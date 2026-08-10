@@ -116,12 +116,20 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
 <main>
 <!-- ===== ホーム ===== -->
 <div class="view" id="v-home">
+  <div class="card" style="padding:12px 16px">
+    <h2 style="margin-bottom:6px">試験を選ぶ</h2>
+    <div class="chiprow" style="margin:0">
+      <button class="chip on">AWS AIP-C01</button>
+      <button class="chip" onclick="alert('準備中です。フィードバックの「欲しい試験のリクエスト」から要望を送れます(本実装)。')">AWS SAA 準備中</button>
+      <button class="chip" onclick="alert('今後、AWSの他資格やAWS以外の資格も追加していきます。')">+ 今後追加</button>
+    </div>
+  </div>
   <div class="tiles">
     <div class="tile"><div class="v" id="h-rate">–</div><div class="l">正答率</div></div>
     <div class="tile"><div class="v" id="h-count">0</div><div class="l">延べ回答</div></div>
     <div class="tile"><div class="v" id="h-master">0<span style="font-size:13px;color:var(--muted)">/95</span></div><div class="l">習得済み</div></div>
   </div>
-  <button class="btn" onclick="startQuiz('auto')">▶ 続きから解く(おまかせ)</button>
+  <button class="btn" onclick="startQuiz('auto')">▶ 問題集を始める(続きから)</button>
   <div class="card">
     <h2>出題モード</h2>
     <div class="chiprow">
@@ -173,7 +181,7 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
 <div class="view" id="v-audio">
   <div class="card">
     <h2>読み上げ音声</h2>
-    <div class="note" style="margin-bottom:8px">デモのためサンプル2トラックのみ同梱。本実装では全95問(4ファイル・約4時間37分)+問題ごとのチャプター頭出しに対応します。連続再生・倍速は下のプレイヤーで試せます。</div>
+    <div class="note" style="margin-bottom:8px">デモのためサンプル2トラックのみ同梱。本実装では全問+問題ごとのチャプター頭出しに対応します。連続再生・倍速は下のプレイヤーで試せます。※現在のデモトラックは1.5倍速で作られた音声のため、本実装では等速で作り直し、速度はプレイヤー側で調整する方式にします。</div>
     <div id="tracklist"></div>
   </div>
   <div class="card">
@@ -185,14 +193,15 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
 <!-- ===== 設定 ===== -->
 <div class="view" id="v-settings">
   <div class="card">
-    <h2>AI連携(任意)</h2>
+    <h2>AI連携(任意) <button class="iconbtn" style="border-radius:50%;padding:1px 8px" onclick="showHelp('ai')">?</button></h2>
     <div class="formrow"><label>APIキー(Anthropic / OpenAI)</label><input type="password" id="set-key" placeholder="sk-..." onchange="saveSettings()"></div>
     <div class="formrow"><label>月の予算上限(USD)</label><input type="number" id="set-budget" value="2" min="0" step="0.5" onchange="saveSettings()"></div>
-    <div class="note">今月の使用額: $<span id="set-usage">0.00</span> / キーと使用額はこの端末のブラウザ内にのみ保存され、AI提供元以外へ送信されません。上限に達するとAI機能は自動停止します。</div>
+    <div class="note">今月の使用額: $<span id="set-usage">0.00</span></div>
   </div>
   <div class="card">
-    <h2>問題データ</h2>
-    <button class="btn sub" onclick="alert('デモでは問題バンクを同梱しています。本実装では、手元の 問題バンク.json をここから読み込む方式(著作権対応の二層構成)になります。AIによる画像・テキスト変換取り込みもここに入ります。')">JSONファイルを読み込む</button>
+    <h2>問題データの追加 <button class="iconbtn" style="border-radius:50%;padding:1px 8px" onclick="showHelp('data')">?</button></h2>
+    <button class="btn sub" onclick="alert('本実装機能: 問題のスクリーンショットやコピペしたテキストを貼ると、AIが問題形式に変換します(要APIキー)。変換結果は保存前に確認・修正できます。')">📷 テキスト/写真から追加(AI変換)</button>
+    <button class="btn sub" onclick="showHelp('json')">📄 JSONファイルを読み込む</button>
   </div>
   <div class="card">
     <h2>フィードバック</h2>
@@ -224,6 +233,11 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
       <span class="note" style="margin-left:auto">連続再生: ON</span>
     </div>
   </div>
+</div>
+
+<!-- ヘルプシート -->
+<div class="sheet" id="helpsheet" onclick="if(event.target===this)this.classList.remove('on')">
+  <div class="panel" id="help-body"></div>
 </div>
 
 <!-- フィードバックシート -->
@@ -464,6 +478,43 @@ function exportProgress(){
 }
 function importProgress(inp){ const f=inp.files[0]; if(!f) return;
   f.text().then(t=>{ try{ const d=JSON.parse(t); P.questions=d.questions||{}; P.history=d.history||[]; saveP(); alert('インポートしました'); refreshHome(); }catch(e){alert('読み込みに失敗しました')} });
+}
+
+/* ---------- ヘルプ ---------- */
+const HELP = {
+ ai: `<h3>AI連携とは?</h3>
+  <p style="font-size:14px;color:var(--ink2)">自分のAIサービスのAPIキーを登録すると、次のことができるようになります。</p>
+  <ul style="font-size:14px;color:var(--ink2);padding-left:18px;line-height:1.9">
+    <li>問題や解説について「もっと簡単に」「例え話で」など<b>その場でAIに質問</b></li>
+    <li>分からない用語の<b>深掘り解説</b></li>
+    <li>写真・テキストからの<b>問題データ自動変換</b></li>
+  </ul>
+  <p style="font-size:13px;color:var(--muted)">キーはこの端末のブラウザ内にのみ保存され、AI提供元(Anthropic/OpenAI)以外には送信されません。使いすぎ防止のため月の予算上限を設定でき、達すると自動停止します。<b>登録しなくてもアプリの他機能はすべて使えます。</b></p>`,
+ data: `<h3>問題データの追加とは?</h3>
+  <p style="font-size:14px;color:var(--ink2)">このアプリに最初から入っている問題集に加えて、<b>自分の問題を持ち込める</b>機能です。追加した問題は自分のブラウザにだけ保存されます。</p>
+  <p style="font-size:14px;color:var(--ink2)">追加方法は2つ:</p>
+  <ul style="font-size:14px;color:var(--ink2);padding-left:18px;line-height:1.9">
+    <li><b>テキスト/写真から(かんたん・おすすめ)</b> — 問題のスクショやコピペを貼るだけ。AIが自動で変換します(要APIキー)</li>
+    <li><b>JSONファイル</b> — 形式が決まったファイルを読み込む方法。<a href="#" onclick="showHelp('json');return false">形式を見る</a></li>
+  </ul>`,
+ json: `<h3>JSONファイルの形式</h3>
+  <p style="font-size:13px;color:var(--ink2)">1問あたり、以下の形の項目を並べたファイルです。<b>手書きする必要はありません</b> — 「テキスト/写真から追加」を使えばAIがこの形式に変換してくれます。Claude や ChatGPT に「この形式にして」と頼むのも簡単です。</p>
+  <pre style="background:var(--page);border:1px solid var(--grid);border-radius:9px;padding:10px;font-size:11px;overflow:auto;line-height:1.5">{
+  "id": "MY-001",
+  "question": "問題文",
+  "n_correct": 1,
+  "options": [
+    {"letter": "A", "text": "選択肢A",
+     "correct": true,  "explanation": "解説"},
+    {"letter": "B", "text": "選択肢B",
+     "correct": false, "explanation": "解説"}
+  ]
+}</pre>
+  <button class="btn sub" style="margin-top:10px" onclick="alert('デモでは省略。本実装ではサンプルJSONをダウンロードできます。')">サンプルJSONをダウンロード</button>`,
+};
+function showHelp(k){
+  document.getElementById('help-body').innerHTML = HELP[k];
+  document.getElementById('helpsheet').classList.add('on');
 }
 
 /* ---------- フィードバック ---------- */
