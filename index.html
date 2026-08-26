@@ -229,9 +229,26 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
   </div>
   <div class="card">
     <h2>AI連携(任意)</h2>
-    <div class="formrow"><label>APIキー(Anthropic / OpenAI)</label><input type="password" id="set-key" placeholder="sk-..." onchange="saveSettings()"></div>
+    <div class="formrow"><label>APIキー(Anthropic)</label><input type="password" id="set-key" placeholder="sk-ant-..." onchange="saveSettings()"></div>
+    <div class="formrow"><label>使用モデル</label>
+      <select id="set-model" style="width:100%" onchange="saveSettings()">
+        <option value="claude-haiku-4-5">Haiku 4.5 — 安価(標準)</option>
+        <option value="claude-sonnet-5">Sonnet 5 — バランス</option>
+        <option value="claude-opus-5">Opus 5 — 高性能</option>
+      </select>
+    </div>
     <div class="formrow"><label>月の予算上限(USD)</label><input type="number" id="set-budget" value="2" min="0" step="0.5" onchange="saveSettings()"></div>
-    <div class="note">問題への質問・用語の深掘りなどのAI機能(開発予定)で使用します。キーはこの端末にのみ保存されます。</div>
+    <div class="note">今月の使用額: $<span id="set-usage">0.00</span>。上限に達するとAI機能は自動停止します。キーはこの端末のブラウザ内にのみ保存され、送信先はAnthropicのAPIだけです。キーがなくてもAI以外の全機能を使えます。</div>
+  </div>
+  <div class="card">
+    <h2>問題の追加(AI変換)</h2>
+    <div class="formrow"><label>追加先の試験</label><select id="cv-exam" style="width:100%"></select></div>
+    <div class="formrow"><label>問題のテキスト(コピペ)</label><textarea id="cv-text" rows="5" style="width:100%;font-size:13px;padding:9px;border-radius:9px;border:1px solid var(--grid);background:var(--page);color:var(--ink)" placeholder="問題文・選択肢・正解をそのまま貼り付け(複数問OK)"></textarea></div>
+    <div class="formrow"><label>またはスクリーンショット画像</label><input type="file" id="cv-imgs" accept="image/*" multiple style="width:100%;font-size:13px"></div>
+    <button class="btn sub" id="cv-run" onclick="convertQuestions()">🤖 AIで問題形式に変換(要APIキー)</button>
+    <div id="cv-preview"></div>
+    <div class="note" style="margin-top:6px">追加した問題はこの端末のブラウザ内にのみ保存され、出題セット「追加」として出題されます。<span id="cv-count"></span></div>
+    <button class="btn sub" style="color:var(--crit);border-color:var(--crit);margin-top:8px" onclick="removeUserQuestions()">追加した問題をすべて削除</button>
   </div>
   <div class="card">
     <h2>学習データ</h2>
@@ -267,6 +284,21 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
     <h3 id="sh-term"></h3>
     <div id="sh-body" style="font-size:14px;color:var(--ink2)"></div>
     <div class="rel" id="sh-rel"></div>
+    <button class="btn sub" style="margin-top:12px" onclick="askAboutTerm()">🤖 この用語についてAIに聞く</button>
+  </div>
+</div>
+
+<!-- AIチャットシート -->
+<div class="sheet" id="aisheet" onclick="if(event.target===this)this.classList.remove('on')">
+  <div class="panel" style="max-height:80vh">
+    <h3 id="ai-title" style="font-size:15px">🤖 AIに質問</h3>
+    <div id="ai-msgs" style="font-size:14px;max-height:40vh;overflow:auto;margin:8px 0"></div>
+    <div class="chiprow" id="ai-presets"></div>
+    <div style="display:flex;gap:8px;margin-top:6px">
+      <input type="text" id="ai-input" placeholder="質問を入力..." style="flex:1" onkeydown="if(event.key==='Enter')sendAiInput()">
+      <button class="iconbtn" style="padding:8px 14px" onclick="sendAiInput()">送信</button>
+    </div>
+    <div class="note" style="margin-top:6px">今月の使用額: $<span class="ai-usage-inline">0.00</span></div>
   </div>
 </div>
 
@@ -285,7 +317,7 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
 <script src="data/audio_tracks.js"></script><!-- 実音声(ローカルのみ、なければ404で無視される) -->
 <script>
 const EXAMS = window.EXAMS||[], GLOSSARY = window.GLOSSARY||{}, ORIG = window.ORIG_QUESTIONS||[], TRACKS = window.TRACKS||[];
-const SET_LABELS = {orig:'オリジナル', qset:'問題集', exam:'模擬試験', pretest:'Pretest'};
+const SET_LABELS = {orig:'オリジナル', qset:'問題集', exam:'模擬試験', pretest:'Pretest', user:'追加'};
 
 /* ---------- IndexedDB(公式バンク保存用) ---------- */
 const IDB = {
@@ -316,8 +348,10 @@ function loadProgress(ex){ P = lsGet(progKey(ex)) || {questions:{}, history:[]};
 const saveP = ()=>{ if(currentExam) lsSet(progKey(currentExam), P); };
 
 /* ---------- 問題プール ---------- */
+let USER = [];               // AI変換で追加した問題(IndexedDB保存)
 function examQuestions(ex){
   return ORIG.filter(q=>q.exam===ex)
+    .concat(USER.filter(q=>q.exam===ex))
     .concat(OFFICIAL.filter(q=>q.exam===ex && !q.needs_review));
 }
 function pool(){
@@ -590,6 +624,7 @@ function renderResult(ok, chosen, correctAns, review){
   }
   const gx = stripRef(q.explanation);
   if(gx) h += `<div class="expl"><div class="h">解説</div><div class="body">${linkify(gx)}</div></div>`;
+  h += `<button class="btn sub" style="margin-top:8px" onclick="openAiChat(buildQuestionCtx(cur), 'この問題について')">🤖 この問題についてAIに質問</button>`;
   if(review) h += `<div class="rowbtns"><button class="btn" onclick="document.getElementById('q-card').innerHTML=MOCK.resultHtml;window.scrollTo(0,0)">結果一覧へ戻る</button></div>`;
   else h += `<div class="rowbtns"><button class="btn sub" onclick="switchView('home')">ホーム</button><button class="btn" onclick="nextQ()">次の問題 ▶</button></div>`;
   document.getElementById('q-card').innerHTML = h;
@@ -637,7 +672,9 @@ function refreshStats(){
 /* ---------- 公式バンクの読み込み ---------- */
 async function initBank(){
   try{ const b=await IDB.get('officialBank'); if(Array.isArray(b)) OFFICIAL=b; }catch(e){}
+  try{ const u=await IDB.get('userQuestions'); if(Array.isArray(u)) USER=u; }catch(e){}
   refreshExamList(); if(currentExam) refreshHome();
+  updateUserCount();
 }
 function importBank(inp){
   const f=inp.files[0]; if(!f) return; inp.value='';
@@ -696,8 +733,186 @@ document.querySelectorAll('[data-sp]').forEach(b=>b.onclick=()=>{
 });
 document.getElementById('player').addEventListener('ended',()=>{ if(trackIdx<ALL_TRACKS.length-1) playTrack(trackIdx+1); });
 
+/* ---------- AI連携 ---------- */
+const AI_PRICES = {'claude-haiku-4-5':[1,5], 'claude-sonnet-5':[3,15], 'claude-opus-5':[5,25]}; // $/MTok [入力,出力]
+const monthKey = ()=>new Date().toISOString().slice(0,7);
+function aiUsage(){ return (SETTINGS.aiUsage||{})[monthKey()]||0; }
+function recordAiCost(model, usage){
+  const [ri,ro]=AI_PRICES[model]||[5,25];
+  const cost=((usage.input_tokens||0)*ri+(usage.output_tokens||0)*ro)/1e6;
+  SETTINGS.aiUsage=SETTINGS.aiUsage||{};
+  SETTINGS.aiUsage[monthKey()]=aiUsage()+cost;
+  lsSet(SETTINGS_KEY, SETTINGS); updateUsageUI();
+}
+function updateUsageUI(){
+  const v=aiUsage();
+  const u=(v>0 && v<0.01)? v.toFixed(4) : v.toFixed(2);
+  const el=document.getElementById('set-usage'); if(el) el.textContent=u;
+  document.querySelectorAll('.ai-usage-inline').forEach(x=>x.textContent=u);
+}
+function aiReady(){
+  const key=(SETTINGS.key||'').trim();
+  if(!key){ alert('APIキーが未設定です。設定タブで登録してください。\n(キーがなくてもAI以外の全機能は使えます)'); return false; }
+  if(!key.startsWith('sk-ant')){ alert('現在はAnthropicのAPIキー(sk-ant-...)のみ対応しています'); return false; }
+  const budget=parseFloat(SETTINGS.budget??2);
+  if(budget>0 && aiUsage()>=budget){ alert(`月の予算上限($${budget})に達したため、AI機能を自動停止しています。設定で上限を引き上げると再開できます`); return false; }
+  return true;
+}
+async function aiCall(messages, opts={}){
+  const model=SETTINGS.model||'claude-haiku-4-5';
+  const body={model, max_tokens:opts.maxTokens||4096, messages};
+  if(opts.system) body.system=opts.system;
+  if(opts.schema) body.output_config={format:{type:'json_schema', schema:opts.schema}};
+  const res=await fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',
+    headers:{
+      'content-type':'application/json',
+      'x-api-key':(SETTINGS.key||'').trim(),
+      'anthropic-version':'2023-06-01',
+      'anthropic-dangerous-direct-browser-access':'true',
+    },
+    body:JSON.stringify(body),
+  });
+  if(!res.ok){
+    const e=await res.json().catch(()=>({}));
+    throw new Error(`APIエラー(${res.status}): ${e.error?.message||'不明なエラー'}`);
+  }
+  const data=await res.json();
+  recordAiCost(model, data.usage||{});
+  if(data.stop_reason==='refusal') throw new Error('AIが回答を差し控えました');
+  return (data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('');
+}
+
+/* ---------- AI質問チャット ---------- */
+let aiChat={ctx:'', history:[], busy:false};
+const AI_PRESETS=['もっと簡単に説明して','例え話で説明して','なぜ他の選択肢は不正解？','実務ではどう使う？'];
+function buildQuestionCtx(q){
+  let t=`【問題】\n${q.question}\n`;
+  if(q.options) t+='\n【選択肢】\n'+q.options.map(o=>`${o.letter}. ${o.text}${o.correct?' (正解)':''}`).join('\n');
+  if(q.type==='matching') t+='\n【正しい組み合わせ】\n'+q.statements.map((s,i)=>`${i+1}. ${s.statement} → ${s.answer}`).join('\n');
+  if(q.type==='ordering') t+='\n【正しい順序】\n'+q.order_answer.map((s,i)=>`${i+1}. ${s}`).join('\n');
+  if(q.options?.some(o=>o.explanation)) t+='\n\n【解説】\n'+q.options.map(o=>`${o.letter}. ${stripRef(o.explanation)}`).join('\n');
+  if(q.explanation) t+='\n\n【解説】\n'+stripRef(q.explanation);
+  return t;
+}
+function openAiChat(ctx, title){
+  if(!aiReady()) return;
+  aiChat={ctx, history:[], busy:false};
+  document.getElementById('ai-title').textContent='🤖 '+title;
+  document.getElementById('ai-presets').innerHTML=AI_PRESETS.map(p=>
+    `<button class="chip" onclick="askAi('${p}')">${p}</button>`).join('');
+  renderAiChat(); updateUsageUI();
+  document.getElementById('aisheet').classList.add('on');
+}
+function renderAiChat(){
+  const box=document.getElementById('ai-msgs');
+  box.innerHTML = aiChat.history.map(h=>
+    h.role==='user'
+      ? `<div style="text-align:right;margin:6px 0"><span style="display:inline-block;background:var(--accent-soft);border-radius:10px;padding:7px 11px;max-width:85%">${esc(h.content)}</span></div>`
+      : `<div style="margin:6px 0"><span style="display:inline-block;background:var(--page);border:1px solid var(--grid);border-radius:10px;padding:7px 11px;max-width:92%;white-space:pre-wrap">${esc(h.content)}</span></div>`
+  ).join('') + (aiChat.busy?'<div class="note">考え中…</div>':'');
+  box.scrollTop=box.scrollHeight;
+}
+function sendAiInput(){
+  const inp=document.getElementById('ai-input');
+  const q=inp.value.trim(); if(!q) return;
+  inp.value=''; askAi(q);
+}
+async function askAi(q){
+  if(aiChat.busy || !aiReady()) return;
+  aiChat.history.push({role:'user', content:q});
+  aiChat.busy=true; renderAiChat();
+  try{
+    const sys='あなたはAWS認定資格の学習コーチです。以下のコンテキストにもとづき、学習者の質問に日本語で簡潔かつ正確に答えてください。試験対策として重要なポイントを優先してください。\n\n'+aiChat.ctx;
+    const text=await aiCall(aiChat.history.map(h=>({role:h.role, content:h.content})), {system:sys, maxTokens:2048});
+    aiChat.history.push({role:'assistant', content:text});
+  }catch(e){
+    aiChat.history.push({role:'assistant', content:'⚠ '+e.message});
+  }
+  aiChat.busy=false; renderAiChat();
+}
+function askAboutTerm(){
+  const t=document.getElementById('sh-term').textContent;
+  const g=GLOSSARY[t]||{};
+  document.getElementById('sheet').classList.remove('on');
+  openAiChat(`用語: ${t}\n既存の説明: ${g.short||'(なし)'}`, t+' について');
+}
+
+/* ---------- AI変換(テキスト/画像 → 問題) ---------- */
+const CONVERT_SCHEMA={type:'object', additionalProperties:false, required:['questions'], properties:{
+  questions:{type:'array', items:{type:'object', additionalProperties:false,
+    required:['question','n_correct','options'],
+    properties:{
+      question:{type:'string'}, n_correct:{type:'integer'},
+      options:{type:'array', items:{type:'object', additionalProperties:false,
+        required:['letter','text','correct','explanation'],
+        properties:{letter:{type:'string'}, text:{type:'string'}, correct:{type:'boolean'}, explanation:{type:'string'}}}}
+    }}}}};
+let cvPending=null;
+function fileToBlock(f){
+  return new Promise((res,rej)=>{
+    const r=new FileReader();
+    r.onload=()=>res({type:'image', source:{type:'base64', media_type:f.type||'image/png', data:r.result.split(',')[1]}});
+    r.onerror=rej; r.readAsDataURL(f);
+  });
+}
+async function convertQuestions(){
+  if(!aiReady()) return;
+  const text=document.getElementById('cv-text').value.trim();
+  const files=[...document.getElementById('cv-imgs').files];
+  if(!text && !files.length){ alert('テキストを貼るか画像を選択してください'); return; }
+  const btn=document.getElementById('cv-run'); btn.disabled=true; btn.textContent='変換中…';
+  try{
+    const content=[];
+    for(const f of files) content.push(await fileToBlock(f));
+    content.push({type:'text', text:'以下は資格試験の問題です。1問ずつ、問題文・全選択肢・正解・各選択肢の解説(なければ簡潔に補足)を構造化してください。正解が不明確な場合はあなたの知識で判断し、explanationにその旨を書いてください。\n\n'+(text||'(画像を参照)')});
+    const out=await aiCall([{role:'user', content}], {schema:CONVERT_SCHEMA, maxTokens:8192});
+    const parsed=JSON.parse(out);
+    if(!parsed.questions?.length) throw new Error('問題を抽出できませんでした');
+    cvPending=parsed.questions;
+    document.getElementById('cv-preview').innerHTML =
+      `<div class="note" style="margin:8px 0">変換結果: ${cvPending.length}問</div>`+
+      cvPending.map((q,i)=>`<div class="setrow"><span>${i+1}. ${esc(q.question.slice(0,40))}…</span><span class="note">${q.options.length}択</span></div>`).join('')+
+      `<div class="rowbtns"><button class="btn sub" onclick="cvPending=null;document.getElementById('cv-preview').innerHTML=''">破棄</button><button class="btn" onclick="saveConverted()">保存する</button></div>`;
+  }catch(e){ alert('変換に失敗しました: '+e.message); }
+  btn.disabled=false; btn.textContent='🤖 AIで問題形式に変換(要APIキー)';
+}
+async function saveConverted(){
+  if(!cvPending) return;
+  const exam=document.getElementById('cv-exam').value;
+  const base=Date.now();
+  const items=cvPending.map((q,i)=>({
+    id:`${exam}_user_${base}_${i+1}`, exam, set:'user', type:'choice', domain:'',
+    question:q.question, n_correct:q.n_correct||q.options.filter(o=>o.correct).length||1,
+    options:q.options,
+  }));
+  USER=USER.concat(items);
+  try{ await IDB.set('userQuestions', USER); }catch(e){}
+  cvPending=null;
+  document.getElementById('cv-preview').innerHTML='';
+  document.getElementById('cv-text').value='';
+  document.getElementById('cv-imgs').value='';
+  alert(`${items.length}問を「${exam}」の出題セット「追加」に保存しました`);
+  updateUserCount(); refreshExamList();
+}
+async function removeUserQuestions(){
+  if(!USER.length){ alert('追加した問題はありません'); return; }
+  if(!confirm(`追加した${USER.length}問をすべて削除しますか?`)) return;
+  USER=[]; try{ await IDB.set('userQuestions', USER); }catch(e){}
+  updateUserCount(); refreshExamList();
+}
+function updateUserCount(){
+  const el=document.getElementById('cv-count');
+  if(el) el.textContent = USER.length? `現在${USER.length}問を保存中。` : '';
+}
+
 /* ---------- 設定 ---------- */
-function saveSettings(){ SETTINGS.key=document.getElementById('set-key').value; SETTINGS.budget=document.getElementById('set-budget').value; lsSet(SETTINGS_KEY, SETTINGS); }
+function saveSettings(){
+  SETTINGS.key=document.getElementById('set-key').value;
+  SETTINGS.budget=document.getElementById('set-budget').value;
+  SETTINGS.model=document.getElementById('set-model').value;
+  lsSet(SETTINGS_KEY, SETTINGS);
+}
 function exportProgress(){
   const dump={exams:{}};
   for(const e of EXAMS){ const p=lsGet(progKey(e.id)); if(p) dump.exams[e.id]=p; }
@@ -747,6 +962,9 @@ if(SETTINGS.theme) document.documentElement.dataset.theme=SETTINGS.theme;
 else if(matchMedia('(prefers-color-scheme: dark)').matches) document.documentElement.dataset.theme='dark';
 document.getElementById('set-key').value=SETTINGS.key||'';
 document.getElementById('set-budget').value=SETTINGS.budget||2;
+document.getElementById('set-model').value=SETTINGS.model||'claude-haiku-4-5';
+document.getElementById('cv-exam').innerHTML=EXAMS.filter(e=>!e.retired).map(e=>`<option value="${e.id}">AWS ${e.short} (${e.id})</option>`).join('');
+updateUsageUI();
 switchView('exams');
 initBank();
 </script>

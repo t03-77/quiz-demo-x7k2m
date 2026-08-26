@@ -61,7 +61,7 @@ def load_generated():
     out = []
     if not GEN_DIR.exists():
         return out
-    for f in sorted(GEN_DIR.glob("*_orig.json")):
+    for f in sorted(GEN_DIR.glob("*_orig*.json")):
         try:
             qs = json.load(open(f, encoding="utf-8"))
         except Exception as e:
