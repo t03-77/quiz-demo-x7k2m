@@ -160,8 +160,9 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
   </div>
   <div class="note" id="h-duenote" style="margin:-4px 2px 10px"></div>
   <div class="card" style="padding:12px 16px">
-    <h2 style="margin-bottom:6px">出題セット <span class="note" id="h-setinfo"></span></h2>
-    <div class="chiprow" id="h-sets" style="margin:0"></div>
+    <h2 style="margin-bottom:6px">出題する問題の種類</h2>
+    <div class="chiprow" id="h-sets" style="margin:0 0 4px"></div>
+    <div class="note" id="h-setinfo"></div>
   </div>
   <button class="btn" onclick="startQuiz('auto')">▶ 問題を解く(おまかせ)</button>
   <div class="card">
@@ -348,7 +349,15 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
 <script src="data/audio_tracks.js"></script><!-- 実音声(ローカルのみ、なければ404で無視される) -->
 <script>
 const EXAMS = window.EXAMS||[], GLOSSARY = window.GLOSSARY||{}, ORIG = window.ORIG_QUESTIONS||[], TRACKS = window.TRACKS||[];
-const SET_LABELS = {orig:'オリジナル', qset:'問題集', exam:'模擬試験', pretest:'Pretest', user:'追加'};
+const SET_LABELS = {orig:'本番形式', flash:'一問一答', qset:'問題集', exam:'模擬試験', pretest:'Pretest', user:'追加'};
+const SET_HINT = {
+  orig:'本番と同じシナリオ形式の問題です',
+  flash:'用語や機能を短く確認する暗記用の問題です',
+  qset:'AWS公式の問題集(各20問)',
+  exam:'AWS公式の模擬試験',
+  pretest:'AWS公式のPretest(模擬試験の新しい版)',
+  user:'あなたが追加した問題',
+};
 
 /* ---------- IndexedDB(公式バンク保存用) ---------- */
 const IDB = {
@@ -526,8 +535,8 @@ function refreshHome(){
   const chips=[['all','すべて']].concat(Object.keys(SET_LABELS).filter(k=>counts[k]).map(k=>[k,SET_LABELS[k]]));
   document.getElementById('h-sets').innerHTML = chips.map(([k,l])=>
     `<button class="chip ${setFilter===k?'on':''}" onclick="setFilter='${k}';refreshHome()">${l} ${counts[k]||''}</button>`).join('');
-  const hasOfficial = OFFICIAL.some(q=>q.exam===currentExam);
-  document.getElementById('h-setinfo').textContent = hasOfficial? '' : '(公式問題は未読み込み)';
+  document.getElementById('h-setinfo').textContent =
+    setFilter==='all'? 'すべての種類から出題します' : (SET_HINT[setFilter]||'');
   // 模擬試験の選択肢。本番と同じ問題数・時間を第一候補に、短縮版も用意する
   const e=EXAMS.find(x=>x.id===currentExam);
   const perQ=e.min/e.n;
@@ -685,7 +694,9 @@ function applySrs(st, ok){
 let MOCK=null; // {ids, idx, answers, deadline, timer, rows, resultHtml}
 function startMock(n, minutes){
   domFilter = null;
-  const ids = shuffled(pool().map(q=>q.id), currentExam+':'+Date.now());
+  // 暗記用の一問一答は本番の練習にならないので、模擬試験からは除く
+  const src = pool().filter(q=>q.set!=='flash' || setFilter==='flash');
+  const ids = shuffled(src.map(q=>q.id), currentExam+':'+Date.now());
   if(!ids.length){ alert('出題できる問題がありません'); return; }
   const take = ids.slice(0, Math.min(n, ids.length));
   if(take.length < n && !confirm(`この出題セットには${take.length}問しかありません。${take.length}問で開始しますか?`)) return;

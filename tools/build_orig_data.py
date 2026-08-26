@@ -45,7 +45,8 @@ def convert_aip_legacy():
         out.append({
             "id": f"AIP-C01_orig_{i:03d}",
             "exam": "AIP-C01",
-            "set": "orig",
+            # 一問一答形式。本番形式の問題と混ぜると練習の質が測れないため別セットにする
+            "set": "flash",
             "type": "choice",
             "domain": AIP_DOMAINS.get(q.get("domain", ""), q.get("domain", "")),
             "level": q.get("level", ""),
