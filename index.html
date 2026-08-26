@@ -146,6 +146,7 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
     <div class="tile"><div class="v" id="h-count">0</div><div class="l">延べ回答</div></div>
     <div class="tile"><div class="v" id="h-master">0</div><div class="l">習得済み</div></div>
   </div>
+  <div class="note" id="h-duenote" style="margin:-4px 2px 10px"></div>
   <div class="card" style="padding:12px 16px">
     <h2 style="margin-bottom:6px">出題セット <span class="note" id="h-setinfo"></span></h2>
     <div class="chiprow" id="h-sets" style="margin:0"></div>
@@ -261,6 +262,11 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
       選択肢の並びをランダムにする
     </label>
     <div class="note" style="margin-top:4px">同じ問題を繰り返すとき「正解はB」と記号で覚えてしまうのを防ぎます。本番同様、内容で判断する練習になります。</div>
+    <label style="display:flex;align-items:center;gap:10px;font-size:14px;cursor:pointer;margin-top:12px">
+      <input type="checkbox" id="set-srs" style="width:auto" onchange="SETTINGS.srs=this.checked;lsSet(SETTINGS_KEY,SETTINGS);if(currentExam)refreshHome()">
+      間隔反復で復習する(推奨)
+    </label>
+    <div class="note" style="margin-top:4px">習得済みの問題を 1日 → 3日 → 7日 → 14日 → 30日 の間隔で自動的に再出題します(忘却曲線対策)。間違えると間隔はリセットされます。</div>
   </div>
   <div class="card">
     <h2>学習データ</h2>
@@ -377,22 +383,31 @@ const byId = id => examQuestions(currentExam).find(q=>q.id===id);
 
 /* ---------- 出題ロジック(quiz.py移植) ---------- */
 const qs_ = id => P.questions[id] || {attempts:[], streak:0};
-function statusOf(st){ if(!st.attempts.length) return '未出題'; if(st.streak===0) return '要復習'; if(st.streak===1) return '再確認待ち'; return '習得済み'; }
+/* 間隔反復(SRS): 習得後は 1→3→7→14→30日 の間隔で再出題し、忘却を防ぐ */
+const SRS_DAYS = [1, 3, 7, 14, 30];
+function statusOf(st){
+  if(!st.attempts.length) return '未出題';
+  if(st.streak===0) return '要復習';
+  if(st.streak===1) return '再確認待ち';
+  if(SETTINGS.srs!==false && st.due && Date.now()>=st.due) return '復習期';
+  return '習得済み';
+}
+const STATUS_ORDER = ['要復習','復習期','未出題','再確認待ち'];
 function pickNext(mode){
   const last = P.history.length? P.history[P.history.length-1].id : null;
   const ids = pool().map(q=>q.id);
   if(!ids.length) return null;
   if(mode==='random'){ const c=ids.filter(i=>i!==last); return c[Math.floor(Math.random()*c.length)] ?? ids[0]; }
   if(mode==='seq'){ const done=new Set(P.history.map(h=>h.id)); return ids.find(i=>!done.has(i)) || ids[0]; }
-  const buckets = {'要復習':[], '未出題':[], '再確認待ち':[]};
+  const buckets = {'要復習':[], '復習期':[], '未出題':[], '再確認待ち':[]};
   for(const id of ids){ const st=qs_(id), s=statusOf(st);
     if(!(s in buckets)) continue;
     if(s!=='未出題'){ const li = st.lastIndex ?? -999; if(P.history.length-li<3) continue; }
     buckets[s].push(id);
   }
-  if(mode==='review') return buckets['要復習'][0]||null;
+  if(mode==='review') return buckets['要復習'][0]||buckets['復習期'][0]||null;
   if(mode==='new') return buckets['未出題'][0]||null;
-  for(const k of ['要復習','未出題','再確認待ち']){ const c=buckets[k].filter(i=>i!==last); if(c.length) return c[0]; if(buckets[k].length) return buckets[k][0]; }
+  for(const k of STATUS_ORDER){ const c=buckets[k].filter(i=>i!==last); if(c.length) return c[0]; if(buckets[k].length) return buckets[k][0]; }
   const done=[...ids].sort((a,b)=>(qs_(a).lastIndex||0)-(qs_(b).lastIndex||0)).filter(i=>i!==last);
   return done[0]||ids[0];
 }
@@ -473,8 +488,11 @@ function refreshHome(){
   document.getElementById('h-rate').textContent = n? Math.round(ok/n*100)+'%':'–';
   document.getElementById('h-count').textContent = n;
   const all=examQuestions(currentExam);
-  let mastered=0; for(const q of all) if(statusOf(qs_(q.id))==='習得済み') mastered++;
-  document.getElementById('h-master').innerHTML = `${mastered}<span style="font-size:13px;color:var(--muted)">/${all.length}</span>`;
+  // 復習期は「一度習得した」問題なので習得数に含める(内訳は統計のドーナツで確認できる)
+  let mastered=0, due=0;
+  for(const q of all){ const s=statusOf(qs_(q.id)); if(s==='習得済み') mastered++; else if(s==='復習期') due++; }
+  document.getElementById('h-master').innerHTML = `${mastered+due}<span style="font-size:13px;color:var(--muted)">/${all.length}</span>`;
+  document.getElementById('h-duenote').innerHTML = due? `🔔 復習期の問題が <b>${due}問</b> あります(忘却対策)` : '';
   const counts={all:all.length};
   for(const q of all) counts[q.set]=(counts[q.set]||0)+1;
   if(!counts[setFilter]) setFilter='all';
@@ -572,8 +590,18 @@ function grade(){
   const st=qs_(q.id);
   st.attempts.push({date:new Date().toISOString().slice(0,16), chosen, correct:ok});
   st.streak = ok? st.streak+1 : 0; st.lastIndex = P.history.length;
+  applySrs(st, ok);
   P.questions[q.id]=st; P.history.push({id:q.id, date:new Date().toISOString().slice(0,10), correct:ok}); saveP();
   renderResult(ok, chosen, correctAns);
+}
+/* 正解を重ねるほど次の復習を先送りし、間違えたら間隔をリセットする */
+function applySrs(st, ok){
+  if(!ok){ st.due=null; st.srs=0; return; }
+  if(st.streak>=2){
+    const i = Math.min(st.srs||0, SRS_DAYS.length-1);
+    st.due = Date.now() + SRS_DAYS[i]*86400000;
+    st.srs = (st.srs||0)+1;
+  }
 }
 
 /* ---------- 模擬試験モード ---------- */
@@ -613,6 +641,7 @@ function finishMock(timeup){
       const st=qs_(q.id);
       st.attempts.push({date:new Date().toISOString().slice(0,16), chosen:a, correct:ok});
       st.streak = ok? st.streak+1 : 0; st.lastIndex = P.history.length;
+      applySrs(st, ok);
       P.questions[q.id]=st; P.history.push({id:q.id, date:new Date().toISOString().slice(0,10), correct:ok});
     }
     rows.push({id, ok, answered});
@@ -671,10 +700,10 @@ function refreshStats(){
   document.getElementById('s-count').textContent = n;
   const today=new Date().toISOString().slice(0,10);
   document.getElementById('s-streakdays').textContent = P.history.filter(h=>h.date===today).length;
-  const c={'未出題':0,'要復習':0,'再確認待ち':0,'習得済み':0};
+  const c={'未出題':0,'要復習':0,'再確認待ち':0,'習得済み':0,'復習期':0};
   for(const q of all) c[statusOf(qs_(q.id))]++;
   const total=all.length||1;
-  const slots=[['習得済み','--s1'],['再確認待ち','--s3'],['要復習','--s2'],['未出題','--grid']];
+  const slots=[['習得済み','--s1'],['復習期','--s4'],['再確認待ち','--s3'],['要復習','--s2'],['未出題','--grid']];
   const R=52, C=2*Math.PI*R; let off=0, svg='';
   for(const [k,v] of slots){ const frac=c[k]/total, len=frac*C;
     svg+=`<circle cx="65" cy="65" r="${R}" fill="none" stroke="var(${v})" stroke-width="16" stroke-dasharray="${Math.max(0,len-2)} ${C-Math.max(0,len-2)}" stroke-dashoffset="${-off}" transform="rotate(-90 65 65)"/>`;
@@ -1009,6 +1038,7 @@ document.getElementById('set-key').value=SETTINGS.key||'';
 document.getElementById('set-budget').value=SETTINGS.budget||2;
 document.getElementById('set-model').value=SETTINGS.model||'claude-haiku-4-5';
 document.getElementById('set-shuffle').checked = SETTINGS.shuffle===true;
+document.getElementById('set-srs').checked = SETTINGS.srs!==false;
 document.getElementById('cv-exam').innerHTML=EXAMS.filter(e=>!e.retired).map(e=>`<option value="${e.id}">AWS ${e.short} (${e.id})</option>`).join('');
 updateUsageUI();
 switchView('exams');
