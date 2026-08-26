@@ -44,6 +44,12 @@ nav button.on{color:var(--accent); font-weight:700}
 .chiprow{display:flex; flex-wrap:wrap; gap:8px; margin:8px 0}
 .chip{border:1px solid var(--grid); background:var(--surface); color:var(--ink2); border-radius:99px; padding:5px 13px; font-size:13px; cursor:pointer}
 .chip.on{background:var(--accent); border-color:var(--accent); color:#fff; font-weight:600}
+/* 押すと即座に始まるチップ。選択状態を持つチップと区別する */
+.chip.act{border-color:var(--accent); color:var(--accent); font-weight:600}
+.weakitem::after{content:'›'; color:var(--muted); font-size:17px; line-height:1}
+.emptyhint{font-size:12px; color:var(--muted); padding:6px 0}
+/* 取り消せない操作。通常のボタンと同じ比重で並べない */
+.dangerlink{display:block; margin-top:10px; background:none; border:0; padding:4px 0; font-size:12px; color:var(--crit); text-decoration:underline; cursor:pointer}
 .qmeta{display:flex; gap:8px; align-items:center; font-size:12px; color:var(--muted); margin-bottom:8px; flex-wrap:wrap}
 .qmeta .tag{border:1px solid var(--grid); border-radius:6px; padding:1px 7px}
 .qmeta .tag.warn{color:var(--s2); border-color:var(--s2); font-weight:600}
@@ -60,6 +66,8 @@ nav button.on{color:var(--accent); font-weight:700}
 .expl .h{font-weight:700; margin-bottom:2px}
 .expl.ok{border-color:var(--good)} .expl.ng{border-color:var(--crit)}
 .expl .body{color:var(--ink2); white-space:pre-wrap}
+details.expl summary::after{content:' ▾ 解説'; font-size:11px; color:var(--muted); font-weight:400}
+details.expl[open] summary::after{content:' ▴'}
 .term{color:var(--accent); border-bottom:1px dashed var(--accent); cursor:pointer}
 .rowbtns{display:flex; gap:10px; margin-top:12px}
 .rowbtns .btn{margin:0}
@@ -130,13 +138,17 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
 <!-- ===== 試験選択 ===== -->
 <div class="view" id="v-exams">
   <div class="card" style="padding:12px 16px">
-    <div class="bankbar">
-      <span class="st" id="bank-status">公式問題バンク: 確認中…</span>
-      <button class="iconbtn" onclick="document.getElementById('bankfile').click()">読み込む</button>
-    </div>
-    <div class="note" style="margin-top:6px">AWS公式問題(問題集/模擬試験/Pretest)は著作権保護のためサイトに同梱していません。手元の <b>questions_all.json</b> を読み込むと全試験で使えるようになります(この端末のブラウザ内にのみ保存)。</div>
+    <h2 style="margin-bottom:4px">学習する試験を選んでください</h2>
+    <div class="note">選ぶとその試験の練習・模擬試験・統計が使えます。あとから何度でも切り替えられます。</div>
   </div>
   <div id="examlist"></div>
+  <div class="card" style="padding:12px 16px">
+    <div class="bankbar">
+      <span class="st" id="bank-status">公式問題を追加(任意)</span>
+      <button class="iconbtn" onclick="document.getElementById('bankfile').click()">読み込む</button>
+    </div>
+    <div class="note" style="margin-top:6px">AWS Skill Builderで受験した公式問題のファイル(<b>questions_all.json</b>)をお持ちの場合、読み込むと問題数が増えます。<b>なくても上の問題だけで学習できます。</b>著作権保護のためサイトには同梱しておらず、読み込んだデータはこの端末のブラウザ内にのみ保存されます。</div>
+  </div>
 </div>
 
 <!-- ===== 試験ホーム ===== -->
@@ -153,14 +165,14 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
   </div>
   <button class="btn" onclick="startQuiz('auto')">▶ 問題を解く(おまかせ)</button>
   <div class="card">
-    <h2>出題モード</h2>
+    <h2>別の出し方で始める</h2>
     <div class="chiprow">
-      <button class="chip" onclick="startQuiz('review')">要復習のみ</button>
-      <button class="chip" onclick="startQuiz('new')">未出題のみ</button>
-      <button class="chip" onclick="startQuiz('random')">ランダム</button>
-      <button class="chip" onclick="startQuiz('seq')">順番どおり</button>
+      <button class="chip act" onclick="startQuiz('review')">▶ まちがえた問題だけ</button>
+      <button class="chip act" onclick="startQuiz('new')">▶ まだ解いていない問題</button>
+      <button class="chip act" onclick="startQuiz('random')">▶ ランダム</button>
+      <button class="chip act" onclick="startQuiz('seq')">▶ 順番どおり</button>
     </div>
-    <div class="note">おまかせ = 要復習 → 復習期 → 未出題 → 再確認待ち の優先度。2回連続正解で習得済みになります。<br>PCでは A〜F キーで選択、Enter で回答・次の問題へ進めます。</div>
+    <div class="note">「おまかせ」は <b>前回まちがえた問題 → そろそろ復習の問題 → はじめての問題</b> の順に出します。同じ問題に2回続けて正解すると習得済みになり、その後も忘却対策で間隔をあけて再登場します。1セットは${'10'}問です。<br>PCでは A〜F キーで選択、Enter で回答・次の問題へ進めます。</div>
   </div>
   <div class="card">
     <h2>模擬試験モード</h2>
@@ -190,12 +202,13 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
     </div>
   </div>
   <div class="card">
-    <h2>分野別の正答率 <span class="note">— 弱点の分野から復習できます</span></h2>
-    <div id="domstats"><div class="note">まだデータがありません</div></div>
+    <h2>分野別の正答率</h2>
+    <div class="note" style="margin:-4px 0 6px">正答率が低い分野が上に来ます。行をタップするとその分野だけ出題されます。</div>
+    <div id="domstats"><div class="emptyhint">分野ごとの成績がここに出ます。まず10問解いてみましょう。</div></div>
   </div>
   <div class="card">
-    <h2>セット別の正答率</h2>
-    <div id="setstats"><div class="note">まだデータがありません</div></div>
+    <h2>出題セット別の正答率</h2>
+    <div id="setstats"><div class="emptyhint">まだデータがありません。</div></div>
   </div>
   <div class="card">
     <h2>直近20問の正誤</h2>
@@ -203,8 +216,9 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
     <div class="note" style="margin-top:6px"><span class="dot" style="background:var(--s1)"></span>正解 <span class="dot" style="background:var(--s8);margin-left:10px"></span>不正解</div>
   </div>
   <div class="card">
-    <h2>苦手トップ5(タップで復習)</h2>
-    <div id="weaklist"><div class="note">まだデータがありません</div></div>
+    <h2>まちがえた回数が多い問題</h2>
+    <div class="note" style="margin:-4px 0 6px">タップするとその問題をもう一度解けます。</div>
+    <div id="weaklist"><div class="emptyhint">まちがえた問題がここに並びます。まず10問解いてみましょう。</div></div>
   </div>
 </div>
 
@@ -225,8 +239,8 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
       <span class="st" id="bank-status2">確認中…</span>
     </div>
     <button class="btn sub" onclick="document.getElementById('bankfile').click()">📄 questions_all.json を読み込む</button>
-    <button class="btn sub" style="color:var(--crit);border-color:var(--crit)" onclick="removeBank()">読み込んだ公式問題を削除</button>
     <div class="note">公式問題データはこの端末のブラウザ内にのみ保存されます。</div>
+    <div id="bank-remove" style="display:none"><button class="dangerlink" onclick="removeBank()">読み込んだ公式問題を削除する</button></div>
   </div>
   <div class="card">
     <h2>AI連携(任意)</h2>
@@ -249,7 +263,7 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
     <button class="btn sub" id="cv-run" onclick="convertQuestions()">🤖 AIで問題形式に変換(要APIキー)</button>
     <div id="cv-preview"></div>
     <div class="note" style="margin-top:6px">追加した問題はこの端末のブラウザ内にのみ保存され、出題セット「追加」として出題されます。<span id="cv-count"></span></div>
-    <button class="btn sub" style="color:var(--crit);border-color:var(--crit);margin-top:8px" onclick="removeUserQuestions()">追加した問題をすべて削除</button>
+    <div id="user-remove" style="display:none"><button class="dangerlink" onclick="removeUserQuestions()">追加した問題をすべて削除する</button></div>
   </div>
   <div class="card">
     <h2>学習設定</h2>
@@ -269,8 +283,8 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
     <button class="btn sub" onclick="exportProgress()">全試験の進捗をエクスポート</button>
     <button class="btn sub" onclick="document.getElementById('imp').click()">進捗をインポート</button>
     <input type="file" id="imp" accept=".json" style="display:none" onchange="importProgress(this)">
-    <button class="btn sub" style="color:var(--crit);border-color:var(--crit)" onclick="resetProgress()">進捗をリセット</button>
     <div class="note">進捗はこの端末のブラウザ内にのみ保存されます。試験ごとに分けて管理されます。</div>
+    <button class="dangerlink" onclick="resetProgress()">全試験の進捗をリセットする</button>
   </div>
 </div>
 </main>
@@ -295,7 +309,10 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
 <!-- 用語シート -->
 <div class="sheet" id="sheet" onclick="if(event.target===this)this.classList.remove('on')">
   <div class="panel">
-    <h3 id="sh-term"></h3>
+    <div style="display:flex;align-items:flex-start;gap:10px">
+      <h3 id="sh-term" style="flex:1"></h3>
+      <button class="iconbtn" onclick="document.getElementById('sheet').classList.remove('on')">閉じる</button>
+    </div>
     <div id="sh-body" style="font-size:14px;color:var(--ink2)"></div>
     <div class="rel" id="sh-rel"></div>
     <button class="btn sub" style="margin-top:12px" onclick="askAboutTerm()">🤖 この用語についてAIに聞く</button>
@@ -317,8 +334,8 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
 </div>
 
 <nav>
-  <button data-v="exams" class="on"><span class="ic">📚</span>試験</button>
-  <button data-v="quiz"><span class="ic">✏️</span>演習</button>
+  <button data-v="exams" class="on"><span class="ic">📚</span>試験を選ぶ</button>
+  <button data-v="home"><span class="ic">✏️</span>学習</button>
   <button data-v="stats"><span class="ic">📊</span>統計</button>
   <button data-v="audio"><span class="ic">🎧</span>音声</button>
   <button data-v="settings"><span class="ic">⚙️</span>設定</button>
@@ -389,7 +406,14 @@ function statusOf(st){
   return '習得済み';
 }
 const STATUS_ORDER = ['要復習','復習期','未出題','再確認待ち'];
+// 内部の状態名は学習者に伝わらないので、画面に出すときは平易な言い換えを使う
+const STATUS_LABEL = {
+  '要復習':'前回まちがえた', '復習期':'そろそろ復習', '未出題':'はじめて',
+  '再確認待ち':'あと1回で習得', '習得済み':'習得済み',
+};
+let REVIEW_QUEUE = [];   // 模試の誤答など、決められた順に解き直す一時的な待ち行列
 function pickNext(mode){
+  if(mode==='queue') return REVIEW_QUEUE.shift() || null;
   const last = P.history.length? P.history[P.history.length-1].id : null;
   const ids = pool().map(q=>q.id);
   if(!ids.length) return null;
@@ -458,18 +482,25 @@ function refreshExamList(){
       const prog = lsGet(progKey(e.id));
       let mastered=0; const total=orig+off;
       if(prog) for(const id in prog.questions){ const st=prog.questions[id]; if(st.attempts?.length && st.streak>=2) mastered++; }
-      const badge = e.retired? `<span class="badge retired">廃止 ${e.retired}</span>` : '';
-      h+=`<div class="examcard" onclick="selectExam('${e.id}')">
+      const retired = e.retired && new Date(e.retired) <= new Date();
+      const badge = e.retired? `<span class="badge retired">${retired?'廃止済み':'まもなく廃止'}</span>` : '';
+      const empty = total===0;
+      const sub = empty
+        ? '<span style="color:var(--crit)">問題がまだありません</span>'
+        : `${e.id} ・ オリジナル${orig}問${off?` + 公式${off}問`:''}`;
+      h+=`<div class="examcard" ${empty?'style="opacity:.55;cursor:default" title="この試験には問題がありません"':`onclick="selectExam('${e.id}')"`}>
         <span class="code">${e.short}</span>
-        <span class="nm"><span class="t">${esc(e.name)} ${badge}</span><span class="s">${e.id} ・ オリジナル${orig}問${off?` + 公式${off}問`:''}</span></span>
-        <span class="prog"><div class="p">${total? Math.round(mastered/total*100):0}%</div><div class="q">習得 ${mastered}/${total}</div></span>
+        <span class="nm"><span class="t">${esc(e.name)} ${badge}</span><span class="s">${sub}</span></span>
+        <span class="prog">${empty?'<div class="q">—</div>':`<div class="p">${Math.round(mastered/total*100)}%</div><div class="q">習得 ${mastered}/${total}</div>`}</span>
       </div>`;
     }
   }
   box.innerHTML=h;
-  const st = OFFICIAL.length? `公式問題バンク: <b>読み込み済み(${OFFICIAL.length}問)</b>` : '公式問題バンク: 未読み込み';
+  const st = OFFICIAL.length? `公式問題: <b>読み込み済み(${OFFICIAL.length}問)</b>` : '公式問題を追加(任意)';
   document.getElementById('bank-status').innerHTML=st;
   document.getElementById('bank-status2').innerHTML=st;
+  // 削除の導線は、消すものがあるときだけ出す
+  document.getElementById('bank-remove').style.display = OFFICIAL.length? 'block':'none';
 }
 function selectExam(ex){
   currentExam=ex; setFilter='all'; cur=null; loadProgress(ex);
@@ -508,19 +539,58 @@ function refreshHome(){
 
 /* ---------- 演習 ---------- */
 let cur=null, mode='auto', sel=new Set(), ordSel=[], sessionN=0;
+const SESSION_LEN = 10;          // 練習1セットの問題数。区切りを作り達成感と復習の機会を与える
+let sessionLog = [];
 function startQuiz(m, dom){
   if(MOCK){ clearInterval(MOCK.timer); MOCK=null; }
   domFilter = dom || null;
-  mode=m; sessionN=0; nextQ(); switchView('quiz');
+  mode=m; sessionN=0; sessionLog=[]; nextQ(); switchView('quiz');
 }
 function startDomainQuiz(d){ startQuiz('auto', d); }
+/* 苦手リストから1問だけ開く。セッション扱いにして途中で終わらないようにする */
+function startSingleReview(id){
+  if(MOCK){ clearInterval(MOCK.timer); MOCK=null; }
+  domFilter=null; mode='auto'; sessionN=1; sessionLog=[];
+  cur=byId(id); sel=new Set(); ordSel=[];
+  document.getElementById('q-pbar').style.width='0%';
+  switchView('quiz'); renderQ();
+}
 function nextQ(){
+  if(mode==='queue' && !REVIEW_QUEUE.length && sessionLog.length){ finishSession(); return; }
   const id = pickNext(mode);
-  if(!id){ document.getElementById('q-card').innerHTML = '<p>このモードの対象問題はありません 🎉</p><button class="btn" onclick="switchView(\'home\')">ホームへ</button>'; return; }
+  if(!id){
+    const label = {review:'まちがえた問題', new:'まだ解いていない問題'}[mode] || 'このセットの問題';
+    document.getElementById('q-pbar').style.width='0%';
+    document.getElementById('q-card').innerHTML =
+      `<p>${label}はいまありません。</p><div class="note">別の出題モードや出題セットを選ぶと続けられます。</div>
+       <div class="rowbtns"><button class="btn" onclick="switchView('home')">学習トップへ</button></div>`;
+    return;
+  }
   cur = byId(id); sel=new Set(); ordSel=[];
   sessionN++;
-  document.getElementById('q-pbar').style.width = Math.min(100, sessionN*10)+'%';
+  const denom = (mode==='queue')? sessionN+REVIEW_QUEUE.length : SESSION_LEN;
+  document.getElementById('q-pbar').style.width = Math.round((sessionN-1)/denom*100)+'%';
   renderQ();
+}
+/* 1セット終了時のまとめ。次にやることを示して学習を切らさない */
+function finishSession(){
+  const ok=sessionLog.filter(r=>r.ok).length, n=sessionLog.length;
+  const wrong=sessionLog.filter(r=>!r.ok).map(r=>r.id);
+  document.getElementById('q-pbar').style.width='100%';
+  let h=`<div class="resultbanner ${ok/n>=0.7?'ok':'ng'}">${ok/n>=0.7?'🎉 このセット完了':'📚 このセット完了'}<span style="font-weight:400;font-size:13px;margin-left:auto">${ok}/${n}問正解</span></div>`;
+  h+= wrong.length
+    ? `<div class="note" style="margin-bottom:10px">間違えた${wrong.length}問は「要復習」になり、次のセットで優先的に出題されます。</div>`
+    : `<div class="note" style="margin-bottom:10px">全問正解です。2回連続で正解した問題は「習得済み」になります。</div>`;
+  h+= sessionLog.map((r,i)=>{ const q=byId(r.id); if(!q) return '';
+    return `<div class="weakitem" onclick="reviewSessionQ(${i})"><span>${i+1}. ${esc(q.question.slice(0,34))}…</span><span style="font-weight:700;color:var(${r.ok?'--good':'--crit'})">${r.ok?'⭕':'❌'}</span></div>`;
+  }).join('');
+  h+=`<div class="rowbtns"><button class="btn sub" onclick="switchView('home')">学習トップへ</button><button class="btn" onclick="startQuiz(mode, domFilter)">もう1セット ▶</button></div>`;
+  document.getElementById('q-card').innerHTML=h;
+  window.scrollTo(0,0);
+}
+function reviewSessionQ(i){
+  const r=sessionLog[i]; cur=byId(r.id);
+  renderResult(r.ok, r.chosen, correctOf(cur), 'session');
 }
 function ordItems(q){ return shuffled(q.order_answer.concat(q.distractors||[]), q.id); }
 function matchPool(q){ return shuffled([...new Set(q.statements.map(s=>s.answer))], q.id); }
@@ -543,13 +613,16 @@ function renderQ(){
     else if(q.n_correct>1) head+=`<span class="tag warn">${q.n_correct}つ選択</span>`;
     head+=`<span style="margin-left:auto"><button class="iconbtn" onclick="quitMock()">中断</button></span></div>`;
   } else {
-    head = `<div class="qmeta"><span class="tag">${q.id}</span><span class="tag">${SET_LABELS[q.set]||q.set}</span>`;
+    // 学習者が知りたい順に並べる。内部IDは報告用なので最後に控えめに置く
+    const denom = (mode==='queue')? sessionN+REVIEW_QUEUE.length : SESSION_LEN;
+    head = `<div class="qmeta"><span class="tag" style="font-weight:700;color:var(--ink2)">${sessionN}問目 / ${denom}</span>`;
+    head+=`<span class="tag">${SET_LABELS[q.set]||q.set}</span>`;
     if(q.type==='ordering') head+=`<span class="tag warn">並び替え</span>`;
     else if(q.type==='matching') head+=`<span class="tag warn">マッチング</span>`;
     else if(q.n_correct>1) head+=`<span class="tag warn">${q.n_correct}つ選択</span>`;
-    if(s!=='未出題') head+=`<span class="tag">${s}</span>`;
+    if(s!=='未出題') head+=`<span class="tag">${STATUS_LABEL[s]||s}</span>`;
     if(domFilter) head+=`<span class="tag" style="color:var(--accent);border-color:var(--accent)">分野別: ${esc(domFilter.slice(0,16))}</span>`;
-    head+=`</div>`;
+    head+=`<span class="tag" style="margin-left:auto;color:var(--muted);border:0">${q.id}</span></div>`;
   }
   let body = `<div class="qtext">${linkify(q.question)}</div>`;
   if(q.type==='ordering'){
@@ -595,6 +668,7 @@ function grade(){
   st.streak = ok? st.streak+1 : 0; st.lastIndex = P.history.length;
   applySrs(st, ok);
   P.questions[q.id]=st; P.history.push({id:q.id, date:new Date().toISOString().slice(0,10), correct:ok}); saveP();
+  sessionLog.push({id:q.id, ok, chosen});
   renderResult(ok, chosen, correctAns);
 }
 /* 正解を重ねるほど次の復習を先送りし、間違えたら間隔をリセットする */
@@ -659,10 +733,28 @@ function finishMock(timeup){
   const need=Math.round((e.pass-100)/9);
   const pass=rate>=need;
   let h = `<div class="resultbanner ${pass?'ok':'ng'}">${pass?'🎉 合格ライン到達':'📚 もう少し!'}<span style="font-weight:400;font-size:13px;margin-left:auto">${okN}/${total}問正解 (${rate}%)${timeup?' ・時間切れ':''}</span></div>`;
-  h += `<div class="note" style="margin-bottom:10px">${e.id}の合格ラインはスコア${e.pass}/1000 — 素点換算で約${need}%が目安です(あと${Math.max(0,Math.ceil(total*need/100)-okN)}問で到達)。タップで各問題の解説を確認できます。</div>`;
+  const short=Math.max(0, Math.ceil(total*need/100)-okN);
+  h += `<div class="note" style="margin-bottom:10px">${e.id}の合格ラインはスコア${e.pass}/1000。本番は問題ごとの重み付けがあるため単純比較はできませんが、正答率${need}%前後が目安です。${short? `この結果ではあと${short}問足りません。` : ''}</div>`;
+  // 分野別の内訳。どこを勉強し直すべきかが一目で分かる
+  const dom={};
+  for(const r of rows){ const q=byId(r.id); if(!q?.domain) continue;
+    (dom[q.domain] ??= {n:0, ok:0}); dom[q.domain].n++; if(r.ok) dom[q.domain].ok++; }
+  const de=Object.entries(dom).sort((a,b)=>a[1].ok/a[1].n - b[1].ok/b[1].n);
+  if(de.length){
+    h += `<div style="font-weight:700;font-size:13px;margin:12px 0 4px">分野別の内訳</div>`;
+    h += de.map(([d,a])=>{ const p=Math.round(a.ok/a.n*100);
+      return `<div class="setrow"><span style="flex:1;min-width:0">${esc(d)}</span><span style="white-space:nowrap"><b style="color:var(${p>=80?'--good':p>=60?'--s4':'--crit'})">${p}%</b> <span class="note">(${a.ok}/${a.n})</span></span></div>`;
+    }).join('');
+  }
+  h += `<div style="font-weight:700;font-size:13px;margin:14px 0 4px">各問題(タップで解説)</div>`;
   h += rows.map((r,i)=>{ const q=byId(r.id);
-    return `<div class="weakitem" onclick="reviewMockQ(${i})"><span>${i+1}. ${esc(q.question.slice(0,38))}…</span><span style="font-weight:700;color:var(${r.ok?'--good':'--crit'})">${r.answered? (r.ok?'⭕':'❌') : '未回答'}</span></div>`; }).join('');
-  h += `<div class="rowbtns" style="margin-top:14px"><button class="btn" onclick="MOCK=null;mode='auto';cur=null;switchView('home')">終了する</button></div>`;
+    return `<div class="weakitem" onclick="reviewMockQ(${i})"><span>${i+1}. ${esc(q.question.slice(0,34))}…</span><span style="font-weight:700;color:var(${r.ok?'--good':'--crit'})">${r.answered? (r.ok?'⭕':'❌') : '未回答'}</span></div>`; }).join('');
+  const wrongIds=rows.filter(r=>!r.ok).map(r=>r.id);
+  h += `<div class="rowbtns" style="margin-top:14px">`;
+  h += `<button class="btn sub" onclick="MOCK=null;mode='auto';cur=null;switchView('home')">終了する</button>`;
+  if(wrongIds.length) h += `<button class="btn" onclick="reviewWrongFromMock()">まちがえた${wrongIds.length}問を復習 ▶</button>`;
+  h += `</div>`;
+  MOCK.wrongIds = wrongIds;
   MOCK.rows=rows; MOCK.resultHtml=h;
   document.getElementById('q-pbar').style.width='100%';
   document.getElementById('q-card').innerHTML=h;
@@ -672,10 +764,19 @@ function reviewMockQ(i){
   const r=MOCK.rows[i]; cur=byId(r.id);
   renderResult(r.ok, MOCK.answers[r.id]||[], correctOf(cur), true);
 }
+/* 模試でまちがえた問題だけを、そのまま練習セッションとして解き直す */
+function reviewWrongFromMock(){
+  const ids=MOCK.wrongIds||[];
+  clearInterval(MOCK.timer); MOCK=null;
+  if(!ids.length){ switchView('home'); return; }
+  REVIEW_QUEUE = ids.slice();
+  mode='queue'; domFilter=null; sessionN=0; sessionLog=[];
+  nextQ(); switchView('quiz');
+}
 function stripRef(t){ return String(t||'').replace(/^.*に関するページを参照してください。?\s*$/gm,'').replace(/^.*を参照してください。?\s*$/gm,'').trim(); }
 function renderResult(ok, chosen, correctAns, review){
   const q=cur, st=qs_(q.id);
-  let h = `<div class="qmeta"><span class="tag">${q.id}</span><span class="tag">${SET_LABELS[q.set]||q.set}</span><span class="tag">${statusOf(st)}${!review&&ok&&st.streak===1?'(あと1回で習得)':''}</span></div>`;
+  let h = `<div class="qmeta"><span class="tag">${SET_LABELS[q.set]||q.set}</span><span class="tag">${STATUS_LABEL[statusOf(st)]||statusOf(st)}</span><span class="tag" style="margin-left:auto;color:var(--muted);border:0">${q.id}</span></div>`;
   const ansLabel = q.type==='ordering'? '正しい順序は下記' : q.type==='matching'? '正しい組み合わせは下記' : '正解: '+dispLetters(q).join(', ');
   h += `<div class="resultbanner ${ok?'ok':'ng'}">${ok?'⭕ 正解!':'❌ 不正解'}<span style="font-weight:400;font-size:13px;margin-left:auto">${ansLabel}</span></div>`;
   h += `<div class="qtext" style="font-size:13px;color:var(--ink2)">${linkify(q.question)}</div>`;
@@ -686,17 +787,26 @@ function renderResult(ok, chosen, correctAns, review){
     h += q.statements.map((sm,i)=>{ const good = chosen[i]===sm.answer;
       return `<div class="expl ${good?'ok':'ng'}"><div class="h">${i+1}. ${esc(sm.statement)}</div><div class="body">→ ${esc(sm.answer)}${good?'':' (あなたの回答: '+esc(chosen[i])+')'}</div></div>`; }).join('');
   } else {
+    // 正解と自分が選んだ選択肢は開いたまま。残りは折りたたみ、次の問題まで遠くならないようにする
     for(const o of displayOpts(q)){
       const body = stripRef(o.explanation);
-      const picked = chosen.includes(o.orig)? ' <span style="font-size:11px;color:var(--muted)">(あなたの回答)</span>':'';
-      h += `<div class="expl ${o.correct?'ok':'ng'}"><div class="h">${o.letter}. ${esc(o.text)} <span style="font-weight:600;font-size:12px">${o.correct?'⭕ 正解':'✖ 不正解'}</span>${picked}</div>${body?`<div class="body">${linkify(body)}</div>`:''}</div>`;
+      const mine = chosen.includes(o.orig);
+      const head = `${o.letter}. ${esc(o.text)} <span style="font-weight:600;font-size:12px">${o.correct?'⭕ 正解':'✖ 不正解'}</span>${mine?' <span style="font-size:11px;color:var(--muted)">(あなたの回答)</span>':''}`;
+      if(o.correct || mine){
+        h += `<div class="expl ${o.correct?'ok':'ng'}"><div class="h">${head}</div>${body?`<div class="body">${linkify(body)}</div>`:''}</div>`;
+      } else {
+        h += `<details class="expl ng"><summary class="h" style="cursor:pointer;list-style:none">${head}</summary>${body?`<div class="body" style="margin-top:6px">${linkify(body)}</div>`:''}</details>`;
+      }
     }
   }
   const gx = stripRef(q.explanation);
   if(gx) h += `<div class="expl"><div class="h">解説</div><div class="body">${linkify(gx)}</div></div>`;
   h += `<button class="btn sub" style="margin-top:8px" onclick="openAiChat(buildQuestionCtx(cur), 'この問題について')">🤖 この問題についてAIに質問</button>`;
-  if(review) h += `<div class="rowbtns"><button class="btn" onclick="document.getElementById('q-card').innerHTML=MOCK.resultHtml;window.scrollTo(0,0)">結果一覧へ戻る</button></div>`;
-  else h += `<div class="rowbtns"><button class="btn sub" onclick="switchView('home')">ホーム</button><button class="btn" onclick="nextQ()">次の問題 ▶</button></div>`;
+  if(review==='session') h += `<div class="rowbtns"><button class="btn" onclick="finishSession()">結果一覧へ戻る</button></div>`;
+  else if(review) h += `<div class="rowbtns"><button class="btn" onclick="document.getElementById('q-card').innerHTML=MOCK.resultHtml;window.scrollTo(0,0)">結果一覧へ戻る</button></div>`;
+  else if(mode==='queue') h += `<div class="rowbtns"><button class="btn" onclick="nextQ()">${REVIEW_QUEUE.length? `次の問題 ▶ (残り${REVIEW_QUEUE.length}問)` : '結果を見る ▶'}</button></div>`;
+  else if(sessionN>=SESSION_LEN) h += `<div class="rowbtns"><button class="btn" onclick="finishSession()">このセットの結果を見る ▶</button></div>`;
+  else h += `<div class="rowbtns"><button class="btn sub" onclick="switchView('home')">中断</button><button class="btn" onclick="nextQ()">次の問題 ▶</button></div>`;
   document.getElementById('q-card').innerHTML = h;
   window.scrollTo(0,0);
 }
@@ -721,7 +831,7 @@ function refreshStats(){
   }
   svg+=`<text x="65" y="62" text-anchor="middle" font-size="22" font-weight="800" fill="var(--ink)">${c['習得済み']}</text><text x="65" y="80" text-anchor="middle" font-size="10" fill="var(--muted)">習得済み</text>`;
   document.getElementById('donut').innerHTML=svg;
-  document.getElementById('donut-legend').innerHTML = slots.map(([k,v])=>`<div><span class="sw" style="background:var(${v})"></span>${k} <b>${c[k]}</b></div>`).join('');
+  document.getElementById('donut-legend').innerHTML = slots.map(([k,v])=>`<div><span class="sw" style="background:var(${v})"></span>${STATUS_LABEL[k]||k} <b>${c[k]}</b></div>`).join('');
   // セット別・分野別の正答率
   const qset={}, qdom={};
   for(const q of all){ qset[q.id]=q.set; if(q.domain) qdom[q.id]=q.domain; }
@@ -733,24 +843,26 @@ function refreshStats(){
     if(d){ (domAgg[d] ??= {n:0, ok:0}); domAgg[d].n++; if(h.correct) domAgg[d].ok++; }
   }
   const rows=Object.entries(setAgg).map(([s,a])=>`<div class="setrow"><span>${SET_LABELS[s]||s}</span><span><b>${Math.round(a.ok/a.n*100)}%</b> <span class="note">(${a.ok}/${a.n})</span></span></div>`);
-  document.getElementById('setstats').innerHTML = rows.length? rows.join(''):'<div class="note">まだデータがありません</div>';
+  document.getElementById('setstats').innerHTML = rows.length? rows.join(''):'<div class="emptyhint">まだデータがありません。</div>';
   // 分野別は正答率の低い順(=弱点が上)。タップでその分野だけ復習
   const doms=Object.entries(domAgg).sort((a,b)=>a[1].ok/a[1].n - b[1].ok/b[1].n);
   document.getElementById('domstats').innerHTML = doms.length? doms.map(([d,a])=>{
     const pct=Math.round(a.ok/a.n*100);
     const color = pct>=80?'--good' : pct>=60?'--s4' : '--crit';
-    return `<div class="setrow" style="cursor:pointer" onclick="startDomainQuiz('${d.replace(/'/g,"\\'")}')">
+    return `<div class="weakitem" onclick="startDomainQuiz('${d.replace(/'/g,"\\'")}')">
       <span style="flex:1;min-width:0">${esc(d)}</span>
       <span style="white-space:nowrap"><b style="color:var(${color})">${pct}%</b> <span class="note">(${a.ok}/${a.n})</span></span></div>`;
-  }).join(''):'<div class="note">まだデータがありません</div>';
+  }).join(''):'<div class="emptyhint">分野ごとの成績がここに出ます。まず10問解いてみましょう。</div>';
   const rec=P.history.slice(-20);
-  document.getElementById('recent20').innerHTML = rec.length? rec.map(h=>`<span title="${h.id}" style="width:18px;height:18px;border-radius:5px;background:var(${h.correct?'--s1':'--s8'});display:inline-block"></span>`).join(''): '<span class="note">まだデータがありません</span>';
+  const recBox=document.getElementById('recent20');
+  recBox.innerHTML = rec.length? rec.map(h=>`<span title="${h.id}" style="width:18px;height:18px;border-radius:5px;background:var(${h.correct?'--s1':'--s8'});display:inline-block"></span>`).join(''): '<span class="emptyhint">まだ解いた問題がありません。</span>';
+  recBox.nextElementSibling.style.display = rec.length? '' : 'none';   // データが無いのに凡例だけ出さない
   const wrongs={}; for(const h of P.history) if(!h.correct) wrongs[h.id]=(wrongs[h.id]||0)+1;
   const top=Object.entries(wrongs).sort((a,b)=>b[1]-a[1]).slice(0,5);
   document.getElementById('weaklist').innerHTML = top.length? top.map(([id,n2])=>{
     const q=byId(id); if(!q) return '';
-    return `<div class="weakitem" onclick="cur=byId('${id}');sel=new Set();ordSel=[];switchView('quiz');renderQ()"><span>${esc(q.question.slice(0,42))}…</span><span class="n">×${n2}</span></div>`;
-  }).join(''): '<div class="note">まだデータがありません</div>';
+    return `<div class="weakitem" onclick="startSingleReview('${id}')"><span>${esc(q.question.slice(0,38))}…</span><span class="n">${n2}回まちがえた</span></div>`;
+  }).join(''): '<div class="emptyhint">まちがえた問題がここに並びます。まず10問解いてみましょう。</div>';
 }
 
 /* ---------- 公式バンクの読み込み ---------- */
@@ -783,13 +895,20 @@ async function removeBank(){
 /* ---------- 音声 ---------- */
 const RTRACKS = window.AUDIO_TRACKS||[];   // 実音声(等速・チャプター付き)。ローカル生成時のみ存在
 const ALL_TRACKS = RTRACKS.length? RTRACKS : TRACKS;
+// 表示・再生とも同じ並びを使う(片方だけ絞ると番号がずれて別の音声が鳴る)
+const visibleTracks = ()=> currentExam? ALL_TRACKS.filter(t=>!t.exam || t.exam===currentExam) : ALL_TRACKS;
 let trackIdx=-1;
 function fmtSec(s){ const m=Math.floor(s/60); return `${m}:${String(Math.floor(s%60)).padStart(2,'0')}`; }
 function renderTracks(){
-  document.getElementById('audio-note').textContent = RTRACKS.length
-    ? '等速で生成した読み上げ音声です(VOICEVOX:四国めたん)。再生速度は下のプレイヤーで調整、チャプターで問題ごとに頭出しできます。'
-    : 'デモのためサンプル2トラックのみ同梱。実音声は tools/make_audio_vv.py で生成すると、ここに全問+チャプター付きで表示されます。';
-  document.getElementById('tracklist').innerHTML = ALL_TRACKS.length? ALL_TRACKS.map((t,i)=>{
+  // 選択中の試験の音声だけを見せる。無関係な試験のトラックが並ぶと混乱する
+  const mine = visibleTracks();
+  const examName = currentExam? 'AWS '+(EXAMS.find(e=>e.id===currentExam)||{}).short : '';
+  document.getElementById('audio-note').textContent = mine.length
+    ? '通勤中などに聞き流せる読み上げ音声です。再生速度は下のプレイヤーで変えられ、チャプターで問題ごとに頭出しできます。'
+    : currentExam
+      ? `${examName} の読み上げ音声はまだありません。現在はAIP-C01のみ対応しています。`
+      : '試験を選ぶと、その試験の読み上げ音声が表示されます。';
+  document.getElementById('tracklist').innerHTML = mine.length? mine.map((t,i)=>{
     let h=`<div class="audiotrack ${i===trackIdx?'playing':''}" onclick="playTrack(${i})"><span class="num">${i+1}</span><span class="t">${esc(t.title)}</span><span class="d">${i===trackIdx?'再生中':''}</span></div>`;
     if(i===trackIdx && t.chapters?.length){
       h+=`<div class="chiprow" style="padding:4px 0 8px 36px">${t.chapters.map(c=>
@@ -799,9 +918,10 @@ function renderTracks(){
   }).join('') : '<div class="note">音声データがありません</div>';
 }
 function playTrack(i){
+  const t=visibleTracks()[i]; if(!t) return;
   trackIdx=i; const a=document.getElementById('player');
-  a.src=ALL_TRACKS[i].src; a.playbackRate=curSpeed; a.play();
-  document.getElementById('np').textContent='♪ '+ALL_TRACKS[i].title;
+  a.src=t.src; a.playbackRate=curSpeed; a.play();
+  document.getElementById('np').textContent='♪ '+t.title;
   document.getElementById('playerbar').classList.add('on');
   renderTracks();
 }
@@ -815,7 +935,7 @@ document.querySelectorAll('[data-sp]').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('[data-sp]').forEach(x=>x.classList.toggle('on',x===b));
   document.getElementById('player').playbackRate=curSpeed;
 });
-document.getElementById('player').addEventListener('ended',()=>{ if(trackIdx<ALL_TRACKS.length-1) playTrack(trackIdx+1); });
+document.getElementById('player').addEventListener('ended',()=>{ if(trackIdx<visibleTracks().length-1) playTrack(trackIdx+1); });
 
 /* ---------- AI連携 ---------- */
 const AI_PRICES = {'claude-haiku-4-5':[1,5], 'claude-sonnet-5':[3,15], 'claude-opus-5':[5,25]}; // $/MTok [入力,出力]
@@ -988,6 +1108,8 @@ async function removeUserQuestions(){
 function updateUserCount(){
   const el=document.getElementById('cv-count');
   if(el) el.textContent = USER.length? `現在${USER.length}問を保存中。` : '';
+  const rm=document.getElementById('user-remove');
+  if(rm) rm.style.display = USER.length? 'block':'none';
 }
 
 /* ---------- 設定 ---------- */
@@ -1022,21 +1144,33 @@ function resetProgress(){
 /* ---------- ナビ・テーマ ---------- */
 function switchView(v){
   document.querySelectorAll('.view').forEach(x=>x.classList.toggle('on', x.id==='v-'+v));
-  document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on', b.dataset.v===v || (v==='home'&&b.dataset.v==='exams')));
+  // 演習中も「学習」タブを点灯させ、現在地が分かるようにする
+  const navFor = (v==='quiz')? 'home' : v;
+  document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on', b.dataset.v===navFor));
   if(v==='exams') refreshExamList();
   if(v==='home') refreshHome();
   if(v==='stats') refreshStats();
   if(v==='audio') renderTracks();
   window.scrollTo(0,0);
 }
+/* 模擬試験中に画面を離れると解答が失われるため、必ず確認する */
+function leaveGuard(){
+  if(!MOCK || MOCK.rows) return true;                 // 採点済みなら離れてよい
+  if(!confirm('模擬試験が進行中です。画面を移動すると解答が失われます。中断しますか?')) return false;
+  clearInterval(MOCK.timer); MOCK=null; mode='auto'; cur=null;
+  return true;
+}
 document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
   const v=b.dataset.v;
-  if((v==='quiz'||v==='stats') && !currentExam){ alert('先に試験を選んでください'); switchView('exams'); return; }
-  if(v==='quiz' && !cur){ startQuiz('auto'); return; }
+  if(!leaveGuard()) return;
+  if((v==='home'||v==='stats') && !currentExam){ alert('先に試験を選んでください'); switchView('exams'); return; }
   if(v==='exams' && currentExam){ currentExam=null; cur=null; document.getElementById('head-exam').textContent='試験を選ぶ'; }
   switchView(v);
 });
-document.getElementById('head-exam').onclick=()=>{ currentExam=null; cur=null; document.getElementById('head-exam').textContent='試験を選ぶ'; switchView('exams'); };
+document.getElementById('head-exam').onclick=()=>{
+  if(!leaveGuard()) return;
+  currentExam=null; cur=null; document.getElementById('head-exam').textContent='試験を選ぶ'; switchView('exams');
+};
 /* ---------- キーボード操作(PC) ---------- */
 document.addEventListener('keydown', e=>{
   const t=e.target.tagName;
