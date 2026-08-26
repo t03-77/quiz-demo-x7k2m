@@ -193,6 +193,10 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
     </div>
   </div>
   <div class="card">
+    <h2>分野別の正答率 <span class="note">— 弱点の分野から復習できます</span></h2>
+    <div id="domstats"><div class="note">まだデータがありません</div></div>
+  </div>
+  <div class="card">
     <h2>セット別の正答率</h2>
     <div id="setstats"><div class="note">まだデータがありません</div></div>
   </div>
@@ -249,6 +253,14 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
     <div id="cv-preview"></div>
     <div class="note" style="margin-top:6px">追加した問題はこの端末のブラウザ内にのみ保存され、出題セット「追加」として出題されます。<span id="cv-count"></span></div>
     <button class="btn sub" style="color:var(--crit);border-color:var(--crit);margin-top:8px" onclick="removeUserQuestions()">追加した問題をすべて削除</button>
+  </div>
+  <div class="card">
+    <h2>学習設定</h2>
+    <label style="display:flex;align-items:center;gap:10px;font-size:14px;cursor:pointer">
+      <input type="checkbox" id="set-shuffle" style="width:auto" onchange="SETTINGS.shuffle=this.checked;lsSet(SETTINGS_KEY,SETTINGS)">
+      選択肢の並びをランダムにする
+    </label>
+    <div class="note" style="margin-top:4px">同じ問題を繰り返すとき「正解はB」と記号で覚えてしまうのを防ぎます。本番同様、内容で判断する練習になります。</div>
   </div>
   <div class="card">
     <h2>学習データ</h2>
@@ -354,9 +366,11 @@ function examQuestions(ex){
     .concat(USER.filter(q=>q.exam===ex))
     .concat(OFFICIAL.filter(q=>q.exam===ex && !q.needs_review));
 }
+let domFilter = null;   // 分野別復習中の対象ドメイン
 function pool(){
   let qs = examQuestions(currentExam);
   if(setFilter!=='all') qs = qs.filter(q=>q.set===setFilter);
+  if(domFilter) qs = qs.filter(q=>q.domain===domFilter);
   return qs;
 }
 const byId = id => examQuestions(currentExam).find(q=>q.id===id);
@@ -473,7 +487,12 @@ function refreshHome(){
 
 /* ---------- 演習 ---------- */
 let cur=null, mode='auto', sel=new Set(), ordSel=[], sessionN=0;
-function startQuiz(m){ if(MOCK){ clearInterval(MOCK.timer); MOCK=null; } mode=m; sessionN=0; nextQ(); switchView('quiz'); }
+function startQuiz(m, dom){
+  if(MOCK){ clearInterval(MOCK.timer); MOCK=null; }
+  domFilter = dom || null;
+  mode=m; sessionN=0; nextQ(); switchView('quiz');
+}
+function startDomainQuiz(d){ startQuiz('auto', d); }
 function nextQ(){
   const id = pickNext(mode);
   if(!id){ document.getElementById('q-card').innerHTML = '<p>このモードの対象問題はありません 🎉</p><button class="btn" onclick="switchView(\'home\')">ホームへ</button>'; return; }
@@ -484,6 +503,15 @@ function nextQ(){
 }
 function ordItems(q){ return shuffled(q.order_answer.concat(q.distractors||[]), q.id); }
 function matchPool(q){ return shuffled([...new Set(q.statements.map(s=>s.answer))], q.id); }
+/* 選択肢の表示順。シャッフル時は表示記号を振り直し、判定は元の記号(orig)で行う */
+function displayOpts(q){
+  if(!q.options) return [];
+  if(SETTINGS.shuffle===false || SETTINGS.shuffle===undefined)
+    return q.options.map(o=>({...o, orig:o.letter}));
+  const L='ABCDEFGH';
+  return shuffled(q.options, 'opt:'+q.id).map((o,i)=>({...o, orig:o.letter, letter:L[i]}));
+}
+const dispLetters = q => displayOpts(q).filter(o=>o.correct).map(o=>o.letter).sort();
 function renderQ(){
   const q=cur, st=qs_(q.id), s=statusOf(st);
   let head;
@@ -499,6 +527,7 @@ function renderQ(){
     else if(q.type==='matching') head+=`<span class="tag warn">マッチング</span>`;
     else if(q.n_correct>1) head+=`<span class="tag warn">${q.n_correct}つ選択</span>`;
     if(s!=='未出題') head+=`<span class="tag">${s}</span>`;
+    if(domFilter) head+=`<span class="tag" style="color:var(--accent);border-color:var(--accent)">分野別: ${esc(domFilter.slice(0,16))}</span>`;
     head+=`</div>`;
   }
   let body = `<div class="qtext">${linkify(q.question)}</div>`;
@@ -512,7 +541,7 @@ function renderQ(){
     body += q.statements.map((sm,i)=>`<div style="margin-bottom:12px"><div style="font-size:14px;margin-bottom:4px">${i+1}. ${esc(sm.statement)}</div><select id="mt-${i}" style="width:100%"><option value="">選択してください</option>${opts.map(o=>`<option>${esc(o)}</option>`).join('')}</select></div>`).join('');
     body += `<div class="rowbtns"><button class="btn" onclick="grade()">回答する</button></div>`;
   } else {
-    body += q.options.map(o=>`<div class="opt ${sel.has(o.letter)?'sel':''}" onclick="tapOpt('${o.letter}')"><span class="lt">${o.letter}</span><span>${esc(o.text)}</span></div>`).join('');
+    body += displayOpts(q).map(o=>`<div class="opt ${sel.has(o.orig)?'sel':''}" onclick="tapOpt('${o.orig}')"><span class="lt">${o.letter}</span><span>${esc(o.text)}</span></div>`).join('');
     body += `<div class="rowbtns"><button class="btn" ${sel.size?'':'disabled'} onclick="grade()">回答する</button></div>`;
   }
   document.getElementById('q-card').innerHTML = head+body;
@@ -550,6 +579,7 @@ function grade(){
 /* ---------- 模擬試験モード ---------- */
 let MOCK=null; // {ids, idx, answers, deadline, timer, rows, resultHtml}
 function startMock(n){
+  domFilter = null;
   const ids = shuffled(pool().map(q=>q.id), currentExam+':'+Date.now());
   if(!ids.length){ alert('出題できる問題がありません'); return; }
   const take = ids.slice(0, Math.min(n, ids.length));
@@ -607,7 +637,7 @@ function stripRef(t){ return String(t||'').replace(/^.*に関するページを�
 function renderResult(ok, chosen, correctAns, review){
   const q=cur, st=qs_(q.id);
   let h = `<div class="qmeta"><span class="tag">${q.id}</span><span class="tag">${SET_LABELS[q.set]||q.set}</span><span class="tag">${statusOf(st)}${!review&&ok&&st.streak===1?'(あと1回で習得)':''}</span></div>`;
-  const ansLabel = q.type==='ordering'? '正しい順序は下記' : q.type==='matching'? '正しい組み合わせは下記' : '正解: '+correctAns.join(', ');
+  const ansLabel = q.type==='ordering'? '正しい順序は下記' : q.type==='matching'? '正しい組み合わせは下記' : '正解: '+dispLetters(q).join(', ');
   h += `<div class="resultbanner ${ok?'ok':'ng'}">${ok?'⭕ 正解!':'❌ 不正解'}<span style="font-weight:400;font-size:13px;margin-left:auto">${ansLabel}</span></div>`;
   h += `<div class="qtext" style="font-size:13px;color:var(--ink2)">${linkify(q.question)}</div>`;
   if(q.type==='ordering'){
@@ -617,9 +647,10 @@ function renderResult(ok, chosen, correctAns, review){
     h += q.statements.map((sm,i)=>{ const good = chosen[i]===sm.answer;
       return `<div class="expl ${good?'ok':'ng'}"><div class="h">${i+1}. ${esc(sm.statement)}</div><div class="body">→ ${esc(sm.answer)}${good?'':' (あなたの回答: '+esc(chosen[i])+')'}</div></div>`; }).join('');
   } else {
-    for(const o of q.options){
+    for(const o of displayOpts(q)){
       const body = stripRef(o.explanation);
-      h += `<div class="expl ${o.correct?'ok':'ng'}"><div class="h">${o.letter}. ${esc(o.text)} <span style="font-weight:600;font-size:12px">${o.correct?'⭕ 正解':'✖ 不正解'}</span></div>${body?`<div class="body">${linkify(body)}</div>`:''}</div>`;
+      const picked = chosen.includes(o.orig)? ' <span style="font-size:11px;color:var(--muted)">(あなたの回答)</span>':'';
+      h += `<div class="expl ${o.correct?'ok':'ng'}"><div class="h">${o.letter}. ${esc(o.text)} <span style="font-weight:600;font-size:12px">${o.correct?'⭕ 正解':'✖ 不正解'}</span>${picked}</div>${body?`<div class="body">${linkify(body)}</div>`:''}</div>`;
     }
   }
   const gx = stripRef(q.explanation);
@@ -652,13 +683,27 @@ function refreshStats(){
   svg+=`<text x="65" y="62" text-anchor="middle" font-size="22" font-weight="800" fill="var(--ink)">${c['習得済み']}</text><text x="65" y="80" text-anchor="middle" font-size="10" fill="var(--muted)">習得済み</text>`;
   document.getElementById('donut').innerHTML=svg;
   document.getElementById('donut-legend').innerHTML = slots.map(([k,v])=>`<div><span class="sw" style="background:var(${v})"></span>${k} <b>${c[k]}</b></div>`).join('');
-  // セット別正答率
-  const qset={}; for(const q of all) qset[q.id]=q.set;
-  const setAgg={};
-  for(const h of P.history){ const s=qset[h.id]; if(!s) continue;
-    (setAgg[s] ??= {n:0, ok:0}); setAgg[s].n++; if(h.correct) setAgg[s].ok++; }
+  // セット別・分野別の正答率
+  const qset={}, qdom={};
+  for(const q of all){ qset[q.id]=q.set; if(q.domain) qdom[q.id]=q.domain; }
+  const setAgg={}, domAgg={};
+  for(const h of P.history){
+    const s=qset[h.id];
+    if(s){ (setAgg[s] ??= {n:0, ok:0}); setAgg[s].n++; if(h.correct) setAgg[s].ok++; }
+    const d=qdom[h.id];
+    if(d){ (domAgg[d] ??= {n:0, ok:0}); domAgg[d].n++; if(h.correct) domAgg[d].ok++; }
+  }
   const rows=Object.entries(setAgg).map(([s,a])=>`<div class="setrow"><span>${SET_LABELS[s]||s}</span><span><b>${Math.round(a.ok/a.n*100)}%</b> <span class="note">(${a.ok}/${a.n})</span></span></div>`);
   document.getElementById('setstats').innerHTML = rows.length? rows.join(''):'<div class="note">まだデータがありません</div>';
+  // 分野別は正答率の低い順(=弱点が上)。タップでその分野だけ復習
+  const doms=Object.entries(domAgg).sort((a,b)=>a[1].ok/a[1].n - b[1].ok/b[1].n);
+  document.getElementById('domstats').innerHTML = doms.length? doms.map(([d,a])=>{
+    const pct=Math.round(a.ok/a.n*100);
+    const color = pct>=80?'--good' : pct>=60?'--s4' : '--crit';
+    return `<div class="setrow" style="cursor:pointer" onclick="startDomainQuiz('${d.replace(/'/g,"\\'")}')">
+      <span style="flex:1;min-width:0">${esc(d)}</span>
+      <span style="white-space:nowrap"><b style="color:var(${color})">${pct}%</b> <span class="note">(${a.ok}/${a.n})</span></span></div>`;
+  }).join(''):'<div class="note">まだデータがありません</div>';
   const rec=P.history.slice(-20);
   document.getElementById('recent20').innerHTML = rec.length? rec.map(h=>`<span title="${h.id}" style="width:18px;height:18px;border-radius:5px;background:var(${h.correct?'--s1':'--s8'});display:inline-block"></span>`).join(''): '<span class="note">まだデータがありません</span>';
   const wrongs={}; for(const h of P.history) if(!h.correct) wrongs[h.id]=(wrongs[h.id]||0)+1;
@@ -963,6 +1008,7 @@ else if(matchMedia('(prefers-color-scheme: dark)').matches) document.documentEle
 document.getElementById('set-key').value=SETTINGS.key||'';
 document.getElementById('set-budget').value=SETTINGS.budget||2;
 document.getElementById('set-model').value=SETTINGS.model||'claude-haiku-4-5';
+document.getElementById('set-shuffle').checked = SETTINGS.shuffle===true;
 document.getElementById('cv-exam').innerHTML=EXAMS.filter(e=>!e.retired).map(e=>`<option value="${e.id}">AWS ${e.short} (${e.id})</option>`).join('');
 updateUsageUI();
 switchView('exams');
