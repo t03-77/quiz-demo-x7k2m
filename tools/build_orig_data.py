@@ -25,6 +25,14 @@ AIP_DOMAINS = {
     "D5": "テスト・検証・トラブルシューティング",
 }
 
+# 旧quiz.pyのlevel欄には難易度ではなく出題形式が入っている問題が20問ある。
+# 難易度で絞り込む機能が効かなくなるため、内容に応じた難易度へ読み替える。
+AIP_LEVEL_FIX = {
+    "scenario": "hard",         # 業務シナリオから最適解を選ぶ形式
+    "multi_response": "medium",  # 「2つ選べ」形式
+    "ordering": "medium",        # 手順の並べ替え形式
+}
+
 
 def convert_aip_legacy():
     if not AIP_LEGACY.exists():
@@ -49,7 +57,7 @@ def convert_aip_legacy():
             "set": "flash",
             "type": "choice",
             "domain": AIP_DOMAINS.get(q.get("domain", ""), q.get("domain", "")),
-            "level": q.get("level", ""),
+            "level": AIP_LEVEL_FIX.get(q.get("level", ""), q.get("level", "")),
             "question": q["question"],
             "n_correct": len(answers),
             "options": options,
