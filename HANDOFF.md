@@ -70,10 +70,22 @@ python tools/audit_explanations.py   # 解説が公式水準か
    （id/exam/set/type/domain/level/question/n_correct/options[].letter/text/correct）に触れないこと
 5. 中断でファイルに反映されない成果が出たら `python tools/merge_explanation_chunks.py` で回収できる
 
-### E2Eテスト
-`C:\Users\na7sh\AppData\Local\Temp\quizapp_e2e\` に playwright-core 導入済み。
-`node test.js` `node test_mock.js` `node test_uxfix.js` など。
-実行は `chromium.launch({channel:'msedge'})`（ブラウザは別途インストール不要）。
+### E2Eテスト（15本、すべて合格状態）
+テスト本体は `tests/` にある。実行するには playwright-core が要る:
+```
+cd %TEMP% && mkdir quizapp_e2e && cd quizapp_e2e
+npm init -y && npm i playwright-core
+copy <プロジェクト>\tests\* .
+node test.js
+```
+`chromium.launch({channel:'msedge'})` で動く（ブラウザの別途インストール不要）。
+
+**重要**: `answer.js` が共通ヘルパー。出題はマッチング・並び替えも混ざるため、
+`.opt`（選択式のUI）だけを前提にしたテストは失敗する。必ず次を使うこと:
+- `waitQuestion(page)` … 形式を問わず問題の表示を待つ
+- `answer(page, correct)` … 形式を問わず回答して採点画面まで
+- `choose(page)` … 回答だけ（模試は途中で採点画面を出さないのでこちら）
+- `startChoiceQuestion(page)` … 選択式限定の機能（シャッフル・キーボード）を試すとき
 
 ## 品質検証で分かっていること
 

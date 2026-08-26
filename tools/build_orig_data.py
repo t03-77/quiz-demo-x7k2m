@@ -62,6 +62,7 @@ def load_generated():
     out = []
     if not GEN_DIR.exists():
         return out
+    # mixed_orig_*.json はマッチング/並び替えを混在させたファイル
     for f in sorted(GEN_DIR.glob("*_orig*.json")):
         try:
             qs = json.load(open(f, encoding="utf-8"))
@@ -70,9 +71,23 @@ def load_generated():
             continue
         ok = True
         for q in qs:
-            n_marked = sum(1 for o in q["options"] if o["correct"])
-            if n_marked != q["n_correct"] or n_marked == 0:
-                print(f"ERROR: {f.name} {q['id']}: correct数不一致 ({n_marked} vs {q['n_correct']})")
+            t = q.get("type", "choice")
+            if t == "choice":
+                n_marked = sum(1 for o in q["options"] if o["correct"])
+                if n_marked != q["n_correct"] or n_marked == 0:
+                    print(f"ERROR: {f.name} {q['id']}: correct数不一致 ({n_marked} vs {q['n_correct']})")
+                    ok = False
+            elif t == "matching":
+                if not q.get("statements") or any(
+                        not s.get("statement") or not s.get("answer") for s in q["statements"]):
+                    print(f"ERROR: {f.name} {q['id']}: statementsが不正")
+                    ok = False
+            elif t == "ordering":
+                if len(q.get("order_answer") or []) < 2:
+                    print(f"ERROR: {f.name} {q['id']}: order_answerが不正")
+                    ok = False
+            else:
+                print(f"ERROR: {f.name} {q['id']}: 未知のtype {t}")
                 ok = False
             if not re.match(r"^[A-Z]{3}-C\d{2}_orig_\d+$", q["id"]):
                 print(f"WARN: {f.name} {q['id']}: ID形式が非標準")
