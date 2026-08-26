@@ -11,3 +11,9 @@ desktop.ini
 *.tmp
 *.bak
 _scratch/
+
+# AWS公式問題を含む元データ(著作権対応のためリポジトリ・サイトに含めない。仕様書§3.8)
+資料/
+# 公式問題の読み上げ音声も同様にローカル専用
+audio/
+data/audio_tracks.js
