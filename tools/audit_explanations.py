@@ -11,11 +11,17 @@ from collections import defaultdict
 from pathlib import Path
 
 BASE = Path(__file__).resolve().parent.parent
-REF = re.compile(r"^.*(に関するページを参照してください|を参照してください)。?\s*$", re.M)
+
+# 公式解説は「〜を参照してください。https://...」という誘導が本文の半分近くを占める。
+# 説明の中身どうしを比べるため、URLと誘導文を落としてから字数を測る。
+URL = re.compile(r"https?://\S+")
+POINTER = re.compile(r"[^。\n]*(参照してください|に関するページ)[^。\n]*。?")
 
 
 def clean(s):
-    return REF.sub("", s or "").strip()
+    s = URL.sub("", s or "")
+    s = POINTER.sub("", s)
+    return re.sub(r"\s+", " ", s).strip()
 
 
 def official_baseline():
