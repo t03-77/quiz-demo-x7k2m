@@ -17,3 +17,4 @@ _scratch/
 # 公式問題の読み上げ音声も同様にローカル専用
 audio/
 data/audio_tracks.js
+__pycache__/
