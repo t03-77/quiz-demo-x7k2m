@@ -165,11 +165,7 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
   <div class="card">
     <h2>模擬試験モード</h2>
     <div class="note" style="margin-bottom:8px">本番同様、途中の正解表示なしで連続出題し、最後にまとめて採点します(時間切れで自動終了)。上の出題セットの絞り込みが反映されます。</div>
-    <div class="chiprow">
-      <button class="chip" onclick="startMock(10)">10問 / 20分</button>
-      <button class="chip" onclick="startMock(25)">25問 / 50分</button>
-      <button class="chip" onclick="startMock(65)">65問 / 130分</button>
-    </div>
+    <div class="chiprow" id="h-mock"></div>
   </div>
 </div>
 
@@ -501,6 +497,13 @@ function refreshHome(){
     `<button class="chip ${setFilter===k?'on':''}" onclick="setFilter='${k}';refreshHome()">${l} ${counts[k]||''}</button>`).join('');
   const hasOfficial = OFFICIAL.some(q=>q.exam===currentExam);
   document.getElementById('h-setinfo').textContent = hasOfficial? '' : '(公式問題は未読み込み)';
+  // 模擬試験の選択肢。本番と同じ問題数・時間を第一候補に、短縮版も用意する
+  const e=EXAMS.find(x=>x.id===currentExam);
+  const perQ=e.min/e.n;
+  const short=[[10,'ウォームアップ'],[25,'ハーフ']];
+  document.getElementById('h-mock').innerHTML =
+    `<button class="chip on" onclick="startMock(${e.n},${e.min})">本番形式 ${e.n}問 / ${e.min}分</button>` +
+    short.map(([n,label])=>`<button class="chip" onclick="startMock(${n},${Math.round(n*perQ)})">${label} ${n}問 / ${Math.round(n*perQ)}分</button>`).join('');
 }
 
 /* ---------- 演習 ---------- */
@@ -606,12 +609,15 @@ function applySrs(st, ok){
 
 /* ---------- 模擬試験モード ---------- */
 let MOCK=null; // {ids, idx, answers, deadline, timer, rows, resultHtml}
-function startMock(n){
+function startMock(n, minutes){
   domFilter = null;
   const ids = shuffled(pool().map(q=>q.id), currentExam+':'+Date.now());
   if(!ids.length){ alert('出題できる問題がありません'); return; }
   const take = ids.slice(0, Math.min(n, ids.length));
-  MOCK = {ids:take, idx:0, answers:{}, deadline: Date.now()+take.length*2*60*1000};
+  if(take.length < n && !confirm(`この出題セットには${take.length}問しかありません。${take.length}問で開始しますか?`)) return;
+  // 問題が足りないときは時間も比例配分し、1問あたりの時間感覚を本番に合わせる
+  const mins = Math.max(1, Math.round((minutes||n*2) * take.length / n));
+  MOCK = {ids:take, idx:0, answers:{}, deadline: Date.now()+mins*60*1000};
   MOCK.timer = setInterval(tickMock, 1000);
   mode='mock';
   nextMockQ(); switchView('quiz');
@@ -648,8 +654,12 @@ function finishMock(timeup){
   }
   saveP();
   const okN=rows.filter(r=>r.ok).length, total=rows.length, rate=Math.round(okN/total*100);
-  let h = `<div class="resultbanner ${rate>=70?'ok':'ng'}">${rate>=70?'🎉 合格ライン到達':'📚 もう少し!'}<span style="font-weight:400;font-size:13px;margin-left:auto">${okN}/${total}問正解 (${rate}%)${timeup?' ・時間切れ':''}</span></div>`;
-  h += `<div class="note" style="margin-bottom:10px">本番の合格ラインはスコア720/1000(CLF-C02は700)。正答率70%強が目安です。タップで各問題の解説を確認できます。</div>`;
+  // 本番は100〜1000のスケールドスコア。合格ラインを素点換算した目安と比較する
+  const e=EXAMS.find(x=>x.id===currentExam);
+  const need=Math.round((e.pass-100)/9);
+  const pass=rate>=need;
+  let h = `<div class="resultbanner ${pass?'ok':'ng'}">${pass?'🎉 合格ライン到達':'📚 もう少し!'}<span style="font-weight:400;font-size:13px;margin-left:auto">${okN}/${total}問正解 (${rate}%)${timeup?' ・時間切れ':''}</span></div>`;
+  h += `<div class="note" style="margin-bottom:10px">${e.id}の合格ラインはスコア${e.pass}/1000 — 素点換算で約${need}%が目安です(あと${Math.max(0,Math.ceil(total*need/100)-okN)}問で到達)。タップで各問題の解説を確認できます。</div>`;
   h += rows.map((r,i)=>{ const q=byId(r.id);
     return `<div class="weakitem" onclick="reviewMockQ(${i})"><span>${i+1}. ${esc(q.question.slice(0,38))}…</span><span style="font-weight:700;color:var(${r.ok?'--good':'--crit'})">${r.answered? (r.ok?'⭕':'❌') : '未回答'}</span></div>`; }).join('');
   h += `<div class="rowbtns" style="margin-top:14px"><button class="btn" onclick="MOCK=null;mode='auto';cur=null;switchView('home')">終了する</button></div>`;
