@@ -21,9 +21,29 @@
 | `tools/make_audio_vv.py` | 読み上げ音声の生成(VOICEVOX、チャプター付き) |
 | `tools/survey_generated.py` | 生成問題の完成度と欠番を確認 |
 | `tools/consolidate_fragments.py` | 生成が中断して残った断片ファイルを正規ファイルへ統合 |
+| `tools/merge_explanation_chunks.py` | 解説の一括書き直しで各所に残った中間ファイルを本体へ安全に取り込む |
+| `tools/make_calibration_samples.py` | 公式模試から**解説つき**のお手本を抽出(生成・書き直しの基準に使う) |
+| `tools/audit_explanations.py` | 解説の分量を公式模試と比較(URL誘導を除いた実質字数で判定) |
+| `tools/audit_domains.py` | ドメイン配分を公式試験ガイドの比重と突合 |
+| `tools/audit_consistency.py` | 解説と正誤フラグの矛盾を検出 |
+| `tools/audit_enumerations.py` | 「対応するのはA、B、C」型の列挙漏れ候補を洗い出す |
 | `tools/audit_risky_claims.py` | 料金・SLA・数値上限など事実誤認になりやすい記述を洗い出す |
-| `tools/make_calibration_samples.py` | 公式模試から難易度のお手本を抽出(生成時の基準に使う) |
+| `tools/audit_padding.py` | 解説が字数合わせの水増しになっていないかを検査 |
+| `tools/review_quality.py` | 問題文・選択肢の長さや条件句の割合を公式と比較 |
 | `tools/validate_questions.py` / `tools/smoke_test.js` | データ検証 |
+
+## 問題の品質基準
+
+公式模試を「お手本」として、次の水準に揃えている。基準は `資料/校正サンプル/{EXAM}.md`（公式問題を解説つきで抽出したもの）。
+
+- **問題文**: 制約条件を含むシナリオ形式。「最もコスト効率が良い」等の選定条件を入れる
+- **誤答選択肢**: 一見もっともらしく、決定的な理由で違うもの。明らかな捨て選択肢を作らない
+- **解説**: 正解は仕組みレベルで「なぜ満たすか」、誤答は「どの条件で破綻するか」を述べる
+- **ドメイン配分**: 公式試験ガイドの比重に沿わせる
+- 変わりやすい数値上限・料金・リージョン対応状況は書かない
+
+計測は `python tools/audit_explanations.py` と `python tools/audit_domains.py` で行う。
+なお公式解説は字数の約半分がURL誘導のため、比較時はそれを除いた実質字数で見ること。
 
 ## 主な学習機能
 
