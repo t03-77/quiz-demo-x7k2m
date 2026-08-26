@@ -160,7 +160,7 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
       <button class="chip" onclick="startQuiz('random')">ランダム</button>
       <button class="chip" onclick="startQuiz('seq')">順番どおり</button>
     </div>
-    <div class="note">おまかせ = 要復習 → 未出題 → 再確認待ち の優先度。2回連続正解で習得済みになります。</div>
+    <div class="note">おまかせ = 要復習 → 復習期 → 未出題 → 再確認待ち の優先度。2回連続正解で習得済みになります。<br>PCでは A〜F キーで選択、Enter で回答・次の問題へ進めます。</div>
   </div>
   <div class="card">
     <h2>模擬試験モード</h2>
@@ -1027,6 +1027,24 @@ document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
   switchView(v);
 });
 document.getElementById('head-exam').onclick=()=>{ currentExam=null; cur=null; document.getElementById('head-exam').textContent='試験を選ぶ'; switchView('exams'); };
+/* ---------- キーボード操作(PC) ---------- */
+document.addEventListener('keydown', e=>{
+  const t=e.target.tagName;
+  if(t==='INPUT'||t==='TEXTAREA'||t==='SELECT') return;          // 入力中は無効
+  if(document.querySelector('.sheet.on')) return;                 // シート表示中は無効
+  if(!document.getElementById('v-quiz').classList.contains('on')) return;
+  const card=document.getElementById('q-card');
+  if(/^[a-fA-F]$/.test(e.key)){
+    const opts=card.querySelectorAll('.opt');
+    const i='abcdef'.indexOf(e.key.toLowerCase());
+    if(opts[i]){ e.preventDefault(); opts[i].click(); }
+  } else if(e.key==='Enter'){
+    const btn=[...card.querySelectorAll('button')].find(b=>
+      !b.disabled && /回答する|次の問題/.test(b.textContent));
+    if(btn){ e.preventDefault(); btn.click(); }
+  }
+});
+
 function toggleTheme(){
   const el=document.documentElement;
   el.dataset.theme = el.dataset.theme==='dark'?'light':'dark';
