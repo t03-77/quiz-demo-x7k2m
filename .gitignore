@@ -18,3 +18,6 @@ _scratch/
 audio/
 data/audio_tracks.js
 __pycache__/
+
+# 解説の一括書き直しで使う中間ファイル(本体JSONへ反映済みのもの)
+資料/生成/_*/
