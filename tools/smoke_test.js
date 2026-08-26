@@ -15,7 +15,7 @@ let errors = [];
 function checkQ(q, src) {
   if (!examIds.has(q.exam)) errors.push(`${src} ${q.id}: 未知の試験 ${q.exam}`);
   if (!q.question || !q.question.trim()) errors.push(`${src} ${q.id}: 問題文なし`);
-  if (!['orig', 'qset', 'exam', 'pretest'].includes(q.set)) errors.push(`${src} ${q.id}: 未知のセット ${q.set}`);
+  if (!['orig', 'flash', 'qset', 'exam', 'pretest', 'user'].includes(q.set)) errors.push(`${src} ${q.id}: 未知のセット ${q.set}`);
   if (q.type === 'choice' || !q.type) {
     if (!Array.isArray(q.options) || q.options.length < 2) return errors.push(`${src} ${q.id}: options不正`);
     const nc = q.options.filter(o => o.correct).length;
