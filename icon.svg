@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="96" fill="#232f3e"/>
+  <path d="M112 300h288" stroke="#ff9900" stroke-width="24" stroke-linecap="round"/>
+  <text x="256" y="248" font-family="system-ui,sans-serif" font-size="150" font-weight="800"
+        fill="#ffffff" text-anchor="middle">AWS</text>
+  <text x="256" y="392" font-family="system-ui,sans-serif" font-size="88" font-weight="700"
+        fill="#ff9900" text-anchor="middle">学習</text>
+</svg>

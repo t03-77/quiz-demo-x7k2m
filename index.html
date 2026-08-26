@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>資格学習アプリ</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg">
+<meta name="theme-color" content="#2a78d6">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="AWS学習">
 <style>
 :root{
   color-scheme: light;
@@ -1216,6 +1221,40 @@ document.getElementById('cv-exam').innerHTML=EXAMS.filter(e=>!e.retired).map(e=>
 updateUsageUI();
 switchView('exams');
 initBank();
+
+/* ---------- オフライン対応(PWA) ---------- */
+// file:// で開いた場合はService Workerが使えないため、その時は何もしない
+if('serviceWorker' in navigator && location.protocol.startsWith('http')){
+  window.addEventListener('load', ()=>{
+    navigator.serviceWorker.register('sw.js').catch(()=>{});
+  });
+}
+// 通信できない状態を画面に出す(問題演習は続けられることを添える)
+function showOffline(on){
+  let el=document.getElementById('offbar');
+  if(!el){
+    el=document.createElement('div'); el.id='offbar';
+    el.style.cssText='position:fixed;top:0;left:0;right:0;z-index:60;background:var(--s4);color:#fff;'+
+      'font-size:12px;text-align:center;padding:5px 10px';
+    el.textContent='オフラインです。問題演習と模擬試験はそのまま続けられます(AI機能のみ使えません)';
+    document.body.appendChild(el);
+  }
+  el.style.display = on? 'block':'none';
+}
+window.addEventListener('offline', ()=>showOffline(true));
+window.addEventListener('online', ()=>showOffline(false));
+// キャッシュから起動したときは navigator.onLine が true を返すため、実際に通信できるか確かめる
+async function probeOffline(){
+  if(!location.protocol.startsWith('http')) return;   // file:// では判定しない
+  if(!navigator.onLine){ showOffline(true); return; }
+  try{
+    // audio/ 配下はService Workerがキャッシュしない(素通しする)ので、実際の通信可否が分かる。
+    // 応答が404でも「通信できた」ことの確認になる
+    await fetch('audio/__connectivity_probe', {cache:'no-store'});
+    showOffline(false);
+  }catch(e){ showOffline(true); }
+}
+probeOffline();
 </script>
 </body>
 </html>

@@ -1,0 +1,15 @@
+{
+  "name": "AWS資格学習",
+  "short_name": "AWS学習",
+  "description": "AWS認定資格の問題演習・模擬試験アプリ。進捗は端末内にのみ保存されます。",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f9f9f7",
+  "theme_color": "#2a78d6",
+  "lang": "ja",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
