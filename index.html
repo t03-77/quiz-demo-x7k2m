@@ -71,6 +71,14 @@ nav button.on{color:var(--accent); font-weight:700}
 .expl .h{font-weight:700; margin-bottom:2px}
 .expl.ok{border-color:var(--good)} .expl.ng{border-color:var(--crit)}
 .expl .body{color:var(--ink2); white-space:pre-wrap}
+/* 図は横幅に収める。狭い画面でもはみ出さないようにする */
+#diagram-body svg{max-width:100%; height:auto; display:block; margin:0 auto; cursor:zoom-in}
+#diagram-body{white-space:normal}
+/* 狭い画面では縮みすぎて読めないため、タップで拡大できるようにする */
+.zoomwrap{position:fixed; inset:0; background:rgba(0,0,0,.86); z-index:200;
+  display:flex; align-items:center; justify-content:center; padding:10px; overflow:auto}
+.zoomwrap svg{max-width:none; min-width:640px; height:auto; background:#fff; border-radius:10px; padding:12px}
+.zoomhint{font-size:11px; color:var(--muted); text-align:center; margin-top:4px}
 details.expl summary::after{content:' ▾ 解説'; font-size:11px; color:var(--muted); font-weight:400}
 details.expl[open] summary::after{content:' ▴'}
 .term{color:var(--accent); border-bottom:1px dashed var(--accent); cursor:pointer}
@@ -351,6 +359,7 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
 
 <script src="data/exams.js"></script>
 <script src="data/glossary.js"></script>
+<script src="data/diagrams.js"></script>
 <script src="data/orig.js"></script>
 <script src="data/demo_audio.js"></script>
 <script src="data/audio_tracks.js"></script><!-- 実音声(ローカルのみ、なければ404で無視される) -->
@@ -819,6 +828,7 @@ function renderResult(ok, chosen, correctAns, review){
   }
   const gx = stripRef(q.explanation);
   if(gx) h += `<div class="expl"><div class="h">解説</div><div class="body">${linkify(gx)}</div></div>`;
+  if(findDiagram(q)) h += `<div class="expl" id="diagram-box"><div class="h">図</div><div class="body" id="diagram-body">読み込み中…</div></div>`;
   h += `<button class="btn sub" style="margin-top:8px" onclick="openAiChat(buildQuestionCtx(cur), 'この問題について')">🤖 この問題についてAIに質問</button>`;
   if(review==='session') h += `<div class="rowbtns"><button class="btn" onclick="finishSession()">結果一覧へ戻る</button></div>`;
   else if(review) h += `<div class="rowbtns"><button class="btn" onclick="document.getElementById('q-card').innerHTML=MOCK.resultHtml;window.scrollTo(0,0)">結果一覧へ戻る</button></div>`;
@@ -826,7 +836,54 @@ function renderResult(ok, chosen, correctAns, review){
   else if(sessionN>=SESSION_LEN) h += `<div class="rowbtns"><button class="btn" onclick="finishSession()">このセットの結果を見る ▶</button></div>`;
   else h += `<div class="rowbtns"><button class="btn sub" onclick="switchView('home')">中断</button><button class="btn" onclick="nextQ()">次の問題 ▶</button></div>`;
   document.getElementById('q-card').innerHTML = h;
+  renderDiagram(q);
   window.scrollTo(0,0);
+}
+
+/* ---------- 図解 ----------
+   問題ごとに図を用意すると量が多くなるため、頻出トピック単位の図を
+   data/diagrams.js に置き、問題文と正解肢の語で引き当てて表示する。
+   Mermaidは図が必要になったときだけ読み込む(初回表示までの待ち時間を増やさないため)。 */
+let mermaidLoad=null;
+function loadMermaid(){
+  if(mermaidLoad) return mermaidLoad;
+  mermaidLoad=new Promise((ok,ng)=>{
+    const s=document.createElement('script');
+    s.src='https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js';
+    s.onload=()=>{ mermaid.initialize({startOnLoad:false, theme:'neutral', securityLevel:'strict'}); ok(true); };
+    s.onerror=()=>ng(new Error('図を読み込めませんでした'));
+    document.head.appendChild(s);
+  });
+  return mermaidLoad;
+}
+function findDiagram(q){
+  if(!q || !window.DIAGRAMS) return null;
+  const t=(q.question||'')+' '+(q.options||[]).filter(o=>o.correct).map(o=>o.text||'').join(' ');
+  return window.DIAGRAMS.find(d=>
+    (!d.exams || d.exams.includes(q.exam)) && d.match.every(k=>t.includes(k))) || null;
+}
+let diagramSeq=0;
+async function renderDiagram(q){
+  const d=findDiagram(q); if(!d) return;
+  const box=document.getElementById('diagram-box'), body=document.getElementById('diagram-body');
+  if(!box||!body) return;
+  try{
+    await loadMermaid();
+    const {svg}=await mermaid.render('mmd'+(++diagramSeq), d.mermaid);
+    body.innerHTML=`<div style="font-weight:600;margin-bottom:6px">${esc(d.title)}</div>${svg}`
+      +`<div class="zoomhint">図をタップすると大きく表示します</div>`;
+    const el=body.querySelector('svg');
+    if(el) el.onclick=()=>zoomDiagram(el);
+  }catch(e){
+    box.remove();   // オフラインなどで読めないときは、図の枠ごと消す
+  }
+}
+function zoomDiagram(svg){
+  const w=document.createElement('div');
+  w.className='zoomwrap';
+  w.innerHTML=svg.outerHTML;
+  w.onclick=()=>w.remove();
+  document.body.appendChild(w);
 }
 
 /* ---------- 統計 ---------- */

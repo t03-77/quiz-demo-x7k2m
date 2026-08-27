@@ -1,0 +1,3542 @@
+{
+ "SCS-C03_orig_001": {
+  "file": "SCS-C03_orig.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "検出",
+  "level": "easy",
+  "question": "ある企業が AWS Organizations で 50 の AWS アカウントを管理しています。セキュリティチームは、すべてのアカウントで不正な API アクティビティ、侵害された EC2 インスタンス、異常な認証情報の使用などの脅威を継続的に検出し、検出結果を単一のアカウントで一元的に確認したいと考えています。最も少ない運用オーバーヘッドでこの要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "セキュリティアカウントを Amazon GuardDuty の委任管理者として設定し、組織内の全アカウントで GuardDuty を自動的に有効化してメンバーアカウントの検出結果を集約する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_002": {
+  "file": "SCS-C03_orig.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "検出",
+  "level": "medium",
+  "question": "ある企業のセキュリティ運用チームが、複数の AWS アカウントと複数のリージョンにまたがる CloudTrail ログ、VPC フローログ、Route 53 リゾルバーのクエリログ、およびサードパーティーのセキュリティ製品のログを一元的に収集して分析基盤を構築しようとしています。ログは標準化されたオープンなスキーマに正規化したうえで長期保存し、Amazon Athena や既存の SIEM ツールから横断的にクエリできるようにする必要があります。最も少ない開発工数でこの要件を満たす AWS のサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon Security Lake を有効化し、AWS ソースとカスタムソースからのログを OCSF 形式に正規化して専用のデータレイクに集約する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_003": {
+  "file": "SCS-C03_orig.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インシデント対応",
+  "level": "hard",
+  "question": "ある企業の本番 VPC で稼働する Amazon EC2 インスタンスについて、Amazon GuardDuty が既知のコマンドアンドコントロール (C2) サーバーとの通信を示す検出結果を生成しました。インスタンスは Auto Scaling グループに属し、現在も稼働中です。セキュリティチームは、事業への影響を抑えつつ、フォレンジック調査のために証拠を保全しながらインスタンスを封じ込める必要があります。取るべきアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "インスタンスを Auto Scaling グループからデタッチしたうえで、インバウンド/アウトバウンドのトラフィックを許可しない隔離用セキュリティグループに置き換える。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "インスタンスの EBS ボリュームのスナップショットを取得し、必要に応じてメモリダンプを取得してからフォレンジック専用環境で分析する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_004": {
+  "file": "SCS-C03_orig.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インフラストラクチャのセキュリティ",
+  "level": "medium",
+  "question": "ある企業が Application Load Balancer (ALB) の背後で会員制 Web アプリケーションを運用しています。最近、ログインエンドポイントに対して、漏えいした認証情報リストを使用した大量のログイン試行 (クレデンシャルスタッフィング攻撃) が短時間に多数の IP アドレスから発生しています。正規ユーザーへの影響を最小限に抑えながら、この攻撃を緩和する方法として最も適切なものはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS WAF のウェブ ACL を ALB に関連付け、ログインエンドポイントを対象とするレートベースルールと AWS マネージドルールの ATP (Account Takeover Prevention) ルールグループを適用する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_005": {
+  "file": "SCS-C03_orig.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インフラストラクチャのセキュリティ",
+  "level": "hard",
+  "question": "ある金融企業のコンプライアンス要件により、本番 VPC 内の EC2 インスタンスからインターネットへのアウトバウンド通信を、承認済みのドメイン名 (FQDN) の許可リストに含まれる宛先のみに制限する必要があります。承認済みドメインの多くは CDN を利用しており、IP アドレスが頻繁に変化するため、IP アドレスベースの制御は現実的ではありません。また、すべての許可/拒否の判定結果をログとして記録する必要があります。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Network Firewall をデプロイしてアウトバウンド経路にファイアウォールエンドポイントを配置し、ステートフルルールのドメインリストで許可ドメインのみを許可して、それ以外を拒否するルールを構成し、ログを S3 または CloudWatch Logs に送信する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_006": {
+  "file": "SCS-C03_orig.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "アイデンティティとアクセスの管理",
+  "level": "hard",
+  "question": "ある企業のプラットフォームチームは、開発者がアプリケーション用の IAM ロールを自律的に作成できるようにして開発速度を向上させたいと考えています。一方、セキュリティチームは、開発者が自分自身の権限を超える強力な権限を持つロールを作成して権限昇格することを防ぐ必要があります。開発者によるロール作成の柔軟性を維持しながら、作成されるロールの権限に上限を強制する方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "セキュリティチームが許可の上限を定義したアクセス許可の境界 (permissions boundary) 用の管理ポリシーを作成し、開発者の IAM ポリシーで iam:PermissionsBoundary 条件キーを使用して、その境界がアタッチされたロールの作成のみを許可する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_007": {
+  "file": "SCS-C03_orig.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "アイデンティティとアクセスの管理",
+  "level": "medium",
+  "question": "ある企業が、サードパーティーの SaaS 型監視サービスに自社の AWS アカウント内のリソースの読み取りアクセスを許可しようとしています。SaaS プロバイダーは自社の AWS アカウントから IAM ロールを引き受ける (AssumeRole) 方式を採用しています。企業のセキュリティチームは、SaaS プロバイダーの他の顧客が「混乱した代理 (confused deputy)」問題を悪用して、誤ってこの企業のロールを引き受けることを防ぎたいと考えています。この要件を満たすロールの構成はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ロールの信頼ポリシーで SaaS プロバイダーのアカウントをプリンシパルとして指定し、sts:ExternalId 条件キーで SaaS プロバイダーが発行した顧客固有の外部 ID の一致を必須にする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_008": {
+  "file": "SCS-C03_orig.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ保護",
+  "level": "easy",
+  "question": "ある企業が、契約書や本人確認書類などの機密文書を保存する Amazon S3 バケットを新規に作成しました。社内のコンプライアンス基準では、このバケットに保存されるすべての新しいオブジェクトを、自社でキーポリシーを定義でき、ローテーションや無効化を自社の判断で実行できる暗号化キーによって保存時に暗号化することが求められています。さらに監査部門は、どのプリンシパルがいつ復号を行ったかを AWS CloudTrail のログで追跡できることを要件としています。このバケットには 5 つの部門が運用する合計 40 本の既存アプリケーションからアップロードが行われており、リリース凍結中のためアプリケーション側のコード改修は行えません。この要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS KMS でカスタマーマネージドキーを作成し、バケットのデフォルト暗号化を SSE-KMS に設定してそのキーを指定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_009": {
+  "file": "SCS-C03_orig.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ保護",
+  "level": "hard",
+  "question": "ある企業がアカウント A の Amazon S3 バケットに、アカウント A の AWS KMS カスタマーマネージドキーで暗号化 (SSE-KMS) されたデータを保存しています。同じ組織のアカウント B で稼働するアプリケーションが IAM ロールを使用してこのオブジェクトをダウンロードする必要があります。S3 バケットポリシーではアカウント B のロールに s3:GetObject が既に許可されていますが、ダウンロードはアクセス拒否エラーで失敗します。この問題を解決するために必要なアクションはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "アカウント A の KMS キーのキーポリシーに、アカウント B (またはアカウント B の該当ロール) に kms:Decrypt を許可するステートメントを追加する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "アカウント B の IAM ロールのポリシーに、アカウント A の KMS キーの ARN に対する kms:Decrypt を許可するステートメントを追加する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_010": {
+  "file": "SCS-C03_orig.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティの基礎とガバナンス",
+  "level": "medium",
+  "question": "ある企業が AWS Organizations で複数の AWS アカウントを管理しています。データレジデンシー要件により、すべてのメンバーアカウントでのリソース作成を 2 つの承認済みリージョンに限定する必要があります。ただし、IAM や AWS STS などのグローバルサービスの利用は妨げてはなりません。個々のアカウントの管理者であっても回避できない方法でこの統制を実装するにはどうすればよいですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "aws:RequestedRegion 条件キーを使用して承認済みリージョン以外へのリクエストを拒否し、グローバルサービスのアクションを除外 (NotAction) したサービスコントロールポリシー (SCP) を作成して、対象の OU にアタッチする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_011": {
+  "file": "SCS-C03_orig_b2.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "検出",
+  "level": "easy",
+  "question": "ある企業が Amazon EC2 インスタンス、Amazon ECR に保存されたコンテナイメージ、および AWS Lambda 関数でアプリケーションを運用しています。セキュリティチームは、これらのワークロードに含まれるソフトウェアパッケージの既知の脆弱性 (CVE) と、意図しないネットワーク露出を継続的に評価する必要があります。新しい CVE が公開された際には、既存のリソースも自動的に再評価されなければなりません。最も少ない運用オーバーヘッドでこの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon Inspector を有効化し、EC2 インスタンス、ECR コンテナイメージ、Lambda 関数の継続的な脆弱性スキャンを実行する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_012": {
+  "file": "SCS-C03_orig_b2.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "検出",
+  "level": "medium",
+  "question": "ある企業のセキュリティチームが Amazon GuardDuty を運用しています。社内の承認済み脆弱性診断チームが VPC 内の専用 EC2 インスタンスから定期的にポートスキャンを実施しており、そのたびに Recon:EC2/Portscan の検出結果が大量に生成されて、本来対応すべき検出結果が埋もれてしまっています。GuardDuty の他の検出能力を維持したまま、この既知の無害なアクティビティに関する検出結果を今後自動的にアーカイブするには、どうすればよいですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "検出結果タイプと対象インスタンス ID を条件とする抑制ルール (suppression rule) を GuardDuty に作成する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_013": {
+  "file": "SCS-C03_orig_b2.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "検出",
+  "level": "medium",
+  "question": "ある企業が複数の AWS リージョンでワークロードを運用しており、すべてのリージョンで AWS Security Hub と Amazon GuardDuty を有効化しています。セキュリティ運用チームは、各リージョンのコンソールを個別に切り替えて検出結果を確認しており、対応の遅れが発生しています。すべてのリージョンのセキュリティ検出結果を単一のリージョンで継続的かつ自動的に確認できるようにする、最も効率的な方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Security Hub のリージョン間集約 (cross-Region aggregation) を設定し、集約リージョンを指定してリンクされたリージョンの検出結果を自動的に複製する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_014": {
+  "file": "SCS-C03_orig_b2.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "検出",
+  "level": "medium",
+  "question": "ある企業が機密データを含む多数の Amazon S3 バケットを運用しています。セキュリティチームは、認証情報の侵害を示唆するような S3 データへの異常なアクセスパターン (通常と異なる地理的位置からの API 呼び出し、異常な量のデータ取得、データ検出のためのアクセス許可の列挙など) を、脅威インテリジェンスと機械学習に基づいて検出したいと考えています。最も少ない運用オーバーヘッドでこの要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon GuardDuty の S3 Protection を有効化し、S3 データイベントを分析して異常なアクセスを検出する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_015": {
+  "file": "SCS-C03_orig_b2.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "検出",
+  "level": "hard",
+  "question": "ある企業の AWS アカウントで、侵害された IAM 認証情報を入手した攻撃者が、痕跡を隠すために CloudTrail の証跡 (trail) に対して StopLogging を実行してログ記録を停止させました。このアカウントでは Amazon GuardDuty が有効です。この状況における GuardDuty の動作として正しい説明はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "GuardDuty は CloudTrail イベントを証跡の設定とは独立したイベントストリームから直接取得しているため、証跡が停止されても API アクティビティに基づく脅威検出を継続し、ログ記録の無効化自体も検出結果として報告できる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_016": {
+  "file": "SCS-C03_orig_b2.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "検出",
+  "level": "easy",
+  "question": "ある企業のセキュリティアナリストが、Amazon GuardDuty の検出結果を受けて調査を行っています。関係する IAM ユーザーや EC2 インスタンスが過去数週間にわたってどのような API 呼び出しやネットワーク通信を行ったかを時系列で可視化し、関連するリソース間の関係をたどって根本原因を特定したいと考えています。事前のデータ基盤構築なしにこの調査を効率化できる AWS のサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon Detective を使用して、検出結果に関連するエンティティの行動グラフと時系列の分析結果を確認する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_017": {
+  "file": "SCS-C03_orig_b2.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "検出",
+  "level": "medium",
+  "question": "ある企業が数百の Amazon S3 バケットに大量のデータを保存しています。コンプライアンスチームは、氏名やクレジットカード番号などの個人情報 (PII) がどのバケットのどのオブジェクトに含まれているかを機械学習とパターンマッチングで継続的に検出し、あわせて暗号化されていないバケットや外部に共有されているバケットを把握する必要があります。この要件を満たす AWS のサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon Macie を有効化し、機密データ検出ジョブと S3 バケットのセキュリティ評価を実行する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_018": {
+  "file": "SCS-C03_orig_b2.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "検出",
+  "level": "hard",
+  "question": "ある企業が AWS Security Hub を組織全体で運用しています。サンドボックス用 OU のアカウント群から生成される特定のコントロールの検出結果は、リスク受容済みとして重大度を INFORMATIONAL に変更し、ステータスを SUPPRESSED に自動更新したいと考えています。一方、本番アカウントの同じコントロールの検出結果はそのまま維持する必要があります。カスタムコードを開発せずにこの要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Security Hub のオートメーションルールを作成し、アカウント ID とコントロール ID を条件として一致する検出結果の重大度とワークフローステータスを自動的に更新する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_019": {
+  "file": "SCS-C03_orig_b2.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "検出",
+  "level": "hard",
+  "question": "ある企業の脅威インテリジェンスチームは、業界の情報共有コミュニティから自社を標的とする攻撃者の既知の悪意ある IP アドレスのリストを定期的に入手しています。セキュリティチームは、組織内のリソースとこれらの IP アドレスとの間に通信が発生した場合に、Amazon GuardDuty の検出結果として確実に検出されるようにしたいと考えています。この要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "GuardDuty の委任管理者アカウントで、入手した IP アドレスのリストを脅威リスト (threat IP list) としてアップロードして有効化する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_020": {
+  "file": "SCS-C03_orig_b2.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "検出",
+  "level": "hard",
+  "question": "ある企業が Amazon EKS 上で約 300 のコンテナ化されたマイクロサービスを本番運用しています。同社はすでに Amazon Inspector による ECR イメージの脆弱性スキャンと GuardDuty の EKS Audit Log Monitoring を有効化しています。しかし先日のインシデントでは、脆弱性のない正規のイメージから起動したコンテナ内部で攻撃者が暗号通貨マイニングツールを実行し、外部へリバースシェルを確立していたにもかかわらず検知できませんでした。セキュリティチームは、コンテナ内部のプロセス実行やネットワーク接続といった OS レベルの挙動を可視化して同種の攻撃を検出したいと考えています。この要件を満たす GuardDuty の機能はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "GuardDuty Runtime Monitoring を有効化し、セキュリティエージェントを通じてコンテナのランタイムアクティビティ (プロセスの実行、ネットワーク接続など) を監視する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_021": {
+  "file": "SCS-C03_orig_b2.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インシデント対応",
+  "level": "hard",
+  "question": "ある企業のセキュリティエンジニアは、開発者の IAM ユーザーのアクセスキーが 3 日前に公開の GitHub リポジトリへ誤ってコミットされていたことを検知しました。Amazon GuardDuty には、このキーによる普段と異なるリージョンからの API 呼び出しを示す検出結果が出ています。このアクセスキーは夜間の本番バッチ処理でも使用されているため、業務を長時間停止させることはできません。組織証跡の CloudTrail ログは 400 日分保持されています。法務部門からは 24 時間以内に侵害の影響範囲を報告するよう求められています。アプリケーションへの影響を抑えつつ、被害の拡大防止と影響範囲の特定を行うために取るべきアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "漏えいしたアクセスキーをただちに無効化し、必要に応じて新しいアクセスキーへローテーションする。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "CloudTrail でそのアクセスキーによる API アクティビティを調査し、不正に作成されたリソースやバックドア (新規 IAM ユーザー、ロール、キーなど) がないか確認して削除する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_022": {
+  "file": "SCS-C03_orig_b2.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インシデント対応",
+  "level": "hard",
+  "question": "Amazon GuardDuty が、ある EC2 インスタンスの IAM ロールに紐づく一時的な認証情報が AWS の外部の IP アドレスから使用されていることを示す UnauthorizedAccess:IAMUser/InstanceCredentialExfiltration.OutsideAWS の検出結果を生成しました。認証情報はインスタンスメタデータサービスから窃取されたと疑われます。取るべきアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "該当 IAM ロールに対して、aws:TokenIssueTime 条件を使用して検出時点以前に発行されたセッションのアクセスを拒否するポリシーを適用し、窃取された一時認証情報を失効させる。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "認証情報が窃取された EC2 インスタンスを隔離してフォレンジック調査を行い、侵入経路を特定したうえで、再発防止として IMDSv2 の必須化などの対策を実施する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_023": {
+  "file": "SCS-C03_orig_b2.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インシデント対応",
+  "level": "medium",
+  "question": "ある企業のセキュリティチームは、インシデント調査時に運用担当者がプライベートサブネットの EC2 インスタンスへアクセスする方法を見直しています。現在は踏み台サーバー経由の SSH を使用していますが、SSH キーの管理負荷と、誰が何を実行したかの記録が残らないことが課題です。インバウンドポートを開放せず、アクセスを IAM で制御し、すべての操作セッションをログとして記録できる方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Systems Manager Session Manager を使用してインスタンスに接続し、セッションログを S3 または CloudWatch Logs に記録するよう構成する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_024": {
+  "file": "SCS-C03_orig_b2.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インシデント対応",
+  "level": "hard",
+  "question": "ある企業では、侵害が疑われる EC2 インスタンスの EBS ボリュームのスナップショットを、分析のために専用のフォレンジックアカウントへ共有する手順を整備しています。対象のボリュームは AWS KMS のカスタマーマネージドキーで暗号化されています。フォレンジックアカウントがこのスナップショットからボリュームを復元して分析できるようにするために必要なアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "スナップショットの共有設定 (createVolumePermission) を変更し、フォレンジックアカウントの ID を追加する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "暗号化に使用したカスタマーマネージドキーのキーポリシーで、フォレンジックアカウントに kms:Decrypt や kms:CreateGrant などの必要なアクションを許可する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_025": {
+  "file": "SCS-C03_orig_b2.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インシデント対応",
+  "level": "medium",
+  "question": "ある企業のセキュリティチームは、本番環境で稼働する約 200 台の Amazon EC2 インスタンスを監視しています。同社は 24 時間体制の監視要員を確保できないため、Amazon GuardDuty が重大度の高い (High) 検出結果を生成してから 5 分以内に、影響を受けたインスタンスのセキュリティグループを、事後のフォレンジック調査のためインスタンスを終了させずに通信だけを遮断する隔離用セキュリティグループへ自動的に置き換える必要があります。同時に、オンコール担当者へ通知を送って対応の開始を記録することも求められています。運用負荷を最小限に抑えてこの要件を満たすアーキテクチャはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "GuardDuty の検出結果イベントを重大度でフィルタリングする Amazon EventBridge ルールを作成し、ターゲットとして隔離処理を行う Lambda 関数と通知用の SNS トピックを設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_026": {
+  "file": "SCS-C03_orig_b2.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インシデント対応",
+  "level": "hard",
+  "question": "ある企業のセキュリティエンジニアは、AWS アカウントのルートユーザーの認証情報が侵害された可能性が高いことを示す通知を受けました。CloudTrail には、海外の IP アドレスからの身に覚えのないルートユーザーによるコンソールサインインと、その直後の IAM ユーザー作成が記録されています。このアカウントは AWS Organizations の管理アカウントであり、配下の 30 のメンバーアカウントの請求と SCP を管理しているため、アカウントごと破棄する選択肢は取れません。社内手順では、侵害の疑いを検知してから 1 時間以内に認証情報を封じ込め、実行された操作を洗い出すことになっています。直ちに実行すべきアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ルートユーザーのパスワードをただちに変更し、ルートユーザーの MFA を再設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "ルートユーザーに発行されているアクセスキーを無効化または削除し、CloudTrail でルートユーザーによる操作内容を調査する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_027": {
+  "file": "SCS-C03_orig_b2.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インフラストラクチャのセキュリティ",
+  "level": "medium",
+  "question": "ある企業が Amazon CloudFront ディストリビューションを使用して、Amazon S3 バケットに保存された静的コンテンツを配信しています。オブジェクトは AWS KMS のカスタマーマネージドキーで暗号化 (SSE-KMS) されています。セキュリティ要件として、ユーザーが S3 バケットの URL に直接アクセスすることを禁止し、CloudFront 経由のアクセスのみを許可する必要があります。この要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "オリジンアクセスコントロール (OAC) を設定し、S3 バケットポリシーで cloudfront.amazonaws.com サービスプリンシパルからの、当該ディストリビューションを条件とするアクセスのみを許可する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_028": {
+  "file": "SCS-C03_orig_b2.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インフラストラクチャのセキュリティ",
+  "level": "hard",
+  "question": "ある企業が Amazon CloudFront ディストリビューションの背後に Application Load Balancer (ALB) をオリジンとして配置し、Web アプリケーションを公開しています。CloudFront には AWS WAF が関連付けられていますが、攻撃者が ALB のパブリック DNS 名を特定し、CloudFront と WAF をバイパスして ALB へ直接リクエストを送信していることが判明しました。CloudFront 経由以外のアクセスを ALB で確実に排除する方法として最も適切なものはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ALB のセキュリティグループで CloudFront のオリジン向けマネージドプレフィックスリストからのインバウンドのみを許可し、さらに CloudFront でカスタムオリジンヘッダーに秘密の値を付与して ALB 側で検証する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_029": {
+  "file": "SCS-C03_orig_b2.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インフラストラクチャのセキュリティ",
+  "level": "medium",
+  "question": "ある企業が Network Load Balancer と Elastic IP アドレスを使用した対外向けサービスを運用しており、過去に大規模な DDoS 攻撃を受けた経験があります。経営層は、大規模攻撃時に AWS の DDoS 対応の専門チームによる支援を受けられること、および攻撃に起因するリソースのスケーリング費用の補償を受けられることを次年度のセキュリティ要件として定めました。この要件を満たすために有効化すべきサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Shield Advanced を契約し、Elastic IP アドレスなどの対象リソースを保護対象として登録する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_030": {
+  "file": "SCS-C03_orig_b2.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インフラストラクチャのセキュリティ",
+  "level": "medium",
+  "question": "ある企業が AWS Organizations で数十のアカウントを管理しており、各アカウントの Application Load Balancer と Amazon API Gateway に共通のベースラインとなる AWS WAF ウェブ ACL を適用することを義務付けています。今後新しく作成されるリソースにも自動的に適用され、アカウント管理者がウェブ ACL の関連付けを解除した場合も自動的に再適用される必要があります。この要件を満たすサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Firewall Manager で WAF ポリシーを作成し、組織全体の対象リソースにウェブ ACL を自動的に適用・維持する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_031": {
+  "file": "SCS-C03_orig_b2.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インフラストラクチャのセキュリティ",
+  "level": "easy",
+  "question": "ある企業が VPC 内に Web 層、アプリケーション層、データベース層からなる 3 層アーキテクチャを構築しています。セキュリティ要件として、データベース層の EC2 インスタンスへの接続は、アプリケーション層のインスタンスからのデータベースポート (3306) への通信のみに限定する必要があります。アプリケーション層は Auto Scaling によりインスタンスが頻繁に増減します。最も保守性の高い方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "データベース層のセキュリティグループのインバウンドルールで、ソースとしてアプリケーション層のセキュリティグループを指定し、ポート 3306 のみを許可する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_032": {
+  "file": "SCS-C03_orig_b2.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インフラストラクチャのセキュリティ",
+  "level": "hard",
+  "question": "ある企業のセキュリティチームは、SSRF (サーバーサイドリクエストフォージェリ) 脆弱性を悪用したインスタンスメタデータサービス経由の認証情報窃取を緩和するため、すべての EC2 インスタンスでセッション指向の IMDSv2 のみを使用させることを決定しました。既存インスタンスへの対応と、今後起動されるインスタンスへの強制の両方が必要です。取るべきアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "既存の各インスタンスに対して ModifyInstanceMetadataOptions API を実行し、HttpTokens を required に設定して IMDSv1 を無効化する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "IAM ポリシーまたは SCP で、ec2:MetadataHttpTokens 条件キーが required でない RunInstances リクエストを拒否し、新規インスタンスでの IMDSv2 必須化を強制する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_033": {
+  "file": "SCS-C03_orig_b2.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インフラストラクチャのセキュリティ",
+  "level": "hard",
+  "question": "ある企業の VPC で、アプリケーションサーバーの EC2 インスタンスから別のサブネットにあるデータベースの EC2 インスタンスへの接続が失敗しています。この経路にはセキュリティグループ、ネットワーク ACL、ルートテーブルなど複数の制御が存在し、どの設定が通信をブロックしているのかが特定できていません。設定を 1 つずつ手動で確認せずに、ブロックしている具体的なコンポーネントを特定できる方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "VPC Reachability Analyzer で送信元と送信先を指定して分析を実行し、到達性を妨げているコンポーネントを特定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_034": {
+  "file": "SCS-C03_orig_b2.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インフラストラクチャのセキュリティ",
+  "level": "hard",
+  "question": "ある企業のセキュリティチームは、VPC に出入りするトラフィックに対して、シグネチャベースの侵入防御 (IPS) をインラインで実施することを求められています。要件として、オープンソースの Suricata 互換ルール形式で記述された既存の検知ルール資産を再利用できること、およびインフラの管理をマネージドサービスに任せられることが挙げられています。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Network Firewall をデプロイし、ステートフルルールエンジンに Suricata 互換ルールをインポートしてインラインでトラフィックを検査・ブロックする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_035": {
+  "file": "SCS-C03_orig_b2.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インフラストラクチャのセキュリティ",
+  "level": "medium",
+  "question": "ある企業のセキュリティチームが、VPC 内の特定の EC2 インスタンス群を通過するネットワークトラフィックについて、パケットのペイロードまで含めた詳細なコンテンツ検査を、既存のトラフィックフローに影響を与えないアウトオブバンド方式で実施したいと考えています。検査には既存のオープンソースのネットワーク解析ツールを使用します。この要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "VPC Traffic Mirroring を設定し、対象 ENI のトラフィックのコピーを解析ツールが稼働するアプライアンスに転送する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_036": {
+  "file": "SCS-C03_orig_b2.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インフラストラクチャのセキュリティ",
+  "level": "hard",
+  "question": "ある企業が、インターネットへの経路を持たないプライベートサブネットの EC2 インスタンスから、特定の Amazon S3 バケットへアクセスする必要があります。セキュリティ要件として、S3 への通信を AWS ネットワーク内に閉じること、および対象バケットへのアクセスを VPC 内からの経路に限定することが求められています。追加のデータ処理料金を発生させずにこの要件を満たすアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "S3 用のゲートウェイ型 VPC エンドポイントを作成し、プライベートサブネットのルートテーブルにエンドポイントへのルートを追加する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "S3 バケットポリシーで aws:SourceVpce 条件を使用し、作成した VPC エンドポイント経由以外のアクセスを拒否する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_037": {
+  "file": "SCS-C03_orig_b2.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "アイデンティティとアクセスの管理",
+  "level": "medium",
+  "question": "ある企業のセキュリティエンジニアが、監査チーム用の IAM ロール audit-role を作成しました。監査チームのメンバーの IAM ユーザーには、この audit-role の ARN に対する sts:AssumeRole を許可するアイデンティティベースポリシーがアタッチされています。しかし、メンバーがロールの引き受けを試みると Access Denied エラーが発生します。この問題の最も可能性の高い原因はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "audit-role の信頼ポリシー (信頼関係) で、監査チームのユーザーまたはアカウントがプリンシパルとして許可されていない。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_038": {
+  "file": "SCS-C03_orig_b2.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "アイデンティティとアクセスの管理",
+  "level": "hard",
+  "question": "ある企業では、開発者に AWS Lambda 関数の作成と実行ロールの割り当てを許可しています。セキュリティチームは、開発者が管理者権限を持つ既存の強力な IAM ロールを Lambda 関数に割り当てて、その関数経由で権限昇格することを懸念しています。開発者の Lambda 開発の作業を妨げずに、この権限昇格経路を防ぐ方法として最も適切なものはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "開発者のポリシーで iam:PassRole の Resource を承認済みの実行ロールの ARN パス (プレフィックス) に限定し、あわせて iam:PassedToService 条件で lambda.amazonaws.com に限定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_039": {
+  "file": "SCS-C03_orig_b2.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "アイデンティティとアクセスの管理",
+  "level": "hard",
+  "question": "AWS Organizations のメンバーアカウントで作業している開発者の IAM ユーザーには AdministratorAccess 管理ポリシーがアタッチされています。しかし、この開発者が Amazon SageMaker AI の API を呼び出すと、常に明示的な許可の欠如を示す Access Denied エラーが発生します。同じ操作は組織に属さない検証用アカウントでは成功します。permissions boundary は設定されていません。この事象の最も可能性の高い原因はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "アカウントまたは所属 OU にアタッチされたサービスコントロールポリシー (SCP) が SageMaker AI のアクションを許可していない。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_040": {
+  "file": "SCS-C03_orig_b2.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ保護",
+  "level": "medium",
+  "question": "ある企業のセキュリティエンジニアが、3 年前に作成され現在は使用されていないと考えられている AWS KMS のカスタマーマネージドキーを廃止しようとしています。このキーは過去に Amazon S3、Amazon EBS、Amazon RDS のスナップショットなど複数のサービスで使用されていた可能性がありますが、AWS CloudTrail のログは 90 日分しか保持されておらず、四半期ごとや年次でしか実行されないジョブが暗号化したデータが残っているかどうかを完全には確認できません。キーを失うとそれらのデータは永久に復号できなくなります。復号エラーが起きた場合に元に戻せる猶予を確保しながら、最終的にキーを完全に削除したいと考えています。最も安全な廃止手順はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "まずキーを無効化して一定期間の運用で復号エラーが発生しないことを監視し、その後 7〜30 日の待機期間を設定してキーの削除をスケジュールする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_041": {
+  "file": "SCS-C03_orig_b3.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "アイデンティティとアクセスの管理",
+  "level": "hard",
+  "question": "ある企業が AWS Organizations でデータ境界 (データペリメータ) の実装を進めています。要件は、組織内のすべてのアカウントの Amazon S3 バケットについて、リソースベースポリシーの内容にかかわらず、組織外部のプリンシパルからのアクセスを組織レベルで一律に制限することです。個々のアカウント管理者がバケットポリシーで外部アカウントを許可しても、この統制が上書きされてはなりません。この要件を満たす仕組みはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "リソースコントロールポリシー (RCP) を作成し、aws:PrincipalOrgID が組織 ID と一致しないプリンシパルからの S3 アクセスを拒否する条件を定義して組織にアタッチする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_042": {
+  "file": "SCS-C03_orig_b3.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "アイデンティティとアクセスの管理",
+  "level": "medium",
+  "question": "ある企業が AWS Organizations で多数のアカウントを運用しており、共有アーティファクトを保存する Amazon S3 バケットを中央アカウントに配置しています。このバケットには、組織内のどのアカウントのプリンシパルからでもアクセスできるようにする一方、組織外のアカウントからのアクセスは許可しない必要があります。アカウントの追加・削除のたびにポリシーを更新せずにこの要件を満たすバケットポリシーの構成はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "aws:PrincipalOrgID 条件キーで自組織の組織 ID を指定し、組織内のプリンシパルからのアクセスのみを許可する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_043": {
+  "file": "SCS-C03_orig_b3.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "アイデンティティとアクセスの管理",
+  "level": "hard",
+  "question": "ある企業のセキュリティチームが、AWS Organizations の組織のルートに、特定のリージョン以外の利用を拒否するサービスコントロールポリシー (SCP) をアタッチしました。しかしその後の監査で、組織の管理アカウント (management account) の管理者が、拒否されているはずのリージョンでリソースを作成できていたことが判明しました。この事象の原因として正しい説明はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "SCP は管理アカウントのプリンシパルには適用されないため、管理アカウントでは SCP による制限が効かない。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_044": {
+  "file": "SCS-C03_orig_b3.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "アイデンティティとアクセスの管理",
+  "level": "medium",
+  "question": "ある企業では IAM Identity Center への移行が完了しておらず、まだ約 200 の IAM ユーザーがコンソールと CLI を利用しています。セキュリティポリシーでは、IAM ユーザーが MFA で認証していない場合、自分自身の仮想 MFA デバイスの登録と有効化に必要な操作を除き、すべての AWS アクションを実行できないようにする必要があります。新入社員は MFA を登録していない状態で初回サインインするため、登録に必要な操作だけは MFA なしでも実行できなければなりません。また、各チームに割り当て済みの許可ポリシーを個別に書き換えずに全 IAM ユーザーへ一律に適用できる方法が求められています。この要件を IAM ポリシーで実装する推奨構成はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "MFA 管理に必要なアクションを除くすべてのアクション (NotAction) を、条件 BoolIfExists で aws:MultiFactorAuthPresent が false の場合に拒否する Deny ステートメントを使用する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_045": {
+  "file": "SCS-C03_orig_b3.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "アイデンティティとアクセスの管理",
+  "level": "hard",
+  "question": "ある企業では多数のプロジェクトチームが同一の AWS アカウントを共有しており、各チームは自チームのリソースのみを操作できるようにする必要があります。チームは頻繁に新設され、リソースも動的に増減するため、チームごとに個別の IAM ポリシーを作成・更新する運用は破綻しつつあります。ポリシーの数を増やさずにスケールするアクセス制御を実現する方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "属性ベースのアクセス制御 (ABAC) を採用し、プリンシパルタグとリソースタグの一致 (aws:PrincipalTag と aws:ResourceTag の比較) を条件とする共通ポリシーを使用する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_046": {
+  "file": "SCS-C03_orig_b3.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "アイデンティティとアクセスの管理",
+  "level": "medium",
+  "question": "ある企業では、複数の運用エンジニアが外部 IdP からのフェデレーションで同一の IAM ロールを引き受けて AWS を操作しています。監査チームから、CloudTrail のログ上でロールセッションによる操作がどの従業員個人によるものかを確実に追跡できるようにすべきという指摘を受けました。従業員が自分で偽装できない形で個人を識別できるようにする仕組みはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "IdP からの属性を基にソース ID (sts:SourceIdentity) を設定するよう構成する。設定されたソース ID はセッション中に変更できず、CloudTrail のログに記録される。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_047": {
+  "file": "SCS-C03_orig_b3.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "アイデンティティとアクセスの管理",
+  "level": "hard",
+  "question": "ある企業が、カスタマーサポート用の社内アプリケーションを開発しています。このアプリケーションは単一の IAM ロールを引き受けて動作しますが、サポート担当者ごとに担当顧客のリソースにしかアクセスできないよう、担当者のセッション単位で権限を動的に絞り込む必要があります。担当者と顧客の組み合わせは膨大で、担当者ごとの IAM ロールの作成は現実的ではありません。この要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "アプリケーションが AssumeRole を呼び出す際に、担当顧客のリソースに限定したセッションポリシーを渡し、発行される一時認証情報の権限を動的に絞り込む。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_048": {
+  "file": "SCS-C03_orig_b3.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "アイデンティティとアクセスの管理",
+  "level": "medium",
+  "question": "ある企業は AWS Organizations で 120 のアカウントを運用しており、各アカウントの開発チームが自由に Amazon S3 バケット、IAM ロール、AWS KMS キー、AWS Lambda 関数を作成できます。セキュリティチームは、これらのリソースがリソースベースポリシーによって組織外部のアカウントやパブリックへ意図せず共有されていないかを継続的に監視し、四半期ごとの監査で外部からアクセス可能なリソースの一覧を提出する必要があります。新たに外部共有が発生した場合も、担当者が全アカウントを手作業で棚卸しすることなく把握できなければなりません。追加の費用をかけずにこの要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "IAM Access Analyzer の外部アクセスアナライザーを組織を信頼ゾーンとして作成し、組織外部のプリンシパルからアクセス可能なリソースの検出結果を確認する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_049": {
+  "file": "SCS-C03_orig_b3.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "アイデンティティとアクセスの管理",
+  "level": "medium",
+  "question": "ある企業で長年運用されているアプリケーションの IAM ロールに、広範な許可を含む管理ポリシーがアタッチされています。セキュリティチームは最小権限の原則に基づいてこのロールの権限を削減したいのですが、アプリケーションが実際にどのアクションを必要としているかが文書化されていません。アプリケーションを停止させずに、実際の利用実績に基づいて権限を削減する進め方として最も適切なものはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "IAM の最終アクセス情報 (last accessed) と IAM Access Analyzer の CloudTrail に基づくポリシー生成を活用し、実際に使用されたサービスとアクションに基づいた絞り込みポリシーを作成して段階的に置き換える。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_050": {
+  "file": "SCS-C03_orig_b3.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "アイデンティティとアクセスの管理",
+  "level": "easy",
+  "question": "ある開発者が、Amazon EC2 インスタンス上で稼働するアプリケーションから Amazon S3 と Amazon DynamoDB の API を呼び出す必要があります。セキュリティレビューで、アプリケーションの設定ファイルに IAM ユーザーのアクセスキーがハードコードされていることが指摘されました。認証情報の管理負荷と漏えいリスクを最小化する修正方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "必要な権限を持つ IAM ロールを作成してインスタンスプロファイルとして EC2 にアタッチし、アプリケーションは SDK を通じて自動取得される一時認証情報を使用する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_051": {
+  "file": "SCS-C03_orig_b3.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "アイデンティティとアクセスの管理",
+  "level": "hard",
+  "question": "ある企業のセキュリティエンジニアが、機密データを含む S3 バケットのバケットポリシーに、社内ネットワークのパブリック IP 範囲以外からのアクセスを aws:SourceIp 条件で拒否するステートメントを追加しました。その直後から、同じアカウントの VPC 内で S3 用ゲートウェイ VPC エンドポイントを経由してこのバケットにアクセスしていたアプリケーションが、すべて Access Denied で失敗するようになりました。この事象の原因と適切な対処はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "VPC エンドポイント経由のリクエストはプライベート IP として扱われ、パブリック IP を前提とする aws:SourceIp 条件に一致せず拒否される。aws:SourceVpce や aws:SourceVpc 条件を組み合わせて VPC 経由のアクセスを除外するようポリシーを修正する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_052": {
+  "file": "SCS-C03_orig_b3.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "アイデンティティとアクセスの管理",
+  "level": "medium",
+  "question": "ある企業が AWS Organizations で 30 のアカウントを運用しており、従業員のアクセス管理に課題を抱えています。現在は各アカウントに IAM ユーザーが個別に作成されており、入退社時の作成・削除漏れや、アカウントごとに異なる認証情報の管理が問題になっています。既存の外部 IdP (SAML 2.0 対応) を認証元として、全アカウントへのシングルサインオンと権限セットの一元管理を実現する方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS IAM Identity Center を有効化して外部 IdP と連携し、許可セット (permission set) を定義してユーザーやグループに各アカウントへのアクセスを割り当てる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_053": {
+  "file": "SCS-C03_orig_b3.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ保護",
+  "level": "medium",
+  "question": "ある企業のコンプライアンス要件により、AWS KMS のカスタマーマネージドキーの暗号化キーマテリアルを定期的にローテーションする必要があります。セキュリティエンジニアは、既存の暗号化済みデータの再暗号化を発生させず、運用負荷を最小限に抑えてこの要件を満たしたいと考えています。KMS が生成したキーマテリアルを使用する対称キーについて、正しい説明はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "自動キーローテーションを有効にすると KMS が新しいキーマテリアルを定期的に生成する。過去のキーマテリアルも保持されるため、ローテーション前に暗号化されたデータも再暗号化なしで復号できる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_054": {
+  "file": "SCS-C03_orig_b3.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ保護",
+  "level": "hard",
+  "question": "ある金融機関では規制当局のガイドラインにより、AWS 上のデータ暗号化に使用する鍵について 2 点が求められています。1 つは、鍵素材 (キーマテリアル) を AWS ではなく自社の管理下にあるハードウェアセキュリティモジュールで生成し、その生成記録を自社で保持すること。もう 1 つは、契約解除や重大インシデントが発生した場合に、AWS 側に残る鍵素材を待機期間を待つことなく直ちに使用不能にできることです。AWS KMS のキー削除で指定できる 7 日から 30 日の待機期間では、2 つ目の要件を満たせません。鍵の利用状況は引き続き AWS CloudTrail で追跡できる必要があります。AWS KMS を使用してこの要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "外部キーマテリアルをインポートするカスタマーマネージドキー (BYOK) を作成する。インポートされたキーマテリアルはオンデマンドで即時に削除でき、削除するとそのキーでの暗号化・復号は直ちに不可能になる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_055": {
+  "file": "SCS-C03_orig_b3.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ保護",
+  "level": "medium",
+  "question": "ある企業の規制要件により、暗号化キーを保管する HSM が FIPS 140 認定を受けたシングルテナントのハードウェアであること、および HSM をアプリケーションから業界標準の PKCS #11 や JCE などのインターフェイスで直接利用できることが求められています。HSM のプロビジョニングやバックアップなどの運用は AWS に任せたいと考えています。この要件を満たすサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS CloudHSM クラスターをプロビジョニングし、アプリケーションから PKCS #11 や JCE などの標準インターフェイスで利用する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_056": {
+  "file": "SCS-C03_orig_b3.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ保護",
+  "level": "hard",
+  "question": "ある企業のバッチ処理アプリケーションは、毎晩 2 時から 4 時の時間帯だけ、特定の AWS KMS カスタマーマネージドキーで暗号化されたデータを復号する必要があります。このキーのキーポリシーと IAM ポリシーの変更は社内の変更管理プロセスの対象で、承認に 3 営業日を要するため、日々の運用でポリシーを書き換えることは現実的ではありません。セキュリティチームは、処理を実行する一時的なロールに対し、必要になった時点でプログラムから復号の許可を与え、処理完了時にその許可を確実に取り消せる仕組みを求めています。許可の付与と取り消しは AWS CloudTrail に記録される必要があります。KMS のどの機能を使用すべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "KMS のグラント (grant) を使用し、処理開始時に対象プリンシパルへ復号操作を許可するグラントを作成して、処理完了後にグラントを廃止 (retire) または取り消す。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_057": {
+  "file": "SCS-C03_orig_b3.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ保護",
+  "level": "hard",
+  "question": "ある企業が、複数のワークロードで共用している AWS KMS カスタマーマネージドキーについて、セキュリティを強化しようとしています。要件は、このキーの使用を特定の AWS サービス (Amazon S3) からのリクエスト経由に限定し、窃取された認証情報によって KMS API が直接呼び出されてもキーを使用できないようにすることです。キーポリシーでこの要件を実装する方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "キーポリシーの許可ステートメントに kms:ViaService 条件キーを追加し、s3.<リージョン>.amazonaws.com 経由のリクエストのみにキーの使用を限定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_058": {
+  "file": "SCS-C03_orig_b3.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ保護",
+  "level": "medium",
+  "question": "ある企業のアプリケーションが、数ギガバイトのファイルをクライアントサイドで暗号化してから Amazon S3 にアップロードする必要があります。開発者が AWS KMS の Encrypt API でファイル全体を暗号化しようとしたところ、データサイズの制約で失敗しました。KMS を鍵管理の基盤としたまま大きなデータを暗号化する、AWS が推奨するアプローチはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "エンベロープ暗号化を使用する。GenerateDataKey API でデータキーを取得してファイル本体をローカルで暗号化し、KMS で暗号化されたデータキーを暗号文と一緒に保存する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_059": {
+  "file": "SCS-C03_orig_b3.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ保護",
+  "level": "easy",
+  "question": "ある企業のアプリケーションが Amazon RDS for MySQL データベースの認証情報を使用しています。セキュリティ監査で、認証情報が長期間変更されていないことが指摘されました。企業は、認証情報を安全に保存し、アプリケーションの再デプロイなしに定期的な自動ローテーションを実現したいと考えています。最も少ない開発工数でこの要件を満たすサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Secrets Manager に認証情報を保存し、RDS との統合によるマネージドな自動ローテーションを有効化して、アプリケーションは実行時にシークレットを取得するように構成する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_060": {
+  "file": "SCS-C03_orig_b3.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ保護",
+  "level": "hard",
+  "question": "ある企業のアカウント A の AWS Secrets Manager に保存されているシークレットを、アカウント B の Lambda 関数の実行ロールから取得できるようにする必要があります。セキュリティエンジニアが構成を確認したところ、シークレットはデフォルトの AWS マネージドキー (aws/secretsmanager) で暗号化されていました。クロスアカウントでの取得を可能にするために必要なアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "シークレットの暗号化キーをアカウント A のカスタマーマネージドキーに変更し、そのキーポリシーでアカウント B のロールに kms:Decrypt を許可する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "シークレットにリソースポリシーをアタッチし、アカウント B のロールに secretsmanager:GetSecretValue を許可する。あわせてアカウント B のロールの IAM ポリシーでも同アクションを許可する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_061": {
+  "file": "SCS-C03_orig_b3.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ保護",
+  "level": "medium",
+  "question": "ある企業のセキュリティ監査で、本番稼働中の Amazon RDS for PostgreSQL インスタンス (ストレージ 500 GB) が暗号化されていないことが判明しました。コンプライアンス要件により、90 日以内にこのデータベースの保存データを自社が管理する AWS KMS のカスタマーマネージドキーで暗号化する必要があります。アプリケーションチームは週末の深夜に最大 2 時間のメンテナンスウィンドウを確保できるため、その範囲であればダウンタイムを伴う切り替えを許容します。既存のデータをすべて引き継ぎ、切り替え後はアプリケーションの接続先エンドポイントの変更のみで動作することが条件です。この要件を満たす正しい手順はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "暗号化されていない DB インスタンスのスナップショットを取得し、そのスナップショットを KMS キーを指定して暗号化ありでコピーし、暗号化されたコピーから新しい DB インスタンスを復元して切り替える。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_062": {
+  "file": "SCS-C03_orig_b3.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ保護",
+  "level": "hard",
+  "question": "ある企業が、規制対象データを保存する Amazon S3 バケットについて、次の 2 つのコンプライアンス要件を満たす必要があります。(1) すべてのオブジェクトが自社管理の KMS キーで保存時に暗号化されること、(2) 暗号化されていない通信 (HTTP) によるアクセスがポリシーで確実に拒否されること。実装すべきアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "バケットのデフォルト暗号化を、カスタマーマネージドキーを指定した SSE-KMS に設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "バケットポリシーに、条件 aws:SecureTransport が false の場合にすべての S3 アクションを拒否する Deny ステートメントを追加する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_063": {
+  "file": "SCS-C03_orig_b3.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ保護",
+  "level": "medium",
+  "question": "ある金融機関が、規制当局の要件により取引記録を Amazon S3 に 7 年間保存する必要があります。年間およそ 2 億オブジェクトが書き込まれ、監査人は無作為に抽出したオブジェクトが書き込み後に一切変更されていないことを確認します。要件として、保持期間中はいかなるユーザー (バケット所有者の管理者権限やアカウントのルートユーザーを含む) であってもオブジェクトの削除・上書きができない WORM (Write Once Read Many) 保護を実装しなければならず、保持期間の短縮や解除も認められません。バケットはこの用途のために新規に作成します。この要件を満たす構成はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "S3 Object Lock を有効化したバケットに、コンプライアンスモードで 7 年の保持期間を設定してオブジェクトを保存する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_064": {
+  "file": "SCS-C03_orig_b3.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ保護",
+  "level": "easy",
+  "question": "ある企業の AWS アカウントには、複数の開発チームが作成した約 300 個の Amazon S3 バケットがあり、毎週新しいバケットが追加されています。過去に、開発者がテスト目的で設定したバケットポリシーが解除されないまま残り、機密データが一時的にインターネットへ公開されるインシデントが発生しました。静的コンテンツの配信は Amazon CloudFront のオリジンアクセスコントロール (OAC) 経由で行っているため、バケットをパブリックにする必要はありません。セキュリティチームは、既存のバケットと今後作成されるバケットの両方に適用され、個々のバケットの設定内容に依存しない防止策を求めています。最も適切な方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "アカウントレベルの S3 ブロックパブリックアクセス設定をすべて有効にする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_065": {
+  "file": "SCS-C03_orig_b3.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ保護",
+  "level": "hard",
+  "question": "ある企業のセキュリティポリシーにより、特定リージョンのすべての Amazon EBS ボリュームを AWS KMS キーで暗号化する必要があります。監査の結果、既存の EC2 インスタンスに暗号化されていないボリュームが複数接続されており、また開発者が新しいボリュームを暗号化なしで作成できてしまう状態であることが判明しました。この状況を是正するアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "対象リージョンで EBS 暗号化のデフォルト有効化 (encryption by default) を設定し、以後作成されるボリュームが常に KMS キーで暗号化されるようにする。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "既存の暗号化されていないボリュームはスナップショットを取得し、KMS キーを指定して暗号化ありでコピーしたスナップショットから新しいボリュームを作成して置き換える。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_066": {
+  "file": "SCS-C03_orig_b3.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "検出",
+  "level": "medium",
+  "question": "ある企業が Amazon Aurora データベースクラスターを運用しています。セキュリティチームは、漏えいした認証情報を使用したデータベースへの不審なログイン試行 (通常と異なる送信元からのアクセス、総当たりによるログイン失敗の急増など) を、データベースやアプリケーションに変更を加えることなく検出したいと考えています。この要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon GuardDuty の RDS Protection を有効化し、データベースのログインアクティビティを分析して異常を検出する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_067": {
+  "file": "SCS-C03_orig_b3.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インフラストラクチャのセキュリティ",
+  "level": "hard",
+  "question": "ある企業が VPC 内の Amazon RDS データベースインスタンスのネットワーク防御を見直しています。現在、データベースはパブリックサブネットに配置され、セキュリティグループはVPC 全体からのアクセスを許可しています。データベースへのネットワーク経路を、アプリケーションサーバーからの必要最小限に絞り込むためのアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "データベースを、インターネットゲートウェイへのルートを持たないプライベートサブネットに配置し、パブリックアクセシビリティを無効にする。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "データベースのセキュリティグループのインバウンドルールを、アプリケーションサーバーのセキュリティグループをソースとするデータベースポートのみに変更する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_068": {
+  "file": "SCS-C03_orig_b3.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インフラストラクチャのセキュリティ",
+  "level": "hard",
+  "question": "ある企業のセキュリティ部門は、社内で標準化しているサードパーティー製のネットワークセキュリティアプライアンス (次世代ファイアウォール) を使用して、複数の VPC のトラフィックをインラインで検査することを求めています。要件として、アプライアンス群への透過的なトラフィック分散、アプライアンスの水平スケーリング、および複数 VPC からの検査基盤の共同利用が挙げられています。この要件を満たすアーキテクチャの中核となるサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Gateway Load Balancer (GWLB) を使用してアプライアンス群を配置し、各 VPC からは Gateway Load Balancer エンドポイント経由でトラフィックを透過的に検査基盤へルーティングする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_069": {
+  "file": "SCS-C03_orig_b3.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インフラストラクチャのセキュリティ",
+  "level": "hard",
+  "question": "ある企業のセキュリティチームは、VPC 内で侵害されたインスタンスが DNS クエリを悪用してデータを外部へ持ち出す DNS ベースのデータ流出 (DNS exfiltration) を懸念しています。要件は、既知の悪意あるドメインへの DNS クエリを VPC のリゾルバーの段階でブロックすること、および DNS を悪用したデータ流出の兆候を検出できるようにすることです。実装すべきアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Route 53 Resolver DNS Firewall を構成し、AWS マネージドドメインリストや自社のブロックリストに一致するドメインへのクエリを拒否するルールを VPC に関連付ける。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "Amazon GuardDuty を有効化し、DNS クエリの分析に基づく検出結果 (DNS データ流出や C2 ドメインへの問い合わせなど) を監視する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_070": {
+  "file": "SCS-C03_orig_b3.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティの基礎とガバナンス",
+  "level": "hard",
+  "question": "ある企業では、訴訟対応や規制当局への提出に備えて、AWS CloudTrail のログを専用のログアーカイブアカウントの Amazon S3 バケットに 7 年間保管しています。監査法人からは、収集されたログファイルが配信後に改ざんまたは削除されていないことを暗号学的に証明できること、および保存先において管理者を含む誰もログファイルを上書き・削除できない状態にしておくことの 2 点を求められました。検証作業は担当者が定期的に実行できる必要があり、外部ツールの導入や独自実装は避けたいと考えています。この要件を満たすアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "CloudTrail のログファイル整合性検証 (log file integrity validation) を有効化し、配信されるダイジェストファイルを使用して定期的に検証を実行する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "ログ保存用の S3 バケットへのアクセスを最小権限のバケットポリシーで制限し、S3 Object Lock などによる上書き・削除の防止を構成する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_071": {
+  "file": "SCS-C03_orig_b4.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティの基礎とガバナンス",
+  "level": "medium",
+  "question": "ある企業のセキュリティポリシーでは、AWS アカウントのルートユーザーの使用は、ルートユーザーでなければ実行できない緊急時の作業のみに限定されています。同社は AWS Organizations で 25 のアカウントを運用し、すべてのアカウントの管理イベントを収集する組織証跡をすでに有効化しています。セキュリティチームは、いずれかのアカウントでルートユーザーによるコンソールサインインや API 呼び出しが発生した場合に、休日や夜間であっても数分以内にセキュリティ担当者へ通知が届く仕組みを、常駐の監視要員を置かずに実装する必要があります。この要件を満たす構成はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "CloudTrail のログを CloudWatch Logs に配信し、ルートユーザーのアクティビティに一致するメトリクスフィルターと CloudWatch アラームを作成して SNS トピックへ通知する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_072": {
+  "file": "SCS-C03_orig_b4.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティの基礎とガバナンス",
+  "level": "medium",
+  "question": "ある企業のコンプライアンスチームは、AWS Organizations 配下の全アカウントに対して、社内セキュリティ基準に対応する数十個の AWS Config ルールと修復アクションをまとめて展開し、基準への準拠状況をパッケージ単位で一元的に追跡したいと考えています。新しいアカウントが組織に追加された場合にも自動的に適用される必要があります。この要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Config ルールと修復アクションをコンフォーマンスパックとして定義し、組織全体にデプロイする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_073": {
+  "file": "SCS-C03_orig_b4.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティの基礎とガバナンス",
+  "level": "hard",
+  "question": "ある企業が AWS Organizations の全アカウントで Amazon GuardDuty と AWS Security Hub を有効化しています。しかし、あるメンバーアカウントの管理者が調査中のノイズを理由に GuardDuty を独断で停止していたことが監査で発覚しました。組織内のすべてのアカウント (今後追加されるアカウントを含む) でこれらのセキュリティサービスの有効状態を維持し、アカウント管理者による無効化を防ぐアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "サービスコントロールポリシー (SCP) で、guardduty:DeleteDetector や securityhub:DisableSecurityHub などのセキュリティサービスを停止・削除するアクションを拒否する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "委任管理者アカウントで GuardDuty と Security Hub の組織設定を構成し、全既存アカウントと新規アカウントでの自動有効化を設定する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_074": {
+  "file": "SCS-C03_orig_b4.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティの基礎とガバナンス",
+  "level": "medium",
+  "question": "ある企業では、AWS Config のマネージドルールとカスタムルールを 50 のアカウントへ展開し、S3 バケットのバージョニングが無効になっている、セキュリティグループが 0.0.0.0/0 から SSH を許可しているといった非準拠のリソース設定を検出しています。非準拠は週に数十件発生しますが、運用チームは 2 名しかおらず手作業での是正が追いつきません。セキュリティチームは、検出するだけでなく非準拠と判定されたリソースを人手を介さずに自動的に是正し、その是正がどの権限でいつ実行されたかを AWS CloudTrail で追跡できるようにしたいと考えています。Config の機能を使用してこれを実現する方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Config ルールに Systems Manager Automation ドキュメントを使用した修復アクションを関連付け、自動修復を有効にする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_075": {
+  "file": "SCS-C03_orig_b4.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティの基礎とガバナンス",
+  "level": "easy",
+  "question": "ある企業が新しい決済サービスの立ち上げにあたり外部監査を受けています。監査人は、責任共有モデルにおいて AWS が責任を負うデータセンターの物理セキュリティや環境統制について、AWS のインフラストラクチャに関する SOC 2 レポートや ISO 27001 認証書などの第三者監査レポートの提出を求めています。提出期限は 5 営業日後で、レポートは秘密保持契約の対象として取り扱う前提です。セキュリティ担当者は追加費用をかけず、最も短時間でこれらのドキュメントを入手する必要があります。どのようにすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Artifact からセルフサービスで対象のコンプライアンスレポートをダウンロードする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_076": {
+  "file": "SCS-C03_orig_b4.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティの基礎とガバナンス",
+  "level": "hard",
+  "question": "ある企業が数十のメンバーアカウントを持つ AWS Organizations の環境で、ルートユーザーの保護状況を監査しました。その結果、複数のアカウントでルートユーザーに MFA が設定されておらず、一部のアカウントではルートユーザーのアクセスキーが発行されたまま放置されていることが判明しました。ルートユーザーの侵害リスクを低減するために実施すべきアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "すべてのアカウントのルートユーザーに MFA を設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "放置されているルートユーザーのアクセスキーを削除し、日常運用には IAM ロールや IAM Identity Center のアイデンティティを使用する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_077": {
+  "file": "SCS-C03_orig_b4.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティの基礎とガバナンス",
+  "level": "medium",
+  "question": "ある企業で、重要な Amazon S3 バケット内のオブジェクトが何者かに削除されるインシデントが発生しました。セキュリティチームが CloudTrail を調査しましたが、証跡には管理イベントのみが記録されており、該当する DeleteObject の呼び出し記録を見つけることができませんでした。今後同様の調査を可能にするために実施すべき対策はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "CloudTrail の証跡で対象バケットの S3 データイベントを有効化し、オブジェクトレベルの API 呼び出しが記録されるようにする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_078": {
+  "file": "SCS-C03_orig_b4.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティの基礎とガバナンス",
+  "level": "medium",
+  "question": "ある企業のセキュリティチームは、監査とインシデント調査のために、過去の AWS API アクティビティに対して SQL ベースのクエリを実行したいと考えています。要件として、S3 バケットや Athena のテーブル、Glue のスキーマ管理といった分析基盤を自前で構築・保守しないこと、およびイベントを長期間 (数年単位) 保持して繰り返し検索できることが挙げられています。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS CloudTrail Lake のイベントデータストアを作成してイベントを取り込み、SQL クエリで分析する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_079": {
+  "file": "SCS-C03_orig_b4.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティの基礎とガバナンス",
+  "level": "hard",
+  "question": "ある企業のセキュリティアナリストが、VPC 内の EC2 インスタンスが不審な外部ドメインへ通信していた疑いについて調査しています。アナリストは VPC フローログを分析しましたが、インスタンスがどのドメイン名を名前解決したのかをフローログから特定できませんでした。VPC の Route 53 Resolver (AmazonProvidedDNS) を使用している環境で、この調査を可能にするために必要な構成はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Route 53 Resolver クエリログ記録を構成し、VPC 内からの DNS クエリの内容 (ドメイン名、応答など) を CloudWatch Logs や S3 に記録する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_080": {
+  "file": "SCS-C03_orig_b4.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "検出",
+  "level": "medium",
+  "question": "ある企業のセキュリティチームは、Amazon GuardDuty が EC2 インスタンスに関する不審なアクティビティ (C2 サーバーとの通信など) を検出した際に、そのインスタンスに接続された EBS ボリューム上にマルウェアが存在するかどうかを、インスタンスにエージェントを導入することなく確認したいと考えています。この要件を満たす GuardDuty の機能はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "GuardDuty Malware Protection for EC2 を有効化し、不審な検出結果を契機とした EBS ボリュームのエージェントレススキャンを実行させる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_081": {
+  "file": "SCS-C03_orig_b4.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "検出",
+  "level": "hard",
+  "question": "ある企業が Amazon EKS クラスターを運用しています。セキュリティチームは、Kubernetes API に対する不審な操作 (匿名ユーザーへの権限付与、特権コンテナの起動、システム名前空間への不審なアクセスなど) を検出したいと考えています。クラスターの運用チームは、検出のためにコントロールプレーンのログ設定やクラスター構成を変更したくないと考えています。この要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "GuardDuty の EKS Audit Log Monitoring を有効化する。GuardDuty は EKS のコントロールプレーンから監査ログを独立したストリームで直接取得するため、クラスター側のログ設定の変更は不要である。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_082": {
+  "file": "SCS-C03_orig_b4.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インシデント対応",
+  "level": "medium",
+  "question": "ある企業のセキュリティチームが、機密データを保存する Amazon S3 バケットから、侵害された IAM ロールのセッションによって大量のオブジェクトがダウンロードされ続けていることを検知しました。正規のワークロードも同じバケットを利用しているため、バケット全体を停止することはできません。進行中の不正なダウンロードを直ちに停止させる対処として最も適切なものはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "バケットポリシーに、侵害されたロールとそのセッションを指すプリンシパル条件 (aws:PrincipalArn など) を用いた明示的な Deny ステートメントを追加してアクセスを遮断し、あわせてロールのセッションを失効させる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_083": {
+  "file": "SCS-C03_orig_b4.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インシデント対応",
+  "level": "hard",
+  "question": "ある企業のセキュリティチームは、AWS 環境でのセキュリティインシデントに備えた対応能力の強化を進めています。過去のインシデントの振り返りでは、侵害されたインスタンスの証拠保全作業が場当たり的で時間がかかったこと、および調査環境が本番環境と分離されていなかったことが課題として挙げられました。インシデント対応の「準備」フェーズとして実施すべきアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "本番環境から分離された専用のフォレンジック調査用 AWS アカウントを事前に用意し、調査ツールとアクセス権限を整備しておく。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "インスタンスの隔離、スナップショット取得、メタデータ収集などの証拠保全手順を Systems Manager Automation などのランブックとして事前に自動化し、訓練で検証しておく。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_084": {
+  "file": "SCS-C03_orig_b4.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インシデント対応",
+  "level": "medium",
+  "question": "ある開発者が IAM ユーザーのアクセスキーを誤って公開 GitHub リポジトリにプッシュしてしまいました。しばらくして、AWS から「認証情報の漏えいを検出した」という通知が届き、該当 IAM ユーザーに AWSCompromisedKeyQuarantineV2 という AWS 管理ポリシーがアタッチされていることが確認されました。この状況の説明と取るべき対応として正しいものはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS が漏えいを検出して悪用リスクの高いアクションを制限する隔離ポリシーを適用した状態である。ポリシーを外すだけで済ませず、キーを無効化・ローテーションし、CloudTrail で不正使用の有無を調査したうえで隔離ポリシーを解除する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_085": {
+  "file": "SCS-C03_orig_b4.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インフラストラクチャのセキュリティ",
+  "level": "hard",
+  "question": "ある企業が、社内システム間連携のための REST API を Amazon API Gateway で構築しています。この API は、AWS Direct Connect で接続されたオンプレミスのシステムと、社内の 3 つの VPC で稼働するアプリケーションからのみ呼び出されます。セキュリティ要件として、API のエンドポイントにインターネットから一切到達できないこと、および承認された特定の VPC エンドポイントを経由した呼び出しだけを受け付け、それ以外の経路からのアクセスは拒否することが求められています。いったんパブリックに公開したうえで IP アドレスで絞り込む方式は、社内の設計標準で認められていません。実装すべきアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "API Gateway の REST API をプライベートエンドポイントタイプで作成し、VPC に execute-api 用のインターフェイス VPC エンドポイントを作成して VPC 内から呼び出す。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "API のリソースポリシーで、指定した VPC エンドポイント (aws:SourceVpce) 以外からの呼び出しを拒否する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_086": {
+  "file": "SCS-C03_orig_b4.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インフラストラクチャのセキュリティ",
+  "level": "hard",
+  "question": "ある企業がグローバル向けの Web アプリケーションを Application Load Balancer で公開しています。経営層は、大規模な L3/L4 の volumetric DDoS 攻撃と、HTTP フラッドのようなアプリケーション層 (L7) の攻撃の両方に対する耐性を高めることを求めています。エッジロケーションでの攻撃吸収と、リクエストレートに基づく L7 の緩和を実現するアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ALB の前段に Amazon CloudFront ディストリビューションを配置し、AWS Shield Advanced で保護対象として登録する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "AWS WAF のウェブ ACL を CloudFront に関連付け、レートベースルールで送信元ごとの過剰なリクエストをブロックする。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_087": {
+  "file": "SCS-C03_orig_b4.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インフラストラクチャのセキュリティ",
+  "level": "easy",
+  "question": "ある企業は、Application Load Balancer で公開している 12 のウェブサイトについて、合計 30 枚の TLS サーバー証明書を管理しています。対象ドメインの DNS は Amazon Route 53 のパブリックホストゾーンで管理しています。昨年、担当者の異動によって証明書の更新が漏れ、有効期限切れによりサイトが 4 時間停止するインシデントが発生しました。セキュリティチームは、証明書の発行と更新を自動化して更新忘れのリスクを構造的に排除し、証明書の費用と運用負荷を最小限に抑えたいと考えています。最も適切な方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Certificate Manager (ACM) でパブリック証明書を発行して DNS 検証を構成し、ALB のリスナーに関連付けて自動更新に任せる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_088": {
+  "file": "SCS-C03_orig_b4.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インフラストラクチャのセキュリティ",
+  "level": "hard",
+  "question": "ある企業が、社内のマイクロサービス間の通信を相互 TLS (mTLS) で認証・暗号化することを計画しています。要件として、社内サービス用のクライアント証明書とサーバー証明書を発行するプライベートな認証局 (CA) 階層を AWS 上に構築すること、CA の秘密鍵が安全に管理されること、および証明書の発行を API で自動化できることが挙げられています。この要件を満たすサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Private CA (プライベート認証局) でルート CA と下位 CA の階層を構築し、API 経由でプライベート証明書を発行・管理する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_089": {
+  "file": "SCS-C03_orig_b4.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インフラストラクチャのセキュリティ",
+  "level": "hard",
+  "question": "ある金融企業が、EC2 インスタンス上で極めて機密性の高いデータ (決済用の鍵情報) を処理するアプリケーションを運用しています。要件として、処理環境は同一インスタンス上の他のプロセスや、インスタンスに SSH アクセスできる管理者からも分離されていること、および AWS KMS が処理環境の同一性を暗号学的に検証 (構成証明) できた場合にのみ鍵の復号を許可することが挙げられています。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Nitro Enclaves で分離された実行環境を作成し、KMS のキーポリシーで構成証明ドキュメントの測定値 (kms:RecipientAttestation 条件) に基づいて復号を許可する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_090": {
+  "file": "SCS-C03_orig_b4.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インフラストラクチャのセキュリティ",
+  "level": "medium",
+  "question": "ある企業のネットワーク管理者が、セキュリティ強化のためにサブネットのネットワーク ACL を変更し、インバウンドは HTTPS (443 番ポート) のみを許可、アウトバウンドも 443 番ポートのみを許可する構成にしました。その直後から、このサブネット内の Web サーバーに対する外部クライアントからの HTTPS アクセスが応答しなくなりました。セキュリティグループは 443 番のインバウンドを許可しています。この問題の原因はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ネットワーク ACL はステートレスであるため、クライアントへの応答トラフィックが使用するエフェメラルポート (1024〜65535) へのアウトバウンド許可がなく、戻りの通信が拒否されている。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_091": {
+  "file": "SCS-C03_orig_b4.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "アイデンティティとアクセスの管理",
+  "level": "hard",
+  "question": "ある企業が、Amazon S3 バケットのイベント通知から Amazon SNS トピックへメッセージを発行する構成を設計しています。SNS トピックのアクセスポリシーでは S3 サービスプリンシパル (s3.amazonaws.com) に sns:Publish を許可する必要がありますが、セキュリティチームは、他の AWS アカウントの S3 バケットが S3 サービスを介してこのトピックへ発行する「サービス間の混乱した代理」問題を防ぐことを求めています。トピックポリシーに追加すべき条件キーの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "aws:SourceArn 条件キーで、発行元として想定する自社バケットの ARN を指定する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "aws:SourceAccount 条件キーで、発生元リソースを所有する自社アカウント ID を指定する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_092": {
+  "file": "SCS-C03_orig_b4.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "アイデンティティとアクセスの管理",
+  "level": "medium",
+  "question": "ある IAM ユーザーには、Amazon S3 と Amazon EC2 のフルアクセスを許可するアイデンティティベースポリシーがアタッチされています。さらにこのユーザーには、Amazon S3 のフルアクセスのみを許可する管理ポリシーがアクセス許可の境界 (permissions boundary) として設定されています。SCP やリソースポリシーによる制限はないものとします。このユーザーの有効なアクセス許可として正しいものはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "S3 のフルアクセスのみが許可され、EC2 のアクションはすべて暗黙的に拒否される。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_093": {
+  "file": "SCS-C03_orig_b4.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "アイデンティティとアクセスの管理",
+  "level": "hard",
+  "question": "ある企業のセキュリティエンジニアが、インフラ自動化ツールで AWS KMS のカスタマーマネージドキーを作成しました。このキーのキーポリシーには、特定の管理者ロールにのみキー管理操作を許可するステートメントだけが含まれており、アカウントのルートプリンシパル (arn:aws:iam::アカウントID:root) への許可ステートメントは含まれていません。その後、別の運用ロールに、このキーへの kms:Decrypt を許可する IAM ポリシーをアタッチしましたが、復号は Access Denied で失敗します。この事象の原因として正しい説明はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "KMS のキーポリシーにアカウントのルートプリンシパルへの許可 (または該当プリンシパルへの直接の許可) がないため、IAM ポリシーによる許可がこのキーに対して有効化されておらず、IAM ポリシー単独ではアクセスを付与できない。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_094": {
+  "file": "SCS-C03_orig_b4.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ保護",
+  "level": "hard",
+  "question": "ある企業が、災害対策のために Amazon S3 バケットのクロスリージョンレプリケーション (CRR) を構成しています。ソースバケットのオブジェクトは AWS KMS カスタマーマネージドキーによる SSE-KMS で暗号化されています。レプリケーションルールを有効化しましたが、SSE-KMS で暗号化されたオブジェクトが宛先バケットに複製されません。この問題を解決するために必要な構成として正しいものはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "レプリケーションルールで KMS 暗号化オブジェクトの複製を有効にして宛先リージョンの KMS キーを指定し、レプリケーションロールにソースキーでの復号と宛先キーでの暗号化の権限を付与する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_095": {
+  "file": "SCS-C03_orig_b4.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ保護",
+  "level": "medium",
+  "question": "ある企業のコンプライアンス要件により、アプリケーションが Amazon CloudWatch Logs に出力するログデータを、自社で管理する AWS KMS カスタマーマネージドキーで暗号化する必要があります。セキュリティエンジニアがロググループにキーを関連付けようとしましたが、操作がエラーになります。関連付けを成功させるために必要な構成はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "KMS キーのキーポリシーに、対象リージョンの CloudWatch Logs サービスプリンシパル (logs.リージョン.amazonaws.com) に対して暗号化・復号などの必要なアクションを許可するステートメントを追加する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_096": {
+  "file": "SCS-C03_orig_b4.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ保護",
+  "level": "hard",
+  "question": "ある企業が、個人情報を扱う新しい Amazon RDS for PostgreSQL データベースを構築しています。セキュリティ要件は次の 2 つです。(1) データベースのストレージ、スナップショット、レプリカを含む保存データが AWS KMS キーで暗号化されていること、(2) アプリケーションからデータベースへのすべての接続が TLS で暗号化され、暗号化されていない接続は確立できないこと。実装すべきアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "DB インスタンスの作成時にストレージ暗号化を有効にし、KMS のカスタマーマネージドキーを指定する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "DB パラメータグループで rds.force_ssl パラメータを 1 に設定し、TLS を使用しない接続を拒否する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_097": {
+  "file": "SCS-C03_orig_b4.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "検出",
+  "level": "medium",
+  "question": "ある企業のセキュリティチームが、AWS アカウントの構成を CIS AWS Foundations Benchmark および AWS 基礎セキュリティのベストプラクティス (FSBP) に照らして継続的かつ自動的にチェックし、不合格のコントロールを重大度付きの検出結果として一元管理したいと考えています。最も少ない運用オーバーヘッドでこの要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Security Hub を有効化し、CIS AWS Foundations Benchmark と AWS 基礎セキュリティのベストプラクティスのセキュリティ基準を有効にする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_098": {
+  "file": "SCS-C03_orig_b4.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インシデント対応",
+  "level": "hard",
+  "question": "ある企業のセキュリティチームが、四半期監査の中で、本番データベースの Amazon RDS スナップショットが「パブリック」として共有設定されていたことを発見しました。このスナップショットは暗号化されておらず、氏名やメールアドレスを含む顧客データと、アプリケーションが使用するデータベースユーザーの認証情報を含んでいます。CloudTrail のログからこの設定は約 3 週間前に行われたことが分かりましたが、同一リージョンの他アカウントによってコピーされたかどうかを完全には特定できません。個人データの侵害は 72 時間以内に監督当局へ報告する義務があります。取るべきアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ただちにスナップショットの共有設定をプライベートに変更して、これ以上の第三者によるコピー・復元を防ぐ。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "スナップショットに含まれていたデータベース認証情報や埋め込みのシークレットは漏えいしたものとみなしてローテーションし、公開期間中のアクセスの影響評価を実施する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_099": {
+  "file": "SCS-C03_orig_b4.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティの基礎とガバナンス",
+  "level": "easy",
+  "question": "ある企業のセキュリティチームが、自社の AWS アカウントで稼働する Amazon EC2 インスタンス上のウェブアプリケーションに対して、外部のセキュリティベンダーによる侵入テスト (ペネトレーションテスト) を 2 週間後に開始する予定です。テストの対象は自社が所有するリソースに限定され、他のテナントや AWS が管理するインフラストラクチャは含めません。プロジェクトマネージャーからは、AWS への申請手続きが必要であればスケジュールに織り込みたいので確認するよう指示がありました。AWS の侵入テストに関するポリシーとして正しい説明はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "EC2 など AWS が許可対象として公表しているサービス上の自社リソースに対する侵入テストは、AWS への事前申請なしで実施できる。ただし DoS/DDoS 攻撃のシミュレーションなど禁止されている行為は含めてはならない。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_100": {
+  "file": "SCS-C03_orig_b4.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティの基礎とガバナンス",
+  "level": "hard",
+  "question": "AWS Organizations で、組織のルートの直下に OU-A があり、OU-A の配下にメンバーアカウント X が属しています。組織のルートにはデフォルトの FullAWSAccess SCP がアタッチされています。OU-A には「Amazon EC2 と Amazon S3 のアクションのみを許可する」SCP がアタッチされ、アカウント X には「Amazon DynamoDB のアクションのみを許可する」SCP が直接アタッチされています。アカウント X の管理者権限を持つ IAM ユーザーが実行できる操作について、正しい説明はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "DynamoDB のアクションは OU-A の SCP で許可されていないため、アカウント X ではいかなる DynamoDB アクションも実行できず、EC2 や S3 もアカウントの SCP で許可されていないため実行できない。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_101": {
+  "file": "SCS-C03_orig_gap1.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ保護",
+  "level": "hard",
+  "question": "ある医療系企業の監査で、3 年前から共有ファイルストレージとして使用している Amazon EFS ファイルシステム (12 TB) が保存時に暗号化されていないことが判明しました。社内基準では、患者データを保持するすべてのストレージを、キーポリシーを自社で定義できる AWS KMS のカスタマーマネージドキーで暗号化しなければなりません。既存データはすべて引き継ぐ必要がありますが、マウント先の変更は許容されます。さらに、AWS Organizations 配下の 40 アカウントで同じ設定ミスが再発しないよう、暗号化されていない EFS ファイルシステムの作成そのものを組織全体で禁止することも求められました。実施すべきアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "カスタマーマネージドキーを指定した新しい暗号化済みファイルシステムを作成し、EFS レプリケーションまたは AWS DataSync で既存データをコピーしてから、クライアントのマウント先を新しいファイルシステムへ切り替える。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "IAM のアイデンティティベースのポリシーと AWS Organizations のサービスコントロールポリシー (SCP) で、elasticfilesystem:Encrypted 条件キーを使用し、暗号化が有効でないファイルシステムの作成を拒否する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_102": {
+  "file": "SCS-C03_orig_gap1.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "アイデンティティとアクセスの管理",
+  "level": "hard",
+  "question": "ある企業は、5 つの開発チームが共有する 1 つの Amazon EFS ファイルシステムを、Amazon ECS on Fargate のタスクからマウントして使用しています。現在ファイルシステムポリシーは設定されておらず、同じサブネットのどのタスクからも全ディレクトリを読み書きできる状態です。セキュリティチームは、各チームのタスクが自チーム用のディレクトリ配下だけを、あらかじめ決められた POSIX ユーザーとして読み書きできる状態にし、NFS トラフィックを常に TLS で暗号化し、さらにどの IAM ロールがどの経路でマウントしたかを AWS CloudTrail で追跡できるようにしたいと考えています。最小権限を維持したままこれを実現する構成はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "チームごとにルートディレクトリと POSIX ユーザーを強制する EFS アクセスポイントを作成し、ファイルシステムポリシーで elasticfilesystem:AccessPointArn 条件により各チームのタスクロールに対応するアクセスポイント経由の ClientMount と ClientWrite だけを許可したうえで、aws:SecureTransport が false のアクセスを拒否する。タスクは EFS マウントヘルパーで IAM 認可と TLS を有効にしてマウントする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_103": {
+  "file": "SCS-C03_orig_gap1.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インシデント対応",
+  "level": "hard",
+  "question": "ある企業のセキュリティチームは、Amazon GuardDuty の検出結果を Amazon EventBridge で受け取り、AWS Lambda で該当する Amazon EC2 インスタンスを隔離用セキュリティグループへ付け替える自動対応を構築しました。監査部門からは、この自動対応が実際に機能することを四半期ごとに本番同等の環境で検証し、その記録を残すよう求められています。検証の実行中に、顧客向けサービスのエラー率やレイテンシーがあらかじめ定義した定常状態から逸脱した場合には、実験を自動的に中断して影響の拡大を止めなければなりません。また、検証の内容はテンプレートとして再利用でき、誰がいつ実行したかを AWS CloudTrail に残せる必要があります。最も適切な方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Fault Injection Service (FIS) で実験テンプレートを作成し、対象リソースをタグで指定して障害注入アクションを定義する。定常状態を表す Amazon CloudWatch アラームを停止条件 (stop condition) として指定し、アラームが発報したら実験を自動停止させる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_104": {
+  "file": "SCS-C03_orig_gap1.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インシデント対応",
+  "level": "hard",
+  "question": "ある企業は、インシデント対応手順の訓練のために AWS Fault Injection Service (FIS) を導入し、本番アカウント内のステージング用リソースへ定期的に実験を実行しています。セキュリティチームは実験の影響範囲を統制するため、(1) 実験を開始できるのは Chaos-Engineer ロールを引き受けた担当者だけとし、対象を承認済みタグが付いたテンプレートに限ること、(2) 実験が操作できるリソースを Environment タグが staging のものだけに限定し、本番リソースに影響が及ばないようにすること、(3) すべての操作を AWS CloudTrail で監査できること、の 3 点を実現しなければなりません。最小権限を維持したままこれを実装する方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "FIS が引き受ける実験用のサービスロールに、対象アクションを aws:ResourceTag/Environment が staging の場合に限定した IAM ポリシーを付与し、Chaos-Engineer ロールのアイデンティティベースのポリシーでは、承認済みタグを持つ実験テンプレートに対してのみ fis:StartExperiment を許可する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_105": {
+  "file": "SCS-C03_orig_gap1.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ保護",
+  "level": "hard",
+  "question": "ある企業では、注文処理アカウント (アカウント A) の Amazon SQS キューに対して、分析用の別アカウント (アカウント B) の AWS Lambda 関数がコンシューマーとして接続します。キューのメッセージには個人情報が含まれるため、コンプライアンス要件によりメッセージ本文を保存時に暗号化し、かつ暗号化に使用する鍵のキーポリシーと使用履歴を自社で管理できる必要があります。現在このキューはサーバー側の暗号化として AWS マネージドキー (aws/sqs) を使用していますが、アカウント B の Lambda 関数がメッセージを取得しようとすると KMS に関するアクセス拒否のエラーで失敗します。最小権限を維持したままこの問題を解決する方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "アカウント A でカスタマーマネージドキーを作成してキューの暗号化キーをそのキーに変更し、キーポリシーでアカウント B の Lambda 実行ロールに kms:Decrypt を許可する。あわせてキューポリシーで同じロールに sqs:ReceiveMessage と sqs:DeleteMessage を許可する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_106": {
+  "file": "SCS-C03_orig_gap1.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インフラストラクチャのセキュリティ",
+  "level": "medium",
+  "question": "ある企業のセキュリティ基準では、VPC 内のワークロードから AWS サービスへ送信するトラフィックがインターネットを経由してはならないと定められています。ある業務システムでは、プライベートサブネットの EC2 インスタンスが NAT ゲートウェイ経由で Amazon SQS キューへメッセージを送信しており、この基準に違反しています。セキュリティチームは、この通信を AWS のネットワーク内に閉じたうえで、キューに対する sqs:SendMessage と sqs:ReceiveMessage を、承認された特定の VPC エンドポイントを経由したリクエストだけに限定し、それ以外の経路からのリクエストは有効な認証情報を持っていても拒否したいと考えています。実装すべき構成はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon SQS 用のインターフェイス VPC エンドポイント (AWS PrivateLink) を作成し、キューポリシーに、aws:SourceVpce がそのエンドポイント ID と一致しない場合はキューへのアクセスを拒否する Deny ステートメントを追加する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SCS-C03_orig_201": {
+  "file": "mixed_orig_b1.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "matching",
+  "domain": "検出",
+  "level": "medium",
+  "question": "ある製造業の企業は AWS Organizations で 60 アカウントを運用していますが、セキュリティチームは 3 名です。監査部門からは、(1) 誰がいつどの API を実行したかを事後に追跡できること、(2) 侵害の兆候を継続的に検知できること、(3) 保存された機密データの所在を把握できること、(4) 設定が社内基準から逸脱していないか継続評価できること、(5) 既知の脆弱性を把握できること、の 5 点を示すよう求められました。独自エージェントの開発やログの手動解析は行わず、AWS のマネージドサービスで実現する方針です。以下のリストから、各検出要件に対する正しい AWS のセキュリティサービスを選択してください。各サービスを 1 回以上選択しても構いません。",
+  "n_correct": null,
+  "options": []
+ },
+ "SCS-C03_orig_202": {
+  "file": "mixed_orig_b1.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "matching",
+  "domain": "アイデンティティとアクセスの管理",
+  "level": "medium",
+  "question": "ある企業は AWS Organizations で本番用と開発用の OU に分けて 40 アカウントを運用しています。セキュリティチームは、(1) 特定の OU 配下では各アカウントの管理者であっても利用できるサービスとリージョンの上限を超えられないようにすること、(2) 委託先の別アカウントのプリンシパルに特定の S3 バケットの読み取りを許可すること、(3) 各チームのプリンシパルが実行できるアクションとリソースを職務ごとに定義すること、(4) 引き受けたロールの権限をその作業セッションの間だけさらに狭めること、という 4 つの統制を実装します。以下のリストから、各アクセス制御の説明に対する正しいポリシーの種類を選択してください。各ポリシーの種類を 1 回以上選択しても構いません。",
+  "n_correct": null,
+  "options": []
+ },
+ "SCS-C03_orig_203": {
+  "file": "mixed_orig_b1.json",
+  "exam": "SCS-C03",
+  "set": "orig",
+  "type": "matching",
+  "domain": "データ保護",
+  "level": "medium",
+  "question": "ある金融系企業のセキュリティチームが、暗号化と鍵管理の全社標準を策定しています。要件は、(1) 鍵ごとにキーポリシーとエイリアスを自社で定義し、自動ローテーションの有効化も自社で制御できること、(2) 数百 GB のファイルをアプリケーション側で暗号化する際に、平文データを AWS へ送信せずにエンベロープ暗号化を実装できること、(3) 公開サイトの TLS 証明書を更新忘れなく維持できること、(4) 規制上、鍵が自社専有のハードウェアセキュリティモジュールで保護され、管理を自社が完全に制御していると示せること、の 4 点です。以下のリストから、各暗号化とキー管理の要件に対する正しい AWS のサービスまたは機能を選択してください。各サービスまたは機能を 1 回以上選択しても構いません。",
+  "n_correct": null,
+  "options": []
+ }
+}

@@ -83,6 +83,12 @@ def main(patch_path):
                 continue
             i = ex.index(anchor) + len(anchor)
             new_ex = ex[:i] + p["ins"] + ex[i:]
+        elif "append" in p:
+            # 誤答肢に新しい要素を足したときに、その要素への評価を解説の末尾に補う
+            if p["append"] in ex:
+                errors.append(f"{p['id']}[{p['letter']}]: 追記内容が既に解説にある")
+                continue
+            new_ex = ex.rstrip() + p["append"]
         elif "sub" in p:
             old, new = p["sub"]
             if ex.count(old) != 1:
