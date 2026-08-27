@@ -1,0 +1,3302 @@
+{
+ "SAP-C02_orig_001": {
+  "file": "SAP-C02_orig.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "複雑な組織に対応するソリューションの設計",
+  "level": "hard",
+  "question": "ある企業は AWS Organizations で 40 の AWS アカウントを管理しており、各アカウントには複数の VPC が存在します。現在、各 VPC に NAT ゲートウェイと AWS Network Firewall のエンドポイントを個別にデプロイしてアウトバウンド通信を検査しているため、コストと運用負荷が増大しています。セキュリティチームは、すべての VPC からインターネットへのアウトバウンド通信を単一のポイントで検査およびフィルタリングすることを求めています。また、今後アカウントが追加された場合にも、最小限の作業でネットワークに接続できる必要があります。これらの要件を満たし、コストと運用負荷を最も削減できるソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Transit Gateway をデプロイし、AWS Resource Access Manager で各アカウントと共有する。集中管理用のインスペクション VPC に AWS Network Firewall を、エグレス VPC に NAT ゲートウェイをデプロイする。各 VPC のアウトバウンドトラフィックが Transit Gateway 経由でインスペクション VPC を通過してからインターネットに出るようにルートテーブルを構成する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_002": {
+  "file": "SAP-C02_orig.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "複雑な組織に対応するソリューションの設計",
+  "level": "medium",
+  "question": "ある企業は AWS Organizations ですべての機能を有効にして複数のアカウントを管理しています。コンプライアンス要件により、すべてのメンバーアカウントで AWS CloudTrail の証跡が常に有効であることを保証する必要があります。最近、あるメンバーアカウントの管理者権限を持つ開発者が誤って証跡を停止し、監査ログに欠損が発生しました。企業は、メンバーアカウントの管理者であっても証跡を停止または削除できないようにしたいと考えています。運用負荷を最小限に抑えてこの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "cloudtrail:StopLogging、cloudtrail:DeleteTrail、cloudtrail:UpdateTrail アクションを拒否するサービスコントロールポリシー (SCP) を作成し、組織のルートまたは対象の OU にアタッチする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_003": {
+  "file": "SAP-C02_orig.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "複雑な組織に対応するソリューションの設計",
+  "level": "medium",
+  "question": "ある企業は AWS Organizations 配下の多数のアカウントで開発チームごとにワークロードを運用しています。現在は各チームが独自に VPC を作成しており、IP アドレス範囲の重複や、サブネット設計の不統一が問題になっています。ネットワークチームは、IP アドレスの割り当てとネットワーク構成を一元管理しつつ、各開発チームが自分のアカウントでリソースを自由にデプロイできるようにしたいと考えています。追加のネットワーク機器やゲートウェイのコストを増やさずにこの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ネットワークアカウントで一元管理された VPC を作成し、AWS Resource Access Manager を使用してサブネットを各開発チームのアカウントと共有する。開発チームは共有されたサブネット内にリソースをデプロイする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_004": {
+  "file": "SAP-C02_orig.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "新しいソリューションのための設計",
+  "level": "hard",
+  "question": "ある金融サービス企業が、新しい取引処理アプリケーションを AWS 上に構築しています。アプリケーションは Amazon Aurora MySQL データベースを使用し、リージョン規模の障害に備えたディザスタリカバリが必要です。事業要件として、RPO (目標復旧時点) は 5 秒以内、RTO (目標復旧時間) は 15 分以内と定められています。また、通常時のセカンダリリージョンの運用コストと、フェイルオーバー時の手作業を最小限に抑える必要があります。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Aurora グローバルデータベースを構成し、セカンダリリージョンにリードレプリカクラスターを配置する。障害発生時にセカンダリクラスターをプライマリに昇格させ、Amazon Route 53 のフェイルオーバールーティングでアプリケーションの接続先を切り替える。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_005": {
+  "file": "SAP-C02_orig.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "新しいソリューションのための設計",
+  "level": "hard",
+  "question": "ある企業が、数十万台の IoT デバイスからテレメトリデータを収集する新しいプラットフォームを設計しています。要件は次のとおりです。デバイスごとのイベントは受信した順序どおりに処理されなければなりません。リアルタイム分析チームと機械学習チームがそれぞれ独立に同じストリームを消費する必要があります。障害調査のために、過去 7 日分のデータを再処理 (リプレイ) できる必要があります。また、企業はクラスターの管理などの運用負荷を最小限に抑えたいと考えています。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon Kinesis Data Streams にデータを取り込み、デバイス ID をパーティションキーとして使用する。ストリームの保持期間を 7 日に設定し、各チームは拡張ファンアウトを使用する独立したコンシューマーとしてストリームを読み取る。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_006": {
+  "file": "SAP-C02_orig.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "新しいソリューションのための設計",
+  "level": "medium",
+  "question": "あるメディア企業が、会員向けの動画教材配信サイトを構築しています。教材は 1 本あたり 500 MB 前後の MP4 ファイルで、合計 20 TB を Amazon S3 バケットに保存し、Amazon CloudFront で世界中の会員に配信します。会員は教材を購入した時点から 30 日間だけ視聴でき、期限を過ぎたらコンテンツを取得できなくなる必要があります。会員の接続元 IP アドレスは固定されておらず、モバイル回線からの視聴も相当数を占めます。さらに、コンテンツ提供元との契約により、利用者が S3 バケットのオブジェクト URL を直接指定してもダウンロードできない状態にしなければなりません。担当するインフラ要員は 2 名で、独自の認可プロキシを新たに構築して運用することは避けたいと考えています。運用負荷を最小限に抑えてこれらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "CloudFront のオリジンアクセスコントロール (OAC) を構成し、S3 バケットポリシーで CloudFront サービスプリンシパルからのアクセスのみを許可する。アプリケーションは認証済みの会員に対して有効期限付きの CloudFront 署名付き URL を発行する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_007": {
+  "file": "SAP-C02_orig.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "既存のソリューションの継続的な改善",
+  "level": "hard",
+  "question": "ある企業が Amazon EC2 上で 2 種類のワークロードを運用しています。1 つは 24 時間 365 日安定した台数で稼働する Web アプリケーション、もう 1 つは夜間に実行されるステートレスなバッチ処理で、処理量により必要なコンピューティング容量が日ごとに大きく変動します。バッチ処理は中断されてもチェックポイントから再開できるように設計されています。現在すべてオンデマンドインスタンスで運用しており、経営層からコンピューティングコストの大幅な削減を求められています。可用性を損なわずにコストを最も削減できる組み合わせはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Web アプリケーションのベースライン使用量に対して Compute Savings Plans を購入する。バッチ処理は複数のインスタンスタイプとアベイラビリティーゾーンを指定した Auto Scaling グループでスポットインスタンスを使用する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_008": {
+  "file": "SAP-C02_orig.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "既存のソリューションの継続的な改善",
+  "level": "medium",
+  "question": "ある企業が、社内の複数部門が利用するドキュメント管理システムを AWS で運用しており、数億個のファイルを Amazon S3 の S3 標準ストレージクラスに保存しています。ファイルへのアクセスパターンは部門やファイルの種類によって大きく異なり、事前に予測できません。一部のファイルは長期間アクセスされない一方、古いファイルが突然頻繁に参照されることもあります。企業は、取り出し時のパフォーマンス低下や取り出し料金を発生させずに、ストレージコストを削減したいと考えています。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "S3 ライフサイクルルールを作成し、すべてのオブジェクトを S3 Intelligent-Tiering ストレージクラスに移行する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_009": {
+  "file": "SAP-C02_orig.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ワークロードの移行とモダナイゼーション",
+  "level": "hard",
+  "question": "ある企業が、オンプレミスで稼働する 20 TB の Oracle データベースを Amazon Aurora PostgreSQL 互換エディションに移行する計画を立てています。データベースは基幹業務システムで使用されており、許容されるダウンタイムは 1 時間未満です。データベースにはストアドプロシージャや Oracle 固有のデータ型が多数含まれています。オンプレミスと AWS の間には十分な帯域の AWS Direct Connect 接続がすでに確立されています。この移行を実現するために実行すべきステップはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Schema Conversion Tool (AWS SCT) を使用して、Oracle のスキーマ、ストアドプロシージャ、データ型を PostgreSQL 互換の形式に変換し、自動変換できないオブジェクトを特定して手動で修正する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "AWS Database Migration Service (AWS DMS) でフルロードと変更データキャプチャ (CDC) を組み合わせたタスクを実行し、継続的レプリケーションでターゲットを同期させた後、切り替えウィンドウでアプリケーションの接続先を変更する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_010": {
+  "file": "SAP-C02_orig.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ワークロードの移行とモダナイゼーション",
+  "level": "easy",
+  "question": "ある企業が、オンプレミスの VMware 環境で稼働する約 400 台の仮想マシンを AWS に移行することを決定しました。データセンターの賃貸契約が 6 か月後に満了するため、その期限までにすべての移行を完了しなければなりません。対象には市販のパッケージソフトウェアや、ソースコードが入手できないベンダー製アプリケーションが多数含まれており、アプリケーションのアーキテクチャやコードを変更せずにリホスト (リフトアンドシフト) する方針が決まっています。データセンターと AWS の間には 1 Gbps の AWS Direct Connect が敷設済みです。業務部門からは、カットオーバー前に本番相当のデータを使ったテストを実施して動作を検証すること、および実際の切り替え時の業務停止時間を数分程度に抑えることが求められています。これらの要件を満たすサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Application Migration Service (AWS MGN) を使用して、ソースサーバーのブロックレベルの継続的レプリケーションを行い、テストインスタンスで検証した後にカットオーバーする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_011": {
+  "file": "SAP-C02_orig_b2.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "複雑な組織に対応するソリューションの設計",
+  "level": "medium",
+  "question": "ある企業が AWS の利用を全社に拡大するにあたり、部門ごとに多数の AWS アカウントを新規に払い出す計画を立てています。経営層は、ログの集約や予防的・発見的ガードレールなど、ベストプラクティスに基づくガバナンスを最初から組み込むことを求めています。また、各部門からのアカウント発行依頼に対して、標準化された構成のアカウントを迅速にプロビジョニングできる必要があります。クラウドチームの人数は限られており、独自の自動化の構築と保守は避けたいと考えています。これらの要件を満たし、構築と運用の労力を最小限に抑えるソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Control Tower でランディングゾーンをセットアップし、ガードレール (コントロール) を有効化する。Account Factory を使用して標準化されたアカウントをプロビジョニングする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_012": {
+  "file": "SAP-C02_orig_b2.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "複雑な組織に対応するソリューションの設計",
+  "level": "hard",
+  "question": "ある企業は AWS Organizations で複数のアカウントを管理しています。データ主権に関する社内規程により、すべてのワークロードは東京リージョンと大阪リージョンにのみデプロイすることが義務付けられました。ただし、IAM、AWS Organizations、Amazon CloudFront、Amazon Route 53 などのグローバルサービスの利用は引き続き許可する必要があります。メンバーアカウントの管理者であってもこの制限を回避できないようにしなければなりません。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "aws:RequestedRegion 条件キーで東京と大阪以外のリージョンへのリクエストを拒否するサービスコントロールポリシー (SCP) を作成する。ポリシーでは NotAction 要素を使用してグローバルサービスのアクションを拒否の対象から除外し、組織のルートまたは対象の OU にアタッチする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_013": {
+  "file": "SAP-C02_orig_b2.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "複雑な組織に対応するソリューションの設計",
+  "level": "medium",
+  "question": "ある企業は AWS Organizations で 25 の AWS アカウントを管理しており、従業員の ID は外部の IdP (Microsoft Entra ID) で一元管理されています。現在は各アカウントに IAM ユーザーを個別に作成しているため、入退社時のアカウント管理や認証情報の棚卸しに大きな負荷がかかっています。企業は、従業員が既存の企業認証情報を使用してすべてのアカウントにシングルサインオンでアクセスできるようにし、権限は職務ごとに標準化されたセットとして一元管理したいと考えています。また、長期的な認証情報の発行は避け、一時的な認証情報のみを使用する必要があります。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS IAM Identity Center を有効化して Microsoft Entra ID を外部 IdP として SAML 連携し、SCIM でユーザーとグループを自動プロビジョニングする。職務ごとに許可セットを定義し、各アカウントに割り当てる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_014": {
+  "file": "SAP-C02_orig_b2.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "複雑な組織に対応するソリューションの設計",
+  "level": "hard",
+  "question": "ある企業は、3 つの AWS リージョンにまたがる合計 30 の VPC を運用しており、オンプレミスのデータセンターには 10 Gbps の AWS Direct Connect 接続が 1 本あります。現在はオンプレミスから一部の VPC にのみプライベート仮想インターフェイス (プライベート VIF) で接続していますが、すべての VPC への接続が必要になりました。ネットワークチームは、VIF の数を増やさずに接続を拡張し、今後 VPC が追加された場合も物理接続や VIF の変更なしで対応できる構成を求めています。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "各リージョンに AWS Transit Gateway をデプロイして VPC をアタッチする。Direct Connect ゲートウェイを作成し、トランジット仮想インターフェイスを 1 つ関連付けて、各リージョンの Transit Gateway と Direct Connect ゲートウェイを関連付ける。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_015": {
+  "file": "SAP-C02_orig_b2.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "複雑な組織に対応するソリューションの設計",
+  "level": "medium",
+  "question": "ある企業は、オンプレミスのデータセンターと AWS を 1 Gbps の AWS Direct Connect 接続で結び、基幹システムのハイブリッド構成を運用しています。先日、Direct Connect のメンテナンスにより数時間の接続断が発生し、業務に影響が出ました。企業は、Direct Connect の障害時にも接続を継続できるバックアップ経路を追加したいと考えていますが、追加コストは最小限に抑える方針です。バックアップへの切り替えは自動で行われる必要があります。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Site-to-Site VPN 接続をバックアップとして構成し、BGP による動的ルーティングで通常時は Direct Connect の経路が優先されるようにする。Direct Connect の障害時は BGP の経路切り替えで自動的に VPN にフェイルオーバーさせる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_016": {
+  "file": "SAP-C02_orig_b2.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "複雑な組織に対応するソリューションの設計",
+  "level": "hard",
+  "question": "ある企業は、AWS Direct Connect でオンプレミスのデータセンターと複数の VPC を接続したハイブリッド環境を運用しています。オンプレミスのサーバーは、VPC 内のリソースに関連付けられた Route 53 プライベートホストゾーンの DNS 名を解決できる必要があります。同時に、VPC 内のリソースは、オンプレミスの DNS サーバーが管理する corp.example.com ドメインの名前を解決できる必要があります。企業は、DNS サーバーを自前で構築・運用することは避けたいと考えています。これらの要件を満たすために実行すべきステップはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Route 53 Resolver のインバウンドエンドポイントを VPC に作成し、オンプレミスの DNS サーバーに AWS 向けドメインの条件付きフォワーダーを設定してインバウンドエンドポイントに転送させる。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "Route 53 Resolver のアウトバウンドエンドポイントを VPC に作成し、corp.example.com をオンプレミスの DNS サーバーに転送する Resolver ルールを作成して、必要な VPC に関連付ける。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_017": {
+  "file": "SAP-C02_orig_b2.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "複雑な組織に対応するソリューションの設計",
+  "level": "medium",
+  "question": "ある企業は AWS Organizations で 50 のアカウントを管理しており、月間の AWS 利用料は約 80 万 USD です。8 つの事業部門と 200 を超えるプロジェクトが複数のアカウントにまたがってリソースを共有しているため、1 アカウント = 1 部門という対応付けはできません。財務部門は毎月、部門別およびプロジェクト別の利用額を算出して各部門に費用を配賦する必要がありますが、現在は請求ダッシュボードでアカウント単位の金額しか把握できず、按分の集計に数日を要しています。さらに、同じ意味のタグでもキー名が部門ごとに Dept、dept、Department などとばらついており、集計の妨げになっています。今後はタグの表記を組織全体で統一し、規約に沿わないタグ付けを検出できるようにしたいと考えています。運用負荷を抑えてこれらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "部門とプロジェクトを表すコスト配分タグを定義してアクティブ化し、Organizations のタグポリシーでタグの表記を標準化する。AWS Cost Categories でコストを部門別に分類し、Cost Explorer とコストと使用状況レポートで可視化する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_018": {
+  "file": "SAP-C02_orig_b2.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "複雑な組織に対応するソリューションの設計",
+  "level": "hard",
+  "question": "ある企業は AWS Organizations で 60 のアカウントを運用しており、各ワークロードアカウントの開発チームには、そのアカウント内での管理者権限が付与されています。外部監査への対応として、セキュリティ部門から次の要件が提示されました。すべてのアカウントの、すべてのリージョンにおける AWS API アクティビティのログを、専用のログアーカイブアカウントに集約して 7 年間保存すること。ワークロードアカウントの利用者は、自アカウントの管理者権限を持っていても、集約されたログを閲覧することも変更・削除することもできないこと。今後組織に追加されるアカウントについても、担当者が個別に設定作業を行うことなく自動的に収集対象となること。これらの要件を満たすために実行すべきステップはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "管理アカウントまたは委任された管理者アカウントで、組織のすべてのアカウントに適用される AWS CloudTrail の組織の証跡 (organization trail) を作成する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "ログアーカイブアカウントに S3 バケットを作成し、CloudTrail サービスからの書き込みを許可するバケットポリシーを設定して、組織の証跡の配信先に指定する。ワークロードアカウントからの読み取りはバケットポリシーで許可しない。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_019": {
+  "file": "SAP-C02_orig_b2.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "複雑な組織に対応するソリューションの設計",
+  "level": "medium",
+  "question": "ある企業では、開発チームが AWS リソースを必要とするたびにインフラ部門へ申請書を提出し、インフラ部門が手動で構築しています。申請は月に 100 件を超え、環境の払い出しには平均 3 週間かかっており、リリースの遅延が常態化しています。インフラ部門は 4 名しかおらず、増員は認められていません。企業は、12 の開発チームがそれぞれ自分たちのアカウントでセルフサービスに環境を構築できるようにしたいと考えています。一方でセキュリティ部門は、暗号化やログ出力などの社内標準に準拠した承認済みの構成だけがデプロイされること、および開発チームに対して EC2 や RDS などのサービスを直接操作できる広範な IAM 権限を付与しないことを条件としています。承認済みの構成は、すでに CloudFormation テンプレートとして整備されています。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "承認済みの CloudFormation テンプレートを AWS Service Catalog の製品としてポートフォリオに登録し、起動制約 (launch constraint) で専用の IAM ロールを設定する。ポートフォリオを開発チームのアカウントと共有し、開発チームには Service Catalog の利用権限のみを付与する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_020": {
+  "file": "SAP-C02_orig_b2.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "複雑な組織に対応するソリューションの設計",
+  "level": "medium",
+  "question": "ある企業のコンプライアンスチームは、AWS Organizations 配下の 80 アカウントが 4 リージョンで運用するリソースについて、社内のセキュリティ基準 (EBS ボリュームの暗号化が有効であること、S3 バケットのパブリックアクセスがブロックされていること、など約 40 項目) に準拠しているかを継続的に評価する必要があります。四半期ごとの内部監査では、リソースごとの準拠・非準拠の状態と、非準拠になった時点からの変更履歴を、単一のビューから提示することが求められます。基準となるルール群は改訂のたびに全アカウント・全リージョンへ一括で反映したく、また組織に新しく追加されたアカウントにも自動的に適用されなければなりません。コンプライアンスチームは 3 名で、アカウントごとの個別作業は行えません。運用負荷を最小限に抑えてこれらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Config を全アカウント・全リージョンで有効化し、ルール群をコンフォーマンスパックとして組織全体にデプロイする。委任された管理者アカウントに組織アグリゲータを構成し、全アカウントの準拠状況を一元的に表示する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_021": {
+  "file": "SAP-C02_orig_b2.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "複雑な組織に対応するソリューションの設計",
+  "level": "easy",
+  "question": "ある企業は AWS Organizations で 60 のアカウントを管理しており、四半期ごとに 5 ～ 10 の新しいアカウントが追加されています。3 名のセキュリティチームは、全アカウントを対象として、盗まれた IAM 認証情報の悪用、暗号通貨マイニングを実行しているインスタンス、既知の悪意ある IP アドレスとの通信といった脅威を、CloudTrail イベント、VPC フローログ、DNS クエリログを継続的に分析することで検出したいと考えています。検出結果はセキュリティ専用アカウントに集約して一元的に確認し、そこから調査を開始できる必要があります。ログの収集・分析基盤を自前で構築して運用する余力はなく、組織に新しいアカウントが追加された際には、手作業なしで自動的に脅威検出が有効化されなければなりません。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "セキュリティアカウントを Amazon GuardDuty の委任された管理者に指定し、組織の全アカウントで GuardDuty を有効化する。新規メンバーアカウントの自動有効化を構成する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_022": {
+  "file": "SAP-C02_orig_b2.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "複雑な組織に対応するソリューションの設計",
+  "level": "hard",
+  "question": "ある企業は、AWS Transit Gateway を使用して本番環境の VPC 群、開発環境の VPC 群、共有サービス VPC、およびオンプレミスへの Direct Connect 接続を相互に接続しています。セキュリティ要件により、本番 VPC と開発 VPC の間の直接通信は禁止する必要があります。一方、本番と開発の両方の VPC は、共有サービス VPC とオンプレミスの両方に到達できなければなりません。追加のアプライアンスを導入せずにこれらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Transit Gateway に本番用、開発用、共有サービス用の複数のルートテーブルを作成する。本番と開発のアタッチメントをそれぞれ別のルートテーブルに関連付け、共有サービス VPC と Direct Connect の経路のみを両方のルートテーブルに伝播させる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_023": {
+  "file": "SAP-C02_orig_b2.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "複雑な組織に対応するソリューションの設計",
+  "level": "hard",
+  "question": "ある企業のプラットフォームチームは、セキュリティ強化と監視エージェントの導入を施した標準の Amazon マシンイメージ (AMI) を毎月ビルドし、組織内の 15 の AWS アカウントに提供しています。この AMI の EBS スナップショットは、プラットフォームチームのアカウントにあるカスタマーマネージド KMS キーで暗号化されており、監査要件により、AWS マネージドキーへの切り替えや暗号化の解除は認められていません。また、この AMI は社外に公開してはならず、指定した利用側アカウントだけが使用できる状態にする必要があります。現在、利用側アカウントでこの AMI を指定した EC2 インスタンスの起動は失敗します。利用側アカウントがこの AMI から EC2 インスタンスを起動できるようにする必要があります。実行すべきステップはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AMI の起動許可 (launch permission) を変更して、利用側アカウントの ID を追加する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "カスタマーマネージド KMS キーのキーポリシーを更新し、利用側アカウントに kms:Decrypt や kms:CreateGrant などの必要なアクションを許可する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_024": {
+  "file": "SAP-C02_orig_b2.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "複雑な組織に対応するソリューションの設計",
+  "level": "hard",
+  "question": "ある企業は 50 の VPC を AWS Transit Gateway で相互接続しており、各 VPC から AWS Systems Manager や Amazon ECR などの AWS サービスへはインターネットを経由せずにアクセスする必要があります。現在は VPC ごとに複数のインターフェイス VPC エンドポイントを作成しているため、エンドポイントの時間料金が大きな負担になっています。企業は、プライベート接続の要件を維持したまま、エンドポイントを共有サービス VPC に集約してコストを削減したいと考えています。この集約構成を実現するために実行すべきステップはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "共有サービス VPC にインターフェイスエンドポイントをプライベート DNS を無効にして作成する。各サービスのエンドポイント名に対応するプライベートホストゾーンを作成してエンドポイントを指すエイリアスレコードを登録し、すべてのスポーク VPC に関連付ける。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "スポーク VPC からインターフェイスエンドポイントの IP アドレスへのトラフィックが Transit Gateway 経由で共有サービス VPC に到達するように、ルートテーブルとセキュリティグループを構成する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_025": {
+  "file": "SAP-C02_orig_b2.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "新しいソリューションのための設計",
+  "level": "hard",
+  "question": "ある企業が、世界中の利用者向けにゲームのプレイヤープロファイルサービスを新規に構築します。プロファイルはプレイヤー ID をキーとして 1 件あたり数 KB の JSON を読み書きするだけで、結合や集計を伴う問い合わせは発生しません。ピーク時には毎秒 20 万件のリクエストが見込まれ、北米とアジアの両方のリージョンで、読み書きのどちらも一桁ミリ秒のレイテンシーで処理する必要があります。利用者は最も近いリージョンのエンドポイントに接続し、一方のリージョンで障害が発生した場合には自動的にもう一方のリージョンへ振り向けられて、サービスを継続できなければなりません。企業には専任の運用チームがなく、サーバーやクラスターのパッチ適用・スケーリングを自前で行うことは避けたいと考えています。運用負荷を最小限に抑えてこれらの要件を満たすために実行すべきステップはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon DynamoDB グローバルテーブルを北米とアジアのリージョンに構成し、各リージョンのアプリケーションがローカルのレプリカに読み書きするようにする。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "Amazon Route 53 のレイテンシーベースルーティングとヘルスチェックを構成し、利用者を最も近い正常なリージョンのエンドポイントにルーティングする。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_026": {
+  "file": "SAP-C02_orig_b2.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "新しいソリューションのための設計",
+  "level": "medium",
+  "question": "あるゲーム会社が、UDP ベースの独自プロトコルを使用するリアルタイム対戦ゲームのバックエンドを、北米・欧州・アジアの 3 つの AWS リージョンで運用する計画です。各リージョンでは Auto Scaling グループ内の EC2 インスタンス群がゲームサーバーとして動作し、その前段に Network Load Balancer を配置します。世界中のプレイヤーについて、インターネット経路のばらつきに起因するレイテンシーとパケットロスを最小化し、あるリージョン全体で障害が発生した場合には数十秒以内に別のリージョンへ自動的にフェイルオーバーする必要があります。また、社内ネットワークからプレイする法人顧客が存在するため、顧客のファイアウォールの許可リストに登録できる、変更されない固定の IP アドレスをクライアントに提供しなければなりません。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Global Accelerator をデプロイし、各リージョンの Network Load Balancer をエンドポイントとして登録する。クライアントには Global Accelerator の静的エニーキャスト IP アドレスを配布する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_027": {
+  "file": "SAP-C02_orig_b2.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "新しいソリューションのための設計",
+  "level": "easy",
+  "question": "あるスタートアップ企業が、キャンペーンサイトの API バックエンドを構築します。このサイトはテレビ番組で紹介された際に、数分でリクエストが毎秒 20 件から毎秒 5,000 件へ跳ね上がることがありますが、放送のタイミングは事前に知らされないため、いつ急増するかを予測できません。急増は 10 分程度で収まり、それ以外の時間帯のアクセスはほとんどありません。API が扱うのはキャンペーン ID をキーとした応募情報の登録と参照だけで、複雑な結合や集計は不要です。企業のエンジニアはアプリケーション開発者 3 名のみでインフラ専任の担当者はおらず、サーバーの構築やキャパシティの見積もりに時間を割きたくないと考えています。また、資金が限られているため、アクセスがない時間帯のコストを最小限に抑える必要があります。これらの要件を満たすアーキテクチャはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon API Gateway と AWS Lambda で API を構築し、データストアにはオンデマンドキャパシティモードの Amazon DynamoDB を使用する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_028": {
+  "file": "SAP-C02_orig_b2.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "新しいソリューションのための設計",
+  "level": "medium",
+  "question": "ある EC サイトでは、注文リクエストを受け付けた Web 層が在庫引き当てや決済連携を行うバックエンド処理を同期的に呼び出しています。セール開催時には注文が集中し、バックエンドの処理能力を超えたリクエストがタイムアウトして注文が失われる障害が発生しました。企業は、注文を確実に受け付けて損失なく処理し、バックエンドを負荷に応じてスケールさせたいと考えています。また、処理に繰り返し失敗する注文は自動的に隔離して調査できるようにする必要があります。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Web 層と バックエンドの間に Amazon SQS キューを配置して注文を非同期化する。バックエンドはキューの深さに基づいてスケールする Auto Scaling グループで処理し、最大受信回数を設定したデッドレターキューを構成する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_029": {
+  "file": "SAP-C02_orig_b2.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "新しいソリューションのための設計",
+  "level": "hard",
+  "question": "ある保険会社が、保険金請求の処理ワークフローを AWS で構築します。1 日あたり約 5,000 件の請求を処理し、ワークフローは書類検証、不正検知、自動査定、支払い処理など 12 のステップで構成されます。ステップごとに呼び出す外部サービスが異なるため、再試行の回数と間隔、およびエラー時の分岐をステップ単位で個別に定義する必要があります。また、請求額が一定の基準を超える場合は担当者による承認ステップが入り、承認が完了するまでに数日かかることがあります。監査部門は、個々の請求がどのステップをいつ通過し、どこで失敗したかを実行単位で視覚的に追跡できることを求めています。開発チームは 5 名で、状態管理や再試行制御の仕組みを自前で実装して保守することは避けたいと考えています。運用負荷を最小限に抑えてこれらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Step Functions の標準ワークフローでステートマシンを構築し、ステップごとに再試行とキャッチを定義する。承認ステップはタスクトークンを使用したコールバックパターンで実装し、担当者の承認 API 呼び出しで再開させる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_030": {
+  "file": "SAP-C02_orig_b2.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "新しいソリューションのための設計",
+  "level": "hard",
+  "question": "ある企業は AWS Organizations 配下の 30 のワークロードアカウントでアプリケーションを運用しています。プラットフォームチームは、各アカウントで発生する特定の業務イベント (デプロイ完了、リソース作成など) を中央のオペレーションアカウントに集約し、イベントの内容に応じて通知や自動処理などの異なるターゲットにルーティングしたいと考えています。アカウントが追加されるたびに個別の許可設定を行うことは避け、イベントの発行側と処理側は疎結合に保つ必要があります。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "オペレーションアカウントにカスタムイベントバスを作成し、aws:PrincipalOrgID 条件で組織内の全アカウントからの PutEvents を許可するリソースベースポリシーを設定する。各ワークロードアカウントには中央バスへイベントを転送する EventBridge ルールを構成し、中央バスのルールでターゲットに振り分ける。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_031": {
+  "file": "SAP-C02_orig_b2.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "新しいソリューションのための設計",
+  "level": "medium",
+  "question": "ある企業が、AWS Lambda 関数から Amazon RDS for MySQL データベースにアクセスするサーバーレスアプリケーションを構築しています。データベースは db.r6g.large の Multi-AZ 構成で、max_connections は既定値のままです。負荷テストでリクエストが急増した際、Lambda の同時実行数が 1,000 近くまで増え、大量の短命な接続が同時に確立され、データベースが接続数の上限に達して接続エラーが多発しました。データベースの CPU 使用率とクエリの実行時間には余裕があり、ボトルネックは接続の確立と維持にあります。リリース期限が迫っているため、企業はアプリケーションのコード変更を最小限に抑えつつ、接続の急増からデータベースを保護し、フェイルオーバー時の切り替えも短縮したいと考えています。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon RDS Proxy をデータベースの前段に配置し、Lambda 関数の接続先を RDS Proxy のエンドポイントに変更する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_032": {
+  "file": "SAP-C02_orig_b2.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "新しいソリューションのための設計",
+  "level": "hard",
+  "question": "ある企業が、社内基幹アプリケーションのディザスタリカバリ計画を策定しています。アプリケーションは Auto Scaling グループ内の 40 台の EC2 インスタンスと Amazon RDS for PostgreSQL で構成され、現在は単一のリージョンで稼働しています。規制当局の指導により、地理的に離れた別のリージョンに復旧手段を用意しなければなりません。事業部門との合意では RTO は 30 分以内、RPO は数分以内と定められており、災害時にアプリケーション層を起動して本番相当の規模までスケールさせる作業には 20 分程度を見込んでいます。一方で経営層は、実際に災害が発生する頻度は極めて低いと考えており、通常時に DR リージョンで発生するコストをできる限り小さく抑えることを条件としています。これらの要件を満たす DR 戦略はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "パイロットライト戦略を採用する。DR リージョンにはデータベースのレプリケーションなどコアとなる最小限のリソースのみを常時稼働させ、アプリケーション層は AMI とテンプレートを準備しておき、災害時に起動してスケールさせる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_033": {
+  "file": "SAP-C02_orig_b2.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "新しいソリューションのための設計",
+  "level": "hard",
+  "question": "ある企業が、東京リージョンの Application Load Balancer 配下で稼働する Web アプリケーションの可用性を高めるため、大阪リージョンに同じ構成のスタンバイ環境を構築しました。大阪の環境はデータベースのレプリカを参照しており、いつでも本番トラフィックを受けられる状態にあります。企業は Amazon Route 53 の 1 つのドメイン名を使って、通常時はすべての利用者トラフィックを東京の ALB に送り、東京の環境が異常になった場合にだけ、担当者の操作なしで自動的に大阪の ALB へ切り替えたいと考えています。切り替えは異常の検知から数分以内に完了する必要があり、さらに大阪の ALB 配下のターゲットまで異常な場合には、そこへトラフィックを送らないようにしなければなりません。この要件を満たすために実行すべきステップはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "東京の ALB を指すエイリアスレコードをフェイルオーバールーティングポリシーのプライマリとして作成し、東京のエンドポイントを監視するヘルスチェックを関連付ける。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "大阪の ALB を指すエイリアスレコードをフェイルオーバールーティングポリシーのセカンダリとして作成し、ターゲットの健全性評価 (Evaluate Target Health) を有効にする。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_034": {
+  "file": "SAP-C02_orig_b2.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "新しいソリューションのための設計",
+  "level": "medium",
+  "question": "ある企業が、Windows Server 上で稼働する業務アプリケーションを AWS に移行します。アプリケーションは複数のサーバーから SMB プロトコルで共有ファイルにアクセスし、NTFS のアクセス制御リスト (ACL) と Active Directory によるユーザー認証に依存しています。移行後もこれらの機能を維持し、かつファイルストレージはアベイラビリティーゾーン障害に耐える必要があります。ストレージ基盤の管理負荷は最小限に抑えたいと考えています。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon FSx for Windows File Server をマルチ AZ 構成でデプロイし、Active Directory と統合して SMB ファイル共有を提供する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_035": {
+  "file": "SAP-C02_orig_b2.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "新しいソリューションのための設計",
+  "level": "medium",
+  "question": "ある SaaS 企業が、新しいマルチテナントアプリケーションのデータベースを設計しています。既存のオンプレミス版は MySQL 上で動作しており、テナントごとの請求集計に複雑な結合を伴う SQL を多用しているため、移行先も MySQL 互換で同じクエリがそのまま動作する必要があります。負荷は日中のピークで毎秒 3,000 トランザクションに達する一方、夜間はほぼゼロまで下がり、その差は 50 倍以上です。さらに、テナントの獲得状況によって将来必要となる容量を正確に予測できません。企業は、需要の変化に応じてデータベースの容量がダウンタイムやアプリケーションの再接続を伴わずに、秒単位かつきめ細かく自動的にスケールし、実際に使用した容量に応じて課金される構成を求めています。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon Aurora Serverless v2 の MySQL 互換クラスターを作成し、容量範囲 (最小/最大 ACU) を設定して自動スケーリングさせる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_036": {
+  "file": "SAP-C02_orig_b2.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "新しいソリューションのための設計",
+  "level": "hard",
+  "question": "ある研究機関が、MPI を使用した密結合の数値流体力学 (CFD) シミュレーションを AWS で実行する計画です。1 回のジョブは 256 台の EC2 インスタンスに分散され、計算ステップごとにノード間で数百 GB のデータを交換します。プロファイリングの結果、実行時間の大半がノード間のメッセージ交換の待ち時間に費やされており、ノード間通信のレイテンシーとスループットが全体の実行時間を大きく左右することが分かりました。ジョブは数時間で完了し、終了後にクラスターは破棄されるため、可用性のためにインスタンスを複数のアベイラビリティーゾーンへ分散させる必要はありません。入出力ファイルは共有ファイルシステム上にあり、ローカルのブロックストレージ性能はボトルネックになっていません。このワークロードのノード間通信性能を最大化するために実行すべきステップはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "クラスタープレイスメントグループを作成し、すべてのインスタンスを同一アベイラビリティーゾーン内で物理的に近接して起動する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "Elastic Fabric Adapter (EFA) をサポートするインスタンスタイプを選択し、EFA を有効にして MPI 通信に使用する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_037": {
+  "file": "SAP-C02_orig_b2.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "新しいソリューションのための設計",
+  "level": "hard",
+  "question": "ある証券会社が、金融規制に基づいて取引記録を 7 年間保存するシステムを構築しています。記録は 1 日あたり約 2 TB 生成され、いったん書き込まれた後に内容が更新されることはありません。規制要件では、保存された記録は保持期間が満了するまで、AWS アカウントのルートユーザーや権限を持つ管理者を含めたいかなる利用者によっても、上書き・削除・保持期間の短縮ができないことが求められています。設定を後から緩められる仕組みが残っていること自体が監査での指摘対象となるため、特権ユーザーによる解除の余地を残さない構成にしなければなりません。また、当局からの照会を受けた際には、対象の記録を数秒以内に取り出して提出できる必要があります。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "S3 バケットで S3 オブジェクトロックを有効にし、コンプライアンスモードで保持期間を 7 年に設定して記録を保存する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_038": {
+  "file": "SAP-C02_orig_b2.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "既存のソリューションの継続的な改善",
+  "level": "medium",
+  "question": "ある企業が、VPC のプライベートサブネットで稼働するデータ処理アプリケーションを運用しています。アプリケーションは同一リージョンの Amazon S3 と Amazon DynamoDB に対して月間 300 TB のデータを読み書きしており、現在この通信はすべて 3 つのアベイラビリティーゾーンに配置した NAT ゲートウェイを経由しています。月次のコスト分析で、NAT ゲートウェイのデータ処理料金が VPC 関連費用の大半を占めると判明しました。インスタンスはインターネット上のパッケージリポジトリにもアクセスするため、NAT ゲートウェイ自体を廃止することはできません。また、インスタンスはプライベートのままとし、パブリック IP アドレスを割り当ててはならないという社内規定があります。可用性やアプリケーションの機能を損なわずに、この通信のコストを削減するソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "S3 用と DynamoDB 用のゲートウェイ VPC エンドポイントを作成し、プライベートサブネットのルートテーブルにエンドポイント経由の経路を追加する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_039": {
+  "file": "SAP-C02_orig_b2.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "既存のソリューションの継続的な改善",
+  "level": "easy",
+  "question": "ある企業は、数百台の EC2 インスタンスで合計 500 TB の汎用 SSD (gp2) の EBS ボリュームを使用しています。監視データによると、これらのボリュームの多くは実際には 200 GB 程度のデータしか保持していないにもかかわらず、必要な 6,000 IOPS を確保するために 2 TB でプロビジョニングされています。ワークロードはランダムな読み書きが中心で、ミリ秒単位の応答時間を維持しなければなりません。企業は、現在のパフォーマンスを維持または向上させながらストレージコストを削減したいと考えていますが、対象のインスタンスは業務時間中に停止できず、アプリケーションの変更やデータの移行作業は最小限にとどめる必要があります。最も簡単にこの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "EBS ボリュームを gp3 に変更し、必要な IOPS とスループットを容量とは独立して設定する。過剰にプロビジョニングされた容量は適正なサイズに見直す。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_040": {
+  "file": "SAP-C02_orig_b2.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "既存のソリューションの継続的な改善",
+  "level": "hard",
+  "question": "ある IoT プラットフォームでは、センサーの測定値を Amazon DynamoDB テーブルに書き込んでいます。テーブルのパーティションキーには測定日 (YYYY-MM-DD 形式) を使用しており、ソートキーはタイムスタンプです。テーブル全体には十分な書き込みキャパシティをプロビジョニングしているにもかかわらず、書き込みリクエストのスロットリングが頻発しています。調査の結果、当日の日付のパーティションに書き込みが集中していることがわかりました。スロットリングを解消するために最も効果的なソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "パーティションキーの設計を変更し、日付にセンサー ID や計算したサフィックスを組み合わせて、書き込みが多数のパーティションに分散されるようにする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_041": {
+  "file": "SAP-C02_orig_b3.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "複雑な組織に対応するソリューションの設計",
+  "level": "hard",
+  "question": "ある製造業の企業は、工場の生産管理システムをオンプレミスに残したまま、分析基盤を AWS で運用するハイブリッド構成を採用しています。オンプレミスと AWS の間の通信は生産ラインの稼働に直結するため、一貫した低レイテンシーと広帯域が常時必要であり、インターネット経由の経路は品質要件を満たせないと判断されています。現在は単一の Direct Connect ロケーションに 1 本の接続がありますが、ネットワークチームはロケーション自体の障害にも耐えられる構成を求めています。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "別の Direct Connect ロケーションに 2 本目の Direct Connect 接続を追加し、両方の接続で BGP による動的ルーティングを構成して冗長化する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_042": {
+  "file": "SAP-C02_orig_b3.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "複雑な組織に対応するソリューションの設計",
+  "level": "hard",
+  "question": "ある企業のセキュリティチームは、AWS Organizations 配下の 120 のメンバーアカウントを対象とした監査で、複数のアカウントでルートユーザーの認証情報が日常的な運用作業に使用されていることを発見しました。社内規程では、メンバーアカウントのルートユーザーの使用は請求情報の参照などの例外を除いて禁止されており、内部監査人からは、事後に検知して通知するだけでなく、操作そのものが実行されないよう技術的に防止することを求められています。ルートユーザーの認証情報はアカウント作成時に発行されたまま個別に管理されているため、アカウントごとに設定作業を行う運用は現実的ではありません。セキュリティチームは、全メンバーアカウントのルートユーザーによる操作を組織レベルで一括して制限し、今後追加されるアカウントにも自動的に適用したいと考えています。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "条件キー aws:PrincipalArn がルートユーザーの ARN パターン (arn:aws:iam::*:root) に一致する場合にアクションを拒否するサービスコントロールポリシー (SCP) を作成し、組織のルートまたは対象の OU にアタッチする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_043": {
+  "file": "SAP-C02_orig_b3.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "複雑な組織に対応するソリューションの設計",
+  "level": "medium",
+  "question": "ある企業のセキュリティチームは、AWS Organizations 配下のすべてのアカウントに、監査用の IAM ロール、AWS Config の有効化、標準の CloudWatch アラームといったベースラインリソースをデプロイする必要があります。対象は既存の全アカウントに加えて、今後組織に追加されるアカウントにも人手を介さず自動的にデプロイされなければなりません。また、特定の OU に属するアカウントのみを対象にできる柔軟性も求められています。運用負荷を最小限に抑えてこれらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "CloudFormation StackSets をサービスマネージド型のアクセス許可で構成し、対象の OU をデプロイターゲットに指定して自動デプロイを有効にする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_044": {
+  "file": "SAP-C02_orig_b3.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "複雑な組織に対応するソリューションの設計",
+  "level": "hard",
+  "question": "ある企業のプラットフォームチームは、社内共通の認証 API サービスを 1 つの VPC で運用しており、組織内の 100 以上の VPC からこの API を利用する必要があります。長年の経緯により、利用側の VPC には CIDR が重複しているものが多数存在します。また、セキュリティ要件により、API へのアクセスはインターネットを経由してはならず、利用側 VPC からは API サービスへの一方向のアクセスのみを許可する必要があります。この構成を実現するために実行すべきステップはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "API サービスの前段に Network Load Balancer を配置し、それを指定した VPC エンドポイントサービス (AWS PrivateLink) を作成して、利用側アカウントからの接続リクエストを許可する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "利用側の各 VPC にインターフェイス VPC エンドポイントを作成し、エンドポイントサービスに接続してプライベート IP 経由で API にアクセスさせる。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_045": {
+  "file": "SAP-C02_orig_b3.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "複雑な組織に対応するソリューションの設計",
+  "level": "medium",
+  "question": "ある企業は AWS Organizations で多数のアカウントを管理しており、各アカウントのチームがそれぞれ Application Load Balancer や Amazon CloudFront で Web アプリケーションを公開しています。セキュリティチームは、組織内のすべての対象リソースに共通のベースラインとなる AWS WAF ルールを適用することを義務付けたいと考えています。要件として、既存のリソースだけでなく今後作成されるリソースにも自動的にルールが適用されること、および適用状況を一元的に把握できることが求められています。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Firewall Manager を委任された管理者アカウントで構成し、共通の WAF ルールを含むセキュリティポリシーを作成して組織全体に適用する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_046": {
+  "file": "SAP-C02_orig_b3.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "複雑な組織に対応するソリューションの設計",
+  "level": "hard",
+  "question": "ある企業は、ネットワーク専用アカウントの Amazon Route 53 プライベートホストゾーンで、社内サービスの DNS レコード (internal.example.com) を管理しています。レコードは週に数十件追加・変更され、ネットワークチームがすべての変更を一元的に管理する運用を今後も維持しなければなりません。組織内の 8 つの別アカウントにある合計 25 の VPC からも、このプライベートホストゾーンの名前を解決できるようにする必要があります。名前解決の対象となる社内サービスはインターネットからは到達できず、レコードを外部に公開することは認められていません。また、各アカウントで同じ内容のゾーンを個別に保守すると設定の乖離を招くため、レコードの複製は避けなければなりません。この要件を満たすために実行すべきステップはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ネットワークアカウントで、対象 VPC の関連付けを承認する create-vpc-association-authorization を実行する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "VPC を所有するアカウントで、associate-vpc-with-hosted-zone を実行してプライベートホストゾーンに VPC を関連付ける。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_047": {
+  "file": "SAP-C02_orig_b3.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "複雑な組織に対応するソリューションの設計",
+  "level": "hard",
+  "question": "ある企業は、AWS Organizations 配下の 90 のアカウントでコスト配賦を正確に行うため、すべての EC2 インスタンスに CostCenter タグを付けることを義務付けています。しかし、タグのないインスタンスが毎月数百台起動されており、財務部門は配賦先を特定できない費用の扱いに苦慮しています。現在は検出後に担当者へ依頼してタグを追加していますが、それまでの期間の使用量は正しく按分されないため、監査部門からは、タグのないインスタンスがそもそも作成されない状態にすることを求められました。各アカウントの管理者は自アカウントの IAM ポリシーを変更できるため、アカウント単位の設定では統制を維持できません。企業は、CostCenter タグが指定されていない EC2 インスタンスの起動リクエストを組織レベルで拒否したいと考えています。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "aws:RequestTag/CostCenter が存在しない場合に ec2:RunInstances アクションを拒否するサービスコントロールポリシー (SCP) を作成し、組織のルートまたは対象の OU にアタッチする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_048": {
+  "file": "SAP-C02_orig_b3.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "複雑な組織に対応するソリューションの設計",
+  "level": "hard",
+  "question": "ある企業は、東京リージョンとフランクフルトリージョンのそれぞれに AWS Transit Gateway を構成し、リージョンごとに 20 以上の VPC を接続しています。各リージョン内の VPC 間通信はすでに Transit Gateway 経由に統一されており、VPC の追加はアタッチメントを 1 つ作成するだけで済みます。新しい要件として、両リージョンの VPC 間でもプライベートに通信できるようにする必要があります。リージョン間を流れるデータには個人情報が含まれるため、トラフィックがインターネットを経由することは認められておらず、AWS のグローバルネットワーク上を暗号化された状態で転送しなければなりません。また、今後も VPC は増え続ける見込みであり、VPC を追加するたびに接続を個別に作成し直す運用は避けたいと考えています。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "2 つの Transit Gateway の間にインターリージョンピアリングを構成し、それぞれの Transit Gateway ルートテーブルに相手リージョンの CIDR への静的ルートを追加する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_049": {
+  "file": "SAP-C02_orig_b3.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "複雑な組織に対応するソリューションの設計",
+  "level": "easy",
+  "question": "ある企業は、これまで部門ごとに個別契約していた 12 の AWS アカウントを 1 つの AWS Organizations に統合し、一括請求 (コンソリデーティッドビリング) を有効にすることを検討しています。各部門の月間利用額は 5,000 USD から 4 万 USD までばらついており、Amazon S3 のストレージ使用量は部門単位では従量課金の下位の料金帯にとどまっています。また、一部の部門はリザーブドインスタンスや Savings Plans を購入していますが、繁忙期以外は購入した分を使い切れておらず、無駄が生じています。財務部門は、統合によって請求面でどのような利点が得られるのか、および統合後も部門ごとの利用明細を引き続き把握できるのかを確認したいと考えています。一括請求の利点として正しいものはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "全アカウントの使用量が合算されてボリューム割引の段階が判定され、リザーブドインスタンスや Savings Plans の割引が組織内の他のアカウントの使用量にも適用され得る。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_050": {
+  "file": "SAP-C02_orig_b3.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "新しいソリューションのための設計",
+  "level": "hard",
+  "question": "ある企業が、Amazon S3 バケットをオリジンとする静的 Web サイトを Amazon CloudFront で世界中に配信する構成を構築しています。サイトは独自ドメイン www.example.com で公開し、すべての通信を HTTPS で保護する必要があります。ドメインのホストゾーンは東京リージョンで利用している Amazon Route 53 で管理されています。独自ドメインでの HTTPS 配信を実現するために実行すべきステップはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Certificate Manager (ACM) で www.example.com のパブリック証明書を米国東部 (バージニア北部、us-east-1) リージョンでリクエストし、CloudFront ディストリビューションに関連付けて代替ドメイン名 (CNAME) に www.example.com を設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "Route 53 のホストゾーンに、www.example.com から CloudFront ディストリビューションを指すエイリアスレコードを作成する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_051": {
+  "file": "SAP-C02_orig_b3.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "新しいソリューションのための設計",
+  "level": "medium",
+  "question": "あるモバイルゲーム企業が、世界中のプレイヤーのスコアをリアルタイムで集計するランキング機能を構築します。登録プレイヤーは 2,000 万人を超え、スコアの更新は毎秒数万件発生します。ゲーム画面では、上位 100 名の一覧と、ログイン中のプレイヤー自身の全体順位およびその前後 10 名を、1 ミリ秒未満のレイテンシーで取得して表示する必要があります。順位はスコアが更新されるたびに即座に反映されなければならず、定期的な集計バッチで順位を作り直す方式は許容されません。ランキングはシーズンごとにリセットされるため、恒久的な保存は必要ありません。開発チームは、順位付けのロジックを自前で実装することを避け、順序付きのデータ構造とその操作をあらかじめ備えたデータストアを使用したいと考えています。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon ElastiCache for Redis を使用し、ソート済みセット (Sorted Set) 型でスコアを管理して順位を取得する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_052": {
+  "file": "SAP-C02_orig_b3.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "新しいソリューションのための設計",
+  "level": "hard",
+  "question": "ある企業が、社内システム間連携のための REST API を Amazon API Gateway で構築しています。この API を呼び出すのは、社内の 3 つの VPC で稼働するアプリケーションと、AWS Direct Connect で接続されたオンプレミスの基幹システムだけです。セキュリティ部門の要件により、API のエンドポイントはインターネットからは一切到達できないようにし、呼び出しトラフィックがパブリックなインターネット経路を通らないことを保証しなければなりません。API キーや送信元 IP アドレスによるフィルタリングだけでは、エンドポイント自体がインターネットに公開されたままとなるため要件を満たしません。オンプレミスからの名前解決には、既存の Route 53 Resolver インバウンドエンドポイントを利用できます。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "API をプライベート REST API として作成し、VPC に execute-api のインターフェイス VPC エンドポイントを作成する。API のリソースポリシーで、この VPC エンドポイントからの呼び出しのみを許可し、オンプレミスからは Direct Connect 経由でエンドポイントにアクセスさせる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_053": {
+  "file": "SAP-C02_orig_b3.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "新しいソリューションのための設計",
+  "level": "medium",
+  "question": "ある EC 企業が、Web サイトのクリックストリームデータを収集して分析する基盤を構築します。イベントはピーク時に毎秒 5 万件発生し、1 日あたり約 2 TB になります。データは発生から数分以内の遅延で Amazon S3 のデータレイクに集約し、アナリストが標準的な SQL でアドホックに分析できるようにする必要があります。分析で参照するのは全体のうち数個の列に限られることが多いため、スキャン量とクエリ費用を抑える目的で、保存形式は列指向フォーマットに変換されていることが望ましいとされています。データ基盤の担当者は 2 名しかおらず、ストリーム処理のためのサーバーやクラスターのプロビジョニング、パッチ適用、スケーリングを行いたくないと考えています。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "クリックストリームを Amazon Kinesis Data Firehose (Amazon Data Firehose) に送信し、レコード形式を Apache Parquet に変換して S3 に配信する。アナリストは Amazon Athena で SQL クエリを実行する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_054": {
+  "file": "SAP-C02_orig_b3.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "新しいソリューションのための設計",
+  "level": "medium",
+  "question": "ある企業が、一般消費者向けのモバイルアプリケーションを開発しています。想定利用者は初年度で 50 万人です。利用者はメールアドレスとパスワードでのサインアップに加えて、Google などのソーシャル ID プロバイダーでもログインできる必要があり、パスワードのリセットや多要素認証といった一般的な機能も備えなければなりません。ログインした利用者は、自分専用の Amazon S3 プレフィックス配下にだけ写真を直接アップロードでき、他の利用者のプレフィックスには一切アクセスできないようにする必要があります。そのためアプリケーションには、利用者ごとにスコープされた一時的な AWS 認証情報が必要です。開発チームは 4 名でリリースまで 3 か月しかなく、認証基盤を自社開発する余裕はありません。開発工数を最小限に抑えてこれらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon Cognito ユーザープールでサインアップ・サインインとソーシャル ID 連携を実装し、Cognito ID プールで認証済みユーザーに IAM ロールに基づく一時的な AWS 認証情報を発行する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_055": {
+  "file": "SAP-C02_orig_b3.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "新しいソリューションのための設計",
+  "level": "hard",
+  "question": "ある決済サービス企業が、取引イベントを処理する非同期システムを構築しています。イベントは毎秒 2,000 件発生し、対象となる口座は数十万に及びます。要件は次のとおりです。同一の口座に関するイベントは、残高計算の整合性を保つために、発生した順序どおりに厳密に処理されなければなりません。クライアントの再送やネットワークの再試行によって同じ取引イベントが二重に送信された場合でも、重複して処理されてはなりません。異なる口座のイベントは互いに独立しているため、並列に処理してスループットを確保する必要があります。開発チームは、順序制御や重複排除の仕組みを自前で実装し、その正しさを継続的に検証する負担を避けたいと考えています。開発工数を最小限に抑えてこれらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon SQS FIFO キューを使用し、口座 ID をメッセージグループ ID に、取引 ID を重複排除 ID に設定してイベントを送信する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_056": {
+  "file": "SAP-C02_orig_b3.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "新しいソリューションのための設計",
+  "level": "medium",
+  "question": "ある製薬会社の研究部門が、ゲノム解析のバッチジョブを AWS で実行する基盤を構築します。ジョブはコンテナ化されており、夜間に数百から数千件が投入されます。ジョブごとに必要な vCPU とメモリは大きく異なり、ジョブ間には依存関係もあります。ジョブは中断されても再実行が可能な設計です。研究部門は、キューイングやコンピューティング環境のプロビジョニングを自前で管理せず、コンピューティングコストも最小限に抑えたいと考えています。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Batch でジョブキューとマネージド型コンピューティング環境を構成し、スポットインスタンスを使用してジョブを実行する。ジョブ定義でリソース要件と依存関係を指定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_057": {
+  "file": "SAP-C02_orig_b3.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "新しいソリューションのための設計",
+  "level": "hard",
+  "question": "あるオンラインチケット販売企業の Web サイトが、人気公演の販売開始日に大規模な DDoS 攻撃を受け、サービスが数時間停止しました。攻撃はネットワーク層の大量トラフィックと、アプリケーション層への HTTP リクエストフラッドの両方でした。企業はサイトを CloudFront と Application Load Balancer で再構築するにあたり、同様の攻撃への多層的な防御を導入し、攻撃発生時には AWS の専門チームの支援も受けられるようにしたいと考えています。実行すべきステップはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Shield Advanced にサブスクライブし、CloudFront ディストリビューションと Application Load Balancer を保護対象リソースとして登録する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "AWS WAF の Web ACL を CloudFront に関連付け、レートベースルールとマネージドルールグループで HTTP リクエストフラッドを緩和する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_058": {
+  "file": "SAP-C02_orig_b3.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "新しいソリューションのための設計",
+  "level": "medium",
+  "question": "ある企業が、コンテンツ管理システム (CMS) を AWS で構築します。CMS は複数のアベイラビリティーゾーンにまたがる Auto Scaling グループの EC2 インスタンスで稼働し、すべてのインスタンスがアップロードされたメディアファイルを含む同一のコンテンツディレクトリを読み書きできる必要があります。ストレージは利用量に応じて自動的に拡張し、特定の AZ の障害後もすべてのインスタンスからアクセスできなければなりません。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon EFS ファイルシステムを作成し、各 AZ のマウントターゲットを経由してすべてのインスタンスから NFS でマウントする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_059": {
+  "file": "SAP-C02_orig_b3.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "新しいソリューションのための設計",
+  "level": "hard",
+  "question": "ある EC 企業が、Amazon DynamoDB に保存された商品カタログを提供しています。セール期間中は特定の人気商品への読み取りリクエストが通常の数百倍に達し、読み取りキャパシティの消費が急増してコストが問題になっています。分析の結果、リクエストの大半は同じ項目に対する繰り返しの読み取りで、数秒程度古いデータを返しても問題ないことがわかりました。アプリケーションは DynamoDB の API をそのまま使用しており、キャッシュ管理のロジックを新たに実装する工数は確保できません。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "DynamoDB Accelerator (DAX) クラスターを作成し、アプリケーションの接続先を DAX エンドポイントに変更する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_060": {
+  "file": "SAP-C02_orig_b3.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "新しいソリューションのための設計",
+  "level": "easy",
+  "question": "ある EC 企業では、注文が確定したときに、確認メールの送信、倉庫システムへの出荷指示、分析基盤への記録という 3 つの独立した処理を実行する必要があります。ピーク時の注文は毎秒 500 件に達します。3 つの処理はそれぞれ別のチームが所有しており、所要時間も確認メールの数百ミリ秒から倉庫システム連携の数十秒までばらつきがあります。倉庫システムは日次のメンテナンス時間帯に応答しなくなるため、ある処理が失敗したり遅延したりしても他の処理や注文確定そのものには影響を与えず、失敗した処理だけを後から再試行できる必要があります。また、今後ポイント付与や不正検知などの処理が追加される見込みであり、その際に注文システム側のコードを変更せずに済むようにしたいと考えています。これらの要件を満たすアーキテクチャはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "注文システムが Amazon SNS トピックに注文確定イベントを発行し、処理ごとの Amazon SQS キューをトピックにサブスクライブして、各チームのコンシューマーが自分のキューを処理する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_061": {
+  "file": "SAP-C02_orig_b3.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "新しいソリューションのための設計",
+  "level": "hard",
+  "question": "ある物流企業が、荷物追跡システムのディザスタリカバリ計画を見直しています。システムは Application Load Balancer、Auto Scaling グループの EC2 インスタンス 60 台、および Amazon Aurora で構成されています。顧客との SLA により、リージョン全体の障害時にも RTO 5 分以内、RPO 数秒以内で復旧しなければなりません。検証の結果、DR リージョンでアプリケーション層をゼロから起動して初期化するには 15 分以上かかる一方、稼働中の環境を本番同等のキャパシティへスケールアウトするだけなら数分で完了すると分かりました。経営層は両リージョンで本番同等のキャパシティを常時稼働させる二重投資を承認しておらず、通常時に DR リージョンで発生するコストを本番より小さく抑えるよう求めています。これらの要件を満たす DR 戦略はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ウォームスタンバイ戦略を採用する。DR リージョンに縮小したキャパシティで全層を常時稼働させ、データは継続的にレプリケーションする。障害時にはスケールアウトとトラフィック切り替えのみで本番に昇格させる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_062": {
+  "file": "SAP-C02_orig_b3.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "既存のソリューションの継続的な改善",
+  "level": "hard",
+  "question": "ある企業の基幹 Web アプリケーションは、1 つのアベイラビリティーゾーンにある単一の EC2 インスタンスと、シングル AZ 構成の Amazon RDS for PostgreSQL で稼働しています。先日の AZ 障害でアプリケーションが 6 時間停止し売上に大きな影響が出たため、経営層は AZ 全体の障害でも業務を継続できる構成への改善を指示しました。アプリケーションは開発元のサポートが終了した既存資産のため、コードの大幅な改修やデータモデルの変更は避けなければなりません。セッション情報はすでに外部のキャッシュに保存されているため、同じアプリケーションを複数台で同時に稼働させても問題はありません。データベースは正規化されたスキーマと結合を伴う SQL に依存します。この構成を AZ 障害に耐えられるよう改善するために実行すべきステップはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "RDS インスタンスをマルチ AZ 配置に変更し、別の AZ のスタンバイへ自動フェイルオーバーできるようにする。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "アプリケーション層を複数の AZ にまたがる Auto Scaling グループに移し、Application Load Balancer でトラフィックを分散する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_063": {
+  "file": "SAP-C02_orig_b3.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "既存のソリューションの継続的な改善",
+  "level": "medium",
+  "question": "ある企業の Web サイトは Amazon CloudFront で配信されていますが、キャッシュを無効にする設定で運用されてきたため、すべてのリクエストがオリジンに到達しており、オリジンの負荷とレイテンシーが問題になっています。サイトは、めったに変更されない画像や CSS などの静的アセット (パス: /static/*) と、利用者ごとに応答が異なる API (パス: /api/*) で構成されています。オリジンの負荷を効果的に下げつつ、API の応答の正しさを損なわないソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "パスパターンごとにキャッシュビヘイビアを分割する。/static/* には長い TTL のキャッシュポリシーを適用し、/api/* にはキャッシュを無効化するポリシーを適用して必要なヘッダーや Cookie をオリジンに転送する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_064": {
+  "file": "SAP-C02_orig_b3.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "既存のソリューションの継続的な改善",
+  "level": "easy",
+  "question": "ある企業の業務システムは、db.m6g.2xlarge の Amazon RDS for PostgreSQL を単一構成で使用しています。毎晩 22 時から翌 3 時にかけて BI ツールが数百本の集計クエリを実行し、その時間帯は CPU 使用率が 95 % に張り付いて、オンライン処理の平均応答時間が 200 ミリ秒から 3 秒へ悪化しています。夜間もオンライン注文を受け付けているため、この応答時間の悪化は許容できません。BI ツールが発行するのは読み取り専用の集計クエリだけで、参照するデータが数秒程度遅れていても業務上の問題はありません。企業は、オンライン処理への影響を排除しつつ BI ツールによる分析を継続したいと考えており、業務アプリケーション側のコードや接続設定の変更は最小限に抑える必要があります。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "RDS のリードレプリカを作成し、BI ツールの接続先をリードレプリカのエンドポイントに変更する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_065": {
+  "file": "SAP-C02_orig_b3.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "既存のソリューションの継続的な改善",
+  "level": "hard",
+  "question": "ある企業のバックエンドは、Amazon SQS 標準キューからメッセージを受信して画像変換を行う EC2 ワーカー群で構成されています。1 日あたり約 40 万件のメッセージを処理していますが、最近になって同じメッセージが複数のワーカーで二重に処理され、変換済み画像の上書きや外部 API の課金の重複が発生する事象が頻発しています。調査の結果、扱う画像のサイズが大きくなったことで変換処理には平均 90 秒、最大で 4 分かかるようになっている一方、キューの可視性タイムアウトは作成時の既定値である 30 秒のままであることがわかりました。ワーカーのログに処理中の異常終了は記録されておらず、メッセージの滞留も見られません。アプリケーションの改修は行わずに二重処理を解消したいと考えています。最も効果的な対応はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "キューの可視性タイムアウトを、処理の最大時間より十分長い値 (例: 6 分) に変更する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_066": {
+  "file": "SAP-C02_orig_b3.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "既存のソリューションの継続的な改善",
+  "level": "medium",
+  "question": "ある企業の Web アプリケーションは、Application Load Balancer 配下の Auto Scaling グループで稼働しており、台数は日中の 20 台から夜間の 4 台まで変動します。セッション情報を各インスタンスのメモリに保存しているため、ALB のスティッキーセッションを有効にして運用してきました。しかしこの構成では、スケールインやインスタンス障害が発生するたびに、そのインスタンスに固定されていた利用者が買い物かごの内容を失い、強制的にログアウトされます。また、スケールアウトで追加したインスタンスには既存の利用者が振り分けられないため、負荷が偏り、古いインスタンスだけが高負荷になる問題も起きています。セッションの有効期間は 1 時間で、参照にはミリ秒単位の応答が求められます。これらの問題を解消するソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "セッション情報を Amazon ElastiCache for Redis に外部化してアプリケーションをステートレスにし、スティッキーセッションを無効化する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_067": {
+  "file": "SAP-C02_orig_b3.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "既存のソリューションの継続的な改善",
+  "level": "medium",
+  "question": "ある企業は、AWS Organizations 配下の 25 のアカウントで数百台の EC2 インスタンス、EBS ボリューム、Lambda 関数を運用しており、月間の請求額は前年から 40 % 増加しています。コスト最適化チームはリソースが過剰にプロビジョニングされていると考えていますが、どのリソースをどのサイズに変更すべきかを判断する材料がありません。チームが必要としているのは、CPU 使用率やメモリ、スループットといった実際の使用状況メトリクスの履歴に基づいて、リソースごとに具体的な変更候補 (より小さいインスタンスタイプや別のボリュームタイプなど) と、変更した場合の削減見込みが提示されることです。結果は組織全体を横断して 1 か所で確認できる必要があります。追加のライセンス費用や導入の手間は最小限に抑えたいと考えています。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Compute Optimizer を Organizations 全体で有効化し、機械学習による使用状況分析に基づくリソースごとの推奨事項を確認する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_068": {
+  "file": "SAP-C02_orig_b3.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "既存のソリューションの継続的な改善",
+  "level": "medium",
+  "question": "ある企業の開発・検証環境は、120 台の EC2 インスタンスと 30 台の Amazon RDS インスタンスで構成されており、月額約 6 万 USD の費用が発生しています。これらの環境は平日の業務時間 (9 時から 19 時) にしか使用されていませんが、24 時間 365 日稼働したままであり、コストレビューで大きな無駄が指摘されました。開発チームからは、翌朝の始業時には環境がすぐ使える状態になっていること、および前日までに作成したデータや設定が失われないことが条件として挙げられています。また、突発的な検証のために特定の環境だけを時間外に起動しておける柔軟性も必要です。運用チームは 2 名で、毎日の起動と停止を手作業で行うことはできません。運用負荷を最小限に抑えてこの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon EventBridge のスケジュールで AWS Lambda または Systems Manager Automation を起動し、業務時間外に EC2 と RDS のインスタンスを自動停止し、業務開始前に自動起動する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_069": {
+  "file": "SAP-C02_orig_b3.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ワークロードの移行とモダナイゼーション",
+  "level": "medium",
+  "question": "ある企業が、オンプレミスのデータセンターにある約 800 台のサーバーの AWS 移行を計画しています。サーバーは Windows と Linux が混在し、多数のアプリケーションが相互に通信していますが、どのサーバーがどのサーバーと通信しているかを把握している担当者はすでに在籍していません。構成管理データベース (CMDB) は 5 年以上更新されておらず、記載内容と実機の構成が一致しないことが確認されています。移行の第一段階として、サーバーのインベントリ、サーバー間の依存関係、CPU やメモリの実使用率を実測に基づいて収集し、それをもとに一緒に移行すべきアプリケーション群を特定して移行の優先順位を決め、移行後のコスト試算を含むビジネスケースを経営層に提示する必要があります。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Application Discovery Service のエージェントまたはエージェントレスコレクターをデプロイしてサーバー情報と依存関係を自動収集し、収集データをもとに Migration Evaluator や AWS Migration Hub で分析とビジネスケース作成を行う。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_070": {
+  "file": "SAP-C02_orig_b3.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ワークロードの移行とモダナイゼーション",
+  "level": "hard",
+  "question": "ある企業が、オンプレミスで稼働する 60 TB のデータベースを AWS 上のデータベースに移行します。オンプレミスとインターネットの間の回線は 100 Mbps しかなく、そのうち移行に使えるのは業務時間外の一部の帯域だけで、増速の予定もありません。試算では、この回線で 60 TB を転送し切るには数か月を要します。移行の完了期限は 3 か月後であり、業務上、切り替えのための停止時間は数時間以内に抑えなければなりません。データベースは 24 時間稼働しており、初期データを抽出してから切り替えるまでの間も 1 日あたり数十 GB の書き込みが継続して発生します。切り替えの時点で、ソースとターゲットのデータが一致していることを確認できる必要があります。この移行を成功させるために実行すべきステップはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Snowball Edge デバイスを注文し、データベースの初期データを抽出してデバイス経由で AWS に転送し、ターゲットデータベースにロードする。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "初期データのロード完了後、AWS DMS の変更データキャプチャ (CDC) タスクを実行して輸送中および移行中に発生した変更をターゲットに適用し、同期が追いついた時点で短時間の切り替えを行う。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_071": {
+  "file": "SAP-C02_orig_b4.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "複雑な組織に対応するソリューションの設計",
+  "level": "hard",
+  "question": "ある企業は AWS Organizations で 60 のアカウントを運用しており、各チームが Amazon EBS、Amazon RDS、Amazon DynamoDB のバックアップを独自のスクリプトで取得しています。監査の結果、一部のアカウントではバックアップがまったく取得されていないこと、および取得されたバックアップをワークロードアカウントの管理者が自由に削除できる状態であることが指摘されました。企業は、組織全体で統一されたバックアップ計画を強制し、そのコピーをワークロードアカウントとは別のバックアップ専用アカウントかつ別リージョンに保管し、保持期間中は誰も (ワークロードアカウントの管理者を含めて) 削除できないようにする必要があります。今後追加されるアカウントにも自動的に適用され、運用負荷は最小限であることが求められます。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Backup を組織で有効化し、委任管理者アカウントから作成したバックアップポリシーを OU にアタッチして、すべてのメンバーアカウントにバックアップ計画を適用する。計画にはバックアップ専用アカウントの別リージョンにあるボールトへのクロスアカウント・クロスリージョンコピーを含め、コピー先ボールトで AWS Backup Vault Lock をコンプライアンスモードで有効にする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_072": {
+  "file": "SAP-C02_orig_b4.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "複雑な組織に対応するソリューションの設計",
+  "level": "medium",
+  "question": "ある企業は、外部の監査法人に対して、AWS Organizations 配下の全アカウントの構成情報を読み取り専用で参照させる必要があります。監査法人は自社の AWS アカウントから作業を行い、同時に他の多数の顧客の監査も同じアカウントで実施しています。企業のセキュリティポリシーでは、長期的なアクセスキーを社外に配布することが禁止されています。また、監査法人が他の顧客の依頼と取り違えて自社の環境にアクセスすることがないよう、混乱した代理人 (confused deputy) 問題への対策を明示的に講じる必要があります。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "各アカウントに IAM ロールを作成し、信頼ポリシーで監査法人の AWS アカウントをプリンシパルとして指定したうえで、企業が発行した一意の値を要求する sts:ExternalId 条件を追加する。ロールには読み取り専用の管理ポリシーをアタッチし、AWS CloudFormation StackSets で全アカウントに展開する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_073": {
+  "file": "SAP-C02_orig_b4.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "複雑な組織に対応するソリューションの設計",
+  "level": "hard",
+  "question": "ある企業は、集中インスペクション VPC に Gateway Load Balancer とサードパーティ製ファイアウォールアプライアンスを 3 つのアベイラビリティーゾーンに冗長配置し、AWS Transit Gateway を経由するスポーク VPC 間の East-West トラフィックをすべて検査する構成を導入しました。導入後、一部の長時間の TCP セッションが確立できない、または途中で切断される事象が発生しています。ファイアウォールのログを確認すると、同一の通信について往路のパケットのみ、または復路のパケットのみが記録されており、ステートフル検査がフローを追跡できていないことが判明しました。企業は 3 AZ の冗長性を維持したまま、この問題を解決する必要があります。とるべき対応はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "インスペクション VPC の Transit Gateway アタッチメントでアプライアンスモードを有効にする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_074": {
+  "file": "SAP-C02_orig_b4.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "複雑な組織に対応するソリューションの設計",
+  "level": "hard",
+  "question": "ある企業は、専用のツーリングアカウントに構築した AWS CodePipeline から、開発・ステージング・本番の 3 つのワークロードアカウントへ AWS CloudFormation スタックをデプロイしたいと考えています。ビルド成果物はツーリングアカウントの Amazon S3 アーティファクトバケットに保存されます。セキュリティ要件により、ワークロードアカウントの管理者はパイプラインの定義や実行を変更できてはならず、逆にパイプラインには各ワークロードアカウントでのデプロイに必要な権限だけを与える必要があります。パイプラインは 1 本に集約し、運用負荷を最小限にすることが求められています。この要件を満たすために実施すべきステップはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ツーリングアカウントでカスタマーマネージド KMS キーを作成してアーティファクトバケットの暗号化に使用し、キーポリシーとバケットポリシーで各ワークロードアカウントのデプロイロールに対して復号とオブジェクト取得を許可する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "各ワークロードアカウントに、ツーリングアカウントのパイプラインサービスロールからのみ引き受けられるクロスアカウントデプロイロールを作成し、パイプラインのデプロイステージでそのロールを指定する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_075": {
+  "file": "SAP-C02_orig_b4.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "新しいソリューションのための設計",
+  "level": "hard",
+  "question": "ある企業は、データレイク専用アカウントの Amazon S3 に全社のデータを集約し、AWS Glue データカタログでテーブルを管理する新しい分析基盤を設計しています。5 つの事業部はそれぞれ独自の AWS アカウントを持ち、アナリストは自分のアカウントの Amazon Athena からデータを分析します。事業部ごとに参照できるテーブルが異なり、さらに氏名やメールアドレスなどの個人情報を含む列は特定の事業部からは見えないようにする必要があります。データの複製は禁止されており、権限管理の運用負荷も最小限に抑えたいと考えています。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "データレイクアカウントで AWS Lake Formation を有効にして S3 のロケーションを登録し、Lake Formation のクロスアカウント許可で各事業部アカウントにテーブル単位および列単位のアクセス許可を付与する。各事業部は自アカウントの Athena からリソースリンク経由でクエリする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_076": {
+  "file": "SAP-C02_orig_b4.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "新しいソリューションのための設計",
+  "level": "hard",
+  "question": "ある SaaS 企業が、数千のテナントが利用する新しいマルチテナントアプリケーションを設計しています。テナントのデータは共有の Amazon DynamoDB テーブルに保存する方針です。セキュリティ監査部門からは、アプリケーションコードにバグがあった場合でも、あるテナントのリクエスト処理中に他テナントのデータへ到達できないことを、コードのレビューやフィルタリング処理に依存せずに保証するよう求められました。テナント数は今後さらに増加する見込みで、テナント追加時の運用作業とコストは最小限に抑える必要があります。これらの要件を満たすために実施すべきステップはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "テナント ID をパーティションキー (またはパーティションキーの先頭要素) として使用するテーブル設計にし、すべてのアイテムがテナント ID で区切られるようにする。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "リクエストごとに AWS STS でロールを引き受けてテナント固有の一時的な認証情報を取得し、dynamodb:LeadingKeys 条件でそのテナントのパーティションキー値のみを許可するセッションポリシーを適用する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_077": {
+  "file": "SAP-C02_orig_b4.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "新しいソリューションのための設計",
+  "level": "medium",
+  "question": "ある企業が、クリエイターが投稿した動画を視聴者に配信する新しいサービスを構築しています。クリエイターは 1 ファイル最大 20 GB の元動画を Amazon S3 にアップロードし、システムはそれを複数のビットレートの HLS 形式に変換して配信する必要があります。アップロードは不定期で、まったく投稿がない時間帯がある一方、キャンペーン期間中は短時間に集中します。企業はメディア処理基盤の運用に人員を割けず、アイドル時のコストも発生させたくないと考えています。運用負荷とアイドルコストを最小化しつつ要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "S3 のイベント通知で AWS Lambda 関数を起動し、AWS Elemental MediaConvert のトランスコードジョブを作成する。出力を別の S3 バケットに保存し、Amazon CloudFront で配信する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_078": {
+  "file": "SAP-C02_orig_b4.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "新しいソリューションのための設計",
+  "level": "hard",
+  "question": "ある金融機関が新しい基幹システムを AWS に構築しています。規制当局の要件により、データの暗号化に使用する鍵は単一テナントの専有ハードウェアセキュリティモジュール (HSM) の内部で生成・保管され、FIPS 140-2 レベル 3 の検証を受けたハードウェアで保護され、鍵マテリアルは同機関のみが制御できなければなりません。一方で開発チームは、Amazon EBS、Amazon S3、Amazon RDS といったサービスに組み込まれた暗号化機能をそのまま使いたいと考えており、アプリケーション側に独自の暗号化処理を実装することは避けたいとしています。追加の運用負荷は許容できますが、アプリケーションの実装変更は最小限にする必要があります。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS CloudHSM クラスターを作成し、それをバックエンドとする AWS KMS カスタムキーストアを構成する。カスタムキーストア内に作成した KMS キーの ID を各サービスの暗号化設定で指定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_079": {
+  "file": "SAP-C02_orig_b4.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "既存のソリューションの継続的な改善",
+  "level": "medium",
+  "question": "ある持株会社は、AWS Organizations の一括請求で複数の事業会社のアカウントをまとめています。最近、ある子会社が自社ワークロード用に購入したリザーブドインスタンスと Savings Plans の割引が、同じ組織内の他の事業会社のアカウントの使用量に適用されてしまい、社内の費用配賦で問題になりました。子会社は別法人であるため、購入したコミットメントの割引は自社のアカウント内でのみ適用されるようにする必要があります。組織構造や既存のアカウント配置は変更したくありません。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "管理アカウントの請求設定で、リザーブドインスタンスと Savings Plans の割引共有を該当する子会社のアカウントに対して無効にする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_080": {
+  "file": "SAP-C02_orig_b4.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "既存のソリューションの継続的な改善",
+  "level": "medium",
+  "question": "ある企業では、複数の AWS アカウントにまたがる数百の Amazon S3 バケットを利用しています。コストレビューの結果、S3 の請求上のストレージ量が、コンソールで確認できるオブジェクトの合計サイズを大幅に上回っていることが判明しました。調査の過程で、多くのバケットでバージョニングが有効になっていること、および大容量ファイルのマルチパートアップロードがクライアント側の不安定なネットワークによって頻繁に失敗していることがわかりました。企業は原因を組織横断で可視化し、継続的にストレージコストを削減する仕組みを導入したいと考えています。最小の運用負荷でこれを実現するソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "組織レベルで Amazon S3 Storage Lens を有効にして、不完全なマルチパートアップロードのバイト数と非現行バージョンのバイト数を可視化する。対象バケットに、不完全なマルチパートアップロードを中止するルールと非現行バージョンを一定期間後に失効させるルールを含む S3 ライフサイクル設定を適用する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_081": {
+  "file": "SAP-C02_orig_b4.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "既存のソリューションの継続的な改善",
+  "level": "hard",
+  "question": "ある企業の社内ポータルは、Application Load Balancer と Amazon EC2 Auto Scaling グループで稼働しています。トラフィックは平日の 8 時 45 分から 9 時 15 分にかけて通常の 10 倍に急増し、その後は緩やかに落ち着くというパターンが 1 年以上安定して続いています。EC2 インスタンスは起動からアプリケーションの初期化完了まで約 10 分を要するため、CPU 使用率に対するターゲット追跡スケーリングだけでは容量の追加が間に合わず、毎朝この時間帯にエラー率が上昇しています。休日や全社休業日にはこの急増は発生しないため、常に固定容量を確保するのは無駄が大きいと考えられています。この問題を最も適切に解決するソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Auto Scaling グループで予測スケーリングを有効にし、過去のトラフィック履歴に基づいて急増前に容量を先回りして増やす。あわせてターゲット追跡による動的スケーリングを併用し、インスタンスのウォームアップ時間を実測値に合わせて設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_082": {
+  "file": "SAP-C02_orig_b4.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "既存のソリューションの継続的な改善",
+  "level": "hard",
+  "question": "ある企業では、AWS Organizations 配下の 40 のアカウントで稼働するアプリケーションが、それぞれのアカウントの Amazon CloudWatch Logs にログを出力しています。セキュリティ部門は、これらのログを数分以内に中央のログアーカイブアカウントの Amazon S3 バケットへ集約し、Amazon Athena で全アカウント横断の調査を行えるようにしたいと考えています。アプリケーションチームにコードの変更を求めることはできず、今後追加されるアカウントにも自動的に同じ仕組みが適用される必要があります。運用負荷を最小限に抑えてこれらの要件を満たすために実施すべきステップはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ログアーカイブアカウントに S3 バケットを宛先とする Amazon Data Firehose (旧 Amazon Kinesis Data Firehose) の配信ストリームを作成し、CloudWatch Logs の宛先 (destination) を作成して、組織内のアカウントからのサブスクリプションを許可するアクセスポリシーを設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "各アカウントのロググループに、中央の宛先を指定したサブスクリプションフィルターを作成する。この設定を AWS CloudFormation StackSets の組織単位へのデプロイで展開し、新規アカウントにも自動適用されるようにする。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_083": {
+  "file": "SAP-C02_orig_b4.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "既存のソリューションの継続的な改善",
+  "level": "medium",
+  "question": "ある制作会社は、世界 12 拠点のスタジオから東京リージョンの単一の Amazon S3 バケットへ、1 ファイルあたり 5 GB から 50 GB の映像素材を毎日アップロードしています。南米やヨーロッパの拠点ではアップロードのスループットが著しく低く、1 ファイルの転送に数時間かかることもあります。各拠点への専用線を敷設する予算はなく、資産管理システムの都合上、素材はすべて単一のバケットに集約したままにする必要があります。アプリケーションの大幅な改修も避けたいと考えています。この状況を改善するソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "対象の S3 バケットで Transfer Acceleration を有効にし、各拠点のクライアントが高速化エンドポイント経由でマルチパートアップロードを行うように設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_084": {
+  "file": "SAP-C02_orig_b4.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "既存のソリューションの継続的な改善",
+  "level": "medium",
+  "question": "ある企業の業務アプリケーションは Amazon EC2 と Amazon ECS 上で稼働しており、Amazon RDS for MySQL への接続情報がアプリケーションの設定ファイルにハードコードされています。セキュリティ監査により、データベースのパスワードを 90 日ごとにローテーションすることが義務付けられました。運用チームは、パスワードの変更のたびにアプリケーションを再デプロイしたり再起動したりすることは避けたいと考えており、ローテーション作業も自動化したいと考えています。運用負荷を最小限に抑えてこれらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "認証情報を AWS Secrets Manager のシークレットとして保存し、RDS 用のローテーション設定を有効にして 90 日ごとに自動ローテーションする。アプリケーションはインスタンスプロファイルまたはタスクロールを使って、接続時に Secrets Manager からシークレットを取得する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_085": {
+  "file": "SAP-C02_orig_b4.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "既存のソリューションの継続的な改善",
+  "level": "hard",
+  "question": "ある企業は AWS Organizations 配下の 30 アカウントで、多数の Amazon EC2 インスタンスと Amazon ECR のコンテナイメージを運用しています。現在は四半期ごとに担当者が手動でスキャンツールを実行して既知の脆弱性を確認していますが、スキャンとスキャンの間の期間はまったく可視性がなく、監査で問題視されました。企業は、新しい CVE が公開された際にも影響を受けるリソースを継続的に検出したいと考えています。また、インスタンスごとに専用エージェントを個別導入・更新する運用は避けたく、検出結果はセキュリティ専用アカウントで一元的に確認したいと考えています。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "セキュリティ専用アカウントを Amazon Inspector の委任管理者に指定し、組織全体で Inspector を有効化する。EC2 は AWS Systems Manager エージェント経由で継続的にスキャンし、ECR のイメージはプッシュ時および継続的にスキャンする。検出結果を AWS Security Hub に集約して確認する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_086": {
+  "file": "SAP-C02_orig_b4.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "既存のソリューションの継続的な改善",
+  "level": "hard",
+  "question": "ある企業のデータレイクでは、5 年分のアプリケーションイベントが gzip 圧縮された JSON ファイルとして Amazon S3 の単一のフラットなプレフィックスに保存されています。アナリストは Amazon Athena で分析していますが、クエリのほとんどは直近 1 か月のデータの数列だけを参照しているにもかかわらず、毎回データセット全体がスキャンされるためクエリ料金と実行時間が問題になっています。企業は既存の SQL による分析の使い勝手を維持しつつ、スキャン量を大幅に削減したいと考えています。また、新しいデータが追加されるたびにメタデータを更新する運用作業も増やしたくありません。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Glue の ETL ジョブまたは Athena の CREATE TABLE AS SELECT を使ってデータを Apache Parquet 形式に変換し、日付をキーとした Hive 形式のプレフィックスにパーティション化して書き出す。テーブルでパーティション射影 (partition projection) を構成する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_087": {
+  "file": "SAP-C02_orig_b4.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "既存のソリューションの継続的な改善",
+  "level": "hard",
+  "question": "ある企業の顧客向け API は Amazon API Gateway と AWS Lambda で構成されています。関数のメモリは 128 MB のまま運用されており、CPU 不足によって処理時間が長く、さらにコールドスタートによって p99 レイテンシーが SLA を超過することが常態化しています。トラフィックは平日の日中に安定して高く、夜間と週末はほぼゼロという明確なパターンがあります。経営層からはレイテンシーの改善と同時に、コンピューティングコストを増やさないことも求められています。これらの要件を最も適切に満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "実測に基づいて関数のメモリ割り当てを引き上げて実行時間を短縮し、アーキテクチャを arm64 (AWS Graviton) に変更する。日中の想定同時実行数に対してプロビジョニングされた同時実行を設定し、Application Auto Scaling のスケジュールで夜間と週末は縮小する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_088": {
+  "file": "SAP-C02_orig_b4.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "既存のソリューションの継続的な改善",
+  "level": "hard",
+  "question": "ある企業では、3 年間運用している Amazon DynamoDB テーブルをオンデマンドキャパシティモードで使用しています。CloudWatch の履歴を分析したところ、トラフィックは平日日中に安定して高く、夜間と週末は大きく下がるという明確な周期性があり、1 年を通じてピーク値もほぼ一定であることがわかりました。想定外のスパイクは年に数回のセール時のみで、開催日は事前に決まっています。財務部門からはオンデマンドモードの料金が割高であるとして改善を求められていますが、可用性やスロットリングのリスクは増やせません。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "テーブルをプロビジョニングモードに切り替え、Auto Scaling で日中と夜間の変動に追随させる。安定して消費されるベースライン分に対して DynamoDB のリザーブドキャパシティを購入し、セール開催前にはスケジュールで Auto Scaling の上限を引き上げる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_089": {
+  "file": "SAP-C02_orig_b4.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ワークロードの移行とモダナイゼーション",
+  "level": "hard",
+  "question": "ある企業は、オンプレミスの NFS ファイルサーバーに保存された 60 TB、数千万ファイルのデータを AWS へ移行します。移行後は複数の Amazon EC2 上の Linux アプリケーションが同時に読み書きする共有ファイルシステムとして利用するため、POSIX の所有者、グループ、パーミッションを保持する必要があります。オンプレミスと AWS の間には 10 Gbps の AWS Direct Connect 接続があり、社内規程により移行データはインターネットを経由してはなりません。移行期間中も業務は継続し、最終的なカットオーバー時のダウンタイムは 2 時間以内に収める必要があります。これらの要件を満たすために実施すべきステップはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "オンプレミスに AWS DataSync エージェントをデプロイし、Amazon EFS ファイルシステムを転送先とするタスクを作成する。Direct Connect のプライベート VIF と DataSync 用の VPC インターフェイスエンドポイントを使用して、転送がインターネットを経由しないようにする。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "初回の完全転送の後、カットオーバーまで DataSync タスクを定期的に実行して変更されたファイルのみを増分転送する。カットオーバー時に業務を停止して最終同期を実行してからアプリケーションを切り替える。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_090": {
+  "file": "SAP-C02_orig_b4.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ワークロードの移行とモダナイゼーション",
+  "level": "hard",
+  "question": "あるメディア企業は、オンプレミスのストレージに保存された 900 TB の映像アーカイブを Amazon S3 へ移行する必要があります。データセンターのインターネット回線は 1 Gbps ですが、日常業務のトラフィックが常時流れているため、移行に使える帯域は平均して約 500 Mbps しかありません。試算では、この帯域で 900 TB を転送するには半年近くかかります。データセンターの賃貸契約の関係で、アーカイブの移行は 6 週間以内に完了させなければなりません。移行の完了後も、撮影現場から届く毎日約 2 TB の新規素材を S3 へ継続的に転送し、オンプレミス側との差分だけを自動で同期し続ける運用が必要です。なお、新たな専用線の敷設はキャリアの工事に 3 か月以上かかるため、期限には間に合いません。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "複数台の AWS Snowball Edge Storage Optimized デバイスを並行して利用し、900 TB のアーカイブを物理輸送で S3 に取り込む。移行完了後の日次 2 TB の新規素材は、既存回線経由で AWS DataSync により継続的に転送する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_091": {
+  "file": "SAP-C02_orig_b4.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ワークロードの移行とモダナイゼーション",
+  "level": "medium",
+  "question": "ある企業のオンプレミスデータセンターでは、商用のバックアップソフトウェアが iSCSI 経由で物理テープライブラリにバックアップを書き込んでいます。このテープ装置がまもなく保守終了を迎えるため、バックアップの保存先をクラウドへ移す必要が生じました。運用チームは、既存のバックアップソフトウェアと、テープメディアを前提とした現行のジョブ定義や運用手順をそのまま維持したいと考えています。バックアップは法令により 7 年間保管する必要があり、復元要求は年に数回程度で、取り出しに数時間かかっても業務上問題ありません。これらの要件を最も適切に満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "オンプレミスに AWS Storage Gateway のテープゲートウェイをデプロイし、仮想テープライブラリ (VTL) として既存のバックアップソフトウェアに提示する。書き込みが完了した仮想テープはアーカイブして S3 Glacier Deep Archive 相当のアーカイブ層に長期保管する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_092": {
+  "file": "SAP-C02_orig_b4.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ワークロードの移行とモダナイゼーション",
+  "level": "hard",
+  "question": "ある企業は、オンプレミスの Microsoft SQL Server 上で稼働する 4 TB の業務データベースを Amazon RDS for SQL Server に移行します。データベースのバージョンは RDS でサポートされる範囲にあり、アプリケーション側の変更は不要です。移行にあたっては週末に 8 時間のメンテナンスウィンドウが確保されており、その範囲であれば停止は許容されます。移行ではテーブル、インデックス、ユーザー、権限を含むデータベース全体をそのままの状態で移す必要があり、追加のスキーマ調整作業は避けたいと考えています。OS レベルへのアクセスは不要です。最小の労力でこれらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "SQL Server のネイティブバックアップ (.bak) を取得して Amazon S3 にアップロードし、SQLSERVER_BACKUP_RESTORE オプションを有効にしたオプショングループを関連付けた RDS インスタンスへリストアする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_093": {
+  "file": "SAP-C02_orig_b4.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ワークロードの移行とモダナイゼーション",
+  "level": "hard",
+  "question": "ある企業は、オンプレミスで 200 ノードの Apache Hadoop クラスターを運用しており、HDFS に約 3 PB のデータを保持しています。Apache Spark と Apache Hive のジョブは夜間のバッチウィンドウに集中し、日中はクラスターがほぼアイドル状態です。それでもクラスターは常時稼働しており、容量の拡張が必要になるたびにハードウェアの調達に数か月を要しています。企業はこのワークロードを AWS へ移行しますが、既存のジョブのコードは可能な限り変更したくないと考えています。コストと運用負荷を最小化するために実施すべきステップはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "データを Amazon S3 に移行し、ジョブの入出力パスを EMRFS (s3:// スキーム) 経由で参照するように変更して、ストレージとコンピューティングを分離する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "バッチウィンドウごとに起動して処理完了後に終了する一時的 (transient) な Amazon EMR クラスターを使用し、インスタンスフリートでタスクノードにスポットインスタンスを利用する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_094": {
+  "file": "SAP-C02_orig_b4.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ワークロードの移行とモダナイゼーション",
+  "level": "medium",
+  "question": "ある企業は、10 年以上前に開発された複数の Java (Apache Tomcat) アプリケーションを Amazon EC2 上で運用しています。ソースコードは残っているものの、当時のビルド環境と設計ドキュメントは失われており、アプリケーションのコードを変更することはできません。企業は運用の標準化のためにこれらのアプリケーションをコンテナ化して Amazon ECS で稼働させたいと考えていますが、各アプリケーションの依存関係を人手で調査することに大きな工数をかけたくないと考えています。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS App2Container を使用して稼働中のアプリケーションを検出・分析し、コンテナイメージと Amazon ECS 用のタスク定義や CloudFormation テンプレートなどのデプロイアーティファクトを自動生成する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_095": {
+  "file": "SAP-C02_orig_b4.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ワークロードの移行とモダナイゼーション",
+  "level": "hard",
+  "question": "ある企業は、Application Load Balancer の背後にある Amazon EC2 上のモノリシックな Web アプリケーションを、段階的にマイクロサービスへ分割する計画です。第一段階として /orders と /payments のパスに対応する機能を Amazon ECS 上の新しいサービスとして切り出します。顧客が利用している既存の URL は変更できず、残りの機能は当面モノリスのまま稼働し続けます。切り出したサービスに問題が見つかった場合には、数分以内にモノリス側へ戻せる必要があります。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "既存の ALB のリスナーに /orders* と /payments* を条件とするパスベースのルールを追加し、新しい ECS サービスのターゲットグループへ転送する。転送アクションの加重ターゲットグループを使って新旧のターゲットグループへの配分を段階的に変更し、問題があれば重みを元に戻す。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_096": {
+  "file": "SAP-C02_orig_b4.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ワークロードの移行とモダナイゼーション",
+  "level": "hard",
+  "question": "ある企業は、Amazon EC2 上で 15 台のブローカーからなる自己管理型の Apache Kafka クラスターを運用しています。ブローカーと ZooKeeper のパッチ適用、ディスク容量の枯渇対応、パーティションのリバランスといった運用作業が大きな負担になっています。社内には Kafka のクライアントライブラリを使用する多数のプロデューサーとコンシューマーが存在し、これらのアプリケーションのコードは変更したくありません。また、移行中のダウンタイムは最小限に抑え、既存トピックのデータも引き継ぐ必要があります。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "同じ Apache Kafka バージョンで Amazon MSK クラスターを作成し、MirrorMaker 2 または MSK Replicator でトピックとデータを継続的に複製する。複製が追いついた後、プロデューサーとコンシューマーの接続先を段階的に MSK のブートストラップサーバーへ切り替える。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_097": {
+  "file": "SAP-C02_orig_b4.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ワークロードの移行とモダナイゼーション",
+  "level": "hard",
+  "question": "ある製造業の企業は、工場の生産ラインを制御するアプリケーションを AWS の運用モデルに統合したいと考えています。しかし、このアプリケーションは工場内の製造装置と 5 ミリ秒未満の往復レイテンシーで通信する必要があり、最寄りの AWS リージョンまでの往復レイテンシーは約 40 ミリ秒です。さらに、各国の規制により生産データは工場の敷地外に持ち出せません。一方で企業は、他のワークロードと同じ AWS の API、Amazon EC2 と Amazon EBS、統一された IAM と監視ツールを使って運用したいと考えています。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "工場に AWS Outposts ラックを設置し、その上で Amazon EC2 インスタンスと Amazon EBS ボリュームを実行する。リージョンと同じ AWS API、IAM、監視ツールで一元的に運用する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_098": {
+  "file": "SAP-C02_orig_b4.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ワークロードの移行とモダナイゼーション",
+  "level": "hard",
+  "question": "ある企業は、オンプレミスの 200 台のサーバーを 6 か月かけて波状 (ウェーブ) 方式で AWS へ移行します。各アプリケーションのカットオーバーでは、まず本番トラフィックの 5% のみを AWS 側に流して実際の利用状況で検証し、問題が見つかった場合は数分以内にすべてのトラフィックをオンプレミスへ戻せることが求められています。オンプレミスと AWS の間は AWS Direct Connect で接続されており、移行中の各アプリケーションのダウンタイムは最小限に抑える必要があります。これらの要件を満たすために実施すべきステップはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Application Migration Service (AWS MGN) でソースサーバーの継続的なブロックレベルレプリケーションを行い、カットオーバー前にテストインスタンスを起動して検証する。カットオーバー後も一定期間はソース環境を維持する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "Amazon Route 53 の加重ルーティングポリシーで、オンプレミスのエンドポイントと AWS のエンドポイントに対するレコードを作成し、重みを 95 対 5 から段階的に変更する。レコードの TTL を短く設定しておく。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_099": {
+  "file": "SAP-C02_orig_b4.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ワークロードの移行とモダナイゼーション",
+  "level": "medium",
+  "question": "ある企業では、約 40 個のバッチジョブが 2 台の Amazon EC2 インスタンス上の cron によって実行されています。片方のインスタンスが停止するとその上のジョブが実行されず、逆に運用上の手違いで両方に同じ設定が入り二重実行される事故も発生しています。ジョブの実行時間は数秒で終わるものから 45 分かかるものまでさまざまです。企業はこの仕組みをモダナイズし、OS のパッチ適用やキャパシティ管理を不要にしたいと考えています。運用負荷を最小限に抑えてこれらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon EventBridge のスケジュールで各ジョブをトリガーし、短時間で完了するジョブは AWS Lambda 関数として、長時間かかるジョブは AWS Fargate 上の Amazon ECS タスクとして実行する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_100": {
+  "file": "SAP-C02_orig_b4.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ワークロードの移行とモダナイゼーション",
+  "level": "medium",
+  "question": "ある企業は、Amazon EC2 上に自己管理型の Elasticsearch クラスター (12 ノード) を構築し、アプリケーションログを 90 日間保持しています。分析すると、直近 7 日分のログは開発チームが日常的に検索する一方、8 日目から 90 日目のログは障害調査時にごくまれに参照されるだけでした。ノードにアタッチした EBS ボリュームのコストとクラスターの運用負荷が課題となっており、既存の Kibana ダッシュボードによる可視化は今後も継続して利用したいと考えています。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon OpenSearch Service のマネージドドメインへ移行し、直近 7 日分をホットストレージ、8 日目以降を UltraWarm ストレージに配置する Index State Management ポリシーを設定する。可視化には OpenSearch Dashboards を使用する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ }
+}
