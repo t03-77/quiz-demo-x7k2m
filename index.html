@@ -415,6 +415,13 @@ let domFilter = null;   // 分野別復習中の対象ドメイン
 function pool(){
   let qs = examQuestions(currentExam);
   if(setFilter!=='all') qs = qs.filter(q=>q.set===setFilter);
+  else {
+    // おまかせ出題では本番形式を優先する。
+    // AIP-C01 は一問一答が221問と本番形式(106問)より多く、そのまま混ぜると
+    // 7割が用語確認の短い問題になり、本番の練習にならないため。
+    const real = qs.filter(q=>q.set!=='flash');
+    if(real.length >= 30) qs = real;
+  }
   if(domFilter) qs = qs.filter(q=>q.domain===domFilter);
   return qs;
 }
