@@ -704,13 +704,20 @@ function renderQ(){
     body += `<div class="rowbtns"><button class="btn" onclick="grade()">回答する</button></div>`;
   } else {
     body += displayOpts(q).map(o=>`<div class="opt ${sel.has(o.orig)?'sel':''}" onclick="tapOpt('${o.orig}')"><span class="lt">${o.letter}</span><span>${esc(o.text)}</span></div>`).join('');
-    body += `<div class="rowbtns"><button class="btn" ${sel.size?'':'disabled'} onclick="grade()">回答する</button></div>`;
+    // 複数選択では、指定された数をちょうど選ぶまで回答できないようにする。
+    // 本番も同じで、足りないまま提出できてしまうと練習にならない
+    const need=q.n_correct||1, rest=need-sel.size;
+    body += `<div class="rowbtns"><button class="btn" ${sel.size===need?'':'disabled'} onclick="grade()">`
+         + (sel.size===need? '回答する' : (need>1? `あと ${rest} つ選んでください` : '選択してください'))
+         + `</button></div>`;
   }
   document.getElementById('q-card').innerHTML = head+body;
   if(mode==='mock') tickMock();
 }
-function tapOpt(l){ const q=cur;
-  if(q.n_correct===1){ sel=new Set([l]); } else { sel.has(l)? sel.delete(l): sel.add(l); }
+function tapOpt(l){ const q=cur, need=q.n_correct||1;
+  if(need===1){ sel=new Set([l]); }
+  else if(sel.has(l)){ sel.delete(l); }
+  else if(sel.size < need){ sel.add(l); }   // 指定数を超えて選べないようにする
   renderQ();
 }
 function tapOrd(i){ const t=ordItems(cur)[i]; if(!ordSel.includes(t) && ordSel.length<cur.order_answer.length) ordSel.push(t); renderQ(); }

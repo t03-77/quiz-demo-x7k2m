@@ -24,10 +24,13 @@ async function choose(page, correct = false) {
     }, correct);
     for (const i of idxs) await page.locator('#q-card .opt').nth(i).click();
   } else {
-    const i = correct
-      ? await page.evaluate(() => displayOpts(cur).findIndex(o => o.correct))
-      : 0;
-    await page.locator('#q-card .opt').nth(Math.max(0, i)).click();
+    // 複数選択では n_correct 個をちょうど選ばないと回答できない
+    const idxs = await page.evaluate((ok) => {
+      const opts = displayOpts(cur), need = cur.n_correct || 1;
+      if (ok) return opts.map((o, i) => o.correct ? i : -1).filter(i => i >= 0);
+      return opts.map((_, i) => i).slice(0, need);
+    }, correct);
+    for (const i of idxs) await page.locator('#q-card .opt').nth(i).click();
   }
   await page.locator('#q-card button:has-text("回答する")').click();
 }
