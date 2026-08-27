@@ -3298,5 +3298,215 @@
     "text": null
    }
   ]
+ },
+ "SAP-C02_orig_301": {
+  "file": "SAP-C02_orig_multi1.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ワークロードの移行とモダナイゼーション",
+  "level": "hard",
+  "question": "ある製造業の企業は、オンプレミスのデータセンターにある Windows Server 上で SMB のファイル共有を運用しており、合計 40 TB のデータを保持しています。共有には社内の Active Directory のユーザーとグループに基づく NTFS のアクセス権が設定されており、移行後もこのアクセス権と、利用者が同じ資格情報のままアクセスできる状態を維持する必要があります。企業はオンプレミスのファイルサーバーを廃止し、移行後の共有を複数のアベイラビリティーゾーンにまたがって利用できるようにしたいと考えています。データセンターと AWS の間には AWS Direct Connect の接続があり、初回のデータ転送では進捗と整合性を確認できる必要があります。ソリューションアーキテクトが取るべきステップの組み合わせはどれですか。(3 つ選択)",
+  "n_correct": 3,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "マルチ AZ のデプロイタイプで Amazon FSx for Windows File Server のファイルシステムを作成し、SMB による共有として提供する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": true,
+    "text": "AWS Directory Service で AWS Managed Microsoft AD を作成し、オンプレミスの Active Directory との間に信頼関係を構成して、FSx のファイルシステムをそのディレクトリに参加させる。"
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "F",
+    "correct": true,
+    "text": "AWS DataSync のエージェントをオンプレミスに配置し、SMB のロケーションから FSx for Windows File Server のロケーションへタスクを実行する。"
+   }
+  ]
+ },
+ "SAP-C02_orig_302": {
+  "file": "SAP-C02_orig_multi1.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ワークロードの移行とモダナイゼーション",
+  "level": "hard",
+  "question": "ある企業は、オンプレミスの Oracle Database 上で基幹の受注システムを運用しており、これを Amazon Aurora PostgreSQL 互換エディションへ移行することを決めました。データベースには 6 TB のデータに加えて、多数のストアドプロシージャとトリガーが含まれています。受注の受け付けは移行中も止められないため、切り替え時の停止時間は数分に抑える必要があります。切り替えの前には、移行元と移行先で実際の行の内容が一致していることを確認しなければなりません。データセンターと AWS の間は AWS Direct Connect で接続されています。ソリューションアーキテクトが取るべきステップの組み合わせはどれですか。(3 つ選択)",
+  "n_correct": 3,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Schema Conversion Tool でスキーマとストアドプロシージャ、トリガーを Aurora PostgreSQL 向けに変換し、自動変換できなかった項目の評価レポートを確認して手作業で移植する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": true,
+    "text": "AWS DMS のレプリケーションタスクをフルロードと継続的レプリケーション (CDC) の設定で作成し、フルロードの完了後も移行元の変更を反映し続ける。"
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "F",
+    "correct": true,
+    "text": "DMS のレプリケーションタスクでデータ検証を有効にし、移行元と移行先の行を比較して不一致があれば記録されるようにする。"
+   }
+  ]
+ },
+ "SAP-C02_orig_303": {
+  "file": "SAP-C02_orig_multi1.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ワークロードの移行とモダナイゼーション",
+  "level": "hard",
+  "question": "ある企業は、オンプレミスの Kubernetes クラスターで 40 のマイクロサービスを実行しており、これらを Amazon EKS へ移行します。コンテナイメージは現在、オンプレミスに設置したレジストリに保存されています。一部のサービスは、複数のノードに分散して配置された Pod から同時に読み書きする共有ディレクトリを必要とし、その内容は Pod が入れ替わっても保持されなければなりません。また各サービスは、自分が必要とする Amazon S3 バケットと Amazon DynamoDB テーブルにだけアクセスできる必要があり、長期的な認証情報をコンテナイメージやマニフェストに埋め込むことは認められていません。ソリューションアーキテクトが取るべきステップの組み合わせはどれですか。(3 つ選択)",
+  "n_correct": 3,
+  "options": [
+   {
+    "letter": "A",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "Amazon ECR のプライベートリポジトリを作成してコンテナイメージをプッシュし、EKS 上のワークロードがそのリポジトリからイメージを取得するようにする。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": true,
+    "text": "Amazon EFS のファイルシステムを作成し、EFS CSI ドライバーを使って複数のノード上の Pod から同じ永続ボリュームをマウントする。"
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "F",
+    "correct": true,
+    "text": "サービスごとに IAM ロールを作成して必要な S3 バケットと DynamoDB テーブルだけを許可し、EKS Pod Identity の関連付けで各サービスの Kubernetes サービスアカウントに割り当てる。"
+   }
+  ]
+ },
+ "SAP-C02_orig_304": {
+  "file": "SAP-C02_orig_multi1.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "既存のソリューションの継続的な改善",
+  "level": "medium",
+  "question": "ある企業は、AWS Organizations の下にある複数の AWS アカウントで多数の Amazon EC2 インスタンスを運用しています。使用状況を分析したところ、負荷は 2 種類に分かれることが分かりました。1 つは 1 年を通じて一定量が常時稼働する API サーバー群で、性能改善のために今後インスタンスファミリーを変更する可能性があります。もう 1 つは 1 日に数回だけ実行され、中断されても再実行すれば済むバッチ処理群です。さらに財務部門からは、発生したコストを事業部門ごとに配分して毎月報告できるようにすることも求められています。コストを最適化しながらこれらの要件を満たすステップの組み合わせはどれですか。(3 つ選択)",
+  "n_correct": 3,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "常時稼働している分の使用量に対して Compute Savings Plans を購入し、1 時間あたりの支出額をコミットする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": true,
+    "text": "バッチ処理を実行する Auto Scaling グループに複数のインスタンスタイプを含む混合インスタンスポリシーを設定し、スポットインスタンスで実行する。"
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": true,
+    "text": "事業部門を表すコスト配分タグをリソースに付与して請求で有効にし、AWS Cost Explorer と AWS Budgets でそのタグ別にコストを集計する。"
+   },
+   {
+    "letter": "F",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAP-C02_orig_305": {
+  "file": "SAP-C02_orig_multi1.json",
+  "exam": "SAP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "既存のソリューションの継続的な改善",
+  "level": "hard",
+  "question": "ある企業は AWS Organizations の下で 60 個の AWS アカウントを運用しており、各アカウントに 1 つ以上の VPC があります。現在は VPC どうしを個別の VPC ピアリング接続でつないでおり、接続の数が増えるにつれて構成の管理が難しくなっています。企業は次の 3 点を実現したいと考えています。すべての VPC が中央のネットワークを介して相互に通信できること。本番環境の VPC と開発環境の VPC の間では通信が成立しないこと。オンプレミスのデータセンターとの間にある既存の AWS Direct Connect 接続を、各アカウントの VPC から利用できること。ソリューションアーキテクトが取るべきステップの組み合わせはどれですか。(3 つ選択)",
+  "n_correct": 3,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ネットワーク用のアカウントに AWS Transit Gateway を作成し、AWS Resource Access Manager で組織内へ共有して各 VPC をアタッチする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": true,
+    "text": "Transit Gateway に本番用と開発用の 2 つのルートテーブルを作成し、それぞれのアタッチメントを関連付けて、相手側の環境のルートが伝播しないようにする。"
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": true,
+    "text": "Direct Connect ゲートウェイを作成し、トランジット仮想インターフェイスを介して Transit Gateway と関連付けて、各 VPC からオンプレミスへ到達できるようにする。"
+   },
+   {
+    "letter": "F",
+    "correct": false,
+    "text": null
+   }
+  ]
  }
 }

@@ -1,0 +1,3394 @@
+{
+ "DVA-C02_orig_001": {
+  "file": "DVA-C02_orig.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "AWS のサービスによる開発",
+  "level": "easy",
+  "question": "ある開発者が、顧客 ID をパーティションキーとする Amazon DynamoDB テーブルから特定の顧客の注文履歴を取得するアプリケーションを開発しています。現在の実装では Scan オペレーションとフィルター式を使用しており、テーブルの拡大とともに応答時間と読み込みキャパシティーの消費が増加しています。パフォーマンスを改善し、消費キャパシティーを削減するには、開発者はどうすればよいですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Scan オペレーションを、パーティションキーを条件に指定した Query オペレーションに置き換える。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_002": {
+  "file": "DVA-C02_orig.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "AWS のサービスによる開発",
+  "level": "medium",
+  "question": "ある決済処理企業が、Amazon SQS 標準キューを使用して決済リクエストをワーカーアプリケーションに配信しています。標準キューの少なくとも 1 回の配信という特性により、まれに同じメッセージが複数回配信され、決済が二重に処理されることがあります。開発者は二重処理を確実に防ぐ必要があります。どの組み合わせの手順を実行すべきですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "キューを SQS FIFO キューに移行し、プロデューサーがメッセージ重複排除 ID を設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "ワーカーアプリケーションで、処理済みの決済 ID を DynamoDB に条件付き書き込みで記録し、既に存在する場合は処理をスキップする冪等性を実装する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_003": {
+  "file": "DVA-C02_orig.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "AWS のサービスによる開発",
+  "level": "hard",
+  "question": "ある企業が、IoT センサーデータを Amazon Kinesis Data Streams に取り込んでいます。現在 1 つのコンシューマーアプリケーションがストリームを処理していますが、新たに 2 つのコンシューマーアプリケーションを追加する計画です。各コンシューマーは、他のコンシューマーの読み取りスループットに影響を与えることなく、シャードあたり 2 MB/秒の専用スループットで低レイテンシーにデータを読み取る必要があります。開発者はどうすればよいですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "各コンシューマーを拡張ファンアウトコンシューマーとして登録し、SubscribeToShard API でデータを受信する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_004": {
+  "file": "DVA-C02_orig.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティ",
+  "level": "easy",
+  "question": "ある開発者が、Amazon RDS for MySQL データベースに接続する AWS Lambda 関数を開発しています。現在、データベースの認証情報は Lambda 関数の環境変数に平文で保存されています。同社のセキュリティチームは、認証情報を安全に保存し、定期的な自動ローテーションを行うことを求めています。どのソリューションがこれらの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "認証情報を AWS Secrets Manager に保存し、RDS 用のマネージドローテーションを有効化して、Lambda 関数が実行時にシークレットを取得するように変更する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_005": {
+  "file": "DVA-C02_orig.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティ",
+  "level": "medium",
+  "question": "ある企業がモバイルアプリケーションを開発しています。ユーザーはメールアドレスとパスワードでサインインし、サインイン後は自分の写真を Amazon S3 バケットの専用プレフィックスに直接アップロードする必要があります。開発者は、ユーザー認証と、S3 へアクセスするための一時的な AWS 認証情報の発行を実装する必要があります。どのソリューションがこれらの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon Cognito ユーザープールでユーザーを認証し、ID プールがユーザープールのトークンと引き換えに一時的な AWS 認証情報を発行するように構成する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_006": {
+  "file": "DVA-C02_orig.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティ",
+  "level": "hard",
+  "question": "ある開発者が、数百 MB の機密ファイルを暗号化して Amazon S3 に保存するアプリケーションを開発しています。同社のセキュリティポリシーでは、AWS KMS のカスタマーマネージドキーを暗号化の起点とし、クライアント側で暗号化することが求められています。開発者は KMS の Encrypt API に 4 KB のデータサイズ上限があることを認識しています。どの方法でファイルを暗号化すべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "GenerateDataKey API でデータキーを取得し、平文のデータキーでファイルをローカル暗号化した後、平文キーをメモリから破棄し、暗号化されたデータキーを暗号化済みファイルとともに保存する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_007": {
+  "file": "DVA-C02_orig.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ",
+  "level": "medium",
+  "question": "ある企業が、本番環境の AWS Lambda 関数を頻繁に更新しています。以前のデプロイで問題のあるコードが全トラフィックに即時反映され、障害が発生しました。開発チームは、新しいバージョンにまずトラフィックの 10% を 10 分間流して監視し、問題がなければ残りを切り替え、CloudWatch アラームが発動した場合は自動的にロールバックするデプロイ方式を求めています。どのソリューションがこれらの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Lambda エイリアスを使用し、AWS CodeDeploy のデプロイ設定 Canary10Percent10Minutes と CloudWatch アラームによる自動ロールバックを構成する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_008": {
+  "file": "DVA-C02_orig.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ",
+  "level": "hard",
+  "question": "ある企業が、AWS Elastic Beanstalk で複数の Amazon EC2 インスタンスからなるウェブアプリケーションを運用しています。開発チームは新しいアプリケーションバージョンのデプロイにあたり、デプロイ中もサービス提供能力を一切低下させないこと、およびデプロイ失敗時には既存の環境に影響を与えず迅速に切り戻せることを最優先の要件としています。コストの増加は許容できます。どのデプロイポリシーを使用すべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Immutable デプロイポリシーを使用する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_009": {
+  "file": "DVA-C02_orig.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "トラブルシューティングと最適化",
+  "level": "medium",
+  "question": "ある企業が、Amazon API Gateway、AWS Lambda、Amazon DynamoDB で構成されるサーバーレスアプリケーションを運用しています。ユーザーから応答が遅いという報告がありますが、開発者はリクエストがどのコンポーネントで時間を消費しているのかを特定できていません。リクエストの流れ全体を可視化し、レイテンシーのボトルネックを特定するには、開発者はどうすればよいですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "API Gateway と Lambda で AWS X-Ray のアクティブトレースを有効化し、Lambda 関数内の AWS SDK 呼び出しを X-Ray SDK で計装して、サービスマップとトレースを分析する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_010": {
+  "file": "DVA-C02_orig.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "トラブルシューティングと最適化",
+  "level": "hard",
+  "question": "ある企業が、Amazon S3 へのオブジェクト作成イベントをトリガーとして AWS Lambda 関数を非同期に呼び出し、画像を処理しています。アップロードが集中する時間帯に同時実行数の上限に達してスロットリングが発生し、再試行の上限を超えた一部のイベントが失われていることが判明しました。開発者は、イベントの損失を防ぎ、失敗したイベントを後から分析できるようにする必要があります。どの組み合わせの手順を実行すべきですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Lambda 関数の非同期呼び出し設定で、送信先 (OnFailure) として Amazon SQS キューを構成する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "アカウントの Lambda 同時実行数のサービスクォータ引き上げをリクエストする。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_011": {
+  "file": "DVA-C02_orig_b2.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "AWS のサービスによる開発",
+  "level": "easy",
+  "question": "ある企業が、複数の AWS Lambda 関数で同じ共通ライブラリ群を使用しています。現在は各関数のデプロイパッケージにライブラリを個別に含めており、パッケージサイズが肥大化しています。また、ライブラリを更新するたびにすべての関数を再パッケージして再デプロイする必要があります。ライブラリの管理を簡素化するには、開発者はどうすればよいですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "共通ライブラリを Lambda レイヤーとしてパッケージ化し、各関数にレイヤーをアタッチする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_012": {
+  "file": "DVA-C02_orig_b2.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "AWS のサービスによる開発",
+  "level": "easy",
+  "question": "ある開発者が、ユーザーが最大 2 GB の動画ファイルをブラウザから Amazon S3 バケットにアップロードできる Web アプリケーションを開発しています。バックエンドは Amazon API Gateway と AWS Lambda で構成され、ユーザーは Amazon Cognito ユーザープールで認証済みですが、AWS の認証情報は保持していません。要件として、ユーザーに長期的な AWS 認証情報を配布せず、アップロード手段は発行から 15 分間だけ有効とし、大容量のファイルがバックエンドの Lambda 関数を経由しないようにする必要があります。どのソリューションがこれらの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "バックエンドが S3 の署名付き URL を生成してブラウザに返し、ブラウザはその URL に対して直接アップロードする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_013": {
+  "file": "DVA-C02_orig_b2.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "AWS のサービスによる開発",
+  "level": "medium",
+  "question": "ある企業が、Amazon API Gateway と AWS Lambda で構成される REST API を運用しています。クライアントから必須フィールドが欠落した不正なリクエストが多数送信されており、そのたびに Lambda 関数が呼び出されて検証エラーを返しています。Lambda 関数を呼び出す前に、API Gateway で不正なリクエストを拒否するには、開発者はどうすればよいですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "リクエストボディの JSON スキーマをモデルとして定義し、メソッドでリクエスト検証を有効化する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_014": {
+  "file": "DVA-C02_orig_b2.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "AWS のサービスによる開発",
+  "level": "medium",
+  "question": "ある開発者が、注文 ID をパーティションキーとする Amazon DynamoDB テーブルを運用しています。テーブルには 5,000 万件の注文が格納されており、すでに本番稼働中であるため作り直すことはできません。新たな要件として、注文ステータス (処理中、発送済みなど 5 種類) を条件に、該当する注文の一覧を 1 秒未満で取得する必要があります。テーブル全体のスキャンは読み込みキャパシティーの消費が大きく、応答時間の要件も満たせません。注文 ID を指定した既存の取得処理は、これまでどおり同じテーブルに対して行う必要があります。開発者はどうすればよいですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "注文ステータスをパーティションキーとするグローバルセカンダリインデックス (GSI) を作成し、Query オペレーションで取得する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_015": {
+  "file": "DVA-C02_orig_b2.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "AWS のサービスによる開発",
+  "level": "medium",
+  "question": "ある企業が、ウェブアプリケーションのセッションデータを Amazon DynamoDB テーブルに保存しています。期限切れになったセッションのアイテムがテーブルに蓄積し続け、ストレージコストが増加しています。開発者は、追加の書き込みキャパシティーを消費せずに、期限切れのアイテムを自動的に削除する必要があります。どのソリューションがこれらの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "テーブルで TTL (有効期限) を有効化し、各アイテムに有効期限のエポック秒を保持する属性を設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_016": {
+  "file": "DVA-C02_orig_b2.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "AWS のサービスによる開発",
+  "level": "medium",
+  "question": "ある企業では、Amazon S3 バケットに注文ファイルが作成されるたびに、請求システム、分析システム、通知システムの 3 つがそれぞれ独立してそのイベントを処理する必要があります。各システムは互いに影響を与えずに自分のペースで処理し、将来のシステム追加も容易であることが求められます。どの組み合わせの手順を実行すべきですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon SNS トピックを作成し、S3 イベント通知の送信先として設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "システムごとに Amazon SQS キューを作成して SNS トピックにサブスクライブし、各システムは自分のキューからメッセージを処理する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_017": {
+  "file": "DVA-C02_orig_b2.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "AWS のサービスによる開発",
+  "level": "medium",
+  "question": "ある企業が、すべての注文イベントを 1 つの Amazon SNS トピックに発行しています。複数の SQS キューがこのトピックをサブスクライブしていますが、あるキューのコンシューマーは高額注文のイベントのみを処理します。現在は全イベントを受信してからアプリケーション側で不要なメッセージを破棄しており、無駄な処理とコストが発生しています。開発者はどうすればよいですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "発行時に注文金額区分をメッセージ属性として設定し、該当サブスクリプションにフィルターポリシーを構成して条件に一致するメッセージのみ配信する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_018": {
+  "file": "DVA-C02_orig_b2.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "AWS のサービスによる開発",
+  "level": "hard",
+  "question": "ある開発者が、AWS Step Functions のワークフローを構築しています。ワークフロー内のあるタスクはサードパーティ API を呼び出しますが、この API は一時的なエラーを返すことがあります。開発者は、一時的なエラーの場合は間隔を指数関数的に延ばしながら数回再試行し、再試行の上限を超えた場合は運用チームに通知するための別の状態に遷移させる必要があります。ステートマシンの定義でどのように実装すべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "タスク状態に Retry フィールドで IntervalSeconds、BackoffRate、MaxAttempts を設定し、Catch フィールドで通知用の状態への遷移を定義する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_019": {
+  "file": "DVA-C02_orig_b2.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "AWS のサービスによる開発",
+  "level": "hard",
+  "question": "ある企業の在庫管理アプリケーションでは、複数のユーザーが Amazon DynamoDB テーブル上の同じ商品レコードを同時に編集することがあります。現在は後から保存したユーザーの内容で上書きされるため、先に保存したユーザーの更新が失われることがあります。開発者は、この更新の喪失を防ぐ必要があります。どのソリューションがこれらの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "アイテムにバージョン番号の属性を持たせ、UpdateItem の条件式で読み取り時のバージョンと一致する場合のみ更新してバージョンをインクリメントし、条件チェック失敗時は再読み込みして再試行する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_020": {
+  "file": "DVA-C02_orig_b2.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "AWS のサービスによる開発",
+  "level": "hard",
+  "question": "ある企業が、顧客のアカウント操作イベント (住所変更、プラン変更、解約など) を Amazon SQS で処理しています。イベントは 1 日あたり約 500 万件発生し、顧客数は 10 万を超えます。要件として、同一顧客のイベントは発生した順に、かつ重複なく 1 回だけ処理される必要がありますが、異なる顧客のイベント同士は並列に処理して全体のスループットを確保しなければなりません。現在は単一のコンシューマーが順番に処理しており、ピーク時間帯に大量のメッセージが滞留しています。どのソリューションがこれらの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "SQS FIFO キューを使用し、メッセージグループ ID に顧客 ID を設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_021": {
+  "file": "DVA-C02_orig_b2.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティ",
+  "level": "easy",
+  "question": "ある開発者が、Amazon EC2 インスタンス上で動作するアプリケーションを保守しています。アプリケーションは Amazon S3 バケットにアクセスするために、IAM ユーザーのアクセスキーを設定ファイルに平文で保存して使用しています。セキュリティのベストプラクティスに従ってこの構成を改善するには、開発者はどうすればよいですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "S3 へのアクセス権限を持つ IAM ロールを作成してインスタンスプロファイルとしてインスタンスにアタッチし、設定ファイルからアクセスキーを削除する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_022": {
+  "file": "DVA-C02_orig_b2.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティ",
+  "level": "medium",
+  "question": "ある企業が、Amazon API Gateway の REST API を開発しています。ユーザーは既に Amazon Cognito ユーザープールでサインインしており、サインイン済みのユーザーだけが API を呼び出せるようにする必要があります。開発者は最小限の実装労力でこの認可を実現したいと考えています。どのソリューションがこれらの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "API Gateway に Cognito ユーザープールオーソライザーを構成し、クライアントが Authorization ヘッダーで送信するトークンを検証させる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_023": {
+  "file": "DVA-C02_orig_b2.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティ",
+  "level": "medium",
+  "question": "アカウント A の開発者チームが、アカウント B にある Amazon DynamoDB テーブルの項目を読み書きするアプリケーションを開発しています。開発者は全員、アカウント A の IAM アイデンティティを使用して作業しています。同社のセキュリティポリシーでは、アカウント間で長期的な認証情報を共有することが禁止されており、AWS API の呼び出しには有効期限が 1 時間以内の一時的な認証情報を使用しなければなりません。また、アカウント B が管理するデータを他のアカウントに複製することも認められていません。どの組み合わせの手順を実行すべきですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "アカウント B でテーブルへのアクセス権限を持つ IAM ロールを作成し、信頼ポリシーでアカウント A からの引き受けを許可する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "アカウント A の開発者の IAM アイデンティティに、そのロールに対する sts:AssumeRole を許可し、取得した一時認証情報でテーブルを操作する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_024": {
+  "file": "DVA-C02_orig_b2.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティ",
+  "level": "medium",
+  "question": "ある企業が、機密文書を Amazon S3 バケットに保存しています。オブジェクトは月間で約 200 万件追加され、社内の複数のアプリケーションから読み書きされます。コンプライアンス要件として、保管時に暗号化されていることに加えて、暗号化キーがいつ、どの IAM プリンシパルによって使用されたかを AWS CloudTrail のログで追跡でき、キーの使用許可をポリシーで個別に制御できる必要があります。一方で、キーマテリアル自体の保管や定期的なローテーションを自社の仕組みで運用する負担は避けたいと考えています。どの暗号化方式を使用すべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS KMS のカスタマーマネージドキーを使用したサーバー側暗号化 (SSE-KMS) を使用する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_025": {
+  "file": "DVA-C02_orig_b2.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティ",
+  "level": "hard",
+  "question": "ある開発者が、AWS KMS を使用して顧客レコードごとの機密データを暗号化しています。セキュリティ要件として、あるレコード用に暗号化された暗号文が別のレコードの復号に転用されることを防ぎ、さらに AWS CloudTrail のログ上で各暗号化オペレーションがどのレコードに関するものかを追跡できるようにする必要があります。どのソリューションがこれらの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "暗号化時にレコード ID を暗号化コンテキストとして指定し、復号時にも同じ暗号化コンテキストの指定を必須にする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_026": {
+  "file": "DVA-C02_orig_b2.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティ",
+  "level": "hard",
+  "question": "ある企業が、Amazon API Gateway の REST API を公開しています。同社は既存のサードパーティ ID 基盤が発行する独自形式のトークンを使用しており、トークンの検証には独自のロジックが必要です。このトークンに基づいて API へのアクセスを認可し、検証結果を一定時間再利用してオーバーヘッドを減らす必要があります。どのソリューションがこれらの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Lambda オーソライザーを実装してトークンを検証し、IAM ポリシーを返却して、認可結果のキャッシュ TTL を設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_027": {
+  "file": "DVA-C02_orig_b2.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティ",
+  "level": "hard",
+  "question": "ある企業のモバイルアプリケーションは、Amazon Cognito ID プールから取得した一時認証情報で Amazon DynamoDB テーブルに直接アクセスします。テーブルのパーティションキーはユーザー ID です。セキュリティ要件として、各ユーザーが自分のユーザー ID の行にのみアクセスでき、他のユーザーの行には一切アクセスできないようにする必要があります。どのソリューションがこれらの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "認証済みユーザーの IAM ロールのポリシーに、dynamodb:LeadingKeys 条件キーで ${cognito-identity.amazonaws.com:sub} を指定した条件を追加する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_028": {
+  "file": "DVA-C02_orig_b2.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティ",
+  "level": "hard",
+  "question": "ある企業のコンプライアンス要件では、監査対象の Amazon S3 バケットについて、すべてのアクセスを TLS で暗号化された通信に限定し、保管されるすべてのオブジェクトを、キーポリシーを自社で管理できるカスタマーマネージドの AWS KMS キーで暗号化する必要があります。このバケットには社内の複数のアプリケーションが AWS SDK から直接アクセスしており、その中にはアップロード時に暗号化関連のヘッダーを指定していないコードも存在します。アプリケーション側のコードを変更せずに要件を満たす必要があります。どの組み合わせの手順を実行すべきですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "バケットポリシーで、条件キー aws:SecureTransport が false のすべてのリクエストを明示的に拒否する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "バケットのデフォルト暗号化を、カスタマーマネージドキーを指定した SSE-KMS に設定する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_029": {
+  "file": "DVA-C02_orig_b2.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ",
+  "level": "easy",
+  "question": "ある開発者が、Amazon RDS DB インスタンスと Amazon EC2 インスタンスを含む本番環境の AWS CloudFormation スタックのテンプレートを修正しました。今回の修正には、リソースの置換 (Replacement) を引き起こす可能性のあるプロパティの変更が含まれています。社内の変更管理プロセスでは、更新を実行する前に、どのリソースが追加、変更、置換、削除されるのかを一覧で提示し、責任者の承認を得ることが義務付けられています。実際にスタックへ変更を適用することなく、この一覧を取得する必要があります。開発者はどうすればよいですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "変更セットを作成して変更内容を確認し、問題がなければ変更セットを実行する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_030": {
+  "file": "DVA-C02_orig_b2.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ",
+  "level": "medium",
+  "question": "ある開発者が、AWS SAM で定義された Lambda 関数と API Gateway からなるサーバーレスアプリケーションを開発しています。コードを変更するたびにクラウドへデプロイして動作確認しており、反復開発に時間がかかっています。ローカル環境で関数と API の動作を確認して開発サイクルを高速化するには、開発者はどうすればよいですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS SAM CLI の sam local invoke や sam local start-api を使用し、Docker コンテナ上でローカル実行する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_031": {
+  "file": "DVA-C02_orig_b2.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ",
+  "level": "medium",
+  "question": "ある企業が、AWS CodePipeline でアプリケーションをステージング環境と本番環境に順にデプロイしています。新しい要件として、ステージング環境へのデプロイ後に品質保証チームが動作確認を行い、その承認を得てから本番環境へのデプロイを開始する必要があります。承認待ちの発生はチームに通知される必要があります。開発者はどうすればよいですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ステージングステージと本番ステージの間に手動承認アクションを追加し、Amazon SNS トピックへの通知を構成する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_032": {
+  "file": "DVA-C02_orig_b2.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ",
+  "level": "medium",
+  "question": "ある開発者が、ソースステージに AWS CodeCommit、ビルドステージに AWS CodeBuild、デプロイステージに AWS CodeDeploy を使用する AWS CodePipeline のパイプラインを構築しています。ビルドステージでは、依存関係のインストール、単体テストの実行、アプリケーションのコンパイルをこの順序で実行し、生成された JAR ファイルとデプロイ設定ファイルだけを出力アーティファクトとして後続のデプロイステージへ渡す必要があります。ビルドの定義はアプリケーションのソースコードと同じリポジトリでバージョン管理したいと考えています。開発者はどうすればよいですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ソースリポジトリのルートに buildspec.yml を配置し、phases にコマンドを、artifacts に出力ファイルを定義する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_033": {
+  "file": "DVA-C02_orig_b2.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ",
+  "level": "medium",
+  "question": "ある企業では、ネットワークチームが AWS CloudFormation スタックで VPC とサブネットを管理し、アプリケーションチームは別のスタックでそれらのサブネット ID を参照する必要があります。サブネット ID のハードコードや手動での受け渡しを避け、スタック間で値を安全に連携するには、開発者はどうすればよいですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ネットワークスタックの Outputs でサブネット ID を Export し、アプリケーションスタックで Fn::ImportValue を使用して参照する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_034": {
+  "file": "DVA-C02_orig_b2.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ",
+  "level": "hard",
+  "question": "ある企業が、Amazon RDS DB インスタンスを含む AWS CloudFormation スタックで検証環境を頻繁に作成しては削除しています。運用ルールでは、検証が終わった環境はスタックごと削除してコストを削減しますが、削除の時点でデータベースの内容を復元可能な形で残し、必要になった際に新しい DB インスタンスとして復元できなければなりません。同時に、環境の廃止作業が滞らないよう、スタックの削除操作自体は失敗せずに完了する必要があります。テンプレートでどのように対応すべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "RDS リソースに DeletionPolicy 属性で Snapshot を設定し、スタック削除時に最終スナップショットを作成させる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_035": {
+  "file": "DVA-C02_orig_b2.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ",
+  "level": "hard",
+  "question": "ある企業が、Amazon API Gateway の REST API を本番ステージで公開しています。新しい API デプロイをリリースする際に、まず本番トラフィックの一部のみを新しいデプロイに流して動作を検証し、問題がなければ全体に反映したいと考えています。クライアントが使用する URL は変更できません。開発者はどうすればよいですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "本番ステージでカナリアリリースを構成し、指定した割合のトラフィックを新しいデプロイにルーティングして、検証後にカナリアを昇格させる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_036": {
+  "file": "DVA-C02_orig_b2.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "トラブルシューティングと最適化",
+  "level": "easy",
+  "question": "ある開発者が、独自に作成した IAM 実行ロールを割り当てた新しい AWS Lambda 関数をデプロイしました。関数のコードには標準出力へのログ出力処理が含まれており、Lambda コンソールからのテスト実行は成功して、戻り値も期待どおりに返っています。しかし Amazon CloudWatch Logs を確認すると、この関数のロググループ自体が作成されておらず、ログが一切出力されていません。関数は VPC には接続しておらず、既定のロールを使用する別の関数では同じコードで正常にログが記録されています。最も可能性の高い原因は何ですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "関数の実行ロールに logs:CreateLogGroup、logs:CreateLogStream、logs:PutLogEvents の権限がない。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_037": {
+  "file": "DVA-C02_orig_b2.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "トラブルシューティングと最適化",
+  "level": "medium",
+  "question": "ある企業が、Amazon SQS 標準キューのメッセージを複数の EC2 インスタンス上のワーカーで処理しています。1 件の処理には平均 3 分かかります。同じメッセージが複数のワーカーによってほぼ同時期に処理される事象が頻発しています。キューの可視性タイムアウトはデフォルトの 30 秒のままです。この問題を解決するには、開発者はどうすればよいですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "可視性タイムアウトを、メッセージの最大処理時間より長い値に設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_038": {
+  "file": "DVA-C02_orig_b2.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "トラブルシューティングと最適化",
+  "level": "hard",
+  "question": "ある開発者が、Amazon RDS データベースへ接続するために AWS Lambda 関数を VPC 内のプライベートサブネットに配置しました。その後、この関数からインターネット上のサードパーティ API への呼び出しがすべてタイムアウトするようになりました。データベースへの接続は正常です。どの組み合わせの手順を実行すべきですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "パブリックサブネットに NAT ゲートウェイを作成する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "関数が配置されているプライベートサブネットのルートテーブルに、0.0.0.0/0 の送信先を NAT ゲートウェイに向けるルートを追加する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_039": {
+  "file": "DVA-C02_orig_b2.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "トラブルシューティングと最適化",
+  "level": "hard",
+  "question": "ある開発者が、AWS X-Ray で計装されたアプリケーションのトレースを分析しています。X-Ray SDK を使用して顧客 ID と注文タイプを各トレースにメタデータとして記録していますが、X-Ray コンソールのフィルター式でこれらの値を条件にトレースを検索できません。特定の顧客 ID のトレースを検索できるようにするには、開発者はどうすればよいですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "顧客 ID と注文タイプを、メタデータではなく注釈 (アノテーション) として記録するように変更する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_040": {
+  "file": "DVA-C02_orig_b2.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "トラブルシューティングと最適化",
+  "level": "hard",
+  "question": "ある企業のモバイルアプリケーションが、Amazon API Gateway で公開された API を呼び出しています。ピーク時間帯にクライアントで HTTP 429 エラーが多発しています。バックエンドの Lambda 関数の同時実行数やエラー率には問題がありません。この状況を改善するには、どの組み合わせの手順を実行すべきですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "クライアントアプリケーションに、ジッター付きの指数バックオフによる再試行を実装する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "ステージや使用量プランのスロットリング制限を見直して引き上げる。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_041": {
+  "file": "DVA-C02_orig_b3.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "AWS のサービスによる開発",
+  "level": "medium",
+  "question": "ある企業の EC サイトでは、注文情報を Amazon DynamoDB の Orders テーブルに保存しています。新しい要件として、注文が作成または更新されるたびに、別の集計テーブルに商品カテゴリごとの売上合計を反映する必要があります。集計処理はアプリケーションの注文受付レイテンシーに影響を与えてはならず、アプリケーションコードの変更は最小限に抑える必要があります。どのソリューションがこれらの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Orders テーブルで DynamoDB Streams を有効化し、ストリームをイベントソースとする AWS Lambda 関数で集計テーブルを更新する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_042": {
+  "file": "DVA-C02_orig_b3.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "AWS のサービスによる開発",
+  "level": "medium",
+  "question": "ある開発者が、Amazon DynamoDB にアクセスする AWS Lambda 関数を実装しました。関数のハンドラー内で毎回 AWS SDK のクライアントオブジェクトを生成し、設定値を Systems Manager パラメータストアから取得しています。負荷試験の結果、呼び出しごとの実行時間が長く、パラメータストアへの API 呼び出しがスロットリングされることが判明しました。実行時間を短縮し、API 呼び出しを削減するには、開発者はどうすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "SDK クライアントの生成とパラメータの取得をハンドラー関数の外側の初期化コードに移動し、実行環境の再利用時に再利用されるようにする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_043": {
+  "file": "DVA-C02_orig_b3.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "AWS のサービスによる開発",
+  "level": "hard",
+  "question": "ある旅行予約アプリケーションでは、座席の予約時に Seats テーブルの座席ステータスを「予約済み」に更新し、同時に Bookings テーブルに予約レコードを作成する必要があります。片方だけが成功した状態は業務上許容されません。また、既に予約済みの座席に対する更新は失敗させる必要があります。開発者はどうすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "DynamoDB の TransactWriteItems API を使用し、Seats テーブルの Update に条件式を指定して、Bookings テーブルの Put と 1 つのトランザクションにまとめる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_044": {
+  "file": "DVA-C02_orig_b3.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "AWS のサービスによる開発",
+  "level": "hard",
+  "question": "ある企業が、Amazon Kinesis Data Streams のレコードを AWS Lambda のイベントソースマッピングで処理しています。ある日、不正な形式のレコードが 1 件混入したことで関数が例外を投げ続け、そのシャードの処理が完全に停止して後続のすべてのレコードが滞留しました。開発者は、単一の問題レコードによって処理が停止しないようにし、失敗したレコードを後から調査できるようにする必要があります。どの組み合わせの手順を実行すべきですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "イベントソースマッピングで最大再試行回数 (MaximumRetryAttempts) と最大レコード経過時間を設定し、失敗時の送信先 (OnFailure) として Amazon SQS キューを構成する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "イベントソースマッピングで「関数エラー時にバッチを二分割する」(BisectBatchOnFunctionError) を有効にする。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_045": {
+  "file": "DVA-C02_orig_b3.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "AWS のサービスによる開発",
+  "level": "medium",
+  "question": "ある企業が、商品マスターを Amazon RDS に保存し、読み取り負荷を軽減するために Amazon ElastiCache for Redis を導入しました。現在はキャッシュミス時にデータベースから読み込んでキャッシュに書き込む遅延読み込み (Lazy Loading) を実装しています。しかし、商品情報が更新されてもキャッシュに古い価格が残り、利用者に古い価格が表示される事象が発生しています。実装の変更を最小限にしてこの問題を解消するには、開発者はどうすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "キャッシュへの書き込み時に適切な TTL を設定し、商品情報の更新処理で該当キーをキャッシュから削除 (無効化) する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_046": {
+  "file": "DVA-C02_orig_b3.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "AWS のサービスによる開発",
+  "level": "hard",
+  "question": "ある企業のログ収集アプリケーションが、Amazon DynamoDB テーブルにイベントを書き込んでいます。パーティションキーは日付 (YYYY-MM-DD)、ソートキーはイベント ID です。プロビジョニングされた書き込みキャパシティーは十分にあるにもかかわらず、書き込みが頻繁にスロットリングされます。テーブル設計を見直してスロットリングを解消するには、開発者はどうすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "パーティションキーに日付とランダムなサフィックス (例: 2025-01-15.7) を組み合わせ、書き込みを複数のパーティションに分散させる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_047": {
+  "file": "DVA-C02_orig_b3.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "AWS のサービスによる開発",
+  "level": "medium",
+  "question": "ある企業のマイクロサービス群が、業務イベント (例: OrderPlaced、OrderCancelled) を発行しています。イベントの内容に含まれる属性値に基づいて、異なるターゲット (AWS Lambda 関数、Amazon SQS キュー、AWS Step Functions ステートマシン) へイベントをルーティングする必要があります。ルーティングロジックはコードではなく設定として管理し、新しいターゲットの追加時にプロデューサー側を変更しないようにしたいと考えています。どのソリューションがこれらの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "カスタムイベントバスを持つ Amazon EventBridge を使用し、イベントパターンを定義したルールで各ターゲットへルーティングする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_048": {
+  "file": "DVA-C02_orig_b3.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "AWS のサービスによる開発",
+  "level": "hard",
+  "question": "ある企業が、IoT デバイスからのデータ検証ワークフローを AWS Step Functions で実装する計画です。ワークフローは 1 秒未満で完了する数個の Lambda 呼び出しで構成され、1 日あたり数千万回実行される見込みです。監査上、実行ごとの完全な履歴を Step Functions のサービス内に長期保持する必要はなく、コスト効率が最重要です。どのソリューションがこれらの要件を最も満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Express ワークフローを使用し、必要に応じて実行ログを Amazon CloudWatch Logs に出力する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_049": {
+  "file": "DVA-C02_orig_b3.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "AWS のサービスによる開発",
+  "level": "hard",
+  "question": "ある動画制作会社のアプリケーションが、1 ファイルあたり 20 GB を超える動画を Amazon S3 にアップロードします。現在は 1 回の PutObject リクエストでアップロードしており、ネットワークが不安定な環境では失敗して最初からやり直しになります。また、失敗したアップロードの断片によるストレージ料金が発生していることも判明しました。どの組み合わせの手順を実行すべきですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "マルチパートアップロードを使用してファイルを複数のパートに分割し、パート単位で並列アップロードと再試行を行う。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "S3 バケットに、不完全なマルチパートアップロードを指定日数後に削除する S3 ライフサイクル設定を追加する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_050": {
+  "file": "DVA-C02_orig_b3.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "AWS のサービスによる開発",
+  "level": "medium",
+  "question": "ある金融機関のシステムでは、口座ごとの取引イベントを、不正検知、残高更新、通知配信という 3 つの独立した下流システムへ同時に配信する必要があります。各下流システムは処理速度が異なるため、それぞれ専用のキューからメッセージを取得し、独立したペースで処理します。要件として、同一口座のイベントは発行された順に、かつ重複なく 1 回だけ処理されなければなりませんが、異なる口座のイベント間には順序の制約はありません。また、将来的に下流システムを追加する際に、イベントを発行する側のアプリケーションを変更せずに済む構成が求められています。開発者はどのアーキテクチャを選択すべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon SNS FIFO トピックを作成し、3 つの Amazon SQS FIFO キューをサブスクライブさせる。口座 ID をメッセージグループ ID として発行する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_051": {
+  "file": "DVA-C02_orig_b3.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティ",
+  "level": "medium",
+  "question": "ある開発者が、Amazon S3 バケットへのオブジェクト作成イベントで AWS Lambda 関数を呼び出す構成を AWS CLI で作成しました。Lambda 関数の実行ロールには S3 と CloudWatch Logs への必要な権限が付与されていますが、S3 のイベント通知の設定時に権限エラーが発生し、関数が呼び出されません。開発者は何をすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Lambda の AddPermission API で関数にリソースベースのポリシーを追加し、プリンシパル s3.amazonaws.com からの lambda:InvokeFunction を、送信元バケットの ARN を条件として許可する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_052": {
+  "file": "DVA-C02_orig_b3.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティ",
+  "level": "hard",
+  "question": "ある企業では、バッチ処理サービスが月に一度だけ、AWS KMS のカスタマーマネージドキーを使って特定のデータセットを復号する必要があります。セキュリティチームは、キーポリシー本体を変更せずに、このサービスのロールへ必要最小限の暗号化オペレーションのみを許可し、処理完了後にその許可を取り消せるようにしたいと考えています。どのソリューションがこれらの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "CreateGrant API でバッチ処理サービスのロールを被付与者プリンシパルとするグラントを作成し、Decrypt オペレーションのみを許可する。処理完了後に RetireGrant または RevokeGrant でグラントを取り消す。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_053": {
+  "file": "DVA-C02_orig_b3.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティ",
+  "level": "medium",
+  "question": "ある企業のコンプライアンス要件では、データ暗号化に使用する鍵のマテリアルを定期的に更新する必要があります。開発者は、Amazon S3 のオブジェクト暗号化に使用している AWS KMS のカスタマーマネージドキーについて、この要件を運用負担なく満たす方法を検討しています。また、既存の暗号化済みオブジェクトを再暗号化することなく引き続き読み取れる必要があります。開発者はどうすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "KMS キーの自動キーローテーションを有効化する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_054": {
+  "file": "DVA-C02_orig_b3.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティ",
+  "level": "hard",
+  "question": "ある開発者が、AWS Fargate 上で動作する Amazon ECS タスクを構成しています。タスクは、プライベート Amazon ECR リポジトリからコンテナイメージを取得し、コンテナ定義の secrets パラメータで AWS Secrets Manager のデータベース認証情報を環境変数として受け取り、アプリケーションコードから Amazon S3 バケットのオブジェクトを読み書きします。権限を正しく構成するために、開発者はどの組み合わせの手順を実行すべきですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ECR からのイメージ取得、CloudWatch Logs へのログ出力、および Secrets Manager からのシークレット取得を許可する権限を、タスク実行ロールに付与する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "S3 バケットに対する GetObject と PutObject を許可する権限を、タスクロールに付与する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_055": {
+  "file": "DVA-C02_orig_b3.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティ",
+  "level": "hard",
+  "question": "ある企業が、外部の監視ベンダーに自社 AWS アカウント内の Amazon CloudWatch メトリクスへの読み取りアクセスを許可する必要があります。ベンダーは複数の顧客に同じ監視サービスを提供しています。セキュリティチームは、ベンダーが誤って、あるいは意図的に他の顧客の依頼で自社のロールを引き受けてしまう「混乱した代理」問題を防ぎたいと考えています。開発者はどうすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ベンダーのアカウントを信頼するクロスアカウント IAM ロールを作成し、信頼ポリシーの sts:AssumeRole に sts:ExternalId 条件でベンダーと合意した一意の値を必須とする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_056": {
+  "file": "DVA-C02_orig_b3.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティ",
+  "level": "medium",
+  "question": "ある企業が、Amazon API Gateway で内部向けの REST API を構築しています。セキュリティ要件として、この API には社内 VPC 内のアプリケーションからのみアクセスでき、インターネットからは一切到達できないようにする必要があります。開発者はどの組み合わせの手順を実行すべきですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "API のエンドポイントタイプをプライベートに設定し、VPC に execute-api のインターフェイス VPC エンドポイントを作成する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "API Gateway のリソースポリシーで、aws:SourceVpce 条件により該当する VPC エンドポイントからのリクエストのみを許可する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_057": {
+  "file": "DVA-C02_orig_b3.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティ",
+  "level": "hard",
+  "question": "ある企業が、AWS Secrets Manager でデータベース認証情報の自動ローテーションを有効化しました。ローテーション実行の直後に、複数のアプリケーションインスタンスで断続的に認証エラーが発生しています。ローテーション用の Lambda 関数は正常に完了しており、AWSCURRENT ステージのシークレット値は新しい認証情報を指しています。開発者はこの問題をどのように解消すべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "アプリケーションで認証エラーを検知したときにシークレットのキャッシュを破棄して再取得し、必要に応じて AWSPREVIOUS ステージの値でも接続を試すロジックを実装する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_058": {
+  "file": "DVA-C02_orig_b3.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティ",
+  "level": "hard",
+  "question": "ある企業のウェブアプリケーションは、Amazon EC2 インスタンス上で動作し、インスタンスプロファイルの認証情報を使って Amazon S3 オブジェクトのダウンロード用に有効期限 12 時間の署名付き URL を生成しています。しかし、生成から数時間後に URL が AccessDenied で失敗する事象が報告されています。URL の署名処理自体に誤りはありません。この事象の原因として最も可能性が高いものはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "署名に使用した IAM ロールの一時的なセキュリティ認証情報が失効しており、署名付き URL は元の認証情報の有効期限を超えて有効にはならないため。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_059": {
+  "file": "DVA-C02_orig_b3.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ",
+  "level": "medium",
+  "question": "ある開発チームが、AWS CodeDeploy を使用して Amazon EC2 インスタンスへアプリケーションをデプロイしています。デプロイ時に、新しいファイルを配置する前に既存のアプリケーションプロセスを停止し、ファイル配置後に依存パッケージのインストールとサービスの起動、最後にヘルスチェックスクリプトの実行を行う必要があります。開発者はこれをどのように定義すべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "アプリケーションリビジョンのルートに appspec.yml を配置し、ApplicationStop、BeforeInstall、AfterInstall、ApplicationStart、ValidateService の各ライフサイクルイベントに実行するスクリプトを指定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_060": {
+  "file": "DVA-C02_orig_b3.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ",
+  "level": "hard",
+  "question": "ある企業が、Application Load Balancer の背後にある Amazon ECS サービスでコンテナ化されたアプリケーションを運用しています。開発チームは、新しいタスク定義をデプロイした後、本番トラフィックを流す前に別のポートで内部的な検証テストを実行し、テストに合格した場合のみ本番リスナーを切り替えたいと考えています。問題が発生した場合は即座に元のタスクセットへ戻せる必要があります。どのソリューションがこれらの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ECS サービスのデプロイコントローラーを CODE_DEPLOY に設定し、AWS CodeDeploy の Blue/Green デプロイで本番リスナーとテストリスナーの 2 つを構成する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_061": {
+  "file": "DVA-C02_orig_b3.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ",
+  "level": "medium",
+  "question": "ある開発チームの AWS CodeBuild プロジェクトは、ビルドのたびに数百件の依存パッケージをインターネットからダウンロードしており、平均 12 分のビルド時間のうち約 9 分をこの処理が占めています。依存関係を定義したファイルはほとんど変更されず、毎回同じバージョンのパッケージが取得されています。ビルドは 1 日に 50 回以上実行されるため、ビルド時間の短縮とビルド分数の削減が求められています。調査の結果、ボトルネックは CPU やメモリではなく、パッケージ取得の繰り返しであることが判明しています。開発者は何をすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "CodeBuild プロジェクトでキャッシュを有効化し、buildspec.yml の cache セクションで依存パッケージのディレクトリを指定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_062": {
+  "file": "DVA-C02_orig_b3.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ",
+  "level": "hard",
+  "question": "ある開発者が、Amazon RDS データベースを作成する AWS CloudFormation テンプレートを作成しています。監査で、テンプレートやスタックのイベント、コンソール表示に管理者パスワードが平文で現れてはならないことが指摘されました。パスワードは AWS Secrets Manager で一元管理されています。開発者はどの組み合わせの手順を実行すべきですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "テンプレートのパラメータで値を受け取る場合は、そのパラメータに NoEcho: true を設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "テンプレート内で Secrets Manager の動的リファレンス ({{resolve:secretsmanager:...}}) を使用し、パスワードの値そのものをテンプレートに含めない。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_063": {
+  "file": "DVA-C02_orig_b3.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ",
+  "level": "hard",
+  "question": "ある開発チームが、AWS SAM で管理する AWS Lambda 関数を段階的にデプロイしています。要件として、新しいバージョンへトラフィックを流し始める前に自動テストを実行し、テストが失敗した場合はトラフィックを一切移行せずにデプロイを中止する必要があります。開発者は SAM テンプレートで何を構成すべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "関数に AutoPublishAlias を設定し、DeploymentPreference で Type とともに Hooks の PreTraffic に検証用 Lambda 関数を指定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_064": {
+  "file": "DVA-C02_orig_b3.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ",
+  "level": "medium",
+  "question": "ある企業では、複数のプロジェクトが同じ構成の VPC、セキュリティグループ、ログ設定を AWS CloudFormation で作成しています。現在は各プロジェクトが同じリソース定義を自分のテンプレートにコピーしており、共通部分の修正が全テンプレートに波及して保守が困難になっています。共通定義を一元管理しつつ、各プロジェクトのスタックから利用できるようにするには、開発者はどうすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "共通リソースを定義したテンプレートを Amazon S3 に配置し、各プロジェクトのテンプレートから AWS::CloudFormation::Stack リソースとしてネストされたスタックで参照する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_065": {
+  "file": "DVA-C02_orig_b3.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ",
+  "level": "hard",
+  "question": "ある企業が、Amazon ECR にコンテナイメージを保存し、Amazon ECS へデプロイしています。監査により、本番デプロイで参照している latest タグのイメージが、いつの間にか別の内容に差し替えられていた可能性が指摘されました。開発チームは、一度公開したイメージタグの内容が変更されないことを保証し、デプロイの再現性を確保する必要があります。開発者はどうすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ECR リポジトリでタグのイミュータビリティを有効化し、デプロイでは一意のタグ (コミットハッシュなど) またはイメージダイジェストを参照する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_066": {
+  "file": "DVA-C02_orig_b3.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "トラブルシューティングと最適化",
+  "level": "medium",
+  "question": "ある企業のオンライン申込フォームは、Amazon API Gateway と AWS Lambda で構成されています。関数は Java で実装され、初期化に数秒を要するフレームワークを使用しています。トラフィックが少ない時間帯の後の最初のリクエストで応答が著しく遅くなるという苦情が出ています。開発者は、コードの大幅な書き換えを行わずに、この遅延を確実に排除する必要があります。どのソリューションがこれを実現しますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "関数のバージョンを指すエイリアスに対してプロビジョニングされた同時実行を構成する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_067": {
+  "file": "DVA-C02_orig_b3.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "トラブルシューティングと最適化",
+  "level": "hard",
+  "question": "ある企業の AWS Lambda 関数が、VPC 内の Amazon RDS for PostgreSQL データベースに接続しています。トラフィックが急増して同時実行数が増えると、関数から「too many connections」エラーが発生し、データベースの CPU 使用率も接続確立処理により上昇します。開発者は、アプリケーションのアーキテクチャを大きく変えずにこの問題を解消する必要があります。どのソリューションが最適ですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon RDS Proxy をデータベースの前に配置し、Lambda 関数の接続先を RDS Proxy のエンドポイントに変更する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_068": {
+  "file": "DVA-C02_orig_b3.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "トラブルシューティングと最適化",
+  "level": "hard",
+  "question": "ある開発者が、Amazon API Gateway の REST API に Lambda プロキシ統合 (AWS_PROXY) を構成しました。テストすると、クライアントには HTTP 502 Bad Gateway が返されます。Amazon CloudWatch Logs を確認すると、Lambda 関数は例外を出さずに正常終了しており、実行時間もタイムアウト値を大きく下回っています。原因として最も可能性が高いものはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Lambda 関数の戻り値が、statusCode と body を含むプロキシ統合の所定の JSON 構造になっていない。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_069": {
+  "file": "DVA-C02_orig_b3.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "トラブルシューティングと最適化",
+  "level": "hard",
+  "question": "あるオンラインゲームのバックエンドは、Amazon DynamoDB テーブルからプレイヤープロフィールを繰り返し読み取っています。読み取りは書き込みの数百倍あり、同じ項目が短時間に何度も参照されます。開発チームは読み取りレイテンシーをミリ秒からマイクロ秒のオーダーへ改善し、読み取りキャパシティーの消費も削減したいと考えていますが、アプリケーションコードの変更は最小限にしたいと考えています。どのソリューションが最適ですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon DynamoDB Accelerator (DAX) クラスターを作成し、DAX クライアントを使用してテーブルにアクセスするようアプリケーションを変更する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_070": {
+  "file": "DVA-C02_orig_b3.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "トラブルシューティングと最適化",
+  "level": "hard",
+  "question": "ある企業のキャンペーンサイトでは、テレビ CM の放映直後に数分間だけ書き込みトラフィックが平常時の 30 倍に跳ね上がります。プロビジョニングモードの Amazon DynamoDB テーブルでは、この時間帯に ProvisionedThroughputExceededException が多発し、一部の書き込みが失敗しています。パーティションキーはユーザー ID で、キーの分散は良好です。開発者はどの組み合わせの手順を実行すべきですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "テーブルのキャパシティーモードをオンデマンドに変更する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "AWS SDK のデフォルトの再試行動作を活用し、エクスポネンシャルバックオフとジッターを伴う再試行を適切に構成する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_071": {
+  "file": "DVA-C02_orig_b4.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "AWS のサービスによる開発",
+  "level": "medium",
+  "question": "ある企業の商品カタログ API は、Amazon API Gateway の REST API と、外部の在庫システムを呼び出す AWS Lambda 関数で構成されています。分析の結果、リクエストの大半は同じカテゴリ ID に対する GET リクエストであり、カタログ情報は 5 分程度古くても業務上問題ないことが分かりました。開発者はバックエンドへの呼び出し回数とコストを削減する必要があります。どのソリューションが最も適切ですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "API Gateway のステージでキャッシュを有効化し、キャッシュキーにカテゴリ ID のパスパラメータを指定して TTL を 300 秒に設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_072": {
+  "file": "DVA-C02_orig_b4.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "AWS のサービスによる開発",
+  "level": "hard",
+  "question": "ある開発者が、ブラウザ上で動作する共同編集アプリケーションを構築しています。1 つのドキュメントを最大 50 名が同時に編集し、あるユーザーが行った変更は、サーバー側から接続中の他のユーザー全員へ 1 秒以内にプッシュ配信する必要があります。同時接続数は全体で 10 万を超える見込みです。クライアントからの定期的なポーリングは、レイテンシーと API 呼び出しコストの両面で許容されません。バックエンドはサーバーレスで構成し、接続の管理とスケーリングにかかる運用負荷を最小限に抑える必要があります。開発者はどのソリューションを実装すべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon API Gateway の WebSocket API を作成し、$connect と $disconnect ルートで接続 ID を Amazon DynamoDB に保存して、@connections API を通じてサーバーからクライアントへメッセージを送信する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_073": {
+  "file": "DVA-C02_orig_b4.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "AWS のサービスによる開発",
+  "level": "medium",
+  "question": "ある EC サイトでは、注文が確定してから 10 分後に不正検知チェックを実行する必要があります。この 10 分間はユーザーによるキャンセルを受け付けており、キャンセルされた注文はチェック対象外です。処理は Amazon SQS キューを介したワーカーで実行されます。運用負荷を最小限にしてこの遅延を実現するには、開発者はどうすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "SendMessage の呼び出し時に DelaySeconds を 600 に指定して、メッセージがコンシューマーから見えるようになるまでの時間を遅延させる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_074": {
+  "file": "DVA-C02_orig_b4.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "AWS のサービスによる開発",
+  "level": "hard",
+  "question": "ある企業が、AWS Step Functions のワークフローで日次バッチを実行しています。ワークフローは Amazon S3 のマニフェストから数千件のレコード一覧を取得し、各レコードに対して同じ AWS Lambda 関数による変換処理を行います。現在は 1 件ずつ順次処理しており、完了までに数時間かかっています。また、1 件でも処理に失敗するとワークフロー全体が異常終了し、それまでの結果が無駄になっています。開発者はどの組み合わせの手順を実行すべきですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Map ステートを使用して配列の各要素に対する処理を並列に実行し、MaxConcurrency で同時実行数を制御する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "各処理ステップに Retry と Catch を定義し、再試行しても失敗した要素はエラー処理用のステートへ遷移させてワークフローを継続する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_075": {
+  "file": "DVA-C02_orig_b4.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "AWS のサービスによる開発",
+  "level": "medium",
+  "question": "ある企業が、アプリケーションが生成する大量の JSON 形式のイベントログを Amazon S3 に集約し、Amazon Athena で分析したいと考えています。要件は、数分程度の遅延は許容すること、S3 への書き込み時にバッファリングと圧縮を行うこと、そして配信のためのサーバーやコンシューマーコードを自前で管理しないことです。どのソリューションが最も適切ですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon Data Firehose (Kinesis Data Firehose) の配信ストリームを作成し、送信先を S3 バケットに設定してバッファリングと圧縮を構成する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_076": {
+  "file": "DVA-C02_orig_b4.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "AWS のサービスによる開発",
+  "level": "hard",
+  "question": "ある開発者が、新しい Amazon DynamoDB テーブルを設計しています。パーティションキーは顧客 ID、ソートキーは注文 ID です。追加のアクセスパターンとして、「特定の顧客の注文を注文日時の降順で取得する」というクエリが必要で、業務要件により直前に書き込んだ注文が必ず結果に含まれる強い整合性のある読み取りが求められます。開発者はどうすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "テーブル作成時に、注文日時をソートキーとするローカルセカンダリインデックスを定義する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_077": {
+  "file": "DVA-C02_orig_b4.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "AWS のサービスによる開発",
+  "level": "medium",
+  "question": "あるゲーム会社が、プレイヤーのスコアをリアルタイムに集計するリーダーボード機能を実装しています。要件は、上位 100 名のランキングと、任意のプレイヤー個人の現在の順位を、いずれも数ミリ秒で返すことです。スコアの更新は 1 秒間に数万回発生し、登録プレイヤーは 500 万人を超えます。ランキングは常に最新のスコアを反映する必要があり、夜間バッチで事前集計した結果を返すことは認められません。また、順位の計算ロジックをアプリケーション側で実装する開発工数は避けたいと考えています。開発者はどのソリューションを選択すべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon ElastiCache for Redis を使用し、ソート済みセット (Sorted Set) にスコアを格納して ZADD と ZREVRANGE、ZREVRANK で順位を取得する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_078": {
+  "file": "DVA-C02_orig_b4.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "AWS のサービスによる開発",
+  "level": "hard",
+  "question": "ある企業の AWS Lambda 関数が、社内のレガシーな在庫管理 API を呼び出しています。この API は同時に 50 件を超えるリクエストを受け取ると応答不能になります。Lambda 関数は Amazon SQS キューをイベントソースとしており、キューに大量のメッセージが投入されると同時実行数が急増して API を過負荷にしています。同一アカウント内の他の Lambda 関数の実行にも影響を与えないようにしながら、この問題を解決するには開発者はどうすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "この Lambda 関数に予約済み同時実行数 50 を設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_079": {
+  "file": "DVA-C02_orig_b4.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "AWS のサービスによる開発",
+  "level": "hard",
+  "question": "ある企業のアプリケーションが、問い合わせチケットを Amazon DynamoDB テーブルに保存しています。チケットには長文の本文と添付ファイルのメタデータが含まれ、一部のアイテムが DynamoDB のアイテムサイズの上限を超えて書き込みに失敗しています。アプリケーションはチケットの一覧表示ではタイトルとステータスのみを使用し、本文は詳細画面でのみ必要です。開発者はどの組み合わせの手順を実行すべきですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "本文と添付ファイルの実体を Amazon S3 に保存し、DynamoDB のアイテムには S3 のオブジェクトキーへの参照のみを格納する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "本文などの大きな属性を圧縮し、バイナリ属性として格納する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_080": {
+  "file": "DVA-C02_orig_b4.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "AWS のサービスによる開発",
+  "level": "medium",
+  "question": "ある企業が、AWS Fargate 起動タイプの Amazon ECS サービスで社内向け API を運用しています。トラフィックは平日の日中に集中し、夜間と週末はほとんどありません。現在はタスク数を 20 に固定しており、負荷のない時間帯もその台数分が課金対象となっています。要件は、サービス全体の平均 CPU 使用率が 60% 前後に保たれるようにタスク数を自動で増減させることです。負荷の変動パターンは日によって異なるため、時刻に基づく固定的な切り替えでは対応できません。追加のインフラを管理せず、運用負荷を最小限にしてこれを実現するには、開発者はどうすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ECS サービスに Application Auto Scaling を設定し、ECSServiceAverageCPUUtilization を指標とするターゲット追跡スケーリングポリシーで目標値を 60% にする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_081": {
+  "file": "DVA-C02_orig_b4.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティ",
+  "level": "medium",
+  "question": "ある開発チームが、開発、ステージング、本番の 3 環境で動作するアプリケーションの設定値を一元管理したいと考えています。設定値には機能フラグやエンドポイント URL などの一般的な値に加え、外部 API のトークンのような機密値も含まれます。機密値の自動ローテーションは不要で、コストは可能な限り抑える必要があります。また、環境ごとの設定値を 1 回の API 呼び出しでまとめて取得したいと考えています。どのソリューションが最も適切ですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Systems Manager パラメータストアで /app/prod/ のような階層パスにパラメータを作成し、機密値は SecureString 型で保存して GetParametersByPath で取得する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_082": {
+  "file": "DVA-C02_orig_b4.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティ",
+  "level": "hard",
+  "question": "ある企業の開発者は、業務上の理由から広範な権限を持つ IAM ロールを引き受けています。セキュリティチームは、その広い権限は維持したうえで、監査ログを保管している特定の Amazon S3 バケット内のオブジェクトについては、いかなる方法でも削除できないようにする必要があります。バケットとロールは同一の AWS アカウントに存在します。どのソリューションが確実にこれを実現しますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "対象バケットの ARN に対する s3:DeleteObject を明示的に Deny するステートメントを含むポリシーを、そのロールにアタッチする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_083": {
+  "file": "DVA-C02_orig_b4.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティ",
+  "level": "hard",
+  "question": "アカウント A の Amazon S3 バケットには、アカウント A のカスタマーマネージド AWS KMS キーで暗号化されたオブジェクトが保存されています。アカウント B の AWS Lambda 関数がこれらのオブジェクトを読み取る必要があります。Lambda 関数の実行ロールには s3:GetObject と kms:Decrypt を許可する IAM ポリシーが既にアタッチされていますが、アクセスは AccessDenied で失敗します。アカウント A の管理者はどの組み合わせの手順を実行すべきですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "S3 バケットポリシーで、アカウント B の Lambda 実行ロールをプリンシパルとして s3:GetObject を許可する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "KMS キーのキーポリシーで、アカウント B の Lambda 実行ロールに kms:Decrypt を許可する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_084": {
+  "file": "DVA-C02_orig_b4.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティ",
+  "level": "medium",
+  "question": "ある企業が、Amazon API Gateway の REST API をパートナー企業に提供する予定です。開発者は、パートナーごとにリクエスト数を把握してレート制限とクォータを適用するため、API キーと使用量プランの導入を計画しました。しかしセキュリティチームから、API キーを認証手段として使用してはならないと指摘されました。開発者はどう対応すべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "API キーと使用量プランはパートナーの識別とスロットリングの目的に限定して使用し、呼び出し元の認証と認可には IAM 認証、Amazon Cognito、または Lambda オーソライザーを併用する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_085": {
+  "file": "DVA-C02_orig_b4.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティ",
+  "level": "hard",
+  "question": "ある企業のモバイルアプリケーションは Amazon Cognito ユーザープールで認証を行っています。アクセストークンの有効期限が切れるたびに、ユーザーがメールアドレスとパスワードの再入力を求められることがユーザー体験上の問題になっています。セキュリティチームは、アクセストークンの有効期限を長くすることは許容しないという方針です。開発者はどうすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "認証時に取得したリフレッシュトークンをデバイスの安全なストレージに保存し、トークンの期限切れ時に REFRESH_TOKEN_AUTH フローで新しい ID トークンとアクセストークンを取得する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_086": {
+  "file": "DVA-C02_orig_b4.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティ",
+  "level": "medium",
+  "question": "ある企業のセキュリティレビューで、Amazon EC2 インスタンス上で稼働するウェブアプリケーションにサーバーサイドリクエストフォージェリ (SSRF) の脆弱性がある可能性が指摘されました。攻撃者がインスタンスメタデータサービスから IAM ロールの一時認証情報を取得することを防ぐ必要があります。アプリケーションは引き続き IAM ロールを使用して AWS サービスにアクセスする必要があります。開発者はどうすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "インスタンスのメタデータオプションで IMDSv2 (トークンを必要とするセッション指向のリクエスト) を必須に設定し、レスポンスのホップ制限を 1 にする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_087": {
+  "file": "DVA-C02_orig_b4.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティ",
+  "level": "hard",
+  "question": "ある企業が、AWS KMS のカスタマーマネージドキー A で暗号化された多数の暗号文をアプリケーション側で保持しています。組織のポリシー変更により、これらの暗号文を別のカスタマーマネージドキー B で保護されるように移行する必要があります。移行の過程で、暗号文に含まれる平文データがアプリケーション側に一切現れないようにする必要があります。開発者はどうすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "各暗号文に対して KMS の ReEncrypt API を呼び出し、送信元キーと送信先キーを指定して KMS 内部で再暗号化する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_088": {
+  "file": "DVA-C02_orig_b4.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティ",
+  "level": "hard",
+  "question": "ある社内ツールは、複数の顧客データが格納された 1 つの Amazon S3 バケットに対して広範な権限を持つ IAM ロールを引き受けています。新しい要件として、ツールが処理対象の顧客を選択したら、そのセッションでは当該顧客のプレフィックス配下にしかアクセスできないようにする必要があります。顧客は数千社あり、顧客ごとに IAM ロールを作成することは避けたいと考えています。開発者はどうすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AssumeRole を呼び出す際に、対象顧客のプレフィックスのみを許可するセッションポリシーをインラインで渡し、返された一時認証情報を使用する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_089": {
+  "file": "DVA-C02_orig_b4.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ",
+  "level": "medium",
+  "question": "ある開発者が、AWS CodePipeline でビルドステージ (AWS CodeBuild) とデプロイステージ (AWS CodeDeploy) からなるパイプラインを構成しています。デプロイステージがビルドで生成された成果物 (zip ファイル) を利用できるようにする必要があります。開発者はどうすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ビルドアクションに出力アーティファクトを定義し、その名前をデプロイアクションの入力アーティファクトとして指定する。CodePipeline はアーティファクトストアの S3 バケットを介して受け渡しを行う。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_090": {
+  "file": "DVA-C02_orig_b4.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ",
+  "level": "hard",
+  "question": "ある開発チームが、AWS CodeBuild のビルド中に統合テストを実行したいと考えています。テストは VPC のプライベートサブネットにある Amazon RDS for MySQL データベースへ接続する必要があります。データベースはパブリックアクセス不可の設定で、この設定は変更できません。ビルドは引き続きインターネットから依存パッケージを取得する必要があります。開発者はどの組み合わせの手順を実行すべきですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "CodeBuild プロジェクトの VPC 設定で、VPC、NAT ゲートウェイへのルートを持つプライベートサブネット、およびセキュリティグループを指定する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "RDS インスタンスのセキュリティグループに、CodeBuild プロジェクトに割り当てたセキュリティグループを送信元とするインバウンドルールを追加する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_091": {
+  "file": "DVA-C02_orig_b4.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ",
+  "level": "medium",
+  "question": "ある企業が AWS Elastic Beanstalk でアプリケーションを運用しています。新しいバージョンでは、OS のパッケージを追加インストールし、アプリケーション用の設定ファイルをインスタンス上の特定のパスに配置する必要があります。開発チームは、これらの環境設定をアプリケーションコードと同じリポジトリでバージョン管理し、デプロイのたびに自動適用したいと考えています。開発者はどうすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ソースバンドルのルートに .ebextensions ディレクトリを作成し、packages と files のセクションを記述した .config ファイルを含めてデプロイする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_092": {
+  "file": "DVA-C02_orig_b4.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ",
+  "level": "hard",
+  "question": "ある企業が AWS Elastic Beanstalk で本番アプリケーションを運用しています。データベースは Elastic Beanstalk 環境の外部にある Amazon RDS インスタンスです。開発チームは、新しいバージョンを本番と同一構成の環境に完全にデプロイして十分に検証した後、ダウンタイムなしで本番トラフィックを切り替えたいと考えています。問題が判明した場合は数分以内に元の環境へ戻せる必要があります。どのアプローチが最も適切ですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "既存環境をクローンして新しい環境を作成し、新バージョンをデプロイして検証した後、2 つの環境の URL (CNAME) をスワップする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_093": {
+  "file": "DVA-C02_orig_b4.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ",
+  "level": "hard",
+  "question": "ある企業では、本番インフラを AWS CloudFormation で管理しています。障害対応の際にエンジニアがコンソールから直接リソースを変更してしまい、テンプレートと実環境の状態が乖離する事象が繰り返し発生しています。また、スタック更新時に本番データベースが誤って置換されるリスクも懸念されています。運用チームはどの組み合わせの手順を実行すべきですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "スタックに対してドリフト検出を定期的に実行し、テンプレート定義と実際のリソース設定の差異を検出する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "スタックポリシーを設定し、データベースリソースの論理 ID に対する Update:Replace と Update:Delete を Deny する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_094": {
+  "file": "DVA-C02_orig_b4.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ",
+  "level": "medium",
+  "question": "ある企業が、Application Load Balancer の背後にある 8 台の Amazon EC2 インスタンスへ AWS CodeDeploy でインプレースデプロイを行っています。要件は、デプロイ中も常に半数以上のインスタンスがトラフィックを処理できる状態を維持することと、1 台ずつ更新する方式よりもデプロイ時間を短縮することです。追加のインスタンスを起動するコストは避けたいと考えています。開発者はどのデプロイ設定を使用すべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "CodeDeployDefault.HalfAtATime を使用する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_095": {
+  "file": "DVA-C02_orig_b4.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ",
+  "level": "hard",
+  "question": "ある企業が、AWS CloudFormation で本番インフラを管理し、AWS CodePipeline で更新を自動化しています。監査要件として、本番スタックへ変更を適用する前に、変更によって影響を受けるリソースの一覧を責任者がレビューし、承認した場合のみ適用する必要があります。開発者はパイプラインをどのように構成すべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "CloudFormation デプロイアクションを CHANGE_SET_REPLACE で変更セットを作成するアクションと EXECUTE_CHANGE_SET で実行するアクションに分け、その間に手動承認アクションを配置する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_096": {
+  "file": "DVA-C02_orig_b4.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "トラブルシューティングと最適化",
+  "level": "medium",
+  "question": "ある開発者が、AWS Lambda 関数から業務上の指標 (処理した注文金額や商品カテゴリ別の件数など) を Amazon CloudWatch のカスタムメトリクスとして記録したいと考えています。現在は関数内で PutMetricData API を同期的に呼び出していますが、関数の実行時間が延び、API 呼び出しのコストも増加しています。どのソリューションが最も適切ですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "CloudWatch 埋め込みメトリクスフォーマット (EMF) に従った構造化ログを標準出力に書き出し、CloudWatch がログからメトリクスを自動的に抽出するようにする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_097": {
+  "file": "DVA-C02_orig_b4.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "トラブルシューティングと最適化",
+  "level": "hard",
+  "question": "ある企業の API は 1 日あたり数億件のリクエストを処理しており、AWS X-Ray のアクティブトレースを有効にした結果、記録されるトレース量とコストが想定を大きく超えました。開発チームは全体のトレース量を削減しつつ、決済処理を行う /payments パスへのリクエストについては引き続きすべてトレースする必要があります。開発者はどうすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "X-Ray のサンプリングルールを構成し、/payments パスに一致する高優先度のルールで固定レートを 100% にし、それ以外を対象とする既定のルールのサンプリングレートを低く設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_098": {
+  "file": "DVA-C02_orig_b4.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "トラブルシューティングと最適化",
+  "level": "hard",
+  "question": "ある AWS Lambda 関数は、CPU に負荷のかかる画像変換処理を行っており、メモリ割り当て 128 MB で 1 回あたり約 10 秒の実行時間がかかっています。この関数は 1 か月あたり 500 万回呼び出されており、AWS 請求額の大半を占めています。同時に、変換完了までの待ち時間が長いという利用者からの苦情も出ており、コスト削減と応答時間の改善を同時に達成する必要があります。処理のアルゴリズム自体は変更できず、呼び出し回数も削減できません。実行時間のほぼすべてが変換処理そのものに費やされており、コールドスタートによる遅延は問題になっていません。開発者はまず何をすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "メモリ割り当てを段階的に増やして実行時間の変化を測定し、実行時間とメモリ割り当ての積 (課金対象) が最小になる設定を選択する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_099": {
+  "file": "DVA-C02_orig_b4.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "トラブルシューティングと最適化",
+  "level": "hard",
+  "question": "ある企業の注文処理システムでは、Amazon SQS 標準キューのメッセージを Amazon EC2 インスタンス上のワーカーが処理しています。繁忙期に ApproximateAgeOfOldestMessage メトリクスが継続的に増加し、注文の反映が数時間遅れています。デッドレターキューにメッセージは蓄積しておらず、ワーカーはエラーなく処理を続けています。ワーカーの台数は固定で 4 台です。開発者はどの組み合わせの手順を実行すべきですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ワーカーを Amazon EC2 Auto Scaling グループに配置し、キューのメッセージ数に基づくスケーリング (インスタンスあたりのバックログを指標としたターゲット追跡) を構成する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "ReceiveMessage の MaxNumberOfMessages を増やしてメッセージをバッチで取得し、ロングポーリングを有効化してポーリングの効率を高める。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_100": {
+  "file": "DVA-C02_orig_b4.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "トラブルシューティングと最適化",
+  "level": "hard",
+  "question": "ある企業のアプリケーションは、Amazon ElastiCache for Redis をデータベースの前段のキャッシュとして使用しています。最近、CacheHitRate が低下し、Evictions メトリクスが継続的に増加していることが確認されました。同時にデータベースの読み取り負荷が上昇しています。データセットの規模は事業成長に伴い増え続けています。開発者はどう対処すべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "より大きなメモリを持つノードタイプへスケールアップするか、クラスターモードでシャードを追加してクラスター全体のメモリ容量を拡張する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_301": {
+  "file": "DVA-C02_orig_gap1.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "トラブルシューティングと最適化",
+  "level": "hard",
+  "question": "ある開発者が、Amazon API Gateway の REST API に Lambda プロキシ統合を設定し、Node.js の AWS Lambda 関数を公開しました。関数を Lambda コンソールから直接テストすると、注文情報の JSON が正常に返ります。しかし API を呼び出すと、常に HTTP 502 と Internal server error が返されます。関数の CloudWatch Logs にエラーはなく、処理は完走しています。API Gateway の実行ログには Malformed Lambda proxy response という構成エラーが記録されています。開発者はどう修正すべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "関数が statusCode と body を含む所定の JSON 形式で応答を返すように修正し、body には文字列化した JSON を設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_302": {
+  "file": "DVA-C02_orig_gap1.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ",
+  "level": "medium",
+  "question": "ある開発者が、Amazon API Gateway の REST API を dev、test、prod の 3 つのステージで公開しています。バックエンドは単一の AWS Lambda 関数で、dev、test、prod という 3 つのエイリアスがそれぞれ異なる関数バージョンを指しています。要件として、各ステージへのリクエストは対応する名前のエイリアスを呼び出す必要がありますが、API の定義を複製したり、デプロイのたびに統合設定を手作業で書き換えたりすることは避けたいと考えています。また、エイリアスが指す関数バージョンを切り替えた際に、API を再デプロイしなくても反映される必要があります。開発者はどうすればよいですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "統合で指定する Lambda 関数の ARN の末尾に ${stageVariables.lambdaAlias} を含め、各ステージに lambdaAlias というステージ変数を定義してエイリアス名を値に設定する。あわせて、各エイリアスに対して API Gateway からの呼び出しを許可する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DVA-C02_orig_211": {
+  "file": "mixed_orig_b1.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "ordering",
+  "domain": "デプロイ",
+  "level": "medium",
+  "question": "ある開発者が、AWS Lambda 関数の新しいコードを段階的に本番へ展開しようとしています。呼び出し元のクライアントを変更せずに、少量のトラフィックから切り替える必要があります。以下のリストから、正しいステップを選択して正しい順に並べ替えてください。各ステップを 1 回だけ選択するか、まったく選択しないでください。",
+  "n_correct": null,
+  "options": []
+ },
+ "DVA-C02_orig_212": {
+  "file": "mixed_orig_b1.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "ordering",
+  "domain": "セキュリティ",
+  "level": "medium",
+  "question": "ある企業のモバイルアプリケーションが、Amazon Cognito ユーザープールでユーザーをサインインさせたうえで、認証済みユーザーとして Amazon S3 バケットのオブジェクトにアクセスします。同社のセキュリティ基準では、アプリケーションに長期的な AWS 認証情報を埋め込むことが禁止されており、AWS の API 呼び出しには有効期限付きの一時的なセキュリティ認証情報だけを使用しなければなりません。開発者は Amazon Cognito ID プールの拡張認証フローを使用します。以下のリストから、このフローで発生する処理を選択して正しい順に並べ替えてください。各処理を 1 回だけ選択するか、まったく選択しないでください。",
+  "n_correct": null,
+  "options": []
+ },
+ "DVA-C02_orig_213": {
+  "file": "mixed_orig_b1.json",
+  "exam": "DVA-C02",
+  "set": "orig",
+  "type": "ordering",
+  "domain": "AWS のサービスによる開発",
+  "level": "medium",
+  "question": "ある開発者が、Amazon API Gateway の REST API でリクエストとレスポンスの変換をデバッグしています。以下のリストから、API Gateway がクライアントからのリクエストを処理してレスポンスを返すまでの段階を選択して正しい順に並べ替えてください。各段階を 1 回だけ選択するか、まったく選択しないでください。",
+  "n_correct": null,
+  "options": []
+ }
+}

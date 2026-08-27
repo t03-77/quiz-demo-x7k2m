@@ -2375,11 +2375,6 @@
     "letter": "D",
     "correct": false,
     "text": null
-   },
-   {
-    "letter": "E",
-    "correct": false,
-    "text": null
    }
   ]
  },
@@ -2444,11 +2439,6 @@
     "letter": "D",
     "correct": false,
     "text": null
-   },
-   {
-    "letter": "E",
-    "correct": false,
-    "text": null
    }
   ]
  },
@@ -2479,11 +2469,6 @@
    },
    {
     "letter": "D",
-    "correct": false,
-    "text": null
-   },
-   {
-    "letter": "E",
     "correct": false,
     "text": null
    }
@@ -2619,11 +2604,6 @@
     "letter": "D",
     "correct": false,
     "text": null
-   },
-   {
-    "letter": "E",
-    "correct": false,
-    "text": null
    }
   ]
  },
@@ -2654,11 +2634,6 @@
    },
    {
     "letter": "D",
-    "correct": false,
-    "text": null
-   },
-   {
-    "letter": "E",
     "correct": false,
     "text": null
    }
@@ -2900,11 +2875,6 @@
     "letter": "D",
     "correct": false,
     "text": null
-   },
-   {
-    "letter": "E",
-    "correct": false,
-    "text": null
    }
   ]
  },
@@ -3038,11 +3008,6 @@
     "letter": "D",
     "correct": false,
     "text": null
-   },
-   {
-    "letter": "E",
-    "correct": false,
-    "text": null
    }
   ]
  },
@@ -3073,11 +3038,6 @@
    },
    {
     "letter": "D",
-    "correct": false,
-    "text": null
-   },
-   {
-    "letter": "E",
     "correct": false,
     "text": null
    }
@@ -3149,11 +3109,6 @@
     "letter": "D",
     "correct": false,
     "text": null
-   },
-   {
-    "letter": "E",
-    "correct": false,
-    "text": null
    }
   ]
  },
@@ -3184,11 +3139,6 @@
    },
    {
     "letter": "D",
-    "correct": false,
-    "text": null
-   },
-   {
-    "letter": "E",
     "correct": false,
     "text": null
    }
@@ -3223,11 +3173,6 @@
     "letter": "D",
     "correct": false,
     "text": null
-   },
-   {
-    "letter": "E",
-    "correct": false,
-    "text": null
    }
   ]
  },
@@ -3258,11 +3203,6 @@
    },
    {
     "letter": "D",
-    "correct": false,
-    "text": null
-   },
-   {
-    "letter": "E",
     "correct": false,
     "text": null
    }
@@ -3329,11 +3269,6 @@
     "letter": "D",
     "correct": false,
     "text": null
-   },
-   {
-    "letter": "E",
-    "correct": false,
-    "text": null
    }
   ]
  },
@@ -3364,11 +3299,6 @@
    },
    {
     "letter": "D",
-    "correct": false,
-    "text": null
-   },
-   {
-    "letter": "E",
     "correct": false,
     "text": null
    }
@@ -3435,6 +3365,90 @@
     "letter": "D",
     "correct": false,
     "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_301": {
+  "file": "DEA-C01_orig_multi1.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データセキュリティとガバナンス",
+  "level": "hard",
+  "question": "ある企業は、Amazon S3 のデータレイクを AWS Glue データカタログで管理し、Amazon Athena で分析しています。顧客テーブルには氏名とメールアドレスの列が含まれています。マーケティングチームには、メールアドレスの列を参照させずに、担当する地域に該当する行だけを参照させる必要があります。別の AWS アカウントにいる分析チームにも、同じ制限のもとで同じテーブルを参照させる必要があります。いずれの利用者も、S3 バケットのオブジェクトへ直接アクセスして制限を回避できてはいけません。データエンジニアが取るべきステップの組み合わせはどれですか。(3 つ選択)",
+  "n_correct": 3,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Lake Formation のデータフィルターを作成して参照できる列と行を限定し、そのフィルターを指定してマーケティングチームのプリンシパルにテーブルへのアクセス許可を付与する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": true,
+    "text": "Lake Formation のクロスアカウントの付与で、分析チームのアカウントに対して同じデータフィルターを指定したアクセス許可を付与する。"
+   },
+   {
+    "letter": "E",
+    "correct": true,
+    "text": "データレイクの S3 のロケーションを Lake Formation に登録し、利用者の IAM ポリシーからはその S3 バケットへの直接のアクセスを取り除く。"
+   },
+   {
+    "letter": "F",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_302": {
+  "file": "DEA-C01_orig_multi1.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ運用とサポート",
+  "level": "medium",
+  "question": "ある企業は、毎日 1 回、Amazon S3 に届いたファイルを AWS Glue の ETL ジョブで変換し、結果を別の S3 バケットへ書き出しています。処理は 3 つのジョブを順番に実行する構成で、前のジョブが成功した場合にだけ次のジョブを開始する必要があります。ジョブが失敗した場合は、運用チームがその日のうちに気づけるように通知が届く必要があります。さらに、変換後のデータで主キーの重複や必須列の欠損がないことを毎回検査し、その結果を後から参照できるように記録する必要があります。運用の負荷を抑えてこれらの要件を満たすステップの組み合わせはどれですか。(3 つ選択)",
+  "n_correct": 3,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Step Functions のステートマシンで 3 つの Glue ジョブを順に実行し、Amazon EventBridge Scheduler から毎日そのステートマシンを開始する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": true,
+    "text": "Amazon EventBridge のルールで AWS Glue のジョブ状態変更イベントのうち失敗を示すものを対象にし、Amazon SNS トピックへ発行して運用チームへ通知する。"
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "F",
+    "correct": true,
+    "text": "AWS Glue Data Quality のルールセットを定義して ETL ジョブの中で評価し、評価の結果を保存して後から参照できるようにする。"
    }
   ]
  },

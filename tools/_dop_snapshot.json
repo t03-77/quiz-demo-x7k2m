@@ -129,11 +129,6 @@
     "letter": "D",
     "correct": false,
     "text": null
-   },
-   {
-    "letter": "E",
-    "correct": false,
-    "text": null
    }
   ]
  },
@@ -2705,11 +2700,6 @@
     "letter": "D",
     "correct": false,
     "text": null
-   },
-   {
-    "letter": "E",
-    "correct": false,
-    "text": null
    }
   ]
  },
@@ -2740,11 +2730,6 @@
    },
    {
     "letter": "D",
-    "correct": false,
-    "text": null
-   },
-   {
-    "letter": "E",
     "correct": false,
     "text": null
    }
@@ -2816,11 +2801,6 @@
     "letter": "D",
     "correct": false,
     "text": null
-   },
-   {
-    "letter": "E",
-    "correct": false,
-    "text": null
    }
   ]
  },
@@ -2890,11 +2870,6 @@
     "letter": "D",
     "correct": false,
     "text": null
-   },
-   {
-    "letter": "E",
-    "correct": false,
-    "text": null
    }
   ]
  },
@@ -2925,11 +2900,6 @@
    },
    {
     "letter": "D",
-    "correct": false,
-    "text": null
-   },
-   {
-    "letter": "E",
     "correct": false,
     "text": null
    }
@@ -3001,11 +2971,6 @@
     "letter": "D",
     "correct": false,
     "text": null
-   },
-   {
-    "letter": "E",
-    "correct": false,
-    "text": null
    }
   ]
  },
@@ -3038,11 +3003,6 @@
     "letter": "D",
     "correct": false,
     "text": null
-   },
-   {
-    "letter": "E",
-    "correct": false,
-    "text": null
    }
   ]
  },
@@ -3073,11 +3033,6 @@
    },
    {
     "letter": "D",
-    "correct": false,
-    "text": null
-   },
-   {
-    "letter": "E",
     "correct": false,
     "text": null
    }
@@ -3149,11 +3104,6 @@
     "letter": "D",
     "correct": false,
     "text": null
-   },
-   {
-    "letter": "E",
-    "correct": false,
-    "text": null
    }
   ]
  },
@@ -3184,11 +3134,6 @@
    },
    {
     "letter": "D",
-    "correct": false,
-    "text": null
-   },
-   {
-    "letter": "E",
     "correct": false,
     "text": null
    }
@@ -3223,11 +3168,6 @@
     "letter": "D",
     "correct": false,
     "text": null
-   },
-   {
-    "letter": "E",
-    "correct": false,
-    "text": null
    }
   ]
  },
@@ -3258,11 +3198,6 @@
    },
    {
     "letter": "D",
-    "correct": false,
-    "text": null
-   },
-   {
-    "letter": "E",
     "correct": false,
     "text": null
    }
@@ -3297,11 +3232,6 @@
     "letter": "D",
     "correct": false,
     "text": null
-   },
-   {
-    "letter": "E",
-    "correct": false,
-    "text": null
    }
   ]
  },
@@ -3334,11 +3264,6 @@
     "letter": "D",
     "correct": false,
     "text": null
-   },
-   {
-    "letter": "E",
-    "correct": false,
-    "text": null
    }
   ]
  },
@@ -3369,11 +3294,6 @@
    },
    {
     "letter": "D",
-    "correct": false,
-    "text": null
-   },
-   {
-    "letter": "E",
     "correct": false,
     "text": null
    }
@@ -3445,11 +3365,6 @@
     "letter": "D",
     "correct": false,
     "text": null
-   },
-   {
-    "letter": "E",
-    "correct": false,
-    "text": null
    }
   ]
  },
@@ -3480,11 +3395,6 @@
    },
    {
     "letter": "D",
-    "correct": false,
-    "text": null
-   },
-   {
-    "letter": "E",
     "correct": false,
     "text": null
    }
@@ -3519,11 +3429,6 @@
     "letter": "D",
     "correct": false,
     "text": null
-   },
-   {
-    "letter": "E",
-    "correct": false,
-    "text": null
    }
   ]
  },
@@ -3554,11 +3459,6 @@
    },
    {
     "letter": "D",
-    "correct": false,
-    "text": null
-   },
-   {
-    "letter": "E",
     "correct": false,
     "text": null
    }
@@ -3593,11 +3493,6 @@
     "letter": "D",
     "correct": false,
     "text": null
-   },
-   {
-    "letter": "E",
-    "correct": false,
-    "text": null
    }
   ]
  },
@@ -3628,11 +3523,6 @@
    },
    {
     "letter": "D",
-    "correct": false,
-    "text": null
-   },
-   {
-    "letter": "E",
     "correct": false,
     "text": null
    }
@@ -3667,11 +3557,6 @@
     "letter": "D",
     "correct": false,
     "text": null
-   },
-   {
-    "letter": "E",
-    "correct": false,
-    "text": null
    }
   ]
  },
@@ -3704,11 +3589,6 @@
     "letter": "D",
     "correct": false,
     "text": null
-   },
-   {
-    "letter": "E",
-    "correct": false,
-    "text": null
    }
   ]
  },
@@ -3739,11 +3619,6 @@
    },
    {
     "letter": "D",
-    "correct": false,
-    "text": null
-   },
-   {
-    "letter": "E",
     "correct": false,
     "text": null
    }
@@ -3820,6 +3695,258 @@
     "letter": "E",
     "correct": false,
     "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_301": {
+  "file": "DOP-C02_orig_multi1.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "hard",
+  "question": "ある企業は AWS Organizations で 200 を超える AWS アカウントを管理しています。セキュリティチームは、すべてのメンバーアカウントと有効化済みのすべてのリージョンについて、Amazon EBS ボリュームの暗号化とセキュリティグループの設定が社内基準に適合しているかを継続的に評価し、その結果を 1 つのアカウントでまとめて確認できるようにする必要があります。基準に違反したリソースは、検出された時点で自動的に修正されなければなりません。さらに、メンバーアカウントの管理者が評価の仕組み自体を停止したり削除したりできないようにする必要があります。DevOps エンジニアが実行すべきステップの組み合わせはどれですか。(3 つ選択)",
+  "n_correct": 3,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "組織全体で AWS Config を有効にし、管理アカウントまたは委任管理者アカウントで組織のアグリゲータを作成して、すべてのメンバーアカウントと有効化済みリージョンの評価結果を 1 か所へ集約する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": true,
+    "text": "対象の AWS Config ルールに修復アクションを設定し、AWS Systems Manager Automation のランブックを関連付けたうえで自動修復を有効にして、非準拠と評価されたリソースが修復されるようにする。"
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "F",
+    "correct": true,
+    "text": "組織のサービスコントロールポリシーで config:DeleteConfigurationRecorder や config:StopConfigurationRecorder などのアクションを拒否し、メンバーアカウントで記録が止められないようにする。"
+   }
+  ]
+ },
+ "DOP-C02_orig_302": {
+  "file": "DOP-C02_orig_multi1.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリングとロギング",
+  "level": "medium",
+  "question": "ある企業は、EC2 Auto Scaling グループ内の数百台の Amazon Linux インスタンスでアプリケーションを実行しています。運用チームは、各インスタンスの使用可能メモリ量とルートボリュームのディスク使用率を Amazon CloudWatch のメトリクスとして確認できるようにする必要があります。収集する項目を変更するときは 1 か所を更新するだけで全インスタンスに反映されなければなりません。また、Auto Scaling によって後から起動されたインスタンスにも、運用チームが個別に操作することなく同じ設定が適用される必要があります。これらの要件を満たすステップの組み合わせはどれですか。(3 つ選択)",
+  "n_correct": 3,
+  "options": [
+   {
+    "letter": "A",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "AWS Systems Manager Distributor で CloudWatch エージェントのパッケージをインストールし、インスタンスプロファイルに CloudWatchAgentServerPolicy を付与してメトリクスを発行できるようにする。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": true,
+    "text": "収集するメトリクスを定義した CloudWatch エージェントの設定ファイルを AWS Systems Manager パラメータストアのパラメータとして保存し、エージェントがそのパラメータから設定を読み込むようにする。"
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "F",
+    "correct": true,
+    "text": "タグをターゲットに指定した AWS Systems Manager State Manager の関連付けを作成し、エージェントのインストールと設定の適用が一定の間隔で実行されるようにする。"
+   }
+  ]
+ },
+ "DOP-C02_orig_303": {
+  "file": "DOP-C02_orig_multi1.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インシデントおよびイベントへの対応",
+  "level": "medium",
+  "question": "ある企業の DevOps エンジニアは、AWS Systems Manager Session Manager を使って、VPC のプライベートサブネットにある Amazon EC2 インスタンスへ接続しようとしました。しかし、一部のインスタンスが Session Manager の接続先の一覧にも Fleet Manager のマネージドノードの一覧にも表示されません。表示されないインスタンスはいずれも起動から十分な時間が経過しており、実行中の状態です。エンジニアは Systems Manager と同じ AWS リージョンのコンソールを開いて確認しています。これらのインスタンスがマネージドノードとして表示されない原因になりうるものはどれですか。(3 つ選択)",
+  "n_correct": 3,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "対象のインスタンスに SSM Agent がインストールされていない、またはインストールされていてもエージェントのプロセスが起動していない。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": true,
+    "text": "対象のインスタンスに、ssm:UpdateInstanceInformation などの権限を含む IAM インスタンスプロファイルがアタッチされていない。"
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "F",
+    "correct": true,
+    "text": "対象のインスタンスが置かれたサブネットから、Systems Manager の ssm、ssmmessages、ec2messages の各エンドポイントへ到達する経路がない。"
+   }
+  ]
+ },
+ "DOP-C02_orig_304": {
+  "file": "DOP-C02_orig_multi1.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "耐障害性の高いクラウドソリューションの実装",
+  "level": "hard",
+  "question": "あるチケット販売企業は、Application Load Balancer の背後にある EC2 Auto Scaling グループでアプリケーションを実行しています。インスタンスは起動後にアプリケーションの初期化と大量の静的データの取得を行うため、リクエストを処理できる状態になるまで約 12 分かかります。人気公演の販売開始時にはトラフィックが急増し、ターゲット追跡スケーリングポリシーは正しく発動するものの、新しいインスタンスが加わるまでの間に応答時間の悪化とエラーが発生しています。急増が始まる時刻は事前に分かりません。追加された容量がリクエストを処理し始めるまでの時間を短縮するステップの組み合わせはどれですか。(3 つ選択)",
+  "n_correct": 3,
+  "options": [
+   {
+    "letter": "A",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "Auto Scaling グループにウォームプールを設定し、初期化を済ませた状態で停止したインスタンスを保持して、スケールアウト時にそこから容量を投入する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": true,
+    "text": "アプリケーションの初期化処理と静的データを含めた AMI をあらかじめ作成し、起動テンプレートがその AMI を参照するようにして、起動後に実行する処理を減らす。"
+   },
+   {
+    "letter": "E",
+    "correct": true,
+    "text": "ターゲット追跡スケーリングポリシーのターゲット値を下げて、より低い使用率の段階でスケールアウトが始まるようにする。"
+   },
+   {
+    "letter": "F",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_305": {
+  "file": "DOP-C02_orig_multi1.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "構成管理と IaC",
+  "level": "hard",
+  "question": "ある企業は AWS Organizations を使用しており、事業部門ごとに分けた OU の下に 80 個の AWS アカウントを保有しています。DevOps チームは、監査用の IAM ロールの作成と Amazon GuardDuty の有効化を定義した AWS CloudFormation テンプレートを、指定した 1 つの OU に属するすべてのアカウントと 3 つのリージョンへ展開する必要があります。その OU に新しいアカウントが追加されたときは、DevOps チームが操作しなくても同じテンプレートが展開されなければなりません。また、展開後にテンプレートの定義と異なる変更がリソースに加えられた場合、それを検出できる必要があります。要件を満たすステップの組み合わせはどれですか。(3 つ選択)",
+  "n_correct": 3,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "サービスマネージド型のアクセス許可を使用する CloudFormation StackSets を管理アカウントまたは委任管理者アカウントで作成し、デプロイ先として対象の OU と 3 つのリージョンを指定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": true,
+    "text": "StackSets の自動デプロイを有効にして、対象の OU にアカウントが追加されたときにスタックインスタンスが自動的に作成されるようにする。"
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "F",
+    "correct": true,
+    "text": "StackSets のドリフト検出を定期的に実行し、スタックインスタンスの実際の設定がテンプレートの定義から外れていないかを確認する。"
+   }
+  ]
+ },
+ "DOP-C02_orig_306": {
+  "file": "DOP-C02_orig_multi1.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "medium",
+  "question": "ある企業は、本番アカウントの Amazon ECS on AWS Fargate で動くアプリケーションと、共有サービスアカウントで動くバッチ処理の両方から、同じ Amazon RDS for PostgreSQL データベースの資格情報を利用しています。監査部門から次の 3 点が求められました。資格情報を 90 日ごとに自動でローテーションし、そのたびにアプリケーションの設定を書き換えなくても新しい値が使われること。共有サービスアカウントのバッチ処理からも、資格情報を複製せずに同じ値を取得できること。タスク定義に資格情報の値そのものが残らないこと。DevOps エンジニアが実行すべきステップの組み合わせはどれですか。(3 つ選択)",
+  "n_correct": 3,
+  "options": [
+   {
+    "letter": "A",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "AWS Secrets Manager に資格情報を保存し、Amazon RDS 用のマネージドローテーションを 90 日の間隔で有効にする。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": true,
+    "text": "シークレットのリソースポリシーで共有サービスアカウントのロールに secretsmanager:GetSecretValue を許可し、暗号化に使うカスタマー管理の KMS キーのキーポリシーでも同じロールに kms:Decrypt を許可する。"
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "F",
+    "correct": true,
+    "text": "ECS のタスク定義で、コンテナの secrets にシークレットの ARN を valueFrom として指定し、タスクの起動時に値が注入されるようにする。"
    }
   ]
  },
