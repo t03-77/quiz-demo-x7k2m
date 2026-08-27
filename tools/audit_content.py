@@ -55,19 +55,59 @@ def load():
 
 
 def check_duplicates(mine):
-    """問題文が酷似しているものを資格ごとに探す"""
+    """問題文が酷似しているものを探す
+
+    資格ごとに閉じて探すと、資格をまたいだ重複を見逃す。
+    実際に SAP-C02 と DEA-C01 で、ほぼ同一の Lake Formation の設計問題が見つかった。
+    別の試験でも、同じ論点を2回解くだけになるので学べる範囲が狭まる。
+    """
     hits = []
-    for ex in sorted({q["exam"] for q in mine}):
-        qs = [q for q in mine if q["exam"] == ex]
+    groups = [[q for q in mine if q["exam"] == ex] for ex in sorted({q["exam"] for q in mine})]
+    groups.append(mine)   # 全資格を横断した比較も行う
+    seen = set()
+    for qs in groups:
         for i, a in enumerate(qs):
             for b in qs[i + 1:]:
+                if a["id"] == b["id"] or (a["id"], b["id"]) in seen:
+                    continue
                 # 全組み合わせは重いので、先頭が近いものだけ詳しく比べる
                 if a["question"][:20] != b["question"][:20] and \
                    SequenceMatcher(None, a["question"][:60], b["question"][:60]).ratio() < 0.7:
                     continue
                 r = SequenceMatcher(None, a["question"], b["question"]).ratio()
                 if r >= 0.85:
-                    hits.append((ex, a["id"], b["id"], round(r, 2)))
+                    seen.add((a["id"], b["id"]))
+                    tag = a["exam"] if a["exam"] == b["exam"] else "資格をまたぐ"
+                    hits.append((tag, a["id"], b["id"], round(r, 2)))
+    return hits
+
+
+def check_same_topic(mine):
+    """文面は違うが「正解の構成」が同じ問題を探す
+
+    文字列の類似度だけでは、言い回しを変えた同一論点を見逃す。
+    実際に SAP-C02 と DEA-C01 で、どちらも
+    「Lake Formation のクロスアカウント列レベル許可 + リソースリンク + Athena」を
+    正解とする問題が見つかった(文字列の一致度は0.39しかなく、既存の検査では素通りしていた)。
+    """
+    TERM = re.compile(r"(?:Amazon|AWS)\s+[A-Z][A-Za-z0-9]*(?:\s+[A-Z][A-Za-z0-9]*){0,2}"
+                      r"|[A-Z][A-Za-z]+(?:\s+[A-Z][A-Za-z]+)+")
+    def key(q):
+        t = " ".join(o.get("text", "") for o in q.get("options", []) if o.get("correct"))
+        return {m.group(0).replace("Amazon ", "").replace("AWS ", "").strip()
+                for m in TERM.finditer(t)}
+
+    keys = [(q, key(q)) for q in mine if q.get("options")]
+    hits = []
+    for i, (a, ka) in enumerate(keys):
+        if len(ka) < 3:      # 固有名詞が少ない問題は比べても意味がない
+            continue
+        for b, kb in keys[i + 1:]:
+            if len(kb) < 3:
+                continue
+            j = len(ka & kb) / len(ka | kb)
+            if j >= 0.6:
+                hits.append((a["id"], b["id"], round(j, 2), sorted(ka & kb)[:4]))
     return hits
 
 
@@ -134,6 +174,18 @@ def main():
         for ex, a, b, r in dup[:20]:
             print("  %-9s %s ≒ %s (一致度 %.0f%%)" % (ex, a, b, r * 100))
         print("  計 %d 組" % len(dup))
+    else:
+        print("  なし")
+
+    print()
+    print("=" * 74)
+    print("1b. 文面は違うが正解の構成が同じ問題")
+    same = check_same_topic(mine)
+    if same:
+        ng += 1
+        for a, b, j, common in same[:15]:
+            print("  %s ≒ %s (共通 %.0f%%: %s)" % (a, b, j * 100, " / ".join(common)))
+        print("  計 %d 組" % len(same))
     else:
         print("  なし")
 

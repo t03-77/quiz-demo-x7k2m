@@ -52,7 +52,7 @@ def terms(text):
 def measure(qs, label):
     """選択式の問題だけを対象に手がかりを数える"""
     qs = [q for q in qs if (q.get("type", "choice") == "choice") and q.get("options")]
-    longest = leak = 0
+    longest = leak = longest_wrong = 0
     abs_q = 0
     ratios = []
     dup = Counter()
@@ -71,6 +71,10 @@ def measure(qs, label):
         # 1. 正解が最長か(複数正解なら、正解のどれかが最長なら該当)
         if max(lens) == max(len(o.get("text", "")) for o in cor):
             longest += 1
+        else:
+            # 誤答を長くしすぎると「最長は必ず誤答」という逆の当て方が生まれる。
+            # 正解が最長になる割合を下げるだけでは足りず、こちらも公式と比べる必要がある。
+            longest_wrong += 1
 
         # 2. 問題文の特徴語が正解にだけ出てくるか
         qt = terms(q.get("question", ""))
@@ -99,6 +103,7 @@ def measure(qs, label):
         "label": label,
         "n": n,
         "longest": 100 * longest // n if n else 0,
+        "longest_wrong": 100 * longest_wrong // n if n else 0,
         "leak": 100 * leak // n if n else 0,
         "abs": 100 * abs_q // n if n else 0,
         "ratio": statistics.median(ratios) if ratios else 0,
@@ -130,6 +135,8 @@ def main():
         # 公式より手がかりが目立って多い項目を控える
         if rm["longest"] - ro["longest"] >= 15:
             flags.append((ex, "正解が最長になりやすい", ro["longest"], rm["longest"]))
+        if rm["longest_wrong"] - ro["longest_wrong"] >= 15:
+            flags.append((ex, "最長は誤答という癖がある", ro["longest_wrong"], rm["longest_wrong"]))
         if rm["leak"] - ro["leak"] >= 15:
             flags.append((ex, "問題文の語が正解にだけ出る", ro["leak"], rm["leak"]))
         if rm["abs"] - ro["abs"] >= 15:

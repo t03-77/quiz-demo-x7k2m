@@ -25,10 +25,16 @@ import wave
 from pathlib import Path
 
 BASE = Path(__file__).resolve().parent.parent
-SRC = Path(r"C:\Users\na7sh\Works\95_work\aws\06_lessons\genai_dev_pro\official\questions_official.json")
+# 既定は自作問題(data/orig.js)。公式問題から作るときは --official を付ける。
+# 自作問題の音声は著作権の制約がないので、サイトへの同梱も選べる。
+OFFICIAL_SRC = Path(r"C:\Users\na7sh\Works\95_work\aws\06_lessons\genai_dev_pro\official\questions_official.json")
+ORIG_JS = BASE / "data" / "orig.js"
+TARGET_EXAM = "AIP-C01"
+USE_OFFICIAL = "--official" in sys.argv
+PREFIX = "aip-c01" if USE_OFFICIAL else "aip-c01-orig"
 AUDIO_DIR = BASE / "audio"
-CACHE_DIR = BASE / "audio" / "_cache"
-TRACKS_JS = BASE / "data" / "audio_tracks.js"
+CACHE_DIR = BASE / "audio" / ("_cache" if USE_OFFICIAL else "_cache_orig")
+TRACKS_JS = BASE / "data" / ("audio_tracks.js" if USE_OFFICIAL else "audio_tracks_orig.js")
 ENGINE = Path(os.environ["LOCALAPPDATA"]) / "Programs" / "VOICEVOX" / "vv-engine" / "run.exe"
 API = "http://127.0.0.1:50021"
 SPEAKER = 2          # 四国めたん(ノーマル)
@@ -215,7 +221,10 @@ def question_audio(q, idx):
     cache = CACHE_DIR / f"{q['id']}.pcm"
     if cache.exists() and cache.stat().st_size > 0:
         return cache.read_bytes()
-    texts = [f"問題、{idx}。{q['type']}。"] + sentences(q["question"])
+    # 自作問題の type は choice/matching/ordering という内部値なので、そのまま読ませない
+    nc = q.get("n_correct") or sum(1 for o in q.get("options", []) if o.get("correct"))
+    kind = q.get("type") if USE_OFFICIAL else (f"{nc}つ選択" if nc else "選択")
+    texts = [f"問題、{idx}。{kind}。"] + sentences(q["question"])
     for o in q["options"]:
         texts += sentences(f"{o['letter']}。{o['text']}")
     frames = b""
@@ -247,8 +256,21 @@ def write_mp3(frames, out_path):
     tmp_wav.unlink()
 
 
+def load_questions():
+    if USE_OFFICIAL:
+        return json.load(open(OFFICIAL_SRC, encoding="utf-8"))
+    js = ORIG_JS.read_text(encoding="utf-8")
+    qs = json.loads(js[js.index("["): js.rindex("]") + 1])
+    # 本番形式のうち選択式だけ。一問一答(flash)は短く、読み上げに向かない
+    qs = [q for q in qs if q["exam"] == TARGET_EXAM and q.get("set") == "orig"
+          and q.get("type", "choice") == "choice"]
+    qs.sort(key=lambda q: q["id"])
+    return qs
+
+
 def main():
-    qs = json.load(open(SRC, encoding="utf-8"))
+    qs = load_questions()
+    print(f"対象: {'公式' if USE_OFFICIAL else '自作'}問題 {len(qs)}問 → {PREFIX}_*.mp3")
     AUDIO_DIR.mkdir(exist_ok=True)
     CACHE_DIR.mkdir(exist_ok=True)
     ensure_engine()
@@ -260,7 +282,7 @@ def main():
         group = qs[fi * per:(fi + 1) * per]
         if not group:
             break
-        out = AUDIO_DIR / f"aip-c01_{fi+1}of{N_FILES}.mp3"
+        out = AUDIO_DIR / f"{PREFIX}_{fi+1}of{N_FILES}.mp3"
         chapters = []
         if out.exists() and out.stat().st_size > 0:
             print(f"skip(生成済み): {out.name}")
@@ -281,14 +303,16 @@ def main():
             print(f"書き出し: {out.name} ({out.stat().st_size//1024//1024}MB)")
         tracks.append({
             "exam": "AIP-C01",
-            "title": f"AIP-C01 公式問題 読み上げ {fi+1}/{N_FILES} ({group[0]['id']}〜{group[-1]['id']})",
+            "title": f"AIP-C01 {'公式' if USE_OFFICIAL else 'オリジナル'}問題 読み上げ {fi+1}/{N_FILES} ({len(group)}問)",
             "src": f"audio/{out.name}",
             "chapters": chapters,
         })
 
-    js = "// AIP-C01 公式問題の読み上げ音声(VOICEVOX:四国めたん、等速)。tools/make_audio_vv.py で生成\n"
-    js += "// 公式問題の読み上げのためサイトには同梱しない(.gitignore対象)\n"
-    js += "window.AUDIO_TRACKS = " + json.dumps(tracks, ensure_ascii=False) + ";\n"
+    js = "// AIP-C01 の読み上げ音声(VOICEVOX:四国めたん、等速)。tools/make_audio_vv.py で生成\n"
+    js += ("// 公式問題の読み上げのためサイトには同梱しない(.gitignore対象)\n" if USE_OFFICIAL
+           else "// 自作問題の読み上げ。著作権の制約がないため同梱も可能\n")
+    # 公式版と自作版は別ファイルなので、代入ではなく追加にして両方を並べられるようにする
+    js += "window.AUDIO_TRACKS = (window.AUDIO_TRACKS||[]).concat(" + json.dumps(tracks, ensure_ascii=False) + ");\n"
     TRACKS_JS.write_text(js, encoding="utf-8")
     print(f"完了: {len(tracks)}ファイル / audio_tracks.js 出力済み / 総所要 {(time.time()-t0)/60:.0f}分")
 

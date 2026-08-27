@@ -362,7 +362,8 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
 <script src="data/diagrams.js"></script>
 <script src="data/orig.js"></script>
 <script src="data/demo_audio.js"></script>
-<script src="data/audio_tracks.js"></script><!-- 実音声(ローカルのみ、なければ404で無視される) -->
+<script src="data/audio_tracks.js"></script><!-- 公式問題の読み上げ(ローカルのみ、なければ404で無視される) -->
+<script src="data/audio_tracks_orig.js"></script><!-- 自作問題の読み上げ -->
 <script>
 const EXAMS = window.EXAMS||[], GLOSSARY = window.GLOSSARY||{}, ORIG = window.ORIG_QUESTIONS||[], TRACKS = window.TRACKS||[];
 const SET_LABELS = {orig:'本番形式', flash:'一問一答', qset:'問題集', exam:'模擬試験', pretest:'Pretest', user:'追加'};
