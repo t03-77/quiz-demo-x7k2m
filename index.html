@@ -248,38 +248,49 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
 <!-- ===== 設定 ===== -->
 <div class="view" id="v-settings">
   <div class="card">
-    <h2>公式問題バンク</h2>
-    <div class="bankbar" style="margin-bottom:8px">
-      <span class="st" id="bank-status2">確認中…</span>
+    <h2>問題を増やす（任意）</h2>
+    <div class="note" style="margin-bottom:10px">このアプリには <b id="cnt-bundled">–</b> 問が最初から入っています。それに加えて、手元にある問題を取り込めます。取り込んだ問題は<b>この端末のブラウザ内にだけ</b>保存され、外部には送信されません。</div>
+
+    <div style="border-top:1px solid var(--grid);padding-top:10px;margin-top:4px">
+      <div style="font-weight:700;font-size:14px;margin-bottom:2px">方法1　問題ファイルを読み込む</div>
+      <div class="note" style="margin-bottom:6px">問題をまとめた JSON ファイル（<code>questions_all.json</code> など）があれば、そのまま取り込めます。AWS公式の模擬試験を持っている場合はこちらです。</div>
+      <div class="bankbar" style="margin-bottom:8px"><span class="st" id="bank-status2">確認中…</span></div>
+      <button class="btn sub" onclick="document.getElementById('bankfile').click()">📄 ファイルを選ぶ</button>
+      <div id="bank-remove" style="display:none;margin-top:6px"><button class="dangerlink" onclick="removeBank()">読み込んだ問題を削除する</button></div>
     </div>
-    <button class="btn sub" onclick="document.getElementById('bankfile').click()">📄 questions_all.json を読み込む</button>
-    <div class="note">公式問題データはこの端末のブラウザ内にのみ保存されます。</div>
-    <div id="bank-remove" style="display:none"><button class="dangerlink" onclick="removeBank()">読み込んだ公式問題を削除する</button></div>
+
+    <div style="border-top:1px solid var(--grid);padding-top:10px;margin-top:12px">
+      <div style="font-weight:700;font-size:14px;margin-bottom:2px">方法2　文章や画像から作る</div>
+      <div class="note" style="margin-bottom:6px">問題文をコピペするか、参考書やサイトのスクリーンショットを渡すと、AIが解答・解説つきの問題に整えます。<b>下のAI連携でAPIキーの設定が必要です。</b></div>
+      <div class="formrow"><label>追加先の試験</label><select id="cv-exam" style="width:100%"></select></div>
+      <div class="formrow"><label>問題の文章（コピペ）</label><textarea id="cv-text" rows="4" style="width:100%;font-size:13px;padding:9px;border-radius:9px;border:1px solid var(--grid);background:var(--page);color:var(--ink)" placeholder="問題文・選択肢・正解をそのまま貼り付け（複数問まとめてOK）"></textarea></div>
+      <div class="formrow"><label>または画像（複数可）</label><input type="file" id="cv-imgs" accept="image/*" multiple style="width:100%;font-size:13px"></div>
+      <button class="btn sub" id="cv-run" onclick="convertQuestions()">🤖 AIで問題に変換する</button>
+      <div id="cv-preview"></div>
+      <div class="note" style="margin-top:6px">できた問題は出題セット「追加」として出題されます。<span id="cv-count"></span></div>
+      <div id="user-remove" style="display:none"><button class="dangerlink" onclick="removeUserQuestions()">追加した問題をすべて削除する</button></div>
+    </div>
   </div>
   <div class="card">
     <h2>AI連携(任意)</h2>
     <div class="formrow"><label><input type="checkbox" id="set-demo" onchange="saveSettings()"> デモモード(APIキーなしで動きを見る)</label></div>
     <div class="note" id="demo-note" style="display:none">APIには接続せず、あらかじめ用意した応答を返します。人に見せるときや、機能の雰囲気を確かめたいときに使ってください。料金はかかりません。</div>
-    <div class="formrow"><label>APIキー(Anthropic)</label><input type="password" id="set-key" placeholder="sk-ant-..." onchange="saveSettings()"></div>
+    <div class="formrow"><label>APIキー</label><input type="password" id="set-key" placeholder="sk-ant-... または sk-..." onchange="saveSettings()"></div>
     <div class="formrow"><label>使用モデル</label>
       <select id="set-model" style="width:100%" onchange="saveSettings()">
-        <option value="claude-haiku-4-5">Haiku 4.5 — 安価(標準)</option>
-        <option value="claude-sonnet-5">Sonnet 5 — バランス</option>
-        <option value="claude-opus-5">Opus 5 — 高性能</option>
+        <optgroup label="Anthropic（キーは sk-ant- で始まる）">
+          <option value="claude-haiku-4-5">Claude Haiku 4.5 — 安価（標準）</option>
+          <option value="claude-sonnet-5">Claude Sonnet 5 — バランス</option>
+          <option value="claude-opus-5">Claude Opus 5 — 高性能</option>
+        </optgroup>
+        <optgroup label="OpenAI（キーは sk- で始まる）">
+          <option value="gpt-4o-mini">GPT-4o mini — 安価</option>
+          <option value="gpt-4o">GPT-4o — バランス</option>
+        </optgroup>
       </select>
     </div>
     <div class="formrow"><label>月の予算上限(USD)</label><input type="number" id="set-budget" value="2" min="0" step="0.5" onchange="saveSettings()"></div>
-    <div class="note">今月の使用額: $<span id="set-usage">0.00</span>。上限に達するとAI機能は自動停止します。キーはこの端末のブラウザ内にのみ保存され、送信先はAnthropicのAPIだけです。キーがなくてもAI以外の全機能を使えます。</div>
-  </div>
-  <div class="card">
-    <h2>問題の追加(AI変換)</h2>
-    <div class="formrow"><label>追加先の試験</label><select id="cv-exam" style="width:100%"></select></div>
-    <div class="formrow"><label>問題のテキスト(コピペ)</label><textarea id="cv-text" rows="5" style="width:100%;font-size:13px;padding:9px;border-radius:9px;border:1px solid var(--grid);background:var(--page);color:var(--ink)" placeholder="問題文・選択肢・正解をそのまま貼り付け(複数問OK)"></textarea></div>
-    <div class="formrow"><label>またはスクリーンショット画像</label><input type="file" id="cv-imgs" accept="image/*" multiple style="width:100%;font-size:13px"></div>
-    <button class="btn sub" id="cv-run" onclick="convertQuestions()">🤖 AIで問題形式に変換(要APIキー)</button>
-    <div id="cv-preview"></div>
-    <div class="note" style="margin-top:6px">追加した問題はこの端末のブラウザ内にのみ保存され、出題セット「追加」として出題されます。<span id="cv-count"></span></div>
-    <div id="user-remove" style="display:none"><button class="dangerlink" onclick="removeUserQuestions()">追加した問題をすべて削除する</button></div>
+    <div class="note">今月の使用額: $<span id="set-usage">0.00</span>。上限に達するとAI機能は自動停止します。<b>キーはこの端末のブラウザ内にだけ保存</b>され、送信先は選んだモデルの提供元（AnthropicまたはOpenAI）のAPIだけです。キーがなくてもAI以外の全機能を使えます。</div>
   </div>
   <div class="card">
     <h2>学習設定</h2>
@@ -1046,7 +1057,8 @@ document.querySelectorAll('[data-sp]').forEach(b=>b.onclick=()=>{
 document.getElementById('player').addEventListener('ended',()=>{ if(trackIdx<visibleTracks().length-1) playTrack(trackIdx+1); });
 
 /* ---------- AI連携 ---------- */
-const AI_PRICES = {'claude-haiku-4-5':[1,5], 'claude-sonnet-5':[3,15], 'claude-opus-5':[5,25]}; // $/MTok [入力,出力]
+const AI_PRICES = {'claude-haiku-4-5':[1,5], 'claude-sonnet-5':[3,15], 'claude-opus-5':[5,25],
+                   'gpt-4o-mini':[0.15,0.6], 'gpt-4o':[2.5,10]}; // $/MTok [入力,出力]
 const monthKey = ()=>new Date().toISOString().slice(0,7);
 function aiUsage(){ return (SETTINGS.aiUsage||{})[monthKey()]||0; }
 function recordAiCost(model, usage){
@@ -1067,7 +1079,10 @@ function aiReady(){
   if(demoMode()) return true;   // デモモードはAPIに接続しないのでキー不要
   const key=(SETTINGS.key||'').trim();
   if(!key){ alert('APIキーが未設定です。設定タブで登録してください。\n(設定のデモモードを使うと、キーなしでAI機能の動きを確認できます)'); return false; }
-  if(!key.startsWith('sk-ant')){ alert('現在はAnthropicのAPIキー(sk-ant-...)のみ対応しています'); return false; }
+  // 選んだモデルとキーの種類が合っているか。取り違えるとAPIエラーの意味が分かりにくい
+  const wantOpenAI=isOpenAI(SETTINGS.model||'');
+  if(wantOpenAI && !key.startsWith('sk-')){ alert('OpenAIのモデルを選んでいます。OpenAIのAPIキー(sk-...)を入れてください'); return false; }
+  if(!wantOpenAI && !key.startsWith('sk-ant')){ alert('Claudeのモデルを選んでいます。AnthropicのAPIキー(sk-ant-...)を入れてください\n(OpenAIを使う場合は、使用モデルでGPTを選んでください)'); return false; }
   const budget=parseFloat(SETTINGS.budget??2);
   if(budget>0 && aiUsage()>=budget){ alert(`月の予算上限($${budget})に達したため、AI機能を自動停止しています。設定で上限を引き上げると再開できます`); return false; }
   return true;
@@ -1105,12 +1120,18 @@ function demoReply(messages, opts){
   return head+'「'+ask.slice(0,40)+(ask.length>40?'…':'')+'」について、実際のAIがこの問題の文脈をふまえて答えます。\n\n'+
     '設定でAPIキーを入れると本物の応答に切り替わります。デモモードでは固定の文章を返しています。';
 }
+const isOpenAI = m => (m||'').startsWith('gpt-');
 async function aiCall(messages, opts={}){
   if(demoMode()){
     await new Promise(r=>setTimeout(r, 700));   // 応答を待つ感じを再現する
     return demoReply(messages, opts);
   }
   const model=SETTINGS.model||'claude-haiku-4-5';
+  const key=(SETTINGS.key||'').trim();
+  return isOpenAI(model)? callOpenAI(model, key, messages, opts)
+                        : callAnthropic(model, key, messages, opts);
+}
+async function callAnthropic(model, key, messages, opts){
   const body={model, max_tokens:opts.maxTokens||4096, messages};
   if(opts.system) body.system=opts.system;
   if(opts.schema) body.output_config={format:{type:'json_schema', schema:opts.schema}};
@@ -1118,7 +1139,7 @@ async function aiCall(messages, opts={}){
     method:'POST',
     headers:{
       'content-type':'application/json',
-      'x-api-key':(SETTINGS.key||'').trim(),
+      'x-api-key':key,
       'anthropic-version':'2023-06-01',
       'anthropic-dangerous-direct-browser-access':'true',
     },
@@ -1132,6 +1153,34 @@ async function aiCall(messages, opts={}){
   recordAiCost(model, data.usage||{});
   if(data.stop_reason==='refusal') throw new Error('AIが回答を差し控えました');
   return (data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('');
+}
+/* OpenAI も使えるようにしている。リクエストの形が違うだけで、やることは同じ。
+   画像は image_url 形式、構造化出力は response_format で指定する。 */
+async function callOpenAI(model, key, messages, opts){
+  const conv = c => Array.isArray(c)? c.map(b=>
+        b.type==='image'? {type:'image_url', image_url:{url:`data:${b.source.media_type};base64,${b.source.data}`}}
+                        : {type:'text', text:b.text}) : c;
+  const msgs=[];
+  if(opts.system) msgs.push({role:'system', content:opts.system});
+  messages.forEach(m=>msgs.push({role:m.role, content:conv(m.content)}));
+  const body={model, messages:msgs, max_completion_tokens:opts.maxTokens||4096};
+  if(opts.schema) body.response_format={type:'json_schema',
+    json_schema:{name:'result', strict:true, schema:opts.schema}};
+  const res=await fetch('https://api.openai.com/v1/chat/completions',{
+    method:'POST',
+    headers:{'content-type':'application/json', 'authorization':'Bearer '+key},
+    body:JSON.stringify(body),
+  });
+  if(!res.ok){
+    const e=await res.json().catch(()=>({}));
+    throw new Error(`APIエラー(${res.status}): ${e.error?.message||'不明なエラー'}`);
+  }
+  const data=await res.json();
+  const u=data.usage||{};
+  recordAiCost(model, {input_tokens:u.prompt_tokens, output_tokens:u.completion_tokens});
+  const ch=(data.choices||[])[0];
+  if(ch?.finish_reason==='content_filter') throw new Error('AIが回答を差し控えました');
+  return ch?.message?.content || '';
 }
 
 /* ---------- AI質問チャット ---------- */
@@ -1366,6 +1415,7 @@ document.getElementById('set-srs').checked = SETTINGS.srs!==false;
 document.getElementById('set-demo').checked = SETTINGS.demo===true;
 document.getElementById('set-seslen').value = String(sessionLen());
 document.getElementById('note-seslen').textContent = sessionLen();
+document.getElementById('cnt-bundled').textContent = (ORIG.length||0).toLocaleString();
 syncDemoUI();
 document.getElementById('cv-exam').innerHTML=EXAMS.filter(e=>!e.retired).map(e=>`<option value="${e.id}">AWS ${e.short} (${e.id})</option>`).join('');
 updateUsageUI();
