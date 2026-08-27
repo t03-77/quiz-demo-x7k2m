@@ -14,21 +14,21 @@ const path = require('path');
   await page.goto(url);
   await page.waitForSelector('.examcard');
 
-  // 説明文にテンプレートの書き損じが残っていないか
+  // 学習画面から問題数を変えられるか（設定を開かずに済むこと）
   await page.locator('.examcard', { hasText: 'Solutions Architect – Professional' }).first().click();
   await page.waitForSelector('#v-home.on');
-  const note = await page.locator('#v-home .note', { hasText: '1セットは' }).first().innerText();
-  if (/\$\{/.test(note)) throw new Error('説明文にテンプレートの記号が残っている: ' + note.slice(0, 60));
-  console.log('セット数の表示:', (note.match(/1セットは\s*(\d+)\s*問/) || [])[0] || '(見つからない)');
+  const note = await page.inputValue('#home-seslen');
+  console.log('学習画面の問題数:', note + '問');
+  if (!note) throw new Error('学習画面に問題数の選択がない');
 
-  // 設定で5問に変更
+  // 設定画面で変えると学習画面にも反映されるか（双方向であること）
   await page.locator('nav button[data-v="settings"]').click();
   await page.selectOption('#set-seslen', '5');
   await page.locator('nav button[data-v="exams"]').click();
   await page.locator('.examcard', { hasText: 'Solutions Architect – Professional' }).first().click();
-  const note2 = await page.locator('#v-home .note', { hasText: '1セットは' }).first().innerText();
-  console.log('変更後の表示:', (note2.match(/1セットは\s*(\d+)\s*問/) || [])[0]);
-  if (!/1セットは\s*5\s*問/.test(note2)) throw new Error('設定が説明文に反映されていない');
+  const note2 = await page.inputValue('#home-seslen');
+  console.log('設定で5問にした後:', note2 + '問');
+  if (note2 !== '5') throw new Error('設定が学習画面に反映されていない');
 
   // 5問解いたらセットが終わるか
   await page.locator('button:has-text("問題を解く")').click();

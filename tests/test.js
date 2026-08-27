@@ -8,7 +8,14 @@ const { waitQuestion, answer } = require('./answer');
   const browser = await chromium.launch({ channel: 'msedge', headless: true });
   const page = await browser.newPage({ viewport: { width: 420, height: 900 } });
   page.on('pageerror', e => errors.push('pageerror: ' + e.message));
-  page.on('console', m => { if (m.type() === 'error') errors.push('console: ' + m.text()); });
+  // 配布するときだけ置くファイル（音声トラック定義・デモ用キー）は、無くても正常。
+  // 404は意図した動作なのでエラーとして数えない
+  const OPTIONAL = /audio_tracks|demo_key|\.mp3/;
+  page.on('console', m => {
+    if (m.type() !== 'error') return;
+    if (/ERR_FILE_NOT_FOUND|Failed to load resource/.test(m.text()) && OPTIONAL.test(m.location().url || '')) return;
+    errors.push('console: ' + m.text());
+  });
 
   const url = 'file:///' + path.resolve('C:/Users/na7sh/Works/95_work/aws/01_projects/cert_quiz_app/index.html').replace(/\\/g, '/');
   await page.goto(url);

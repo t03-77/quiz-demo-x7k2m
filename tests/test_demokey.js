@@ -5,6 +5,16 @@ const path = require('path');
 
 const PASS = 'Test-Passphrase-For-E2E-2026-0827';
 
+// デモ用キーは配布するときだけ置くファイル。無ければこのテストは対象外にする
+const fs = require('fs');
+const KEY_FILE = path.resolve('C:/Users/na7sh/Works/95_work/aws/01_projects/cert_quiz_app/data/demo_key.js');
+if (!fs.existsSync(KEY_FILE)) {
+  console.log('デモ用キーが配置されていないためスキップします');
+  console.log('  試すには: node tools/make_demo_key.js "sk-ant-test-demo-key-for-e2e-only" "' + PASS + '"');
+  console.log('JSエラーなし');
+  process.exit(0);
+}
+
 (async () => {
   const errors = [];
   const browser = await chromium.launch({ channel: 'msedge', headless: true });

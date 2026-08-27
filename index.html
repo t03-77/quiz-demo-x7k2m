@@ -186,7 +186,15 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
       <button class="chip act" onclick="startQuiz('random')">▶ ランダム</button>
       <button class="chip act" onclick="startQuiz('seq')">▶ 順番どおり</button>
     </div>
-    <div class="note">「おまかせ」は <b>前回まちがえた問題 → そろそろ復習の問題 → はじめての問題</b> の順に出します。同じ問題に2回続けて正解すると習得済みになり、その後も忘却対策で間隔をあけて再登場します。1セットは <b id="note-seslen">10</b> 問（設定で変更できます）。<br><b>途中でやめても、解いた分の記録は残ります。</b>次に開いたときは続きから出題されます。<br>PCでは A〜F キーで選択、Enter で回答・次の問題へ進めます。</div>
+    <div class="formrow" style="margin-bottom:6px"><label>1セットの問題数</label>
+      <select id="home-seslen" style="width:100%" onchange="SETTINGS.sessionLen=this.value;lsSet(SETTINGS_KEY,SETTINGS);refreshHome();document.getElementById('set-seslen').value=this.value">
+        <option value="5">5問 — すきま時間に</option>
+        <option value="10">10問 — 標準</option>
+        <option value="20">20問 — じっくり</option>
+        <option value="30">30問 — 長めに</option>
+      </select>
+    </div>
+    <div class="note">「おまかせ」は <b>前回まちがえた問題 → そろそろ復習の問題 → はじめての問題</b> の順に出します。同じ問題に2回続けて正解すると習得済みになり、その後も忘却対策で間隔をあけて再登場します。<br><b>途中でやめても、解いた分の記録は残ります。</b>次に開いたときは続きから出題されます。<br>PCでは A〜F キーで選択、Enter で回答・次の問題へ進めます。</div>
   </div>
   <div class="card">
     <h2>模擬試験モード</h2>
@@ -253,7 +261,25 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
 
     <div style="border-top:1px solid var(--grid);padding-top:10px;margin-top:4px">
       <div style="font-weight:700;font-size:14px;margin-bottom:2px">方法1　問題ファイルを読み込む</div>
-      <div class="note" style="margin-bottom:6px">問題をまとめた JSON ファイル（<code>questions_all.json</code> など）があれば、そのまま取り込めます。AWS公式の模擬試験を持っている場合はこちらです。</div>
+      <div class="note" style="margin-bottom:6px">下の形式で書かれた <b>JSONファイル</b>があれば、そのまま取り込めます。ファイル名は何でも構いません。</div>
+      <details style="margin-bottom:8px">
+        <summary style="font-size:13px;cursor:pointer;color:var(--accent)">ファイルの書き方を見る</summary>
+        <pre style="font-size:11px;background:var(--page);border:1px solid var(--grid);border-radius:8px;padding:9px;overflow-x:auto;margin-top:6px">[
+  {
+    "id": "MY-001",
+    "exam": "SAA-C03",
+    "question": "問題文をここに書きます。",
+    "n_correct": 1,
+    "options": [
+      {"letter":"A","text":"選択肢A","correct":true,
+       "explanation":"正解です。理由をここに。"},
+      {"letter":"B","text":"選択肢B","correct":false,
+       "explanation":"不正解です。理由をここに。"}
+    ]
+  }
+]</pre>
+        <div class="note" style="margin-top:6px"><b>必須</b>は <code>id</code>（重複しない文字列）／<code>exam</code>（試験ID）／<code>question</code>／<code>options</code>。<br><code>n_correct</code> は正解の数（省略すると1）。<code>explanation</code> は省略できますが、あると復習に役立ちます。<br>複数の試験の問題を1つのファイルに混ぜても構いません（<code>exam</code> で振り分けられます）。</div>
+      </details>
       <div class="bankbar" style="margin-bottom:8px"><span class="st" id="bank-status2">確認中…</span></div>
       <button class="btn sub" onclick="document.getElementById('bankfile').click()">📄 ファイルを選ぶ</button>
       <div id="bank-remove" style="display:none;margin-top:6px"><button class="dangerlink" onclick="removeBank()">読み込んだ問題を削除する</button></div>
@@ -285,16 +311,10 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
     <div class="formrow"><label>APIキー</label><input type="password" id="set-key" placeholder="sk-ant-... または sk-..." onchange="saveSettings()"></div>
     <div class="formrow"><label>使用モデル</label>
       <input id="set-model" list="model-presets" style="width:100%" placeholder="claude-sonnet-5" onchange="saveSettings()">
-      <datalist id="model-presets">
-        <option value="claude-haiku-4-5">Anthropic / 安価</option>
-        <option value="claude-sonnet-5">Anthropic / バランス</option>
-        <option value="claude-opus-5">Anthropic / 高性能</option>
-        <option value="gpt-5.6-luna">OpenAI / 安価</option>
-        <option value="gpt-5.6-terra">OpenAI / バランス</option>
-        <option value="gpt-5.6-sol">OpenAI / 高性能</option>
-      </datalist>
+      <datalist id="model-presets"></datalist>
     </div>
-    <div class="note" style="margin-top:-4px;margin-bottom:8px"><b>モデル名は各社のドキュメントで確認して入力してください。</b>候補は目安で、新しいモデルが出ると変わります。<code>gpt-</code> で始まる名前ならOpenAI、それ以外はAnthropicのAPIに送ります。</div>
+    <button class="btn sub" style="margin-bottom:6px" onclick="fetchModels()">🔄 提供元から最新のモデル一覧を取得</button>
+    <div class="note" id="model-note" style="margin-bottom:8px">候補は目安です。<b>APIキーを入れて上のボタンを押すと、提供元から実際に使えるモデルを取得</b>できます。<code>gpt-</code> で始まる名前ならOpenAI、それ以外はAnthropicのAPIに送ります。</div>
     <div class="formrow"><label>月の予算上限(USD)</label><input type="number" id="set-budget" value="2" min="0" step="0.5" onchange="saveSettings()"></div>
     <div class="note">今月の使用額（概算）: $<span id="set-usage">0.00</span>。上限に達するとAI機能は自動停止します。<b>料金は変わるため、表示は目安であり請求額そのものではありません。</b><br><b>キーはこの端末のブラウザ内にだけ保存</b>され、送信先は選んだモデルの提供元（AnthropicまたはOpenAI）のAPIだけです。キーがなくてもAI以外の全機能を使えます。</div>
   </div>
@@ -318,15 +338,17 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
         <option value="30">30問 — 長めに</option>
       </select>
     </div>
-    <div class="note" style="margin-top:4px">区切りとして結果をまとめる単位です。<b>回答は1問ごとに保存される</b>ので、セットの途中でやめても記録は残り、次回は続きから出題されます。</div>
+    <div class="note" style="margin-top:4px">区切りとして結果をまとめる単位です。<b>「問題を解く」では回答が1問ごとに保存される</b>ので、セットの途中でやめても記録は残り、次回は続きから出題されます。<br>ただし<b>模擬試験モードは最後まで解くか時間切れになるまで記録されません</b>（本番と同じ扱いにするためです。中断すると採点もされません）。</div>
   </div>
   <div class="card">
     <h2>学習データ</h2>
-    <button class="btn sub" onclick="exportProgress()">全試験の進捗をエクスポート</button>
-    <button class="btn sub" onclick="document.getElementById('imp').click()">進捗をインポート</button>
+    <div class="note" style="margin-bottom:8px">正答率・習得状態・復習の予定は、<b>この端末のブラウザ内にだけ</b>保存されます。<br>そのため<b>別の端末では引き継がれず、ブラウザのデータを消すと失われます</b>。下のボタンでファイルに書き出しておけば、別の端末や新しいブラウザで読み込んで続きから学習できます。</div>
+    <button class="btn sub" onclick="exportProgress()">📥 進捗をファイルに保存</button>
+    <div class="note" style="margin-bottom:8px">全試験ぶんの学習記録を1つのJSONファイルにまとめて書き出します。機種変更の前や、定期的なバックアップに。</div>
+    <button class="btn sub" onclick="document.getElementById('imp').click()">📤 保存したファイルから復元</button>
     <input type="file" id="imp" accept=".json" style="display:none" onchange="importProgress(this)">
-    <div class="note">進捗はこの端末のブラウザ内にのみ保存されます。試験ごとに分けて管理されます。</div>
-    <button class="dangerlink" onclick="resetProgress()">全試験の進捗をリセットする</button>
+    <div class="note">書き出したファイルを読み込んで、学習記録を復元します。<b>いまの記録は上書きされます。</b></div>
+    <button class="dangerlink" style="margin-top:10px" onclick="resetProgress()">全試験の進捗をリセットする</button>
   </div>
 </div>
 </main>
@@ -386,7 +408,13 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
 <script src="data/exams.js"></script>
 <script src="data/glossary.js"></script>
 <script src="data/diagrams.js"></script>
-<script src="data/demo_key.js"></script><!-- デモ用の暗号化キー(配布しない場合は無い) -->
+<script>
+/* デモ用の暗号化キーは配布するときだけ置かれる。
+   無いときに404のエラーを出さないよう、動的に読み込んで失敗を握りつぶす。 */
+(function(){ var s=document.createElement('script'); s.src='data/demo_key.js';
+  s.onerror=function(){}; s.onload=function(){ if(window.syncDemoUI) syncDemoUI(); };
+  document.head.appendChild(s); })();
+</script>
 <script src="data/orig.js"></script>
 <script src="data/demo_audio.js"></script>
 <script src="data/audio_tracks.js"></script><!-- 公式問題の読み上げ(ローカルのみ、なければ404で無視される) -->
@@ -1120,6 +1148,49 @@ async function unlockDemoKey(){
   }
 }
 function activeKey(){ return UNLOCKED_KEY || (SETTINGS.key||'').trim(); }
+
+/* モデル名は次々に増える。アプリに書いた候補はすぐ古くなるので、
+   提供元のAPIから実際に使える一覧を取れるようにしている。
+   取得した一覧はこの端末に保存し、次回からは候補として出す。 */
+const MODEL_FALLBACK=[
+  ['claude-sonnet-5','Anthropic'],['claude-opus-5','Anthropic'],['claude-haiku-4-5','Anthropic'],
+  ['gpt-5.6-terra','OpenAI'],['gpt-5.6-sol','OpenAI'],['gpt-5.6-luna','OpenAI'],
+];
+function renderModelList(){
+  const list=(SETTINGS.models&&SETTINGS.models.length)? SETTINGS.models : MODEL_FALLBACK;
+  document.getElementById('model-presets').innerHTML =
+    list.map(([id,label])=>`<option value="${esc(id)}">${esc(label||'')}</option>`).join('');
+}
+async function fetchModels(){
+  const note=document.getElementById('model-note');
+  const key=activeKey();
+  if(!key){ note.textContent='先にAPIキーを入れてください。'; return; }
+  note.textContent='取得しています…';
+  const openai=key.startsWith('sk-') && !key.startsWith('sk-ant');
+  try{
+    const res=await fetch(openai? 'https://api.openai.com/v1/models'
+                                : 'https://api.anthropic.com/v1/models?limit=100', {
+      headers: openai? {'authorization':'Bearer '+key}
+                     : {'x-api-key':key, 'anthropic-version':'2023-06-01',
+                        'anthropic-dangerous-direct-browser-access':'true'},
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const d=await res.json();
+    const src=openai? (d.data||[]) : (d.data||[]);
+    const got=src.map(m=>[m.id, m.display_name||(openai?'OpenAI':'Anthropic')])
+                 .filter(([id])=>openai? /^(gpt|o[0-9])/.test(id) : /^claude/.test(id));
+    if(!got.length) throw new Error('一覧が空でした');
+    // もう一方の提供元の候補は残しておく(両方使う人がいるため)
+    const keep=(SETTINGS.models||MODEL_FALLBACK).filter(([id])=>
+      openai? !/^(gpt|o[0-9])/.test(id) : !/^claude/.test(id));
+    SETTINGS.models=got.concat(keep);
+    lsSet(SETTINGS_KEY, SETTINGS);
+    renderModelList();
+    note.innerHTML='<b>'+got.length+'件を取得しました。</b>使用モデル欄をタップすると候補に出ます。';
+  }catch(e){
+    note.textContent='取得できませんでした（'+e.message+'）。モデル名は各社のドキュメントで確認して直接入力してください。';
+  }
+}
 function aiReady(){
   if(demoMode()) return true;   // デモモードはAPIに接続しないのでキー不要
   const key=activeKey();
@@ -1172,7 +1243,7 @@ async function aiCall(messages, opts={}){
     await new Promise(r=>setTimeout(r, 700));   // 応答を待つ感じを再現する
     return demoReply(messages, opts);
   }
-  const model=SETTINGS.model||'claude-haiku-4-5';
+  const model=SETTINGS.model||'claude-sonnet-5';
   const key=activeKey();
   return isOpenAI(model)? callOpenAI(model, key, messages, opts)
                         : callAnthropic(model, key, messages, opts);
@@ -1362,8 +1433,8 @@ function saveSettings(){
   SETTINGS.demo=document.getElementById('set-demo').checked;
   SETTINGS.sessionLen=document.getElementById('set-seslen').value;
   lsSet(SETTINGS_KEY, SETTINGS);
-  const nl=document.getElementById('note-seslen');
-  if(nl) nl.textContent=sessionLen();
+  const hs=document.getElementById('home-seslen');
+  if(hs) hs.value=String(sessionLen());
   syncDemoUI();
 }
 function syncDemoUI(){
@@ -1458,12 +1529,12 @@ if(SETTINGS.theme) document.documentElement.dataset.theme=SETTINGS.theme;
 else if(matchMedia('(prefers-color-scheme: dark)').matches) document.documentElement.dataset.theme='dark';
 document.getElementById('set-key').value=SETTINGS.key||'';
 document.getElementById('set-budget').value=SETTINGS.budget||2;
-document.getElementById('set-model').value=SETTINGS.model||'claude-haiku-4-5';
+document.getElementById('set-model').value=SETTINGS.model||'claude-sonnet-5';
+renderModelList();
 document.getElementById('set-shuffle').checked = SETTINGS.shuffle!==false;
 document.getElementById('set-srs').checked = SETTINGS.srs!==false;
 document.getElementById('set-demo').checked = SETTINGS.demo===true;
 document.getElementById('set-seslen').value = String(sessionLen());
-document.getElementById('note-seslen').textContent = sessionLen();
 document.getElementById('cnt-bundled').textContent = (ORIG.length||0).toLocaleString();
 syncDemoUI();
 document.getElementById('cv-exam').innerHTML=EXAMS.filter(e=>!e.retired).map(e=>`<option value="${e.id}">AWS ${e.short} (${e.id})</option>`).join('');
