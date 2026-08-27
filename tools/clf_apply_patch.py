@@ -28,7 +28,7 @@ GEN = BASE / "資料" / "生成"
 EXAM = "CLF-C02"
 SNAP = BASE / "tools" / "_clf_snapshot.json"
 # 基礎資格の選択肢としての自然な長さ
-MIN_LEN, MAX_LEN = 12, 130
+MIN_LEN, MAX_LEN = 4, 130
 
 
 def main(patch_path):
