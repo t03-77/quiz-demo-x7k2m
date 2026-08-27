@@ -186,11 +186,11 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
       <button class="chip act" onclick="startQuiz('random')">▶ ランダム</button>
       <button class="chip act" onclick="startQuiz('seq')">▶ 順番どおり</button>
     </div>
-    <div class="note">「おまかせ」は <b>前回まちがえた問題 → そろそろ復習の問題 → はじめての問題</b> の順に出します。同じ問題に2回続けて正解すると習得済みになり、その後も忘却対策で間隔をあけて再登場します。1セットは${'10'}問です。<br>PCでは A〜F キーで選択、Enter で回答・次の問題へ進めます。</div>
+    <div class="note">「おまかせ」は <b>前回まちがえた問題 → そろそろ復習の問題 → はじめての問題</b> の順に出します。同じ問題に2回続けて正解すると習得済みになり、その後も忘却対策で間隔をあけて再登場します。1セットは <b id="note-seslen">10</b> 問（設定で変更できます）。<br><b>途中でやめても、解いた分の記録は残ります。</b>次に開いたときは続きから出題されます。<br>PCでは A〜F キーで選択、Enter で回答・次の問題へ進めます。</div>
   </div>
   <div class="card">
     <h2>模擬試験モード</h2>
-    <div class="note" style="margin-bottom:8px">本番同様、途中の正解表示なしで連続出題し、最後にまとめて採点します(時間切れで自動終了)。上の出題セットの絞り込みが反映されます。</div>
+    <div class="note" style="margin-bottom:8px"><b>本番と同じ制限時間で計ります。</b>画面上部に残り時間が出て、時間切れになるとそこまでの回答で自動採点します。途中で正解は表示せず、最後にまとめて採点・合否判定します（本番の合格スコアで判定）。<br>いちばん上の選択肢が<b>本番と同じ問題数・同じ時間</b>です。短いものは時間配分の練習に使えます。</div>
     <div class="chiprow" id="h-mock"></div>
   </div>
 </div>
@@ -293,6 +293,15 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
       間隔反復で復習する(推奨)
     </label>
     <div class="note" style="margin-top:4px">習得済みの問題を 1日 → 3日 → 7日 → 14日 → 30日 の間隔で自動的に再出題します(忘却曲線対策)。間違えると間隔はリセットされます。</div>
+    <div class="formrow" style="margin-top:12px"><label>1セットの問題数</label>
+      <select id="set-seslen" style="width:100%" onchange="saveSettings();if(currentExam)refreshHome()">
+        <option value="5">5問 — すきま時間に</option>
+        <option value="10">10問 — 標準</option>
+        <option value="20">20問 — じっくり</option>
+        <option value="30">30問 — 長めに</option>
+      </select>
+    </div>
+    <div class="note" style="margin-top:4px">区切りとして結果をまとめる単位です。<b>回答は1問ごとに保存される</b>ので、セットの途中でやめても記録は残り、次回は続きから出題されます。</div>
   </div>
   <div class="card">
     <h2>学習データ</h2>
@@ -572,7 +581,10 @@ function refreshHome(){
 
 /* ---------- 演習 ---------- */
 let cur=null, mode='auto', sel=new Set(), ordSel=[], sessionN=0;
-const SESSION_LEN = 10;          // 練習1セットの問題数。区切りを作り達成感と復習の機会を与える
+// 練習1セットの問題数。区切りを作り達成感と復習の機会を与える。
+// 一度に解ける量は人によって違うので、設定で変えられるようにしている
+// (回答は1問ごとに保存されるので、途中でやめても記録は残る)
+function sessionLen(){ return parseInt(SETTINGS.sessionLen || 10, 10); }
 let sessionLog = [];
 function startQuiz(m, dom){
   if(MOCK){ clearInterval(MOCK.timer); MOCK=null; }
@@ -601,7 +613,7 @@ function nextQ(){
   }
   cur = byId(id); sel=new Set(); ordSel=[];
   sessionN++;
-  const denom = (mode==='queue')? sessionN+REVIEW_QUEUE.length : SESSION_LEN;
+  const denom = (mode==='queue')? sessionN+REVIEW_QUEUE.length : sessionLen();
   document.getElementById('q-pbar').style.width = Math.round((sessionN-1)/denom*100)+'%';
   renderQ();
 }
@@ -649,7 +661,7 @@ function renderQ(){
     head+=`<span style="margin-left:auto"><button class="iconbtn" onclick="quitMock()">中断</button></span></div>`;
   } else {
     // 学習者が知りたい順に並べる。内部IDは報告用なので最後に控えめに置く
-    const denom = (mode==='queue')? sessionN+REVIEW_QUEUE.length : SESSION_LEN;
+    const denom = (mode==='queue')? sessionN+REVIEW_QUEUE.length : sessionLen();
     head = `<div class="qmeta"><span class="tag" style="font-weight:700;color:var(--ink2)">${sessionN}問目 / ${denom}</span>`;
     head+=`<span class="tag">${SET_LABELS[q.set]||q.set}</span>`;
     if(q.type==='ordering') head+=`<span class="tag warn">並び替え</span>`;
@@ -843,7 +855,7 @@ function renderResult(ok, chosen, correctAns, review){
   if(review==='session') h += `<div class="rowbtns"><button class="btn" onclick="finishSession()">結果一覧へ戻る</button></div>`;
   else if(review) h += `<div class="rowbtns"><button class="btn" onclick="document.getElementById('q-card').innerHTML=MOCK.resultHtml;window.scrollTo(0,0)">結果一覧へ戻る</button></div>`;
   else if(mode==='queue') h += `<div class="rowbtns"><button class="btn" onclick="nextQ()">${REVIEW_QUEUE.length? `次の問題 ▶ (残り${REVIEW_QUEUE.length}問)` : '結果を見る ▶'}</button></div>`;
-  else if(sessionN>=SESSION_LEN) h += `<div class="rowbtns"><button class="btn" onclick="finishSession()">このセットの結果を見る ▶</button></div>`;
+  else if(sessionN>=sessionLen()) h += `<div class="rowbtns"><button class="btn" onclick="finishSession()">このセットの結果を見る ▶</button></div>`;
   else h += `<div class="rowbtns"><button class="btn sub" onclick="switchView('home')">中断</button><button class="btn" onclick="nextQ()">次の問題 ▶</button></div>`;
   document.getElementById('q-card').innerHTML = h;
   renderDiagram(q);
@@ -1242,7 +1254,10 @@ function saveSettings(){
   SETTINGS.budget=document.getElementById('set-budget').value;
   SETTINGS.model=document.getElementById('set-model').value;
   SETTINGS.demo=document.getElementById('set-demo').checked;
+  SETTINGS.sessionLen=document.getElementById('set-seslen').value;
   lsSet(SETTINGS_KEY, SETTINGS);
+  const nl=document.getElementById('note-seslen');
+  if(nl) nl.textContent=sessionLen();
   syncDemoUI();
 }
 function syncDemoUI(){
@@ -1338,6 +1353,8 @@ document.getElementById('set-model').value=SETTINGS.model||'claude-haiku-4-5';
 document.getElementById('set-shuffle').checked = SETTINGS.shuffle!==false;
 document.getElementById('set-srs').checked = SETTINGS.srs!==false;
 document.getElementById('set-demo').checked = SETTINGS.demo===true;
+document.getElementById('set-seslen').value = String(sessionLen());
+document.getElementById('note-seslen').textContent = sessionLen();
 syncDemoUI();
 document.getElementById('cv-exam').innerHTML=EXAMS.filter(e=>!e.retired).map(e=>`<option value="${e.id}">AWS ${e.short} (${e.id})</option>`).join('');
 updateUsageUI();
