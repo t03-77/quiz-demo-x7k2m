@@ -30,7 +30,7 @@ const path = require('path');
 
   // GPTを選んでOpenAIのキーを入れる
   await page.locator('nav button[data-v="settings"]').click();
-  await page.selectOption('#set-model', 'gpt-4o-mini');
+  await page.fill('#set-model', 'gpt-5.6-luna'); await page.locator('#set-model').blur();
   await page.fill('#set-key', 'sk-test-openai-key');
   await page.locator('#set-key').blur();
 
@@ -57,11 +57,11 @@ const path = require('path');
   await page.mouse.click(10, 100);
   await page.locator('nav button[data-v="settings"]').click();
   const usage = await page.locator('#set-usage').innerText();
-  console.log('使用額:', '$' + usage, '(1000in+500out の gpt-4o-mini = $0.00045)');
+  console.log('使用額:', '$' + usage, '(1000in+500out の gpt-5.6-luna = $0.00045)');
   if (parseFloat(usage) === 0 && usage === '0.00') console.log('  ※小数第2位までの表示なので0.00でよい');
 
   // キーの種類が合っていないときに気づけるか
-  await page.selectOption('#set-model', 'claude-haiku-4-5');
+  await page.fill('#set-model', 'claude-haiku-4-5'); await page.locator('#set-model').blur();
   await page.locator('nav button[data-v="exams"]').click();
   await page.locator('.examcard', { hasText: 'Solutions Architect – Associate' }).first().click();
   await page.locator('button:has-text("問題を解く")').click();

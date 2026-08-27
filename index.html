@@ -277,20 +277,19 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
     <div class="note" id="demo-note" style="display:none">APIには接続せず、あらかじめ用意した応答を返します。人に見せるときや、機能の雰囲気を確かめたいときに使ってください。料金はかかりません。</div>
     <div class="formrow"><label>APIキー</label><input type="password" id="set-key" placeholder="sk-ant-... または sk-..." onchange="saveSettings()"></div>
     <div class="formrow"><label>使用モデル</label>
-      <select id="set-model" style="width:100%" onchange="saveSettings()">
-        <optgroup label="Anthropic（キーは sk-ant- で始まる）">
-          <option value="claude-haiku-4-5">Claude Haiku 4.5 — 安価（標準）</option>
-          <option value="claude-sonnet-5">Claude Sonnet 5 — バランス</option>
-          <option value="claude-opus-5">Claude Opus 5 — 高性能</option>
-        </optgroup>
-        <optgroup label="OpenAI（キーは sk- で始まる）">
-          <option value="gpt-4o-mini">GPT-4o mini — 安価</option>
-          <option value="gpt-4o">GPT-4o — バランス</option>
-        </optgroup>
-      </select>
+      <input id="set-model" list="model-presets" style="width:100%" placeholder="claude-sonnet-5" onchange="saveSettings()">
+      <datalist id="model-presets">
+        <option value="claude-haiku-4-5">Anthropic / 安価</option>
+        <option value="claude-sonnet-5">Anthropic / バランス</option>
+        <option value="claude-opus-5">Anthropic / 高性能</option>
+        <option value="gpt-5.6-luna">OpenAI / 安価</option>
+        <option value="gpt-5.6-terra">OpenAI / バランス</option>
+        <option value="gpt-5.6-sol">OpenAI / 高性能</option>
+      </datalist>
     </div>
+    <div class="note" style="margin-top:-4px;margin-bottom:8px"><b>モデル名は各社のドキュメントで確認して入力してください。</b>候補は目安で、新しいモデルが出ると変わります。<code>gpt-</code> で始まる名前ならOpenAI、それ以外はAnthropicのAPIに送ります。</div>
     <div class="formrow"><label>月の予算上限(USD)</label><input type="number" id="set-budget" value="2" min="0" step="0.5" onchange="saveSettings()"></div>
-    <div class="note">今月の使用額: $<span id="set-usage">0.00</span>。上限に達するとAI機能は自動停止します。<b>キーはこの端末のブラウザ内にだけ保存</b>され、送信先は選んだモデルの提供元（AnthropicまたはOpenAI）のAPIだけです。キーがなくてもAI以外の全機能を使えます。</div>
+    <div class="note">今月の使用額（概算）: $<span id="set-usage">0.00</span>。上限に達するとAI機能は自動停止します。<b>料金は変わるため、表示は目安であり請求額そのものではありません。</b><br><b>キーはこの端末のブラウザ内にだけ保存</b>され、送信先は選んだモデルの提供元（AnthropicまたはOpenAI）のAPIだけです。キーがなくてもAI以外の全機能を使えます。</div>
   </div>
   <div class="card">
     <h2>学習設定</h2>
@@ -1064,12 +1063,15 @@ document.querySelectorAll('[data-sp]').forEach(b=>b.onclick=()=>{
 document.getElementById('player').addEventListener('ended',()=>{ if(trackIdx<visibleTracks().length-1) playTrack(trackIdx+1); });
 
 /* ---------- AI連携 ---------- */
-const AI_PRICES = {'claude-haiku-4-5':[1,5], 'claude-sonnet-5':[3,15], 'claude-opus-5':[5,25],
-                   'gpt-4o-mini':[0.15,0.6], 'gpt-4o':[2.5,10]}; // $/MTok [入力,出力]
+/* 使用額の概算に使う単価 ($/MTok, [入力,出力])。
+   料金もモデル名も変わるので、載っていないモデルは高めの既定値で見積もる。
+   予算上限を超えないための目安であり、請求額そのものではない。 */
+const AI_PRICES = {'claude-haiku-4-5':[1,5], 'claude-sonnet-5':[3,15], 'claude-opus-5':[5,25]};
+const AI_PRICE_DEFAULT = [5,25];
 const monthKey = ()=>new Date().toISOString().slice(0,7);
 function aiUsage(){ return (SETTINGS.aiUsage||{})[monthKey()]||0; }
 function recordAiCost(model, usage){
-  const [ri,ro]=AI_PRICES[model]||[5,25];
+  const [ri,ro]=AI_PRICES[model]||AI_PRICE_DEFAULT;
   const cost=((usage.input_tokens||0)*ri+(usage.output_tokens||0)*ro)/1e6;
   SETTINGS.aiUsage=SETTINGS.aiUsage||{};
   SETTINGS.aiUsage[monthKey()]=aiUsage()+cost;
@@ -1319,7 +1321,7 @@ function updateUserCount(){
 function saveSettings(){
   SETTINGS.key=document.getElementById('set-key').value;
   SETTINGS.budget=document.getElementById('set-budget').value;
-  SETTINGS.model=document.getElementById('set-model').value;
+  SETTINGS.model=(document.getElementById('set-model').value||'').trim()||'claude-haiku-4-5';
   SETTINGS.demo=document.getElementById('set-demo').checked;
   SETTINGS.sessionLen=document.getElementById('set-seslen').value;
   lsSet(SETTINGS_KEY, SETTINGS);
