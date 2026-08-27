@@ -383,6 +383,36 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
   </div>
 </div>
 
+<!-- 不具合・問題の報告シート -->
+<div class="sheet" id="repsheet" onclick="if(event.target===this)this.classList.remove('on')">
+  <div class="panel">
+    <div style="display:flex;align-items:flex-start;gap:10px">
+      <h3 style="flex:1">この問題を報告</h3>
+      <button class="iconbtn" onclick="document.getElementById('repsheet').classList.remove('on')">閉じる</button>
+    </div>
+    <div class="note" style="margin-bottom:10px"><b>問題文や選択肢を書き写す必要はありません。</b>どの問題かは自動で添えられます。</div>
+    <div class="formrow"><label>どうしましたか</label>
+      <select id="rep-kind" style="width:100%">
+        <option>正解や解説がおかしい</option>
+        <option>問題が簡単すぎる・本番と違う</option>
+        <option>問題文や選択肢の日本語がおかしい</option>
+        <option>試験範囲から外れている</option>
+        <option>アプリの動作がおかしい</option>
+        <option>その他</option>
+      </select>
+    </div>
+    <div class="formrow"><label>詳しく（任意）</label>
+      <textarea id="rep-note" rows="4" style="width:100%;font-size:13px;padding:9px;border-radius:9px;border:1px solid var(--grid);background:var(--page);color:var(--ink)" placeholder="例: Bも正解になるのでは。〜の場合は…"></textarea>
+    </div>
+    <div id="rep-actions"></div>
+    <div class="note" id="rep-msg" style="margin-top:8px"></div>
+    <details style="margin-top:10px">
+      <summary style="font-size:13px;cursor:pointer;color:var(--accent)">送る内容を確認する</summary>
+      <pre id="rep-preview" style="font-size:11px;background:var(--page);border:1px solid var(--grid);border-radius:8px;padding:9px;overflow-x:auto;margin-top:6px;white-space:pre-wrap"></pre>
+    </details>
+  </div>
+</div>
+
 <!-- AIチャットシート -->
 <div class="sheet" id="aisheet" onclick="if(event.target===this)this.classList.remove('on')">
   <div class="panel" style="max-height:80vh">
@@ -408,6 +438,7 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
 <script src="data/exams.js"></script>
 <script src="data/glossary.js"></script>
 <script src="data/diagrams.js"></script>
+<script src="data/report.js"></script><!-- 不具合報告の送信先(未設定ならコピーのみ) -->
 <script>
 /* デモ用の暗号化キーは配布するときだけ置かれる。
    無いときに404のエラーを出さないよう、動的に読み込んで失敗を握りつぶす。 */
@@ -915,6 +946,7 @@ function renderResult(ok, chosen, correctAns, review){
   if(gx) h += `<div class="expl"><div class="h">解説</div><div class="body">${linkify(gx)}</div></div>`;
   if(findDiagram(q)) h += `<div class="expl" id="diagram-box"><div class="h">図</div><div class="body" id="diagram-body">読み込み中…</div></div>`;
   h += `<button class="btn sub" style="margin-top:8px" onclick="openAiChat(buildQuestionCtx(cur), 'この問題について')">🤖 この問題についてAIに質問</button>`;
+  h += `<button class="btn sub" style="margin-top:6px" onclick="openReport()">🚩 この問題を報告する</button>`;
   if(review==='session') h += `<div class="rowbtns"><button class="btn" onclick="finishSession()">結果一覧へ戻る</button></div>`;
   else if(review) h += `<div class="rowbtns"><button class="btn" onclick="document.getElementById('q-card').innerHTML=MOCK.resultHtml;window.scrollTo(0,0)">結果一覧へ戻る</button></div>`;
   else if(mode==='queue') h += `<div class="rowbtns"><button class="btn" onclick="nextQ()">${REVIEW_QUEUE.length? `次の問題 ▶ (残り${REVIEW_QUEUE.length}問)` : '結果を見る ▶'}</button></div>`;
@@ -923,6 +955,85 @@ function renderResult(ok, chosen, correctAns, review){
   document.getElementById('q-card').innerHTML = h;
   renderDiagram(q);
   window.scrollTo(0,0);
+}
+
+/* ---------- 不具合・問題の報告 ----------
+   使う人が「この問題おかしい」と気づいたとき、問題文を書き写さずに知らせられるようにする。
+   問題の中身は自動で添えるので、報告者は種類を選んで一言書くだけでよい。
+
+   送信先は data/report.js に置く（無ければ「コピー」だけ出す）:
+     window.REPORT_ENDPOINT = 'https://formspree.io/f/xxxxxxx';
+   Formspree などのフォームサービスを挟むことで、
+   **メールアドレスをサイトに載せずに**報告をメールで受け取れる。 */
+function reportText(q){
+  const opts=(q.options||[]).map(o=>
+    `  ${o.letter}. ${o.correct?'[正解] ':''}${o.text}`).join('\n');
+  const st=qs_(q.id), tries=st.attempts||[];
+  const last=tries[tries.length-1];
+  return [
+    `■ 報告の種類: ${document.getElementById('rep-kind').value}`,
+    `■ 内容: ${document.getElementById('rep-note').value || '(記入なし)'}`,
+    '',
+    `■ 問題: ${q.id}（${q.exam} / ${SET_LABELS[q.set]||q.set}${q.domain? ' / '+q.domain:''}）`,
+    `■ 問題文:`,
+    q.question,
+    `■ 選択肢（${q.n_correct||1}つ選択）:`,
+    opts,
+    q.explanation? `■ 解説:\n${q.explanation}` : '',
+    (q.options||[]).some(o=>o.explanation)
+      ? '■ 選択肢ごとの解説:\n'+(q.options||[]).map(o=>`  ${o.letter}. ${o.explanation||''}`).join('\n') : '',
+    '',
+    `■ この人の回答: ${last? (last.chosen||[]).join(',')+(last.correct?'（正解）':'（不正解）') : '未回答'}`,
+    `■ 解いた回数: ${tries.length}回`,
+    `■ 環境: ${navigator.userAgent}`,
+  ].filter(Boolean).join('\n');
+}
+let REPORT_Q=null;
+function openReport(){
+  REPORT_Q=cur;
+  document.getElementById('rep-note').value='';
+  document.getElementById('rep-msg').textContent='';
+  syncReportPreview();
+  document.getElementById('rep-kind').onchange=syncReportPreview;
+  document.getElementById('rep-note').oninput=syncReportPreview;
+  const box=document.getElementById('rep-actions');
+  box.innerHTML = window.REPORT_ENDPOINT
+    ? `<button class="btn" onclick="sendReport()">送信する</button>
+       <button class="btn sub" style="margin-top:6px" onclick="copyReport()">内容をコピーする</button>`
+    : `<button class="btn" onclick="copyReport()">内容をコピーする</button>
+       <div class="note" style="margin-top:6px">コピーした内容を、メールやチャットで管理者に送ってください。</div>`;
+  document.getElementById('repsheet').classList.add('on');
+}
+function syncReportPreview(){
+  if(REPORT_Q) document.getElementById('rep-preview').textContent=reportText(REPORT_Q);
+}
+async function copyReport(){
+  const msg=document.getElementById('rep-msg');
+  try{
+    await navigator.clipboard.writeText(reportText(REPORT_Q));
+    msg.innerHTML='<b>コピーしました。</b>メールやチャットに貼り付けて送ってください。';
+  }catch(e){
+    msg.textContent='コピーできませんでした。下の「送る内容を確認する」から手動で選択してください。';
+  }
+}
+async function sendReport(){
+  const msg=document.getElementById('rep-msg');
+  msg.textContent='送信しています…';
+  try{
+    const res=await fetch(window.REPORT_ENDPOINT,{
+      method:'POST',
+      headers:{'content-type':'application/json','accept':'application/json'},
+      body:JSON.stringify({
+        subject:`[資格学習] ${document.getElementById('rep-kind').value} / ${REPORT_Q.id}`,
+        message:reportText(REPORT_Q),
+      }),
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    msg.innerHTML='<b>送信しました。</b>ありがとうございます。';
+    document.getElementById('rep-actions').innerHTML='';
+  }catch(e){
+    msg.innerHTML='送信できませんでした（'+esc(e.message)+'）。<br>「内容をコピーする」で貼り付けて送ってください。';
+  }
 }
 
 /* ---------- 図解 ----------

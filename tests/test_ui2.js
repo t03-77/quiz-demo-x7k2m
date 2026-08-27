@@ -26,7 +26,7 @@ const path = require('path');
   console.log('JSON例の折りたたみ:', hasSample);
   if (!hasSample) throw new Error('ファイル形式の説明がない');
   await page.locator('details summary:has-text("ファイルの書き方")').click();
-  const sample = await page.locator('details pre').innerText();
+  const sample = await page.locator('.card:has-text("問題を増やす") details pre').first().textContent();
   console.log('例の中身:', sample.includes('"exam"') && sample.includes('"correct"') ? 'exam/correct を含む' : '不足');
 
   // 学習データの説明
