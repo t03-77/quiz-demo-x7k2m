@@ -411,6 +411,15 @@ let currentExam = null;   // 試験ID
 let setFilter = 'all';
 let P = {questions:{}, history:[]};
 function loadProgress(ex){ P = lsGet(progKey(ex)) || {questions:{}, history:[]}; }
+/* 統計に出すのは「いま出題される問題」への回答だけにする。
+   問題を差し替えたり、公式問題の読み込みを外したりしたときに、
+   もう出てこない問題の成績が正答率に混ざると実力を見誤るため。
+   履歴そのものは消さないので、問題が戻れば集計にも戻る。 */
+function liveHistory(){
+  if(!P.history.length) return [];
+  const ids = new Set(examQuestions(currentExam).map(q=>q.id));
+  return P.history.filter(h=>ids.has(h.id));
+}
 const saveP = ()=>{ if(currentExam) lsSet(progKey(currentExam), P); };
 
 /* ---------- 問題プール ---------- */
@@ -553,7 +562,8 @@ function selectExam(ex){
 /* ---------- 試験ホーム ---------- */
 function refreshHome(){
   if(!currentExam){ switchView('exams'); return; }
-  const n=P.history.length, ok=P.history.filter(h=>h.correct).length;
+  const H=liveHistory();
+  const n=H.length, ok=H.filter(h=>h.correct).length;
   document.getElementById('h-rate').textContent = n? Math.round(ok/n*100)+'%':'–';
   document.getElementById('h-count').textContent = n;
   const all=examQuestions(currentExam);
@@ -912,11 +922,12 @@ function zoomDiagram(svg){
 function refreshStats(){
   if(!currentExam){ switchView('exams'); return; }
   const all=examQuestions(currentExam);
-  const n=P.history.length, ok=P.history.filter(h=>h.correct).length;
+  const H=liveHistory();
+  const n=H.length, ok=H.filter(h=>h.correct).length;
   document.getElementById('s-rate').textContent = n? Math.round(ok/n*100)+'%':'–';
   document.getElementById('s-count').textContent = n;
   const today=new Date().toISOString().slice(0,10);
-  document.getElementById('s-streakdays').textContent = P.history.filter(h=>h.date===today).length;
+  document.getElementById('s-streakdays').textContent = H.filter(h=>h.date===today).length;
   const c={'未出題':0,'要復習':0,'再確認待ち':0,'習得済み':0,'復習期':0};
   for(const q of all) c[statusOf(qs_(q.id))]++;
   const total=all.length||1;
@@ -933,7 +944,7 @@ function refreshStats(){
   const qset={}, qdom={};
   for(const q of all){ qset[q.id]=q.set; if(q.domain) qdom[q.id]=q.domain; }
   const setAgg={}, domAgg={};
-  for(const h of P.history){
+  for(const h of H){
     const s=qset[h.id];
     if(s){ (setAgg[s] ??= {n:0, ok:0}); setAgg[s].n++; if(h.correct) setAgg[s].ok++; }
     const d=qdom[h.id];
@@ -950,11 +961,11 @@ function refreshStats(){
       <span style="flex:1;min-width:0">${esc(d)}</span>
       <span style="white-space:nowrap"><b style="color:var(${color})">${pct}%</b> <span class="note">(${a.ok}/${a.n})</span></span></div>`;
   }).join(''):'<div class="emptyhint">分野ごとの成績がここに出ます。まず10問解いてみましょう。</div>';
-  const rec=P.history.slice(-20);
+  const rec=H.slice(-20);
   const recBox=document.getElementById('recent20');
   recBox.innerHTML = rec.length? rec.map(h=>`<span title="${h.id}" style="width:18px;height:18px;border-radius:5px;background:var(${h.correct?'--s1':'--s8'});display:inline-block"></span>`).join(''): '<span class="emptyhint">まだ解いた問題がありません。</span>';
   recBox.nextElementSibling.style.display = rec.length? '' : 'none';   // データが無いのに凡例だけ出さない
-  const wrongs={}; for(const h of P.history) if(!h.correct) wrongs[h.id]=(wrongs[h.id]||0)+1;
+  const wrongs={}; for(const h of H) if(!h.correct) wrongs[h.id]=(wrongs[h.id]||0)+1;
   const top=Object.entries(wrongs).sort((a,b)=>b[1]-a[1]).slice(0,5);
   document.getElementById('weaklist').innerHTML = top.length? top.map(([id,n2])=>{
     const q=byId(id); if(!q) return '';
