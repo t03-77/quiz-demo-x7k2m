@@ -1,0 +1,3371 @@
+{
+ "CLF-C02_orig_001": {
+  "file": "CLF-C02_orig.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドのコンセプト",
+  "level": "easy",
+  "question": "ある企業が自社データセンターの老朽化に伴い、ワークロードを AWS クラウドへ移行することを検討しています。AWS クラウドへ移行することで得られる経済的なメリットはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ハードウェアへの先行投資 (固定費) を、使用量に応じた変動費に置き換えることができる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_002": {
+  "file": "CLF-C02_orig.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドのコンセプト",
+  "level": "medium",
+  "question": "ある企業が AWS Well-Architected フレームワークに基づいてワークロードを設計しています。障害から迅速に復旧する能力や、需要の変化に応じてコンピューティングリソースを動的に獲得する能力を扱う柱はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "信頼性"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_003": {
+  "file": "CLF-C02_orig.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "easy",
+  "question": "ある企業が Amazon EC2 インスタンス上でウェブアプリケーションを実行しています。AWS 責任共有モデルにおいて、顧客の責任となるのはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ゲストオペレーティングシステムへのセキュリティパッチの適用"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_004": {
+  "file": "CLF-C02_orig.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "medium",
+  "question": "ある企業の監査担当者が、AWS の SOC レポートや PCI DSS 関連のコンプライアンスレポートをオンデマンドでダウンロードする必要があります。どの AWS のサービスまたは機能を使用すべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Artifact"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_005": {
+  "file": "CLF-C02_orig.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "hard",
+  "question": "ある企業は、AWS アカウント内の悪意のあるアクティビティや不正な動作を、脅威インテリジェンスと機械学習を用いて継続的にモニタリングしたいと考えています。さらに、Amazon S3 バケットに保存されている個人情報 (PII) を自動的に検出して可視化したいと考えています。これらの要件を満たすサービスの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon GuardDuty"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "Amazon Macie"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_006": {
+  "file": "CLF-C02_orig.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドテクノロジーとサービス",
+  "level": "easy",
+  "question": "ある企業が、画像や動画ファイルなどの大量の非構造化データを保存する必要があります。高い耐久性を備え、事実上無制限にスケールするオブジェクトストレージを提供する AWS のサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon S3"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_007": {
+  "file": "CLF-C02_orig.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドテクノロジーとサービス",
+  "level": "medium",
+  "question": "ある企業が、サーバーのプロビジョニングや管理を一切行わずに、API リクエストに応答してコードを実行し、その結果をキーバリュー形式で保存するアプリケーションを構築したいと考えています。この要件を満たすサーバーレスサービスの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Lambda"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": true,
+    "text": "Amazon DynamoDB"
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_008": {
+  "file": "CLF-C02_orig.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドテクノロジーとサービス",
+  "level": "medium",
+  "question": "ある企業が、世界中のユーザーに向けて静的コンテンツを配信するウェブサイトを運営しています。ユーザーに最も近いロケーションからコンテンツをキャッシュ配信し、レイテンシーを低減できる AWS のサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon CloudFront"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_009": {
+  "file": "CLF-C02_orig.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドテクノロジーとサービス",
+  "level": "hard",
+  "question": "ある製造業の企業は、データレジデンシー要件と工場設備へのミリ秒単位の低レイテンシー要件のため、一部のワークロードを自社データセンター内で実行し続ける必要があります。ただし、AWS クラウドと同じ API、ツール、インフラストラクチャをオンプレミスで使用したいと考えています。この要件を満たすサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Outposts"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_010": {
+  "file": "CLF-C02_orig.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "請求、料金、およびサポート",
+  "level": "hard",
+  "question": "ある大企業がミッションクリティカルなワークロードを AWS で運用しています。専任のテクニカルアカウントマネージャー (TAM) による事前対応型のガイダンスと、ビジネスクリティカルなシステムがダウンした場合の 15 分以内の応答時間を必要としています。この要件を満たす最も低コストの AWS サポートプランはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": true,
+    "text": "AWS エンタープライズサポート"
+   }
+  ]
+ },
+ "CLF-C02_orig_011": {
+  "file": "CLF-C02_orig_b2.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドのコンセプト",
+  "level": "easy",
+  "question": "ある企業の新入社員が、クラウドコンピューティングの基本的な定義を学んでいます。クラウドコンピューティングを最も適切に説明しているのはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "IT リソースをインターネット経由でオンデマンドに提供し、従量課金制で利用する仕組み。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_012": {
+  "file": "CLF-C02_orig_b2.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドのコンセプト",
+  "level": "easy",
+  "question": "ある EC サイト運営企業では、セール期間中にアクセスが急増し、通常期にはアクセスが大きく減少します。需要の変化に応じてリソースを自動的に増減させ、必要な分だけ使用するというクラウドの特性を表す用語はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "弾力性 (Elasticity)"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_013": {
+  "file": "CLF-C02_orig_b2.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドのコンセプト",
+  "level": "medium",
+  "question": "あるスタートアップ企業は、新機能のアイデアを頻繁に試したいと考えています。AWS クラウドを利用すると、数分で環境を構築して実験し、うまくいかなければ低コストで破棄できます。このようなクラウドの価値を最もよく表す用語はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "俊敏性 (Agility)"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_014": {
+  "file": "CLF-C02_orig_b2.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドのコンセプト",
+  "level": "medium",
+  "question": "AWS は数百万の顧客のリソースを集約して大規模に運用しており、その結果として利用料金を継続的に引き下げてきました。このように、多数の顧客の使用量が集約されることで低い変動課金価格が実現されるという概念はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "規模の経済"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_015": {
+  "file": "CLF-C02_orig_b2.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドのコンセプト",
+  "level": "medium",
+  "question": "ある企業が、オンプレミス環境から AWS クラウドへの移行を経営層に提案しています。オンプレミスと比較した場合の AWS クラウドの利点はどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "将来の需要を予測してキャパシティを事前に見積もる必要がなくなる。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "世界中のリージョンを利用して、数分でアプリケーションをグローバルに展開できる。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_016": {
+  "file": "CLF-C02_orig_b2.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドのコンセプト",
+  "level": "easy",
+  "question": "ある企業は、規制対象のデータベースをオンプレミスのデータセンターに残したまま、ウェブサーバー群を AWS クラウドで実行し、両者を接続して 1 つのシステムとして運用しています。このクラウドデプロイモデルはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ハイブリッドクラウド"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_017": {
+  "file": "CLF-C02_orig_b2.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドのコンセプト",
+  "level": "easy",
+  "question": "ある企業は、データベースのバックアップ、パッチ適用、フェイルオーバー処理などの運用作業に多くの時間を費やしています。AWS のマネージドサービスを採用することで得られる主なメリットはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "インフラの運用管理タスクを AWS に任せ、自社はアプリケーション開発などの本来の業務に集中できる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_018": {
+  "file": "CLF-C02_orig_b2.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドのコンセプト",
+  "level": "medium",
+  "question": "ある企業が AWS Well-Architected フレームワークに沿ってワークロードをレビューしています。不要なコストの回避、支出の把握、最も適切なリソースタイプの選択による費用対効果の最大化を扱う柱はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "コスト最適化"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_019": {
+  "file": "CLF-C02_orig_b2.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドのコンセプト",
+  "level": "medium",
+  "question": "ある運用チームは、AWS Well-Architected フレームワークに基づき、運用手順をコードとして管理し、小規模で可逆的な変更を頻繁に行い、障害から学んで手順を継続的に改善する方針を採用しました。この方針が対応する柱はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "運用上の優秀性"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_020": {
+  "file": "CLF-C02_orig_b2.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドのコンセプト",
+  "level": "hard",
+  "question": "あるアーキテクトが、ワークロードの要件を満たすためにコンピューティングリソースを効率的に使用し、新しいテクノロジーの進化に合わせて最適なリソースタイプを選択し続けることを重視しています。AWS Well-Architected フレームワークでこの考え方を扱う柱はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "パフォーマンス効率"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_021": {
+  "file": "CLF-C02_orig_b2.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドのコンセプト",
+  "level": "medium",
+  "question": "ある企業は、環境負荷の低減を経営目標に掲げており、AWS 上のワークロードについてもエネルギー消費や環境への影響を継続的に削減したいと考えています。AWS Well-Architected フレームワークでこの目標に対応する柱はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "持続可能性"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_022": {
+  "file": "CLF-C02_orig_b2.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドのコンセプト",
+  "level": "medium",
+  "question": "ある企業のアプリケーションは、複数のコンポーネントが互いに直接依存する密結合の構成になっており、1 つのコンポーネントの障害がシステム全体の停止につながっています。AWS が推奨する疎結合アーキテクチャを採用する主なメリットはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "1 つのコンポーネントに障害が発生しても、影響を局所化してシステム全体の停止を防ぎやすくなる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_023": {
+  "file": "CLF-C02_orig_b2.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドのコンセプト",
+  "level": "medium",
+  "question": "ある企業が、単一の Amazon EC2 インスタンスで稼働しているウェブアプリケーションの可用性を高めたいと考えています。高可用性を実現するための設計として適切なものはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "複数のアベイラビリティーゾーンにインスタンスを分散して配置する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "ロードバランサーを使用して複数のインスタンスにトラフィックを分散する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_024": {
+  "file": "CLF-C02_orig_b2.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドのコンセプト",
+  "level": "medium",
+  "question": "あるアプリケーションの負荷が増大したため、対応策を検討しています。既存のサーバーの性能を上げるのではなく、同じ構成のインスタンスの台数を増やして負荷を分散するスケーリング手法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "水平スケーリング (スケールアウト)"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_025": {
+  "file": "CLF-C02_orig_b2.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドのコンセプト",
+  "level": "medium",
+  "question": "ある企業は、データセンターの契約満了が迫っているため、オンプレミスのアプリケーションをアーキテクチャを変更せずにそのまま AWS の仮想マシンへ移行し、できるだけ早く移行を完了させたいと考えています。この移行戦略はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "リホスト (リフトアンドシフト)"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_026": {
+  "file": "CLF-C02_orig_b2.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドのコンセプト",
+  "level": "hard",
+  "question": "ある企業は、モノリシックなオンプレミスアプリケーションを AWS へ移行するにあたり、サーバーレスやマネージドデータベースなどのクラウドネイティブ機能を最大限に活用できるよう、アプリケーションのアーキテクチャを根本から再設計することにしました。この移行戦略はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "リファクタリング (リアーキテクト)"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_027": {
+  "file": "CLF-C02_orig_b2.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドのコンセプト",
+  "level": "hard",
+  "question": "ある大企業が全社的なクラウド移行を計画しています。ビジネス、人材、ガバナンスなどの複数の視点 (パースペクティブ) から組織のクラウド移行の準備状況を評価し、変革を計画するために利用できる AWS のフレームワークはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS クラウド導入フレームワーク (AWS CAF)"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_028": {
+  "file": "CLF-C02_orig_b2.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドのコンセプト",
+  "level": "hard",
+  "question": "ある企業が、オンプレミス環境と AWS クラウドの総所有コスト (TCO) を比較しています。オンプレミス環境の TCO に含まれる一方、AWS クラウドへの移行によって削減または不要にできる代表的なコスト要素はどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "データセンターの電源、空調、物理スペースにかかる費用"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "サーバーハードウェアの購入と定期的な更改の費用"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_029": {
+  "file": "CLF-C02_orig_b2.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドのコンセプト",
+  "level": "hard",
+  "question": "あるアーキテクトが、AWS 上で稼働中のワークロードをベストプラクティスに照らして評価したいと考えています。質問に回答する形式でワークロードをレビューし、リスクの高い項目と改善計画を確認できる無料のサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Well-Architected Tool"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_030": {
+  "file": "CLF-C02_orig_b2.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドのコンセプト",
+  "level": "hard",
+  "question": "ある企業が災害復旧 (DR) 計画を策定しています。「障害発生時に、最大でどの時点までのデータ損失を許容できるか」を示す指標はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "目標復旧時点 (RPO)"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_031": {
+  "file": "CLF-C02_orig_b2.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドのコンセプト",
+  "level": "hard",
+  "question": "ある企業が、モノリシックなアプリケーションを、独立した小さなサービスの集合体であるマイクロサービスアーキテクチャへ移行することを検討しています。マイクロサービスアーキテクチャの利点はどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "各サービスを独立して開発、デプロイ、スケールできる。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "1 つのサービスの障害がアプリケーション全体の停止につながりにくい。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_032": {
+  "file": "CLF-C02_orig_b2.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドのコンセプト",
+  "level": "hard",
+  "question": "ある企業が AWS 上で災害復旧 (DR) 戦略を検討しています。DR 用リージョンにデータベースなどの中核となる最小限のリソースを常時稼働させておき、災害発生時にその環境を本番規模まで拡張して復旧する戦略はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "パイロットライト"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_033": {
+  "file": "CLF-C02_orig_b2.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "easy",
+  "question": "ある企業は、IAM ユーザーのサインイン時に、パスワードに加えてスマートフォンアプリなどで生成されるワンタイムコードの入力を必須にして、認証を強化したいと考えています。この仕組みはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "多要素認証 (MFA)"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_034": {
+  "file": "CLF-C02_orig_b2.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "easy",
+  "question": "ある企業のセキュリティ管理者が、IAM のアクセス許可を設計しています。「ユーザーやアプリケーションには、業務の遂行に必要な最小限のアクセス許可のみを付与する」というセキュリティの基本原則はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "最小権限の原則"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_035": {
+  "file": "CLF-C02_orig_b2.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "easy",
+  "question": "ある企業には 50 人の開発者がおり、全員に同じアクセス許可を付与する必要があります。各ユーザーに個別にポリシーをアタッチするのではなく、まとめて効率的にアクセス許可を管理できる IAM の機能はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "IAM グループ"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_036": {
+  "file": "CLF-C02_orig_b2.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "easy",
+  "question": "ある企業のウェブサイトが、大量のトラフィックを送りつけてサービスを停止させようとする DDoS 攻撃の標的になることを懸念しています。AWS 上のアプリケーションを DDoS 攻撃から保護することを主な目的とするサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Shield"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_037": {
+  "file": "CLF-C02_orig_b2.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "medium",
+  "question": "Amazon EC2 インスタンス上のアプリケーションが Amazon S3 バケットにアクセスする必要があります。アクセスキーをインスタンス内に保存することなく、安全に一時的な認証情報を利用させるためのベストプラクティスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "必要な許可を持つ IAM ロールを作成し、EC2 インスタンスにアタッチする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_038": {
+  "file": "CLF-C02_orig_b2.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "medium",
+  "question": "ある企業が新しい AWS アカウントを作成しました。アカウントのルートユーザーを保護するためのベストプラクティスはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ルートユーザーで多要素認証 (MFA) を有効にする。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "ルートユーザーのアクセスキーは作成せず、既に存在する場合は削除する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_039": {
+  "file": "CLF-C02_orig_b2.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "medium",
+  "question": "ある企業が Amazon S3 バケットに顧客データを保存しています。AWS 責任共有モデルにおいて、この構成で顧客の責任となるのはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "バケットポリシーや IAM ポリシーによるデータへのアクセス制御の設定"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "保存するデータの分類と、暗号化オプションの選択・設定"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_040": {
+  "file": "CLF-C02_orig_b2.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "medium",
+  "question": "ある企業は、Amazon S3 や Amazon EBS に保存するデータの暗号化に使用する暗号化キーを、一元的に作成・管理し、キーの使用を制御およびログ記録したいと考えています。この要件を満たす AWS のサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Key Management Service (AWS KMS)"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_041": {
+  "file": "CLF-C02_orig_b3.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "medium",
+  "question": "ある企業のウェブアプリケーションが、SQL インジェクションやクロスサイトスクリプティングなどの一般的なウェブの脆弱性を狙った攻撃を受けています。リクエストの内容に基づいてこれらの悪意のあるトラフィックをフィルタリングできるサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS WAF"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_042": {
+  "file": "CLF-C02_orig_b3.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "medium",
+  "question": "ある企業は、Amazon EC2 インスタンスやコンテナイメージに含まれるソフトウェアパッケージの既知の脆弱性 (CVE) を、自動かつ継続的にスキャンして特定したいと考えています。この要件を満たすサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon Inspector"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_043": {
+  "file": "CLF-C02_orig_b3.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "medium",
+  "question": "ある企業のアプリケーションは、データベースのパスワードをソースコード内に直接記述しています。この認証情報を安全に保存し、定期的な自動ローテーションも行いたいと考えています。この要件に最も適したサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Secrets Manager"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_044": {
+  "file": "CLF-C02_orig_b3.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "medium",
+  "question": "ある企業が、自社のウェブサイトを HTTPS で提供するために SSL/TLS 証明書が必要になりました。AWS のサービスで使用するパブリック証明書を無料でプロビジョニングし、更新を自動化できるサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Certificate Manager (ACM)"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_045": {
+  "file": "CLF-C02_orig_b3.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "medium",
+  "question": "ある企業が、機密データを保存する Amazon S3 バケットが誤ってインターネットに公開されることを防ぎたいと考えています。この目的に有効な対策はどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "S3 のブロックパブリックアクセス機能を有効にする。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "バケットポリシーで、許可されたプリンシパルのみにアクセスを制限する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_046": {
+  "file": "CLF-C02_orig_b3.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "medium",
+  "question": "ある企業のセキュリティチームが、IAM の認証情報の管理方法を見直しています。IAM のベストプラクティスに沿った運用はどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS 上で実行するアプリケーションには、アクセスキーではなく IAM ロールによる一時的な認証情報を使用する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "利用者ごとに個別の認証情報を発行し、複数人での共有はしない。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_047": {
+  "file": "CLF-C02_orig_b3.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "medium",
+  "question": "ある企業は、クライアントとウェブアプリケーションの間でネットワーク上を流れるデータ、すなわち転送中のデータを暗号化して保護したいと考えています。この目的で使用される代表的な仕組みはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "SSL/TLS を使用した HTTPS 通信"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_048": {
+  "file": "CLF-C02_orig_b3.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "medium",
+  "question": "新しく作成された IAM ユーザーが Amazon EC2 インスタンスの一覧を表示しようとしたところ、アクセス拒否エラーが発生しました。デフォルトの状態から、このユーザーに操作を許可するために必要な対応はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "必要なアクセス許可を定義した IAM ポリシーを、ユーザーまたは所属グループにアタッチする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_049": {
+  "file": "CLF-C02_orig_b3.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "hard",
+  "question": "ある企業が AWS Lambda を使用してサーバーレスアプリケーションを構築しています。AWS 責任共有モデルにおいて、この構成で顧客の責任となるのはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Lambda 関数のコードの作成と、コード内のセキュリティ対策"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "Lambda 関数に付与する IAM ロールのアクセス許可の設定"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_050": {
+  "file": "CLF-C02_orig_b3.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "hard",
+  "question": "ある企業は、Amazon GuardDuty、Amazon Inspector、Amazon Macie など複数のセキュリティサービスからの検出結果を 1 か所に集約し、セキュリティ基準への準拠状況とあわせて一元的なダッシュボードで確認したいと考えています。この要件を満たすサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Security Hub"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_051": {
+  "file": "CLF-C02_orig_b3.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "hard",
+  "question": "ある企業の監査要件として、(1) アカウント内で誰がいつどの API 操作を行ったかを記録すること、(2) リソースの設定変更の履歴を記録し社内ルールへの準拠を継続的に評価すること、が求められています。この 2 つの要件をそれぞれ満たすサービスの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS CloudTrail"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "AWS Config"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_052": {
+  "file": "CLF-C02_orig_b3.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "hard",
+  "question": "ある企業のネットワーク管理者が、VPC 内のセキュリティ制御について学んでいます。セキュリティグループの特徴として正しいものはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "インスタンスレベルで動作するステートフルなファイアウォールであり、許可ルールのみを設定できる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_053": {
+  "file": "CLF-C02_orig_b3.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "hard",
+  "question": "ある企業のセキュリティチームは、VPC 内のネットワークインターフェイスを行き来する IP トラフィックの情報 (送信元、送信先、許可/拒否など) をキャプチャして、通信の調査やトラブルシューティングに利用したいと考えています。この要件を満たす機能はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "VPC フローログ"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_054": {
+  "file": "CLF-C02_orig_b3.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "hard",
+  "question": "ある企業は AWS Organizations で複数の AWS アカウントを管理しています。組織内の特定のアカウント群に対して、たとえアカウント内の管理者であっても特定のサービスやリージョンを使用できないように、組織レベルで利用可能なアクセス許可の上限を設定したいと考えています。この要件を満たす機能はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "サービスコントロールポリシー (SCP)"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_055": {
+  "file": "CLF-C02_orig_b3.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "hard",
+  "question": "ある企業は複数の AWS アカウントとビジネスアプリケーションを利用しており、従業員が 1 つの認証情報でこれらすべてにシングルサインオン (SSO) できるようにしたいと考えています。ワークフォースユーザーのアクセスを一元管理できるサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS IAM Identity Center"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_056": {
+  "file": "CLF-C02_orig_b3.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "hard",
+  "question": "ある企業のセキュリティチームが、自社の AWS 環境にある Amazon EC2 インスタンスに対してペネトレーションテスト (侵入テスト) を実施したいと考えています。AWS のポリシーに関する正しい記述はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon EC2 など対象として許可されたサービスについては、AWS への事前承認なしでペネトレーションテストを実施できる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_057": {
+  "file": "CLF-C02_orig_b3.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "hard",
+  "question": "ある企業が、規制対象の決済アプリケーションを AWS 上で運用することを計画しています。AWS のコンプライアンスに関する正しい記述はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS はインフラストラクチャに関する多数の第三者認証を取得しているが、その上で動作するアプリケーションのコンプライアンス確保は顧客の責任である。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_058": {
+  "file": "CLF-C02_orig_b3.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "hard",
+  "question": "ある企業がコンシューマー向けのモバイルアプリケーションを開発しています。アプリの利用者に対して、サインアップとサインインの機能や、ソーシャル ID プロバイダー経由のログイン機能を提供したいと考えています。この要件に最も適したサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon Cognito"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_059": {
+  "file": "CLF-C02_orig_b3.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "hard",
+  "question": "ある企業のセキュリティ監査で、アカウント内のすべての IAM ユーザーについて、パスワードやアクセスキーの使用状況、MFA の有効化状況などの認証情報の状態を一覧で確認する必要があります。この目的で利用できる IAM の機能はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "IAM 認証情報レポート"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_060": {
+  "file": "CLF-C02_orig_b3.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドテクノロジーとサービス",
+  "level": "easy",
+  "question": "ある企業の新任クラウド担当者が、AWS のグローバルインフラストラクチャの構成を学んでいます。AWS リージョンとアベイラビリティーゾーン (AZ) の関係について正しい記述はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "1 つのリージョンは、互いに分離され低レイテンシーのネットワークで接続された複数のアベイラビリティーゾーンで構成される。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_061": {
+  "file": "CLF-C02_orig_b3.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドテクノロジーとサービス",
+  "level": "easy",
+  "question": "ある企業のウェブアプリケーションは複数の Amazon EC2 インスタンスで実行されています。受信したリクエストを複数のインスタンスに自動的に振り分け、正常なインスタンスにのみトラフィックを送るようにしたいと考えています。このために使用するサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Elastic Load Balancing (ELB)"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_062": {
+  "file": "CLF-C02_orig_b3.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドテクノロジーとサービス",
+  "level": "easy",
+  "question": "ある企業は、法令対応のためにほとんどアクセスしない過去の帳票データを長期間保管する必要があります。アクセス頻度が極めて低いデータを最も低コストでアーカイブできる Amazon S3 のストレージクラス群はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon S3 Glacier ストレージクラス"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_063": {
+  "file": "CLF-C02_orig_b3.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドテクノロジーとサービス",
+  "level": "easy",
+  "question": "ある運用チームは、Amazon EC2 インスタンスの CPU 使用率をモニタリングし、使用率がしきい値を超えたときに通知を受け取りたいと考えています。メトリクスの収集とアラームの設定に使用する AWS のサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon CloudWatch"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_064": {
+  "file": "CLF-C02_orig_b3.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドテクノロジーとサービス",
+  "level": "medium",
+  "question": "ある企業が、新しいワークロードをデプロイする AWS リージョンを選定しています。リージョン選択の際に考慮すべき事項として適切なものはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "データを特定の国内に保持することを求める法規制やデータレジデンシー要件"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "エンドユーザーとの地理的な近さ (レイテンシー)"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_065": {
+  "file": "CLF-C02_orig_b3.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドテクノロジーとサービス",
+  "level": "medium",
+  "question": "ある企業のウェブアプリケーションは、日中はトラフィックが多く、夜間は少なくなります。負荷に応じて Amazon EC2 インスタンスの台数を自動的に増減させ、可用性の維持とコストの最適化を両立したいと考えています。この要件を満たす機能はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon EC2 Auto Scaling"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_066": {
+  "file": "CLF-C02_orig_b3.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドテクノロジーとサービス",
+  "level": "medium",
+  "question": "ある企業が Amazon Route 53 の導入を検討しています。Amazon Route 53 が提供する機能はどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ドメイン名の登録"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "ヘルスチェックと組み合わせた DNS ルーティング"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_067": {
+  "file": "CLF-C02_orig_b3.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドテクノロジーとサービス",
+  "level": "medium",
+  "question": "ある企業が、大量のデータをメモリ上で処理するインメモリデータベースを Amazon EC2 で実行する計画です。ワークロードの特性に合わせて EC2 インスタンスを選ぶ場合、最も適したインスタンスタイプのカテゴリはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "メモリ最適化インスタンス"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_068": {
+  "file": "CLF-C02_orig_b3.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドテクノロジーとサービス",
+  "level": "medium",
+  "question": "ある企業は、Amazon S3 に保存しているログファイルについて、作成から 30 日後に低コストのストレージクラスへ自動的に移行し、1 年後に自動的に削除したいと考えています。この要件を満たす S3 の機能はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "S3 ライフサイクルポリシー"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_069": {
+  "file": "CLF-C02_orig_b3.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドテクノロジーとサービス",
+  "level": "medium",
+  "question": "ある企業は、Amazon EC2 インスタンスにアタッチされた Amazon EBS ボリュームのデータを定期的にバックアップし、必要に応じて復元できるようにしたいと考えています。EBS の標準的なバックアップ手段はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "EBS スナップショットを作成する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_070": {
+  "file": "CLF-C02_orig_b3.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドテクノロジーとサービス",
+  "level": "medium",
+  "question": "ある企業のアプリケーションは、複数の Amazon EC2 インスタンスから同じファイルシステムに同時にアクセスして読み書きする必要があります。自動的にスケールする共有ファイルストレージを提供する AWS のサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon EFS"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_071": {
+  "file": "CLF-C02_orig_b4.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドテクノロジーとサービス",
+  "level": "medium",
+  "question": "ある企業が Amazon RDS で基幹システムのデータベースを運用しています。プライマリデータベースに障害が発生した場合に、別のアベイラビリティーゾーンのスタンバイへ自動的にフェイルオーバーして可用性を高めたいと考えています。この要件を満たす RDS の機能はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "マルチ AZ 配置"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_072": {
+  "file": "CLF-C02_orig_b4.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドテクノロジーとサービス",
+  "level": "medium",
+  "question": "ある企業は、複数の業務システムから収集した大量の構造化データを蓄積し、BI ツールから複雑な分析クエリを実行するためのデータウェアハウスを構築したいと考えています。この用途に最も適した AWS のサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon Redshift"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_073": {
+  "file": "CLF-C02_orig_b4.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドテクノロジーとサービス",
+  "level": "medium",
+  "question": "ある EC サイトでは、注文の受付処理と注文の後続処理 (在庫引き当てなど) を分離したいと考えています。受付側が送信したメッセージをキューに保持し、処理側が自分のペースで取り出して処理することで、2 つのコンポーネントを疎結合にできるサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon SQS"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_074": {
+  "file": "CLF-C02_orig_b4.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドテクノロジーとサービス",
+  "level": "medium",
+  "question": "ある企業が Amazon VPC 内にウェブサーバー用のサブネットを構築しています。このサブネット内のリソースがインターネットと直接通信できるようにするために、VPC にアタッチする必要があるコンポーネントはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "インターネットゲートウェイ"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_075": {
+  "file": "CLF-C02_orig_b4.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドテクノロジーとサービス",
+  "level": "medium",
+  "question": "ある企業は、開発・検証・本番の 3 環境に同一構成のインフラを繰り返し構築しています。インフラの構成をテンプレートとしてコードで定義し、同じ構成を自動的かつ再現性をもってプロビジョニングできる AWS のサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS CloudFormation"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_076": {
+  "file": "CLF-C02_orig_b4.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドテクノロジーとサービス",
+  "level": "medium",
+  "question": "ある企業は、数百テラバイトのアーカイブデータを AWS へ移行する必要がありますが、拠点のインターネット回線が細く、ネットワーク経由の転送では数か月かかる見込みです。物理デバイスを使用してオフラインで大容量データを AWS へ転送できるサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Snowball"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_077": {
+  "file": "CLF-C02_orig_b4.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドテクノロジーとサービス",
+  "level": "hard",
+  "question": "ある企業が、SQL を使用するトランザクション処理アプリケーションのために、AWS のマネージド型リレーショナルデータベースを検討しています。リレーショナルデータベースを提供する AWS のサービスはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon RDS"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "Amazon Aurora"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_078": {
+  "file": "CLF-C02_orig_b4.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドテクノロジーとサービス",
+  "level": "hard",
+  "question": "ある企業のウェブアプリケーションでは、同じデータベースクエリが頻繁に実行されており、データベースの負荷増大と応答遅延が課題になっています。頻繁にアクセスされるデータをメモリ上に保持してマイクロ秒からミリ秒単位の高速な応答を実現し、データベースの負荷を軽減できるサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon ElastiCache"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_079": {
+  "file": "CLF-C02_orig_b4.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドテクノロジーとサービス",
+  "level": "hard",
+  "question": "あるデータ分析チームは、Amazon S3 に保存されている大量のログデータを、サーバーやデータウェアハウスにロードすることなく、標準 SQL を使って直接クエリしたいと考えています。実行したクエリに対してのみ料金が発生するサーバーレスのサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon Athena"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_080": {
+  "file": "CLF-C02_orig_b4.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドテクノロジーとサービス",
+  "level": "hard",
+  "question": "ある IoT 企業は、数千台のセンサーから連続的に送信されるデータをリアルタイムに収集し、ストリーミングデータとして処理・分析したいと考えています。この要件に最も適した AWS のサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon Kinesis"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_081": {
+  "file": "CLF-C02_orig_b4.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドテクノロジーとサービス",
+  "level": "hard",
+  "question": "ある開発チームが、AWS Lambda 関数をバックエンドとするウェブアプリケーションを構築しています。クライアントからの HTTP リクエストを受け付ける REST API を作成、公開、管理するためのフルマネージドサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon API Gateway"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_082": {
+  "file": "CLF-C02_orig_b4.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドテクノロジーとサービス",
+  "level": "hard",
+  "question": "ある企業が、Docker コンテナ化されたアプリケーションを AWS 上で実行するために、コンテナのデプロイやスケジューリングを管理するオーケストレーションサービスを探しています。この目的で使用できる AWS のサービスはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon ECS"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "Amazon EKS"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_083": {
+  "file": "CLF-C02_orig_b4.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドテクノロジーとサービス",
+  "level": "hard",
+  "question": "ある企業のセキュリティポリシーでは、Amazon EC2 インスタンスへの SSH ポートの開放や SSH キーの配布が禁止されています。踏み台サーバーやポート開放なしで、ブラウザや CLI からインスタンスに安全にシェルアクセスできる機能はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Systems Manager Session Manager"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_084": {
+  "file": "CLF-C02_orig_b4.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドテクノロジーとサービス",
+  "level": "hard",
+  "question": "ある企業は、オンプレミスのアプリケーションを変更せずに、既存のファイルプロトコルなどを通じてオンプレミス環境から AWS のクラウドストレージへシームレスにアクセスしたいと考えています。オンプレミスと AWS ストレージをつなぐハイブリッドストレージサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Storage Gateway"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_085": {
+  "file": "CLF-C02_orig_b4.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドテクノロジーとサービス",
+  "level": "hard",
+  "question": "あるアプリケーションでは、1 つのイベントが発生した際に、その通知メッセージを複数のサブスクライバー (メール、複数の SQS キュー、Lambda 関数など) へ同時に配信 (ファンアウト) する必要があります。パブリッシュ/サブスクライブ型のメッセージングを提供するサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon SNS"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_086": {
+  "file": "CLF-C02_orig_b4.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドテクノロジーとサービス",
+  "level": "hard",
+  "question": "ある企業が、オンプレミスのデータセンターと Amazon VPC の間をプライベートに接続するハイブリッドネットワークを構築したいと考えています。オンプレミスネットワークと AWS を接続するために使用できるサービスはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Direct Connect"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "AWS Site-to-Site VPN"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_087": {
+  "file": "CLF-C02_orig_b4.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドテクノロジーとサービス",
+  "level": "hard",
+  "question": "ある開発チームは、ウェブアプリケーションのコードをアップロードするだけで、キャパシティのプロビジョニング、ロードバランシング、Auto Scaling、ヘルスモニタリングなどのデプロイと運用の詳細を自動的に処理してほしいと考えています。基盤リソースの制御も必要に応じて維持したい場合、最も適したサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Elastic Beanstalk"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_088": {
+  "file": "CLF-C02_orig_b4.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドテクノロジーとサービス",
+  "level": "hard",
+  "question": "ある教育サービス企業は、機械学習の専門知識を持たずに、(1) 教材テキストを自然な音声のナレーションに変換すること、(2) 教材を複数の言語に自動翻訳すること、の 2 つを実現したいと考えています。これらの要件をそれぞれ満たす AWS の AI サービスの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon Polly"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "Amazon Translate"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_089": {
+  "file": "CLF-C02_orig_b4.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドテクノロジーとサービス",
+  "level": "hard",
+  "question": "ある写真共有サービスの企業は、ユーザーがアップロードした画像に写っている物体や顔を機械学習の専門知識なしで自動的に検出し、不適切なコンテンツの検出にも活用したいと考えています。この要件に最も適したサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon Rekognition"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_090": {
+  "file": "CLF-C02_orig_b4.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "請求、料金、およびサポート",
+  "level": "easy",
+  "question": "ある企業が AWS への移行を計画しており、移行後に想定される AWS の月額利用料金を、実際にリソースを作成する前に見積もりたいと考えています。この目的で使用できる無料のツールはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Pricing Calculator"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_091": {
+  "file": "CLF-C02_orig_b4.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "請求、料金、およびサポート",
+  "level": "easy",
+  "question": "ある企業の経理担当者は、(1) 過去の AWS コストの推移をサービス別に可視化・分析すること、(2) 設定した予算額を超過しそうなときにアラート通知を受け取ること、の 2 つを実現したいと考えています。これらの要件をそれぞれ満たすツールの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Cost Explorer"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "AWS Budgets"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_092": {
+  "file": "CLF-C02_orig_b4.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "請求、料金、およびサポート",
+  "level": "medium",
+  "question": "ある企業が初めて AWS アカウントを作成し、無料利用枠について調べています。AWS 無料利用枠に関する正しい記述はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "無料利用枠には、アカウント作成から一定期間無料のもの、常に無料のもの、短期トライアルの複数の種類がある。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_093": {
+  "file": "CLF-C02_orig_b4.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "請求、料金、およびサポート",
+  "level": "medium",
+  "question": "ある企業の基幹システムは、今後数年間にわたり安定した量のコンピューティング使用量が見込まれています。1 年または 3 年の利用をコミットすることで、オンデマンド料金と比較して大幅な割引を受けられる購入オプションはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "リザーブドインスタンス"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "Savings Plans"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_094": {
+  "file": "CLF-C02_orig_b4.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "請求、料金、およびサポート",
+  "level": "medium",
+  "question": "ある企業は、処理が中断されても後で再実行できる大規模なバッチ処理ジョブを実行する予定です。AWS の未使用の EC2 キャパシティを利用して、オンデマンド料金より大幅に低いコストで実行できる購入オプションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "スポットインスタンス"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_095": {
+  "file": "CLF-C02_orig_b4.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "請求、料金、およびサポート",
+  "level": "medium",
+  "question": "ある企業は部門ごとに複数の AWS アカウントを運用しており、AWS Organizations による管理を検討しています。AWS Organizations を利用するメリットはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "複数アカウントの請求を 1 つにまとめ (一括請求)、支払いを簡素化できる。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "複数のアカウントを組織単位 (OU) にまとめて階層的に管理し、ポリシーを一元的に適用できる。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_096": {
+  "file": "CLF-C02_orig_b4.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "請求、料金、およびサポート",
+  "level": "medium",
+  "question": "ある企業が AWS のデータ転送料金の一般的な考え方について確認しています。データ転送コストに関する正しい記述はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "インターネットから AWS へのデータ受信 (イン) は原則無料で、AWS からインターネットへのデータ送信 (アウト) には料金が発生する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_097": {
+  "file": "CLF-C02_orig_b4.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "請求、料金、およびサポート",
+  "level": "hard",
+  "question": "ある企業は、1 つの AWS アカウント内で複数のプロジェクトを運用しており、請求レポート上でコストをプロジェクト別に分類して把握したいと考えています。リソースにキーと値のラベルを付与し、それを請求管理で有効化することでコストを分類できる機能はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "コスト配分タグ"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_098": {
+  "file": "CLF-C02_orig_b4.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "請求、料金、およびサポート",
+  "level": "hard",
+  "question": "ある企業は、AWS 環境をベストプラクティスと照らし合わせて、使用率の低い EC2 インスタンスなどのコスト最適化の機会、セキュリティ、耐障害性、サービスの制限 (クォータ) への接近状況などを自動チェックし、推奨事項を得たいと考えています。この要件を満たすサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Trusted Advisor"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_099": {
+  "file": "CLF-C02_orig_b4.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "請求、料金、およびサポート",
+  "level": "hard",
+  "question": "ある企業が本番ワークロードを AWS で運用するにあたり、クラウドサポートエンジニアへ 24 時間 365 日、電話やチャットで問い合わせできるサポートを必要としています。この要件を満たす最も低コストの AWS サポートプランはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": true,
+    "text": "AWS ビジネスサポート"
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_100": {
+  "file": "CLF-C02_orig_b4.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "請求、料金、およびサポート",
+  "level": "hard",
+  "question": "ある企業は、サードパーティー製のセキュリティソフトウェアや SaaS 製品を検索して AWS 環境に導入し、その利用料金を AWS の請求と統合して支払いたいと考えています。この要件を満たす AWS のサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Marketplace"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_101": {
+  "file": "CLF-C02_orig_gap1.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドテクノロジーとサービス",
+  "level": "easy",
+  "question": "ある企業では、在宅勤務や出張中の従業員が、それぞれのノート PC から VPC 内のプライベートサブネットで動作する社内アプリケーションへ安全に接続する必要があります。この要件を満たす AWS のサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Client VPN"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "CLF-C02_orig_102": {
+  "file": "CLF-C02_orig_gap1.json",
+  "exam": "CLF-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "クラウドテクノロジーとサービス",
+  "level": "medium",
+  "question": "ある企業が、オンプレミスのデータセンターと AWS の間に、インターネットを経由しない専用のネットワーク接続を用意し、大量のデータ転送に必要な帯域幅と一貫したネットワークパフォーマンスを確保したいと考えています。最も適した AWS のサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Direct Connect"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ }
+}
