@@ -275,6 +275,13 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
     <h2>AI連携(任意)</h2>
     <div class="formrow"><label><input type="checkbox" id="set-demo" onchange="saveSettings()"> デモモード(APIキーなしで動きを見る)</label></div>
     <div class="note" id="demo-note" style="display:none">APIには接続せず、あらかじめ用意した応答を返します。人に見せるときや、機能の雰囲気を確かめたいときに使ってください。料金はかかりません。</div>
+    <div id="demo-key-row" style="display:none;margin-bottom:10px">
+      <div class="formrow"><label>デモ用キーを使う（パスワード）</label>
+        <input type="password" id="demo-pass" placeholder="配布されたパスワード" style="width:100%">
+      </div>
+      <button class="btn sub" onclick="unlockDemoKey()">🔓 解錠して本物のAIを試す</button>
+      <div class="note" id="demo-key-msg" style="margin-top:6px">パスワードを入れると、用意されたAPIキーで実際のAIに接続します。<b>キーは画面を閉じると消え、端末には保存されません。</b></div>
+    </div>
     <div class="formrow"><label>APIキー</label><input type="password" id="set-key" placeholder="sk-ant-... または sk-..." onchange="saveSettings()"></div>
     <div class="formrow"><label>使用モデル</label>
       <input id="set-model" list="model-presets" style="width:100%" placeholder="claude-sonnet-5" onchange="saveSettings()">
@@ -379,6 +386,7 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
 <script src="data/exams.js"></script>
 <script src="data/glossary.js"></script>
 <script src="data/diagrams.js"></script>
+<script src="data/demo_key.js"></script><!-- デモ用の暗号化キー(配布しない場合は無い) -->
 <script src="data/orig.js"></script>
 <script src="data/demo_audio.js"></script>
 <script src="data/audio_tracks.js"></script><!-- 公式問題の読み上げ(ローカルのみ、なければ404で無視される) -->
@@ -1083,10 +1091,39 @@ function updateUsageUI(){
   const el=document.getElementById('set-usage'); if(el) el.textContent=u;
   document.querySelectorAll('.ai-usage-inline').forEach(x=>x.textContent=u);
 }
-function demoMode(){ return !!SETTINGS.demo; }
+function demoMode(){ return !!SETTINGS.demo && !UNLOCKED_KEY; }
+/* デモ用キーの解錠。
+   暗号文は公開されるので、パスワードの強度がそのまま防御力になる。
+   運用（デモ専用キー・低い上限額・使用後に無効化）は tools/make_demo_key.js に書いてある。
+   復号したキーは変数にだけ置き、localStorage には保存しない（画面を閉じれば消える）。 */
+let UNLOCKED_KEY = null;
+async function unlockDemoKey(){
+  const msg=document.getElementById('demo-key-msg');
+  const pass=document.getElementById('demo-pass').value;
+  if(!window.DEMO_KEY){ msg.textContent='デモ用キーが用意されていません。'; return; }
+  if(!pass){ msg.textContent='パスワードを入れてください。'; return; }
+  msg.textContent='解錠しています…';
+  try{
+    const b=s=>Uint8Array.from(atob(s), c=>c.charCodeAt(0));
+    const d=window.DEMO_KEY;
+    const base=await crypto.subtle.importKey('raw', new TextEncoder().encode(pass), 'PBKDF2', false, ['deriveBits']);
+    const bits=await crypto.subtle.deriveBits({name:'PBKDF2', salt:b(d.salt), iterations:d.iter, hash:'SHA-256'}, base, 256);
+    const key=await crypto.subtle.importKey('raw', bits, 'AES-GCM', false, ['decrypt']);
+    const plain=await crypto.subtle.decrypt({name:'AES-GCM', iv:b(d.iv)}, key, b(d.data));
+    UNLOCKED_KEY=new TextDecoder().decode(plain);
+    msg.innerHTML='<b>解錠しました。</b>実際のAIに接続します（この画面を閉じるとキーは消えます）。';
+    document.getElementById('demo-pass').value='';
+    updateUsageUI();
+  }catch(e){
+    UNLOCKED_KEY=null;
+    msg.textContent='パスワードが違うようです。';
+  }
+}
+function activeKey(){ return UNLOCKED_KEY || (SETTINGS.key||'').trim(); }
 function aiReady(){
   if(demoMode()) return true;   // デモモードはAPIに接続しないのでキー不要
-  const key=(SETTINGS.key||'').trim();
+  const key=activeKey();
+  if(UNLOCKED_KEY) return true; // 解錠済みのデモ用キーは、モデルとの整合を確認済み
   if(!key){ alert('APIキーが未設定です。設定タブで登録してください。\n(設定のデモモードを使うと、キーなしでAI機能の動きを確認できます)'); return false; }
   // 選んだモデルとキーの種類が合っているか。取り違えるとAPIエラーの意味が分かりにくい
   const wantOpenAI=isOpenAI(SETTINGS.model||'');
@@ -1136,7 +1173,7 @@ async function aiCall(messages, opts={}){
     return demoReply(messages, opts);
   }
   const model=SETTINGS.model||'claude-haiku-4-5';
-  const key=(SETTINGS.key||'').trim();
+  const key=activeKey();
   return isOpenAI(model)? callOpenAI(model, key, messages, opts)
                         : callAnthropic(model, key, messages, opts);
 }
@@ -1330,9 +1367,12 @@ function saveSettings(){
   syncDemoUI();
 }
 function syncDemoUI(){
-  const on=demoMode();
+  const on=!!SETTINGS.demo;
   const note=document.getElementById('demo-note');
   if(note) note.style.display = on? 'block':'none';
+  // デモ用キーが配布されているときだけ、解錠の入口を出す
+  const row=document.getElementById('demo-key-row');
+  if(row) row.style.display = (on && window.DEMO_KEY)? 'block':'none';
   // デモ中は課金されないので、使用額と予算の欄は意味がない
   ['set-key','set-model','set-budget'].forEach(id=>{
     const el=document.getElementById(id);
