@@ -1,0 +1,3859 @@
+{
+ "DOP-C02_orig_001": {
+  "file": "DOP-C02_orig.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "SDLC のオートメーション",
+  "level": "hard",
+  "question": "ある企業が、ツール専用アカウントの AWS CodePipeline を使用して、本番アカウントの Amazon ECS サービスにアプリケーションをデプロイする CI/CD パイプラインを構築しています。パイプラインのアーティファクトはツールアカウントの Amazon S3 バケットに保存されます。本番アカウントのデプロイアクションが、クロスアカウントの IAM ロールを引き受けてアーティファクトを取得する構成にしたところ、デプロイステージでアーティファクトへのアクセス拒否エラーが発生しました。この問題を解決するために実行すべきステップはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "アーティファクトストアの暗号化に AWS KMS のカスタマーマネージドキーを使用するようにパイプラインを構成し、キーポリシーで本番アカウントのデプロイ用 IAM ロールに復号を許可する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "アーティファクトバケットのバケットポリシーで、本番アカウントのデプロイ用 IAM ロールに対して s3:GetObject などの必要なアクションを許可する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_002": {
+  "file": "DOP-C02_orig.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "SDLC のオートメーション",
+  "level": "medium",
+  "question": "ある企業が Amazon ECS 上の Web アプリケーションを Application Load Balancer の背後で運用しています。現在のローリングデプロイでは、不具合のあるバージョンが本番トラフィックに到達してから問題に気付くことが多く、切り戻しにも時間がかかっています。DevOps チームは、新バージョンを本番トラフィックに公開する前にテスト用リスナーで検証し、トラフィック切り替え後もエラー率の上昇を検知したら自動的にロールバックする仕組みを求めています。運用負荷を最小限に抑えてこれらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS CodeDeploy のブルー/グリーンデプロイを構成し、テスト用リスナーとライフサイクルフックで新バージョンを検証する。エラー率の Amazon CloudWatch アラームをデプロイグループに関連付け、アラームに基づく自動ロールバックを有効にする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_003": {
+  "file": "DOP-C02_orig.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "構成管理と IaC",
+  "level": "medium",
+  "question": "ある企業は AWS Organizations で複数の OU に分かれた 60 のアカウントを管理しています。セキュリティチームは、監査用の IAM ロールと AWS Config の有効化を含むベースラインのリソースを、すべてのメンバーアカウントの特定リージョンにデプロイする必要があります。また、組織に新しいアカウントが追加された場合には、手動の操作なしで同じベースラインが自動的に適用されることが求められています。運用負荷を最小限に抑えてこれらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "サービスマネージド型のアクセス許可を使用する AWS CloudFormation StackSets を作成し、対象の OU をターゲットにデプロイする。自動デプロイオプションを有効にして、OU に追加された新しいアカウントにスタックインスタンスが自動作成されるようにする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_004": {
+  "file": "DOP-C02_orig.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "構成管理と IaC",
+  "level": "hard",
+  "question": "ある企業は、本番環境のインフラストラクチャを AWS CloudFormation で管理しており、スタックには Amazon RDS データベースインスタンスが含まれています。更新は CI/CD パイプラインから自動的に適用されます。過去に、テンプレートの変更によってデータベースリソースの置換が発生しそうになり、危うく本番データを失いかけたことがありました。DevOps チームは、パイプラインによる他のリソースの更新は引き続き許可しつつ、スタック更新操作によってデータベースリソースが置換または削除されることを防ぎたいと考えています。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "データベースの論理 ID に対して Update:Replace と Update:Delete のアクションを拒否するスタックポリシーをスタックに適用する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_005": {
+  "file": "DOP-C02_orig.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "耐障害性の高いクラウドソリューションの実装",
+  "level": "hard",
+  "question": "ある企業が、Amazon API Gateway、AWS Lambda、Amazon DynamoDB で構成されるミッションクリティカルな API を単一リージョンで運用しています。企業はリージョン障害に備えて、セカンダリリージョンへのフェイルオーバーを数分以内に完了できるアクティブ/パッシブ構成を計画しています。要件として、両リージョンでデータが継続的に複製されること、およびフェイルオーバーの実行が障害発生中のリージョンの操作に依存しないことが求められています。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "DynamoDB グローバルテーブルでデータを両リージョンに複製し、API スタックをセカンダリリージョンにもデプロイする。Amazon Route 53 Application Recovery Controller のルーティングコントロールでトラフィックの切り替えを制御し、フェイルオーバー時にルーティングコントロールの状態を変更する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_006": {
+  "file": "DOP-C02_orig.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "耐障害性の高いクラウドソリューションの実装",
+  "level": "easy",
+  "question": "ある企業が、Application Load Balancer (ALB) の背後の Auto Scaling グループで Web アプリケーションを運用しています。最近、一部のインスタンスでアプリケーションプロセスがハングし、ALB のヘルスチェックには失敗しているにもかかわらず、インスタンスが置き換えられずに残り続ける事象が発生しました。調査の結果、OS 自体は正常に稼働しているため EC2 のステータスチェックは成功していることがわかりました。異常なインスタンスが自動的に置き換えられるようにするには、どうすればよいですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Auto Scaling グループのヘルスチェックタイプに ELB ヘルスチェックを追加し、適切なヘルスチェック猶予期間を設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_007": {
+  "file": "DOP-C02_orig.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリングとロギング",
+  "level": "medium",
+  "question": "ある企業は AWS Organizations で 50 のアカウントを管理しており、各アカウントで稼働する 200 以上のアプリケーションはすべて Amazon CloudWatch Logs にログを出力しています。セキュリティチームは、これらのアプリケーションログをログアーカイブアカウントの Amazon S3 バケットに集約し、Amazon Athena による調査を 5 分以内の遅延で開始できるようにする必要があります。アプリケーションのコードや設定を変更することは認められておらず、メンバーアカウント側に新たに保守対象となるコンピューティングリソースを追加することもできません。今後アカウントが追加された際の設定作業も最小限に抑える必要があります。運用負荷を最小限に抑えてこの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ログアーカイブアカウントに Amazon Data Firehose の配信ストリームと CloudWatch Logs の宛先 (destination) を作成し、宛先ポリシーで各アカウントからの書き込みを許可する。各アカウントのロググループにサブスクリプションフィルターを設定して、この宛先にログを送信し、Firehose から S3 バケットに配信する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_008": {
+  "file": "DOP-C02_orig.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インシデントおよびイベントへの対応",
+  "level": "hard",
+  "question": "ある企業のセキュリティポリシーでは、本番アカウントのセキュリティグループで SSH ポート (22) を 0.0.0.0/0 に開放することを禁止しています。しかし、開発者が緊急対応時に一時的にルールを追加し、そのまま放置されるケースが繰り返し発生しています。セキュリティチームは、違反するルールが追加された場合に数分以内に自動的に修復し、修復内容をセキュリティ担当者に通知することを求めています。また、監査のためにリソースの準拠状況の履歴を記録する必要があります。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Config のマネージドルール restricted-ssh を有効にし、AWS Systems Manager Automation ランブックを使用した自動修復アクションを構成して違反ルールを削除する。Config の準拠状況変更イベントを Amazon EventBridge ルールで捕捉し、Amazon SNS トピック経由でセキュリティ担当者に通知する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_009": {
+  "file": "DOP-C02_orig.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "hard",
+  "question": "ある企業は AWS Organizations で複数のメンバーアカウントを管理しており、全アカウントでアカウントレベルの Amazon S3 ブロックパブリックアクセス設定を有効にしています。しかし、メンバーアカウントの管理者がこの設定を無効にできてしまうこと、および個々のバケットに意図せずパブリックアクセスを許可するポリシーが設定される可能性があることが監査で指摘されました。企業は、メンバーアカウントによる設定の無効化を防止し、さらにパブリックアクセスを許可するバケット設定を検出して自動的に是正する必要があります。実行すべきステップはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "s3:PutAccountPublicAccessBlock アクションを拒否するサービスコントロールポリシー (SCP) を作成し、対象の OU にアタッチしてメンバーアカウントによる設定変更を防止する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "S3 バケットのパブリックアクセス設定を評価する AWS Config ルールを全アカウントにデプロイし、非準拠のバケットに対して AWS Systems Manager Automation ランブックによる自動修復を構成する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_010": {
+  "file": "DOP-C02_orig.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "medium",
+  "question": "ある企業のセキュリティ監査で、Amazon EC2 Auto Scaling グループ上で稼働するアプリケーションが、Amazon RDS for MySQL データベースの認証情報をインスタンス上の設定ファイルに平文で保存していることが指摘されました。新しいセキュリティポリシーでは、データベースの認証情報を 30 日ごとに自動でローテーションすること、そのローテーション処理を自社で実装して保守しないこと、および認証情報が取得されたすべての操作を監査ログとして記録することが求められています。アプリケーションの改修は認証情報を取得する箇所だけに限定する必要があり、インスタンスに静的な認証情報を配布し続ける構成は認められません。運用負荷を最小限に抑えてこれらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "認証情報を AWS Secrets Manager に保存し、RDS のマネージドローテーションを 30 日間隔で構成する。アプリケーションは EC2 インスタンスの IAM ロールを使用して実行時にシークレットを取得し、AWS CloudTrail でシークレットへのアクセスを記録する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_011": {
+  "file": "DOP-C02_orig_b2.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "SDLC のオートメーション",
+  "level": "easy",
+  "question": "ある企業が AWS CodePipeline を使用して Web アプリケーションを開発環境と本番環境へ順番にデプロイしており、パイプラインは 1 日に数回実行されます。社内の統制強化に伴い、本番環境へのデプロイ前にリリース管理者による確認と承認を必須とすること、どの実行を誰がいつ承認または却下したのかを監査証跡として残せること、承認待ちの状態になったことをリリース管理者にメールで通知することが求められるようになりました。開発チームは、承認や通知のために AWS Lambda 関数などの独自のコードを開発・保守したくないと考えています。運用負荷を最小限に抑えてこれらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "本番デプロイステージの前に手動承認アクションをパイプラインに追加し、承認アクションに Amazon SNS トピックを関連付けてリリース管理者をサブスクライブさせる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_012": {
+  "file": "DOP-C02_orig_b2.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "SDLC のオートメーション",
+  "level": "medium",
+  "question": "ある開発チームは、1 日に 60 回以上実行される AWS CodeBuild のビルドで、アプリケーションのビルドと 800 件の単体テストを実行しています。テストが失敗すると、開発者は数万行に及ぶビルドログを目視で追って失敗したテストケースを特定しており、原因の切り分けに平均 30 分かかっています。チームは、テストケースごとの成否と実行時間を AWS マネジメントコンソール上で一覧でき、直近のビルドにわたる合格率や実行時間の傾向も追跡できるようにしたいと考えています。そのために独自のデータストアやダッシュボードを開発して保守することは避ける方針です。運用負荷を最小限に抑えてこの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "テストフレームワークが JUnit XML などの形式でテスト結果ファイルを出力するように構成し、buildspec の reports セクションでレポートグループを指定して CodeBuild のテストレポート機能に結果を集約する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_013": {
+  "file": "DOP-C02_orig_b2.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "SDLC のオートメーション",
+  "level": "medium",
+  "question": "ある企業が GitHub のリポジトリでアプリケーションのソースコードを管理しており、AWS CodePipeline でビルドとデプロイを自動化する計画です。開発者は 1 日あたり 20 回以上 main ブランチへプッシュしており、変更からパイプライン開始までの遅延は 1 分以内に抑える必要があります。セキュリティ部門からは、個人のアクセストークンをパイプラインの設定やソースアクションのパラメータに保存しないこと、リポジトリへのアクセスに使う認証情報のローテーションを開発チームの運用作業にしないことが求められています。また、中間にリポジトリを複製するような構成要素を増やさないことも条件です。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS CodeConnections (CodeStar Connections) で GitHub への接続を作成して承認し、パイプラインのソースアクションでこの接続と対象リポジトリ、main ブランチを指定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_014": {
+  "file": "DOP-C02_orig_b2.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "SDLC のオートメーション",
+  "level": "hard",
+  "question": "ある企業は本番環境の AWS Lambda 関数を週に 20 回以上更新しています。先日のリリースでは不具合のあるコードが公開と同時に全トラフィックへ適用され、復旧までに 45 分を要する障害となりました。DevOps チームは今後のリリースについて、新しいバージョンへのトラフィックを最初は 10% に限定し、一定時間問題がなければ残りを移行すること、トラフィックを流し始める前に新しいバージョンに対する自動の検証処理を実行すること、および移行中にエラー率の上昇を検知した場合は担当者の操作を介さずに自動で以前のバージョンへ戻すことを求めています。オンコール担当者が常時メトリクスを監視して手動で切り戻す運用には依存できません。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Lambda のバージョンとエイリアスを使用し、AWS CodeDeploy の Canary デプロイ設定でエイリアスの加重を段階的に移行する。BeforeAllowTraffic フックで検証用 Lambda 関数を実行し、エラーを監視する CloudWatch アラームをデプロイグループに関連付けて自動ロールバックを有効にする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_015": {
+  "file": "DOP-C02_orig_b2.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "SDLC のオートメーション",
+  "level": "medium",
+  "question": "ある企業では 8 つの開発チームが、社内共通の Node.js ライブラリ 30 個以上を開発し、互いのアプリケーションから利用しています。現在は各チームがライブラリのソースコードをリポジトリ間でコピーしているため、どのアプリケーションがどの版を使用しているのか追跡できず、修正の反映漏れが頻発しています。企業は、社内ライブラリをバージョン付きのプライベートパッケージとして一元管理し、開発者のワークステーションと CI のビルド環境の双方が、パブリックの npm レジストリで公開されているパッケージも含めて単一のエンドポイントから取得できるようにしたいと考えています。そのためにサーバーを構築して運用することは避ける方針です。運用負荷を最小限に抑えてこれらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS CodeArtifact のドメインとリポジトリを作成して社内ライブラリを発行し、パブリックの npm レジストリへの外部接続を持つアップストリームリポジトリを構成して、開発者とビルド環境が単一のエンドポイントから両方のパッケージを取得できるようにする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_016": {
+  "file": "DOP-C02_orig_b2.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "SDLC のオートメーション",
+  "level": "medium",
+  "question": "ある企業は Amazon ECS で実行する 200 個以上のコンテナイメージを Amazon ECR のプライベートリポジトリで管理しており、1 日に数十回イメージをプッシュしています。セキュリティチームは、プッシュされたイメージに重大度が Critical の脆弱性が含まれる場合、検出から数分以内にチームの Amazon SNS トピックへ通知が届く仕組みを求めています。さらに、すでにリポジトリに存在していて当面プッシュされる予定のないイメージについても、脆弱性データベースの更新によって新たな脆弱性が判明した時点で検知したいと考えています。定期的なレポートを人手で確認する運用には頼らない方針です。運用負荷を最小限に抑えてこれらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon Inspector による ECR の拡張スキャン (enhanced scanning) を有効にして継続的スキャンを構成し、Critical の検出結果に一致する Amazon EventBridge ルールを作成して Amazon SNS トピックに通知する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_017": {
+  "file": "DOP-C02_orig_b2.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "SDLC のオートメーション",
+  "level": "hard",
+  "question": "ある企業の CI/CD パイプラインでは、AWS CodeBuild で 1 日 30 回の統合テストを実行しています。統合テストは、プライベートサブネットに配置されたテスト環境の Amazon RDS データベースと、VPC 内でのみ名前解決できる社内 API エンドポイントの両方に接続する必要がありますが、現在のビルドはこれらに到達できずタイムアウトで失敗しています。社内のセキュリティ標準では、データベースをインターネットに公開することと、IP アドレス範囲の許可リストでアクセスを制御することがいずれも禁止されており、アクセス元はセキュリティグループの参照によって制御しなければなりません。テストのために保守対象のインスタンスを新たに追加することも避ける必要があります。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "CodeBuild プロジェクトに VPC 設定を追加して対象 VPC のプライベートサブネットとセキュリティグループを指定し、RDS のセキュリティグループで CodeBuild に割り当てたセキュリティグループからの接続を許可する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_018": {
+  "file": "DOP-C02_orig_b2.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "SDLC のオートメーション",
+  "level": "hard",
+  "question": "ある企業は us-east-1 リージョンの AWS CodePipeline でアプリケーションをビルドし、同じ成果物を us-east-1 と eu-west-1 の両リージョンにある AWS Elastic Beanstalk 環境へデプロイする必要があります。リリースは 1 本のパイプラインで管理し、手動承認を 1 回通過したうえで両リージョンへ順にデプロイしなければなりません。また、各リージョンのユーザーは引き続き自分のリージョンの環境に接続する必要があります。エンジニアがパイプラインに eu-west-1 へのデプロイアクションを追加したところ、アクションのリージョンとアーティファクトの保存場所に関するエラーが発生し、パイプラインを保存できませんでした。この問題を解決するために実行すべきステップはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "eu-west-1 リージョンにアーティファクト用の Amazon S3 バケットを作成し、パイプラインのアーティファクトストア設定にリージョンごとのバケットを追加する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "eu-west-1 へのデプロイアクションの定義でアクションのリージョンを明示的に指定する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_019": {
+  "file": "DOP-C02_orig_b2.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "SDLC のオートメーション",
+  "level": "hard",
+  "question": "ある企業は AWS CodeBuild で 1 日 500 回以上ビルドを実行し、Docker Hub のパブリックイメージをベースイメージとしてコンテナイメージを作成しています。ビルド頻度の増加にともない Docker Hub の匿名アクセスに対するプル回数の上限に達し、ビルドの約 15% が失敗して開発者が再実行を繰り返す状態になっています。企業は、ベースイメージの取得経路を安定させて外部レジストリへのプル回数を削減しつつ、上流のイメージが更新された場合にはその内容を担当者の手作業なしで自動的に取り込めるようにしたいと考えています。ビルドの失敗率は 1% 未満に下げる必要があります。運用負荷を最小限に抑えてこれらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon ECR のプルスルーキャッシュルールを構成して上流レジストリのイメージを ECR 経由で取得するようにし、Dockerfile の FROM 行を ECR のプルスルーキャッシュの URI に変更する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_020": {
+  "file": "DOP-C02_orig_b2.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "SDLC のオートメーション",
+  "level": "medium",
+  "question": "ある企業は Amazon EC2 Auto Scaling グループで実行される Java アプリケーションのリリースに AWS CodeDeploy のインプレースデプロイを使用しています。デプロイのたびに、アプリケーションのプロセスを起動する前に環境ごとの構成ファイルを生成して OS の依存パッケージをインストールし、起動した後にはインスタンス上でローカルのヘルスチェックスクリプトを実行して、正常な応答が得られない場合はそのインスタンスへのデプロイを失敗として扱う必要があります。これらの処理は、Auto Scaling によって新しいインスタンスが追加された際に実行されるデプロイでも同じ順序で実行されなければなりません。これらの処理を実装する方法として正しいものはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "appspec.yml のライフサイクルフックを使用し、BeforeInstall または AfterInstall で構成ファイル生成とパッケージインストールを、ApplicationStart の後の ValidateService でヘルスチェックスクリプトを実行する。スクリプトが 0 以外の終了コードを返すとデプロイは失敗する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_021": {
+  "file": "DOP-C02_orig_b2.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "SDLC のオートメーション",
+  "level": "hard",
+  "question": "ある企業がサーバーレスアプリケーションを AWS CloudFormation テンプレートで定義し、AWS CodePipeline で本番アカウントにデプロイしています。コンプライアンス要件により、本番スタックに適用される変更内容をデプロイ実行前に運用チームがレビューし、承認した場合のみ変更が適用されるようにする必要があります。レビューでは、どのリソースが追加・変更・削除されるかを具体的に確認できなければなりません。パイプラインで実行すべきステップはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "CloudFormation デプロイアクションのアクションモードに変更セットの作成 (CHANGE_SET_REPLACE) を指定するステージを追加し、テンプレートから本番スタックの変更セットを作成する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "変更セット作成の後に手動承認アクションを配置し、承認後に変更セットの実行 (CHANGE_SET_EXECUTE) アクションで変更を適用する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_022": {
+  "file": "DOP-C02_orig_b2.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "SDLC のオートメーション",
+  "level": "hard",
+  "question": "ある開発チームでは 25 名の開発者が GitHub リポジトリでトランクベース開発を行っており、1 日あたり 60 件のプルリクエストが作成されます。テストは AWS CodeBuild で実行していますが、現在は開発者が手動でビルドを開始しているため実行漏れが生じており、テストが失敗したままのブランチが main にマージされて他の開発者の作業を止める事象が月に数回発生しています。チームは、プルリクエストが作成された時点と新しいコミットがプッシュされた時点で自動的にビルドとテストが実行され、その結果が GitHub のプルリクエスト画面にステータスとして表示され、成功していない限りマージそのものができない状態にしたいと考えています。実行すべきステップはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "CodeBuild プロジェクトで Webhook を有効にし、フィルターグループでイベントタイプに PULL_REQUEST_CREATED と PULL_REQUEST_UPDATED を指定してプルリクエストイベントでビルドを開始する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "CodeBuild プロジェクトでビルドステータスをソースプロバイダーに報告する設定を有効にし、GitHub 側でステータスチェックの成功をマージの必須条件とするブランチ保護ルールを構成する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_023": {
+  "file": "DOP-C02_orig_b2.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "SDLC のオートメーション",
+  "level": "medium",
+  "question": "ある企業のセキュリティ監査で、AWS CodeBuild プロジェクトの環境変数にサードパーティの決済 API のキーが平文 (PLAINTEXT) で設定されていることが指摘されました。この値は、プロジェクトの設定を参照できるすべての IAM プリンシパルから読み取れる状態にあります。企業は、ビルドスクリプトを変更せずにこれまでどおり同じ名前の環境変数として値を参照できるようにしたうえで、値そのものは暗号化されたマネージドなストアに保管し、プロジェクトの設定画面やビルドログに平文で表示されないようにする必要があります。キーの値をソースリポジトリに含めることも認められていません。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "API キーを AWS Secrets Manager に保存し、CodeBuild の環境変数のタイプを SECRETS_MANAGER に設定してシークレットを参照する。CodeBuild のサービスロールにシークレットの取得権限を付与する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_024": {
+  "file": "DOP-C02_orig_b2.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "SDLC のオートメーション",
+  "level": "hard",
+  "question": "ある企業の AWS CodePipeline は、ソース、ビルド、テスト環境へのデプロイ、本番環境へのデプロイという 4 つのステージで構成され、週に 15 回リリースされています。今週末の 12 時間、本番データベースの大規模なメンテナンスが予定されており、その間も開発チームはテスト環境へのデプロイと検証を通常どおり継続する必要があります。一方で本番環境へのデプロイだけは確実に行われないようにしなければなりません。メンテナンスの完了後は、開発者にコミットのやり直しを依頼することなく、停止していた間に到達した最新のリリース候補をそのまま本番へ反映できる必要があります。この要件を満たす最も適切な方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "本番デプロイステージへのインバウンド遷移 (transition) を無効化する。メンテナンス完了後に遷移を有効化すると、待機していた最新のリリースが本番ステージに進む。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_025": {
+  "file": "DOP-C02_orig_b2.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "SDLC のオートメーション",
+  "level": "medium",
+  "question": "ある企業が Amazon EC2 インスタンスの標準イメージ (ゴールデン AMI) を手動で作成しています。担当者がインスタンスを起動してパッチとエージェントを適用し、手動でテストしてから AMI を作成する現在のプロセスは、時間がかかるうえに構成のばらつきが発生しています。企業は、AMI のビルド、テスト、複数リージョンへの配布までを定期的に自動実行し、最新の AMI ID を各チームのデプロイ自動化から参照できるようにしたいと考えています。運用負荷を最小限に抑えてこれらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "EC2 Image Builder でイメージパイプラインを作成し、ビルドコンポーネントとテストコンポーネント、複数リージョンへのディストリビューション設定、実行スケジュールを定義する。作成された AMI ID を AWS Systems Manager パラメータストアのパラメータに反映し、各チームがパラメータを参照する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_026": {
+  "file": "DOP-C02_orig_b2.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "SDLC のオートメーション",
+  "level": "medium",
+  "question": "ある開発チームの AWS CodeBuild によるビルドは 1 日に約 60 回実行され、1 回あたり 12 分かかっています。そのうち 9 分は、約 1.5 GB の依存パッケージをインターネットからダウンロードする処理が占めています。依存パッケージの内容はビルド間でほとんど変化せず、更新は月に 1 回程度です。ビルドはリリースの所要時間を左右するため、チームはこの待ち時間を削減するよう求められています。チームは、buildspec とプロジェクト設定への変更を数行程度にとどめ、ソースリポジトリの構成やパイプラインのステージ構成は変更せずにビルド時間を短縮したいと考えています。最も効果的な方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "CodeBuild プロジェクトで Amazon S3 キャッシュを構成し、buildspec の cache セクションに依存パッケージのディレクトリを指定して、ビルド間でキャッシュを再利用する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_027": {
+  "file": "DOP-C02_orig_b2.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "SDLC のオートメーション",
+  "level": "hard",
+  "question": "ある企業は、AWS 上で稼働するアプリケーションと同じコードベースを、社内データセンターにある 40 台の物理サーバーにもデプロイする必要があります。データセンターと AWS の間は VPN で接続されており、サーバーからは AWS のパブリックエンドポイントに到達できます。企業はすでに AWS CodePipeline と AWS CodeDeploy で Amazon EC2 インスタンスへのデプロイを自動化しており、既存のパイプラインとリビジョンの管理方法を変えずに、同じデプロイメカニズムと同じライフサイクルフックをオンプレミスサーバーにも適用したいと考えています。デプロイ対象は環境を表すタグで指定できる必要があります。オンプレミスサーバーへのデプロイを可能にするために必要なステップの組み合わせとして正しいものはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "各オンプレミスサーバーに CodeDeploy エージェントをインストールし、IAM 認証情報を使用してオンプレミスインスタンスとして CodeDeploy に登録してタグを付与する。デプロイグループでそのオンプレミスインスタンスタグを対象に指定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_028": {
+  "file": "DOP-C02_orig_b2.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "SDLC のオートメーション",
+  "level": "hard",
+  "question": "ある企業が Amazon EKS クラスターで実行するアプリケーションのデプロイを自動化しています。パイプラインの AWS CodeBuild フェーズでコンテナイメージをビルドして Amazon ECR にプッシュした後、kubectl を使用して Kubernetes マニフェストをクラスターに適用します。しかし、kubectl の適用ステップが認可エラーで失敗します。CodeBuild のサービスロールには EKS の DescribeCluster 権限が付与済みです。この問題を解決するために必要な対応はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "CodeBuild のサービスロールを EKS クラスターのアクセス設定 (aws-auth ConfigMap またはアクセスエントリ) に追加し、必要な Kubernetes RBAC 権限にマッピングする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_029": {
+  "file": "DOP-C02_orig_b2.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "SDLC のオートメーション",
+  "level": "hard",
+  "question": "ある企業の DevOps チームは、開発者がアプリケーションのソースコードとともにコミットする Dockerfile から、イメージのビルド、脆弱性の静的チェック、Amazon ECR へのプッシュ、Amazon ECS サービスの更新までを完全に自動化したいと考えています。以前、同じイメージタグが後のビルドで上書きされたため、ロールバックのために以前のタスク定義を再デプロイしたところ、テスト済みのものとは異なる内容のイメージが起動する障害が発生しました。チームは、タスク定義が参照するイメージが常にテストされたものと同一であることを保証し、過去のタスク定義を再デプロイするだけで確実にロールバックできる状態にする必要があります。これらの要件を満たすステップの組み合わせとして最も適切なものはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS CodePipeline で CodeBuild によるイメージビルドとチェック、ECR へのプッシュ、ECS へのデプロイを構成する。ECR リポジトリでタグのイミュータビリティ (immutable tags) を有効にし、ビルドごとに一意のタグを付与してタスク定義を更新する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_030": {
+  "file": "DOP-C02_orig_b2.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "SDLC のオートメーション",
+  "level": "hard",
+  "question": "ある企業のデータ処理チームは、外部システムが 1 日に数回、不定期に Amazon S3 バケットへアップロードする構成パッケージを AWS CodePipeline のソースとして使用しています。社内標準に従いソースアクションのポーリングによる変更検出 (PollForSourceChanges) は無効化されているため、パッケージがアップロードされてもパイプラインは開始されず、現在は運用担当者が気づいた時点で手動で実行しています。チームは、アップロードから 1 分以内にパイプラインが自動的に開始されるようにする必要があります。外部システム側の実装は変更できず、ソースの保存先を別のサービスへ移行することも認められていません。この要件を満たすために必要な構成はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "対象バケットの S3 オブジェクトレベル (データイベント) の書き込みを記録する AWS CloudTrail 証跡を構成し、対象オブジェクトの PutObject などのイベントに一致する Amazon EventBridge ルールを作成して、ターゲットにパイプラインの開始を指定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_031": {
+  "file": "DOP-C02_orig_b2.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "構成管理と IaC",
+  "level": "medium",
+  "question": "ある企業では、ネットワークチームが AWS CloudFormation で VPC、サブネット、セキュリティグループを管理し、複数のアプリケーションチームがそれぞれ別のスタックでアプリケーションリソースをデプロイしています。アプリケーションチームは、ネットワークチームのスタックが作成したサブネット ID などを自分たちのテンプレートで参照する必要があります。ネットワークスタックとアプリケーションスタックのライフサイクルは独立しており、所有チームも異なります。この構成に最も適した方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ネットワークスタックの Outputs で Export を定義し、アプリケーションスタックのテンプレートで Fn::ImportValue を使用してエクスポートされた値をクロススタック参照する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_032": {
+  "file": "DOP-C02_orig_b2.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "構成管理と IaC",
+  "level": "easy",
+  "question": "ある DevOps エンジニアが、本番環境の AWS CloudFormation スタックのテンプレートを修正し、そのスタックが管理する Amazon EC2 インスタンスのプロパティを変更しようとしています。これらのインスタンスはインスタンスストアに処理中の一時データを保持しているため、置換が発生するとデータを復旧できません。エンジニアは、更新を実行する前に、どのリソースが変更・置換・削除のいずれになるのかをリソース単位で把握して変更管理会議に提示し、内容に問題があればスタックに何も適用せずに取りやめられるようにしたいと考えています。最も適切な方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "修正後のテンプレートで変更セットを作成し、各リソースのアクションと置換 (Replacement) の有無を確認してから実行を判断する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_033": {
+  "file": "DOP-C02_orig_b2.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "構成管理と IaC",
+  "level": "hard",
+  "question": "ある企業は本番環境の 60 個のスタックを含むすべてのインフラストラクチャを AWS CloudFormation で管理する方針ですが、障害対応の際に運用担当者がコンソールから直接リソースを変更することがあり、テンプレートと実環境の乖離が発生しています。緊急時のコンソール操作自体は引き続き許可する必要がありますが、DevOps チームは主要なスタックについてこの乖離を定期的かつ継続的に検出し、乖離が生じた時点で担当チームへ自動的に通知したいと考えています。さらに監査部門の要求により、各スタックの準拠状況の履歴を証跡として保持する必要があります。運用負荷を最小限に抑えてこれらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Config のマネージドルール cloudformation-stack-drift-detection-check を有効にして対象スタックのドリフトを定期的に評価し、非準拠への変更を Amazon EventBridge ルールで捕捉して Amazon SNS で担当チームに通知する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_034": {
+  "file": "DOP-C02_orig_b2.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "構成管理と IaC",
+  "level": "hard",
+  "question": "ある企業が AWS CDK でインフラストラクチャとアプリケーションを定義し、専用のツールアカウントに置いたパイプラインから開発アカウントと本番アカウントへ順にデプロイする継続的デリバリーを構築しようとしています。要件として、リポジトリへのコミットによってステージやアクションの追加といったパイプライン自体の定義変更も自動的に反映されること、クロスアカウントデプロイに必要なロールと権限がフレームワークの標準的な仕組みで作成・管理されること、および長期的なアクセスキーをどのアカウントにも保存しないことが求められています。デプロイのたびに開発者がコンソールを操作する運用は認められません。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "CDK Pipelines を使用してパイプラインをコードとして定義し、各ステージに開発・本番アカウントのステージを追加する。各ターゲットアカウントをツールアカウントを信頼する形で CDK ブートストラップ (cdk bootstrap --trust) し、デプロイ用ロールを標準の仕組みで作成する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_035": {
+  "file": "DOP-C02_orig_b2.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "構成管理と IaC",
+  "level": "medium",
+  "question": "ある DevOps エンジニアが、AWS CloudFormation ではネイティブにサポートされていないサードパーティ SaaS のリソースをスタックの一部として作成・削除するために、AWS Lambda 関数をバックエンドとするカスタムリソースを実装しました。テスト中、SaaS 側の API がエラーを返して Lambda 関数が例外で異常終了した場合に、Lambda 関数のタイムアウトを 3 分に設定しているにもかかわらず、スタックの作成が 1 時間以上も進行中のまま停止し、最終的にタイムアウトすることがわかりました。CloudWatch Logs には例外のスタックトレースが記録されています。エンジニアは、この待機をなくして失敗を速やかにスタックへ反映させる必要があります。この動作の原因と対策として正しいものはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "カスタムリソースは、Lambda 関数がイベントで渡される署名付き URL に SUCCESS または FAILED のレスポンスを送信するまで待機する。例外時にも必ず FAILED レスポンスを送信するようにエラーハンドリングを実装することで、速やかに失敗として処理される。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_036": {
+  "file": "DOP-C02_orig_b2.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "構成管理と IaC",
+  "level": "hard",
+  "question": "ある企業が AWS CloudFormation StackSets を使用して、80 のアカウントの 3 リージョンに共通の監視リソースを展開しています。現在の設定ではデプロイが 1 アカウントずつ順番に実行されるため、全体の完了までに長時間かかっています。DevOps チームは、デプロイ全体の所要時間を短縮しつつ、問題のあるテンプレートが広範囲に展開される前に停止するよう、失敗が一定数を超えたらオペレーションを止めたいと考えています。構成すべき項目はどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "オペレーション設定の最大同時アカウント数 (MaxConcurrentCount または MaxConcurrentPercentage) を引き上げて、複数アカウントへの並列デプロイを行う。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "オペレーション設定の障害許容数 (FailureToleranceCount または FailureTolerancePercentage) を低い値に設定し、失敗数が閾値を超えた時点でオペレーションを停止させる。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_037": {
+  "file": "DOP-C02_orig_b2.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "構成管理と IaC",
+  "level": "medium",
+  "question": "ある企業のクラウド管理チームは、15 の開発チームが社内標準に準拠した構成の Amazon EMR クラスターや Amazon RDS インスタンスをセルフサービスでプロビジョニングできるようにしたいと考えています。現在は依頼を受けたクラウド管理チームが手作業で作成しており、提供までに 3 営業日かかっています。要件として、開発者の IAM プリンシパルには EMR や RDS のリソースを直接作成できる権限を一切付与しないこと、利用できる構成はクラウド管理チームが承認して公開したバージョンのみに限定すること、および共有の認証情報を使用しないことが求められています。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Service Catalog で承認済みテンプレートから製品とポートフォリオを作成して開発者に共有する。製品に起動制約 (launch constraint) の IAM ロールを設定し、開発者には Service Catalog の利用権限のみを付与する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_038": {
+  "file": "DOP-C02_orig_b2.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "構成管理と IaC",
+  "level": "hard",
+  "question": "ある企業が、Amazon EC2 の Auto Scaling グループ、Application Load Balancer、Amazon RDS データベース、Amazon S3 の重要データバケットを 1 つの AWS CloudFormation スタックで管理しています。アプリケーション側のリソースは頻繁に更新される一方、データベースとバケットはほとんど変更されません。チームは、頻繁な更新に伴う事故がデータ層に波及するリスクを構造的に下げ、さらに万一スタックが削除された場合でもデータベースとバケットの実体が失われないようにしたいと考えています。推奨されるアプローチはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ステートフルなデータベースとバケットを別のスタックに分離してライフサイクルを分け、これらのリソースに DeletionPolicy を Retain (データベースは Snapshot も検討) に設定する。アプリケーションスタックからはクロススタック参照で接続情報を参照する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_039": {
+  "file": "DOP-C02_orig_b2.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "構成管理と IaC",
+  "level": "medium",
+  "question": "ある企業は数百台の Amazon EC2 インスタンスで Amazon CloudWatch エージェントを稼働させています。しかし、時間の経過とともに一部のインスタンスでエージェントの設定が手動変更されたり、エージェントが停止したままになったりして、監視データの欠損が発生しています。企業は、全インスタンスでエージェントの導入と標準設定が継続的に維持され、逸脱があれば自動的に修正される状態を実現したいと考えています。運用負荷を最小限に抑えてこの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "標準のエージェント設定を AWS Systems Manager パラメータストアに保存し、State Manager の関連付けでエージェントのインストールと設定適用のドキュメントをタグで対象指定して定期的に実行し、構成を継続的に強制する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_040": {
+  "file": "DOP-C02_orig_b2.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "構成管理と IaC",
+  "level": "hard",
+  "question": "ある企業は 3 つの環境にまたがる 800 台の Amazon EC2 インスタンス (すべて AWS Systems Manager のマネージドインスタンス) の OS パッチ適用を手作業で行っており、適用漏れと作業ミスが監査で指摘されました。企業は、セキュリティ関連のパッチをリリースから 7 日間の承認待機期間を経て自動的に承認すること、パッチの適用を業務影響の少ない毎週日曜の深夜に環境ごとに時間をずらして実行すること、および適用後の準拠状況をインスタンス単位で確認できることを求めています。インスタンスへの SSH 接続や、インスタンスの入れ替えによる対応は運用方針として認められていません。実行すべきステップはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Patch Manager でカスタムパッチベースラインを作成し、分類と重要度による自動承認ルールと承認待機日数を定義して、対象インスタンスのパッチグループに関連付ける。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "環境ごとにメンテナンスウィンドウを毎週日曜深夜のスケジュールで作成し、AWS-RunPatchBaseline ドキュメントを実行する Run Command タスクを登録して対象をパッチグループで指定する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_041": {
+  "file": "DOP-C02_orig_b3.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "構成管理と IaC",
+  "level": "hard",
+  "question": "ある企業のセキュリティチームは、開発チームが所有する 30 本の CI/CD パイプラインからデプロイされる AWS CloudFormation テンプレートについて、暗号化されていない Amazon S3 バケットや 0.0.0.0/0 からのアクセスを許可するセキュリティグループといった禁止構成が、リソースの作成前に検出されてデプロイが中止されるようにしたいと考えています。禁止構成の定義はセキュリティチームが 1 つのリポジトリでポリシーコードとしてバージョン管理し、各パイプラインがそれを取得して評価に使用する形にする必要があります。検出対象は構文の誤りではなくリソースプロパティの値です。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "セキュリティチームが AWS CloudFormation Guard のルールファイルを作成して共有リポジトリで管理し、各パイプラインの AWS CodeBuild ステージで cfn-guard によるテンプレート評価を実行して、ルール違反があればビルドを失敗させる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_042": {
+  "file": "DOP-C02_orig_b3.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "構成管理と IaC",
+  "level": "medium",
+  "question": "ある開発チームが AWS CDK (TypeScript) でインフラストラクチャを定義しています。過去に、Amazon S3 バケットの暗号化設定の指定漏れや、セキュリティグループの意図しない開放を含むコードがそのままデプロイされてしまいました。チームは、CI パイプラインの中で、合成される CloudFormation テンプレートに必須のプロパティが含まれていることをコードとして検証し、違反があればデプロイ前にビルドを失敗させたいと考えています。この要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "CDK の assertions モジュールを使用して、合成されたテンプレートに期待するリソースプロパティが含まれることを検証する単体テストを作成し、パイプラインのビルドステージでテストを実行する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_043": {
+  "file": "DOP-C02_orig_b3.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "構成管理と IaC",
+  "level": "easy",
+  "question": "ある DevOps エンジニアが、Amazon RDS データベースを作成する AWS CloudFormation テンプレートを、AWS CodePipeline の CloudFormation デプロイアクションから実行するように構成しています。社内のセキュリティポリシーでは、データベースのマスターパスワードをテンプレート本体、パラメータのデフォルト値、パイプラインの設定ファイルのいずれにも平文で記載することが禁止されており、これらはすべてソースリポジトリとアーティファクト用の Amazon S3 バケットに保存されます。パスワードはすでに AWS Secrets Manager で管理されており、スタックの操作時には常に最新の値が使われる必要があります。テンプレートからこのパスワードを安全に参照する方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "テンプレート内で Secrets Manager の動的参照 ({{resolve:secretsmanager:...}}) を使用し、スタック操作時にシークレットの値が解決されるようにする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_044": {
+  "file": "DOP-C02_orig_b3.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "構成管理と IaC",
+  "level": "hard",
+  "question": "ある企業には、数年前にコンソールから手動で作成された本番の Amazon S3 バケットと Amazon DynamoDB テーブルがあります。バケットには 50 TB のオブジェクトが保存されており、テーブルは常時本番のトラフィックを処理しています。企業はすべてのリソースを AWS CloudFormation で管理する方針を採用したため、これらの既存リソースを、リソースを再作成したりデータを移行したりすることなく、またダウンタイムを一切発生させることなく、新しい CloudFormation スタックの管理下に置く必要があります。取り込んだ後も、スタックの操作を誤ってリソースが削除されることのないよう保護する必要があります。実行すべきステップはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "既存リソースの現在の構成と一致するリソース定義を含み、各リソースに DeletionPolicy 属性を設定したテンプレートを作成する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "CloudFormation のリソースインポート機能 (既存リソースを使用したスタックの作成) を使用し、バケット名やテーブル名などの識別子を指定して既存リソースをスタックに取り込む。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_045": {
+  "file": "DOP-C02_orig_b3.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "構成管理と IaC",
+  "level": "hard",
+  "question": "ある企業のアプリケーションは 400 台のホストで稼働しており、機能フラグと動作パラメータを含む設定を、アプリケーションを再デプロイすることなく変更できるようにしたいと考えています。過去には、形式に誤りのある設定ファイルが全ホストへ一斉に配布され、40 分間のサービス全断につながる障害が発生しました。企業は、設定変更を配布する前にスキーマと値の妥当性を自動的に検証すること、変更を一部のホストから時間をかけて段階的に展開すること、および展開中にアプリケーションのエラー率の上昇を検知した場合は担当者の操作なしで直前の設定へ自動的に巻き戻すことを求めています。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS AppConfig で設定プロファイルを作成し、JSON スキーマまたは AWS Lambda のバリデーターを関連付ける。段階的なデプロイ戦略で設定を展開し、Amazon CloudWatch アラームをロールバックのトリガーとして構成する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_046": {
+  "file": "DOP-C02_orig_b3.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "耐障害性の高いクラウドソリューションの実装",
+  "level": "hard",
+  "question": "ある金融企業は、5 TB のデータを保持する Amazon Aurora MySQL 互換エディションのクラスターを単一リージョンで運用しています。規制対応のため、リージョン規模の障害が発生した場合でも、データ損失を数秒程度に抑えたうえで 1 時間以内に別リージョンでデータベースの書き込みを再開できなければなりません。また、平常時にはセカンダリリージョンのリソースを遊ばせず、日次のレポート生成などの読み取り専用の分析ワークロードに活用したいと考えています。アプリケーションを改修して複数のデータベースへ書き込む方式にすることは認められていません。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Aurora グローバルデータベースを構成してセカンダリリージョンにクラスターを追加し、平常時はセカンダリの読み取りエンドポイントを分析に利用する。リージョン障害時はセカンダリクラスターを昇格させて書き込みを切り替える。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_047": {
+  "file": "DOP-C02_orig_b3.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "耐障害性の高いクラウドソリューションの実装",
+  "level": "easy",
+  "question": "ある企業の Web アプリケーションは、単一リージョンの Application Load Balancer (ALB) の背後で稼働しており、ドメインは Amazon Route 53 のパブリックホストゾーンで管理されています。企業は、ALB やその背後のアプリケーションが利用できなくなる障害が起きた際に、運用担当者の操作を待たずに数分以内で利用者へ静的な案内ページを表示したいと考えています。案内ページは ALB とは独立して稼働するよう、Amazon S3 と Amazon CloudFront でホストする計画です。平常時には利用者のリクエストがすべて ALB に送られ、案内ページには一切振り分けられない必要があります。この要件を満たす構成はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Route 53 のフェイルオーバールーティングポリシーを使用し、ALB をプライマリレコード、案内ページの CloudFront ディストリビューションをセカンダリレコードに設定して、プライマリにヘルスチェックを関連付ける。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_048": {
+  "file": "DOP-C02_orig_b3.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "耐障害性の高いクラウドソリューションの実装",
+  "level": "medium",
+  "question": "ある企業は、業務アプリケーションのデータベースを Amazon RDS for PostgreSQL のシングル AZ インスタンスで運用しています。先日、アベイラビリティーゾーンの障害によって 4 時間のダウンタイムが発生し、経営層から再発防止を求められました。企業は、AZ の障害が発生した場合でもデータベースが自動的に別の AZ で稼働を再開すること、フェイルオーバーの際にアプリケーションの接続文字列や設定を変更する必要がないこと、およびコミット済みのデータが失われないことを求めています。現在の読み取り性能には問題がないため、追加の読み取りスループットは必要ありません。最も適切なソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "インスタンスをマルチ AZ 配置に変更し、障害時にはスタンバイへの自動フェイルオーバーが行われ、アプリケーションは同じエンドポイントで接続を継続できるようにする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_049": {
+  "file": "DOP-C02_orig_b3.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "耐障害性の高いクラウドソリューションの実装",
+  "level": "medium",
+  "question": "ある企業のアプリケーションは、利用者のセッションデータの保存に Amazon ElastiCache for Redis を使用しています。現在は単一ノードの構成で、先月のノード障害ではセッションデータがすべて失われ、約 2 万人の利用者が同時にログアウトされる事象が発生しました。企業は、ノードまたはアベイラビリティーゾーンの障害が発生した場合でもキャッシュサービスが担当者の操作なしに継続し、失われるセッションデータを最小限に抑えることを求めています。復旧のたびにアプリケーションの接続先設定を書き換える運用は認められません。アプリケーションの変更を最小限にしてこの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "レプリケーショングループを構成して別の AZ にレプリカノードを追加し、マルチ AZ と自動フェイルオーバーを有効にする。アプリケーションはプライマリエンドポイントを使用して接続する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_050": {
+  "file": "DOP-C02_orig_b3.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "耐障害性の高いクラウドソリューションの実装",
+  "level": "hard",
+  "question": "ある企業は AWS Organizations 配下の 30 のアカウントで Amazon EC2、Amazon RDS、Amazon EFS のワークロードを運用しています。コンプライアンス要件により、バックアップの取得を各アカウントの担当者に任せず、組織として一元的に定義したポリシーで管理し、特定のタグが付いたリソースを自動的に対象に含める必要があります。さらに、バックアップのコピーを本番とは別のアカウントかつ別のリージョンにある隔離された保管場所に保持し、認証情報を窃取した攻撃者やアカウントの管理者であっても保持期間中はバックアップを削除・変更できないようにしなければなりません。実行すべきステップはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Backup を組織レベルで有効にし、管理アカウント (または委任管理者アカウント) からバックアップポリシーを作成して OU に適用し、タグまたはリソースタイプに基づいて対象リソースを自動的にバックアップする。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "バックアップ専用アカウントの別リージョンにバックアップボールトを作成してクロスアカウント・クロスリージョンコピーを構成し、ボールトで AWS Backup Vault Lock を有効にしてバックアップの削除や変更を防止する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_051": {
+  "file": "DOP-C02_orig_b3.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "耐障害性の高いクラウドソリューションの実装",
+  "level": "hard",
+  "question": "ある企業が、ステートレスなバッチ処理ワークロードを Amazon EC2 の Auto Scaling グループで実行しており、コスト削減のためにスポットインスタンスを主体とした構成に移行したいと考えています。ただし、特定のインスタンスプールの需給変動によって一斉に中断が発生し、処理能力が大きく低下することは避けなければなりません。また、中断が近いインスタンスがある場合には、可能な限り事前に代替キャパシティを確保したいと考えています。実行すべきステップはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Auto Scaling グループに混合インスタンスポリシーを構成し、複数のインスタンスタイプと複数の AZ にまたがるスポット配分戦略 (price-capacity-optimized など) を使用してキャパシティを分散させる。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "Auto Scaling グループでキャパシティの再調整 (Capacity Rebalancing) を有効にし、スポットの中断リスクの通知 (rebalance recommendation) に応じて代替インスタンスを事前に起動させる。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_052": {
+  "file": "DOP-C02_orig_b3.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "耐障害性の高いクラウドソリューションの実装",
+  "level": "medium",
+  "question": "ある企業の注文処理システムでは、Amazon SQS の標準キューをポーリングする Amazon EC2 上のワーカーがメッセージを処理しています。最近、不正な形式のメッセージが混入した際に、ワーカーが処理に失敗し続け、同じメッセージが際限なく再配信されて他のメッセージの処理も遅延しました。企業は、処理に繰り返し失敗するメッセージを本流から自動的に隔離し、隔離されたメッセージを後から調査できるようにし、隔離が発生したことを運用チームに通知したいと考えています。この要件を満たす構成はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "デッドレターキューを作成してソースキューのリドライブポリシーに最大受信数 (maxReceiveCount) を設定し、閾値を超えたメッセージを自動的に移動させる。デッドレターキューのメッセージ数のメトリクスに Amazon CloudWatch アラームを設定して Amazon SNS で通知する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_053": {
+  "file": "DOP-C02_orig_b3.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "耐障害性の高いクラウドソリューションの実装",
+  "level": "hard",
+  "question": "ある企業が、独自の TCP プロトコルを使用するリアルタイムサービスを 2 つのリージョンの Network Load Balancer の背後で運用しています。クライアントデバイスは接続先を固定 IP アドレスで設定しており、頻繁な設定変更ができません。また、過去に DNS ベースのフェイルオーバーを試したところ、クライアント側の DNS キャッシュにより切り替えに長時間かかりました。企業は、固定の IP アドレスを維持したまま、リージョン障害時に数十秒程度で自動的に正常なリージョンへトラフィックを切り替えたいと考えています。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Global Accelerator でアクセラレーターを作成し、2 つの静的エニーキャスト IP アドレスをクライアントに設定させる。両リージョンの NLB をエンドポイントグループに登録し、ヘルスチェックに基づいて正常なリージョンへ自動的にルーティングさせる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_054": {
+  "file": "DOP-C02_orig_b3.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "耐障害性の高いクラウドソリューションの実装",
+  "level": "medium",
+  "question": "ある企業のサーバーレス API は、AWS Lambda 関数から Amazon RDS for MySQL のマルチ AZ データベースに接続しています。キャンペーン時にトラフィックが急増して Lambda の同時実行数が 1,000 に達すると、データベースへの接続数が上限に達してエラーが多発し、リクエストの一部が失敗します。また、データベースのフェイルオーバーが発生した際に、アプリケーションが新しいプライマリへの接続を回復するまでに数分を要することも課題です。API が同期的に応答する現在の仕様は維持する必要があり、アプリケーションコードの変更は最小限に抑えなければなりません。これらの課題を解決するソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon RDS Proxy を作成して接続プールを管理させ、Lambda 関数の接続先をプロキシのエンドポイントに変更する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_055": {
+  "file": "DOP-C02_orig_b3.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "耐障害性の高いクラウドソリューションの実装",
+  "level": "hard",
+  "question": "ある企業は、Amazon ECS 上で稼働する 50 のマイクロサービスについて、アベイラビリティーゾーンの障害やコンテナインスタンスの障害への耐性を設計しましたが、実際に障害が起きたときに想定どおり回復するかを一度も検証していません。企業は、本番相当の環境に対して障害を計画的に注入する実験を定義し、四半期ごとに同じ手順で繰り返し実行して結果を記録したいと考えています。ただし、実験によってエラー率やレイテンシーが悪化し、利用者への影響が出始めた場合には実験を自動的に停止する安全装置が必要です。担当者が常時画面を監視して手動で止める運用には依存できません。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Fault Injection Service (FIS) で実験テンプレートを作成し、インスタンスの停止や AZ 単位の障害シミュレーションのアクションを定義する。エラー率やレイテンシーの Amazon CloudWatch アラームを停止条件 (stop condition) として構成する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_056": {
+  "file": "DOP-C02_orig_b3.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "耐障害性の高いクラウドソリューションの実装",
+  "level": "medium",
+  "question": "ある企業は Amazon ECS (EC2 起動タイプ) で Web サービスを運用しており、3 つのアベイラビリティーゾーンにまたがるコンテナインスタンス上で 60 個のタスクを実行しています。先日 1 つの AZ で障害が発生した際、そのサービスのタスクの約 70% が同じ AZ に集中して配置されていたため、サービス全体の処理能力が大きく低下しました。調査の結果、コンテナインスタンス自体は 3 つの AZ へ均等に配置されていたものの、サービスのタスクの配置が偏っていたことがわかりました。コストの都合上、1 つのインスタンスで複数のタスクを実行する現在の集約度は維持する必要があります。今後 AZ 障害の影響を最小限に抑えるためにサービスへ設定すべき項目はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "サービスのタスク配置戦略に attribute:ecs.availability-zone をフィールドとする spread を設定し、タスクが複数の AZ に均等に分散して配置されるようにする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_057": {
+  "file": "DOP-C02_orig_b3.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "耐障害性の高いクラウドソリューションの実装",
+  "level": "hard",
+  "question": "ある企業の基幹 Web アプリケーションは、単一リージョンで Application Load Balancer、Auto Scaling グループの Amazon EC2、Amazon Aurora で構成されています。経営層はリージョン障害に備えた DR 計画を承認し、RTO は 15 分、RPO は 1 分以内と定められました。バックアップからの復元では RTO を満たせないこと、また平常時の DR リージョンのコストはフル構成の複製よりも抑えることが確認されています。ウォームスタンバイ戦略としてセカンダリリージョンに構成すべき項目はどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Aurora グローバルデータベースでセカンダリリージョンに継続的にレプリケーションし、フェイルオーバー時にセカンダリクラスターを昇格させる。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "セカンダリリージョンに ALB と縮小したキャパシティの Auto Scaling グループを常時稼働させておき、フェイルオーバー時にスケールアウトして Amazon Route 53 のフェイルオーバールーティングで切り替える。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_058": {
+  "file": "DOP-C02_orig_b3.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "耐障害性の高いクラウドソリューションの実装",
+  "level": "hard",
+  "question": "ある企業が Amazon Kinesis Data Streams のレコードを AWS Lambda 関数で処理しています。最近、異常なデータを含む 1 件のレコードが原因で関数の呼び出しが失敗し続け、同じバッチが繰り返し再試行されて、そのシャードの後続レコードの処理が長時間停止しました。企業は、問題のあるレコードによる停止時間を最小化し、処理できなかったレコードのメタデータを後から調査できるように保存したいと考えています。Lambda のイベントソースマッピングに構成すべき設定の組み合わせはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "最大再試行回数 (MaximumRetryAttempts) を制限し、エラー時のバッチ分割 (BisectBatchOnFunctionError) を有効にして、失敗レコードの情報を送信する障害時の送信先 (on-failure destination) を構成する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_059": {
+  "file": "DOP-C02_orig_b3.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリングとロギング",
+  "level": "medium",
+  "question": "ある企業のアプリケーションは Amazon EC2 インスタンス上で稼働し、アプリケーションログを Amazon CloudWatch Logs のロググループに出力しています。ログには決済処理の失敗を示す「PaymentFailed」という文字列が含まれることがあります。運用チームは、この文字列の出現回数を時系列のメトリクスとして追跡し、5 分間に 10 回を超えた場合にオンコール担当者へ通知したいと考えています。追加のインフラストラクチャを構築せずにこの要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ロググループに「PaymentFailed」に一致するメトリクスフィルターを作成してカスタムメトリクスを発行し、そのメトリクスに Amazon CloudWatch アラームを設定して Amazon SNS トピック経由でオンコール担当者に通知する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_060": {
+  "file": "DOP-C02_orig_b3.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリングとロギング",
+  "level": "medium",
+  "question": "ある企業のサーバーレスアプリケーションは、Amazon API Gateway、12 個の AWS Lambda 関数、Amazon DynamoDB のテーブルで構成され、Lambda 関数どうしが同期的に呼び出し合う区間もあります。利用者から応答が遅いという苦情が寄せられ、p99 レイテンシーが目標の 2 倍になっていることがわかりましたが、運用チームは各コンポーネントの Amazon CloudWatch メトリクスを個別に確認しても、1 件のリクエストがどのコンポーネントで時間を消費しているのかを特定できていません。チームは、リクエストの流れをコンポーネントをまたいで一貫して可視化し、DynamoDB への呼び出しも含めて所要時間の内訳を確認できるようにする必要があります。実行すべき対応はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "API Gateway のステージと Lambda 関数で AWS X-Ray のアクティブトレースを有効にし、Lambda 関数に X-Ray SDK を組み込んで DynamoDB への呼び出しを記録する。サービスマップとトレースでセグメントごとの所要時間を分析する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_061": {
+  "file": "DOP-C02_orig_b3.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリングとロギング",
+  "level": "hard",
+  "question": "ある企業の運用チームは、Web アプリケーションについて ALB の 5xx エラー、ターゲットの応答時間、Auto Scaling グループの異常ホスト数など多数の Amazon CloudWatch アラームを設定しています。障害が発生すると、根本原因が 1 つであっても関連するアラームが同時に多数発報し、オンコール担当者への通知が氾濫して重要な状況判断が遅れています。チームは、個々のアラームは維持しながら、サービス全体としての異常を示す単一の通知に集約し、アラームの嵐を抑えたいと考えています。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "関連するアラームを論理条件 (AND / OR) で組み合わせた複合アラーム (composite alarm) を作成し、通知アクションは複合アラームにのみ設定して、個々のアラームからの通知アクションを外す。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_062": {
+  "file": "DOP-C02_orig_b3.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリングとロギング",
+  "level": "easy",
+  "question": "ある企業の EC サイトでは、実際の利用者からの申告によって初めて障害に気付くことが多く、検知までに平均 40 分かかっていることが課題になっています。運用チームは、アクセスがほとんどない深夜の時間帯も含めて、トップページの表示とログイン API の応答を 5 分間隔で継続的に外形監視し、応答が得られない場合や期待した内容が返らない場合に Amazon CloudWatch アラームで通知を受け取りたいと考えています。監視のために自社で管理するサーバーを追加することは認められておらず、既存のログを後から分析する方式では検知が遅すぎます。運用負荷を最小限に抑えてこの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon CloudWatch Synthetics の Canary を作成してトップページと API エンドポイントへのチェックをスケジュール実行し、成功率のメトリクスにアラームを設定して通知する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_063": {
+  "file": "DOP-C02_orig_b3.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリングとロギング",
+  "level": "medium",
+  "question": "ある企業の 20 のマイクロサービスは、それぞれ別の Amazon CloudWatch Logs ロググループに、リクエスト ID を含む JSON 形式の構造化ログを出力しています。障害調査の際、運用チームは特定のリクエスト ID に関連するログを複数のサービスにまたがって時系列で追跡する必要がありますが、現在は各ロググループを 1 つずつ開いて手動で検索しており、1 件あたり 30 分以上かかっています。チームは、追加のログ基盤を構築して運用することなく、またアプリケーションのログ出力先を変更することなく、障害が発生した直後にその時点までのログを横断的に調査できるようにしたいと考えています。この要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon CloudWatch Logs Insights で複数のロググループを対象に指定し、リクエスト ID でフィルタして時刻順にソートするクエリを実行する。よく使うクエリは保存して再利用する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_064": {
+  "file": "DOP-C02_orig_b3.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリングとロギング",
+  "level": "hard",
+  "question": "ある企業は AWS Organizations で 30 のワークロードアカウントを管理しており、各アカウントで Amazon CloudWatch のメトリクス、ログ、トレースが生成されています。中央の運用チームは、専用のモニタリングアカウントにサインインしたまま、アカウントを切り替えたり各アカウントの認証情報でサインインし直したりすることなく、全アカウントのメトリクスとログを横断的に表示・検索し、単一のダッシュボードで運用状況を把握したいと考えています。テレメトリを複製するためのコードを各アカウントへデプロイして保守することは避け、今後 OU にアカウントが追加された場合も個別の作業なしで対象に含めたいと考えています。実行すべきステップはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "モニタリングアカウントで CloudWatch のクロスアカウントオブザーバビリティのシンク (sink) を作成し、モニタリングアカウントとして構成する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "各ワークロードアカウントでモニタリングアカウントへのリンクを作成し、共有するテレメトリ (メトリクス、ロググループ、トレース) を構成する。組織との統合を利用して一括で設定することもできる。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_065": {
+  "file": "DOP-C02_orig_b3.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリングとロギング",
+  "level": "easy",
+  "question": "ある運用チームは、Amazon EC2 インスタンス 40 台で稼働する Java アプリケーションについて、メモリ使用率とルートボリュームのディスク使用率がしきい値を超えたときに通知する Amazon CloudWatch アラームを設定しようとしました。しかし、CloudWatch のメトリクス一覧にはこれらのメトリクスが見つからず、CPU 使用率やネットワーク、ディスク I/O のメトリクスしか表示されませんでした。チームは、これらの値を通常のメトリクスと同様にアラームの評価対象として扱えるようにし、しきい値の超過を継続的に検知したいと考えています。この要件を満たすために必要な対応はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "各インスタンスに CloudWatch エージェントをインストールして設定し、メモリとディスクのメトリクスをカスタムメトリクスとして CloudWatch に発行する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_066": {
+  "file": "DOP-C02_orig_b3.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリングとロギング",
+  "level": "medium",
+  "question": "ある EC サイトのリクエスト数は、平日と週末、昼と夜で 10 倍以上変動する周期的なパターンを持ち、季節やキャンペーンによってその水準自体も移り変わります。運用チームは静的なしきい値でリクエスト数の異常を検知するアラームを設定しましたが、ピーク時間帯に合わせたしきい値では夜間の異常な減少を検知できず、夜間に合わせたしきい値では日中に誤報が多発しました。チームは、しきい値を時間帯や季節ごとに人手で設定し直す作業を発生させずに、その時点で期待される水準からの逸脱として異常を検知したいと考えています。また、恒常的な誤報によるアラート疲れを避けることも重要視しています。この要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "CloudWatch の異常検出 (anomaly detection) をメトリクスに適用し、機械学習で生成される期待値の帯域からの逸脱を条件とするアラームを作成する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_067": {
+  "file": "DOP-C02_orig_b3.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリングとロギング",
+  "level": "medium",
+  "question": "ある企業の Web アプリケーションは Application Load Balancer の背後で稼働しており、1 日あたり約 3,000 万リクエストを処理しています。マーケティングチームから、過去 3 か月のクライアント IP アドレス別のアクセス傾向や、URL パス別のレスポンスタイムの分布を分析したいという要望がありました。分析は月に数回、アドホックに実施される見込みです。現在、ALB のアクセスログは取得されていません。運用チームは、アプリケーションのコードを変更せず、分析基盤を常時稼働させることによる固定費も発生させたくないと考えています。この要望に応える構成はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ALB のアクセスログを有効にして Amazon S3 バケットに保存し、Amazon Athena でアクセスログ用のテーブルを定義して、必要なときに SQL クエリで分析する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_068": {
+  "file": "DOP-C02_orig_b3.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリングとロギング",
+  "level": "medium",
+  "question": "ある企業は Amazon ECS クラスターで 80 のマイクロサービスを運用しています。運用チームは、サービス単位およびタスク単位の CPU とメモリの使用率、コンテナごとの再起動の発生状況をダッシュボードで俯瞰し、どのタスクが問題を起こしているかを数分以内に特定したいと考えています。しかし、標準の Amazon CloudWatch メトリクスではクラスターとサービスの集計値しか確認できず、タスクやコンテナの粒度まで掘り下げられません。チームは、コンテナイメージに独自の監視エージェントを組み込んだり、メトリクス収集の仕組みを自社で実装して保守したりすることは避ける方針です。運用負荷を最小限に抑えてこの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "クラスターで CloudWatch Container Insights を有効にし、自動収集されるタスクレベル・コンテナレベルのメトリクスとパフォーマンスログを組み込みのダッシュボードで確認する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_069": {
+  "file": "DOP-C02_orig_b3.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリングとロギング",
+  "level": "hard",
+  "question": "ある企業は AWS Organizations で 40 のアカウントを管理しています。内部監査で、一部のアカウントでは AWS CloudTrail が構成されておらず、構成済みのアカウントでも設定が統一されていないことが指摘されました。企業は、既存および将来のすべてのアカウントの管理イベントを一元的に記録すること、メンバーアカウントの管理者が記録を停止・改変できないこと、および保存されたログファイルが改ざんされていないことを検証できることを求めています。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "管理アカウントから組織の証跡 (organization trail) を作成して全アカウントの管理イベントを中央の Amazon S3 バケットに記録し、ログファイルの整合性検証を有効にする。バケットへのアクセスはバケットポリシーで制限する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_070": {
+  "file": "DOP-C02_orig_b3.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリングとロギング",
+  "level": "hard",
+  "question": "ある企業のアプリケーションでは、Amazon EC2 インスタンスから外部の決済サービスへの接続が 1 日に数回、断続的にタイムアウトする事象が発生しています。ネットワークチームは、セキュリティグループやネットワーク ACL による拒否が実際に起きているのか、起きているとすればどの ENI からどの宛先アドレスとポートへの通信が拒否されているのかを、推測ではなくデータに基づいて特定する必要があります。事象は再現性が低いため、平常時から通信の記録を継続して保存し、後から任意の期間に絞り込んで分析できなければなりません。本番環境であるため、切り分けのためにセキュリティグループの制限を緩めることは認められていません。実行すべきステップはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "対象 VPC で VPC フローログを有効にし、ACCEPT と REJECT の両方のトラフィックを記録するように構成して、ログを Amazon S3 または Amazon CloudWatch Logs に保存する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "保存したフローログを Amazon Athena または CloudWatch Logs Insights でクエリし、REJECT のレコードを ENI、宛先アドレス、ポートで集計して拒否の発生箇所を特定する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_071": {
+  "file": "DOP-C02_orig_b4.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリングとロギング",
+  "level": "hard",
+  "question": "ある企業の API は Application Load Balancer (ALB) の背後で稼働しており、サービスレベル目標としてレイテンシーの 99 パーセンタイルが 2 秒未満であることを定めています。運用チームは平均レイテンシーに対する Amazon CloudWatch アラームを設定していましたが、一部の利用者が 10 秒を超える遅延を経験していても、大量の高速なリクエストに埋もれて平均値はほとんど変化せず、SLO 違反を検知できませんでした。一方で、1 分間だけ発生する瞬間的なスパイクでオンコール担当者が呼び出される誤報は避けたいと考えており、遅延が継続している場合にのみ発報させる必要があります。これらの要件を満たすアラーム構成はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ALB の TargetResponseTime メトリクスに p99 の統計を指定したアラームを作成し、「N 個中 M 個のデータポイント」の評価条件で連続的な閾値超過のみを発報させる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_072": {
+  "file": "DOP-C02_orig_b4.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリングとロギング",
+  "level": "hard",
+  "question": "ある企業の監査で、アプリケーションが Amazon CloudWatch Logs の 40 個のロググループへ出力しているログに、クレジットカード番号やメールアドレスなどの機密データが含まれていることが判明しました。ログは複数のチームが日常的に障害調査へ利用しているため出力とアクセスは継続する必要がありますが、一般の調査担当者に対しては該当箇所をマスクした状態で表示し、正当な理由を持つ限られた担当者のみが元の値を確認できるようにしなければなりません。開発チームに余力がないためアプリケーションの改修は行えず、対策は今後出力されるログにも自動的に適用される必要があります。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "対象ロググループに CloudWatch Logs のデータ保護ポリシーを設定して機密データの識別子を指定し、検出されたデータを自動的にマスクする。元の値の表示 (unmask) は専用の IAM アクセス許可を持つ担当者のみに付与する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_073": {
+  "file": "DOP-C02_orig_b4.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インシデントおよびイベントへの対応",
+  "level": "medium",
+  "question": "ある企業の夜間バッチ処理は、特定のタグが付いた Amazon EC2 インスタンス上で毎晩 1 時に実行されます。まれに、このインスタンスが予期せず停止 (stopped 状態へ遷移) することがあり、翌朝の始業まで誰も気付かないためバッチが実行されず、後続の業務に影響が出ています。運用チームは、対象インスタンスが stopped 状態になったことを状態の変化の直後に検知して自動的に起動し、あわせて運用チームの Amazon SNS トピックへ通知したいと考えています。そのために定期実行のポーリング処理を新たに作成して保守することは避ける方針です。運用負荷を最小限に抑えてこの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "EC2 インスタンスの状態変更 (stopped) に一致する Amazon EventBridge ルールを作成し、ターゲットにインスタンスを起動する AWS Systems Manager Automation ランブックと Amazon SNS トピックを設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_074": {
+  "file": "DOP-C02_orig_b4.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インシデントおよびイベントへの対応",
+  "level": "hard",
+  "question": "ある企業では、重大な障害が発生した際の対応が個人の経験に依存しており、誰に連絡すべきか、どの手順で対応すべきかが不明確なまま時間が失われるため、平均復旧時間が目標の 90 分に対して 4 時間を超えています。オンコールは 6 名の交代制で運用されています。企業は、重要なアラームの発報を起点にインシデントを自動的に起票し、定義済みの対応手順 (ランブック) を関係者に提示し、一次担当者が 5 分以内に応答しない場合は上位の担当者へ自動的にエスカレーションする仕組みを、AWS のマネージドサービスで構築したいと考えています。実行すべきステップはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Systems Manager Incident Manager で連絡先とエスカレーションプラン、対応ランブックを含むレスポンスプランを作成する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "重要な Amazon CloudWatch アラームのアクションにレスポンスプランを関連付け (または EventBridge 経由で起動し)、アラーム発報時にインシデントが自動作成されるようにする。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_075": {
+  "file": "DOP-C02_orig_b4.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インシデントおよびイベントへの対応",
+  "level": "hard",
+  "question": "ある企業のセキュリティチームは Amazon GuardDuty を有効にしており、Amazon EC2 インスタンスが暗号通貨マイニングに関連する通信を行っていることを示す検出結果 (CryptoCurrency 系のファインディング) が出た場合の対応を自動化したいと考えています。要件は、該当インスタンスをネットワークから自動的に隔離すること、フォレンジック調査のために EBS ボリュームの証拠を保全すること、およびセキュリティチームに即時通知することです。実行すべきステップはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "GuardDuty の対象の検出結果タイプに一致する Amazon EventBridge ルールを作成し、ターゲットの AWS Lambda 関数 (または AWS Systems Manager Automation ランブック) でインスタンスのセキュリティグループを通信を許可しない隔離用セキュリティグループに差し替え、EBS ボリュームのスナップショットを取得する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "同じ EventBridge ルールのターゲットに Amazon SNS トピックを追加し、セキュリティチームへ検出結果の内容を即時通知する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_076": {
+  "file": "DOP-C02_orig_b4.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インシデントおよびイベントへの対応",
+  "level": "medium",
+  "question": "ある企業の運用チームは、AWS がスケジュールする Amazon EC2 インスタンスのメンテナンス (ホストの退役にともなうインスタンスの停止や再起動の予定など) に気付かないまま、業務時間中に 200 台のうち複数のインスタンスが影響を受け、緊急の障害対応に追われた経験があります。チームは、自社アカウントのリソースに影響する AWS 側のイベントや計画されたライフサイクルイベントが発生した時点でそれを自動的に検知し、既存のチケットシステムへ API 経由で起票したうえで担当者へ通知する仕組みを求めています。担当者がダッシュボードを毎日確認する運用や、外部の公開情報の収集に依存する方法は認められません。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Health のイベントに一致する Amazon EventBridge ルールを作成し、ターゲットの AWS Lambda 関数でチケットシステムの API を呼び出して起票し、Amazon SNS トピックで担当者に通知する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_077": {
+  "file": "DOP-C02_orig_b4.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インシデントおよびイベントへの対応",
+  "level": "medium",
+  "question": "ある企業の運用チームは、12 の AWS アカウントで発生する運用上の問題 (アラームの発報、リソースの非準拠、AWS からの通知など) を、メール、チャット、各アカウントのコンソールというバラバラの経路で受け取っており、誰がどの課題に着手しているのか、すでに解決済みなのかを追跡できていません。チームは、これらの運用課題を一元的な作業項目として集約し、影響を受けているリソースの情報や推奨される修復用ランブックとあわせて管理して、着手から解決までの状態を追跡したいと考えています。サードパーティ製品を新たに導入せず、AWS のサービスで実現する必要があります。この要件に適した AWS のサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Systems Manager OpsCenter を使用し、Amazon EventBridge や CloudWatch アラームから OpsItem を自動作成して、関連リソース情報や修復用ランブックとともに一元管理する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_078": {
+  "file": "DOP-C02_orig_b4.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インシデントおよびイベントへの対応",
+  "level": "medium",
+  "question": "ある企業の重要なアプリケーションは、Auto Scaling グループに属さない単一の Amazon EC2 インスタンスで稼働しています。このアプリケーションはインスタンス ID に紐づくライセンスを使用しており、EBS ボリュームのデータとプライベート IP アドレスを引き継いだまま復旧する必要があるため、新しいインスタンスへの置き換えはできません。まれに AWS 側の基盤ハードウェアの問題によってシステムステータスチェックが失敗し、その間アプリケーションが利用できなくなります。現在は運用担当者が気付いた時点で手動でインスタンスを停止・起動して別のホストへ移動させており、復旧までに平均 40 分かかっています。この復旧を人手を介さずに自動化する最も簡単な方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "StatusCheckFailed_System メトリクスの Amazon CloudWatch アラームを作成し、アラームアクションに EC2 の復旧 (recover) アクションを設定して、正常なホスト上でインスタンスが自動復旧されるようにする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_079": {
+  "file": "DOP-C02_orig_b4.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インシデントおよびイベントへの対応",
+  "level": "hard",
+  "question": "ある企業は、業務上重要なイベント処理を Amazon EventBridge ルールと AWS Lambda 関数の組み合わせで自動化しています。あるとき、Lambda 側の一時的な問題により EventBridge からの呼び出しが失敗し続け、リトライの上限を超えたイベントがそのまま失われていたことが後から判明しました。企業は、ターゲットへの配信に最終的に失敗したイベントを保全して後から再処理できるようにし、配信失敗の発生を検知して通知したいと考えています。実行すべきステップはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "EventBridge ルールのターゲット設定にデッドレターキューとして Amazon SQS キューを構成し、再試行ポリシー (最大再試行時間・回数) を要件に合わせて調整する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "デッドレターキューのメッセージ数 (ApproximateNumberOfMessagesVisible) に Amazon CloudWatch アラームを設定し、メッセージ到達時に運用チームへ通知する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_080": {
+  "file": "DOP-C02_orig_b4.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インシデントおよびイベントへの対応",
+  "level": "hard",
+  "question": "ある企業の運用チームは、本番環境の Amazon EC2 インスタンスの再起動やサービスの復旧といった定型対応を AWS Systems Manager Automation ランブックとして整備しています。しかし、コンプライアンス上、この種の本番環境への操作は上長の承認を得てから実行しなければなりません。チームは、ランブックの実行フローの中に承認プロセスを組み込み、承認された場合のみ後続の操作が実行され、承認の記録が残るようにしたいと考えています。この要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ランブックに aws:approve アクションのステップを追加し、承認者と通知用の Amazon SNS トピックを指定する。承認者が承認した場合のみ後続のステップが実行されるように構成する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_081": {
+  "file": "DOP-C02_orig_b5.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "hard",
+  "question": "ある企業は AWS Organizations で 120 のアカウントを管理しています。データレジデンシー要件により、ワークロードは ap-northeast-1 と us-east-1 の 2 リージョンでのみ実行しなければなりません。しかし内部監査で、複数のアカウントの開発者が他のリージョンに Amazon EC2 インスタンスや Amazon S3 バケットを作成していることが判明しました。セキュリティチームは、許可された 2 リージョン以外でのリソース作成を組織全体で予防的にブロックしたいと考えています。ただし、AWS Identity and Access Management、AWS Organizations、Amazon Route 53、Amazon CloudFront などのグローバルサービスの操作は引き続き利用できなければならず、これらのサービスへのリクエストが us-east-1 として評価される点も考慮する必要があります。運用負荷を最小限に抑えてこれらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "組織のルートまたは対象 OU にサービスコントロールポリシー (SCP) をアタッチする。ポリシーでは、NotAction 要素にグローバルサービスのアクションを列挙して除外したうえで、aws:RequestedRegion 条件キーの値が許可リージョンのリストに含まれない場合にすべてのアクションを拒否する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_082": {
+  "file": "DOP-C02_orig_b5.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "medium",
+  "question": "ある企業は AWS Organizations で 40 のアカウントを運用しています。セキュリティチームは、Amazon S3 バケット、IAM ロールの信頼ポリシー、AWS KMS キー、AWS Lambda 関数などのリソースベースポリシーによって、組織外のアカウントや匿名のプリンシパルにアクセスが許可されているリソースを継続的に洗い出したいと考えています。新たにそのような共有が作成された場合には、セキュリティチームへ自動的に通知が届く必要があります。組織内のアカウント間の共有は正当な構成であるため、検出結果に含めたくありません。運用負荷を最小限に抑えてこれらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "セキュリティアカウントを IAM Access Analyzer の委任管理者として指定し、信頼ゾーンを組織とする外部アクセスアナライザーを作成する。新しい検出結果に対応する Amazon EventBridge イベントをルールで捕捉し、Amazon SNS トピックへ通知する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_083": {
+  "file": "DOP-C02_orig_b5.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "hard",
+  "question": "ある企業は AWS Organizations で 3 つの OU にまたがる 70 のアカウントを管理しています。コンプライアンスチームは、社内標準として定めた 25 個の AWS Config ルールをすべてのアカウントの 2 つのリージョンに一貫して適用し、準拠状況を単一のダッシュボードで確認したいと考えています。さらに、組織に新しく追加されたアカウントにもルールが自動的に適用されること、およびメンバーアカウントの管理者が展開されたルールを個別に変更・削除できないことが求められています。運用負荷を最小限に抑えてこれらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "委任管理者アカウントから、25 個のルールを含む組織の適合パック (organization conformance pack) を対象 OU にデプロイする。同じアカウントで組織のアグリゲータを作成し、対象リージョンをソースに含めて全アカウントの準拠状況を集約表示する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_084": {
+  "file": "DOP-C02_orig_b5.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "hard",
+  "question": "ある企業のセキュリティ基準では、本番アカウントの Amazon RDS DB インスタンスで自動バックアップが有効になっていること、および Amazon S3 バケットでバージョニングが有効になっていることが求められています。現在は四半期ごとの手動監査で違反を発見しており、発見から是正までに数週間かかっています。DevOps チームは、違反を継続的に検出したうえで、可能なものは人手を介さずに構成を是正し、自動是正の対象外となる違反についてはリソースのオーナータグをもとに担当者へ通知する仕組みを構築したいと考えています。これらの要件を満たすステップの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Config のマネージドルール (db-instance-backup-enabled と s3-bucket-versioning-enabled) を有効化し、各ルールに AWS Systems Manager Automation ドキュメントを実行する修復アクションを関連付けて自動修復を構成する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "AWS Config の準拠状況変更イベントを Amazon EventBridge ルールで捕捉し、AWS Lambda 関数でリソースのタグからオーナーを解決して Amazon SNS 経由で担当者に通知する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_085": {
+  "file": "DOP-C02_orig_b5.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "medium",
+  "question": "ある企業は AWS Organizations 配下の 25 アカウントで Amazon EC2 インスタンスと AWS Lambda 関数を運用しています。セキュリティチームは、OS パッケージとアプリケーションの依存関係に含まれる既知の脆弱性を継続的に評価し、新しい CVE が公開された時点で影響を受けるリソースが自動的に再評価されることを求めています。スキャンのスケジュール管理や個別のジョブ実行に人手をかけたくなく、検出結果はセキュリティアカウントで一元的に確認できる必要があります。運用負荷を最小限に抑えてこれらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "セキュリティアカウントを Amazon Inspector の委任管理者として指定し、組織のすべてのアカウントで Inspector を有効化する。新規アカウントの自動有効化を構成し、EC2 インスタンスは AWS Systems Manager のマネージドインスタンスとして登録しておく。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_086": {
+  "file": "DOP-C02_orig_b5.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "hard",
+  "question": "ある企業は AWS Organizations で 60 のアカウントを管理しており、それぞれ 4 つのリージョンでワークロードを運用しています。各アカウントでは Amazon GuardDuty、Amazon Inspector、AWS Config などが検出結果を生成しています。セキュリティ運用チームは、これらの検出結果を 1 つのアカウントの 1 つのリージョンのコンソールで横断的に確認したうえで、重大度が CRITICAL の検出結果については社内のインシデント管理システムへ自動的に連携したいと考えています。また、将来組織に参加するアカウントでも同じ構成が自動的に有効になる必要があります。これらの要件を満たすステップの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "セキュリティアカウントを AWS Security Hub の委任管理者として指定し、組織のすべてのアカウントで Security Hub を有効化する。新規アカウントを自動的に有効化する設定を構成する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "委任管理者アカウントで集約リージョンを選択して検出結果のクロスリージョン集約を構成する。集約リージョンで Security Hub の検出結果を対象とする Amazon EventBridge ルールを作成し、重大度が CRITICAL の検出結果をインシデント管理システムへ連携する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_087": {
+  "file": "DOP-C02_orig_b5.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "medium",
+  "question": "ある企業のバッチ処理アプリケーションは、長年の運用の中で必要になるたびに権限が追加され続け、現在は複数のワイルドカードを含む非常に広範な IAM ロールで実行されています。セキュリティチームはこのロールを最小権限に絞り込みたいと考えていますが、アプリケーションが実際にどの API を呼び出しているかを示すドキュメントは残っておらず、権限を削りすぎてバッチが失敗する事態は避けなければなりません。過去 90 日分の AWS CloudTrail 証跡は Amazon S3 に保管されています。最小限の労力でこの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "IAM Access Analyzer のポリシー生成機能を使用し、指定した期間の CloudTrail 証跡から対象ロールが実際に使用したアクションに基づく IAM ポリシーを生成する。生成されたポリシーをレビューしたうえでロールに適用する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_088": {
+  "file": "DOP-C02_orig_b5.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "hard",
+  "question": "ある企業のセキュリティ監査で、本番の Amazon EC2 インスタンスへのアクセスに踏み台ホスト経由の SSH が使われており、SSH キーの共有と持ち出しが統制されていないことが指摘されました。新しい要件は次のとおりです。インスタンスのセキュリティグループでインバウンドポートを一切開放しないこと。対話型セッションで実行されたコマンドと出力をすべて記録し、暗号化して長期保管すること。インスタンスはプライベートサブネットにあり、インターネットゲートウェイや NAT ゲートウェイを経由せずに接続できること。誰がどのインスタンスに接続できるかを IAM で制御できること。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "SSM Agent を導入した EC2 インスタンスに AWS Systems Manager Session Manager で接続する。VPC に ssm、ssmmessages、ec2messages のインターフェイス VPC エンドポイントを作成する。セッションのログ出力先として AWS KMS で暗号化した Amazon S3 バケットを構成し、IAM ポリシーの条件でインスタンスのタグに基づいて接続を許可する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_089": {
+  "file": "DOP-C02_orig_b5.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "hard",
+  "question": "ある企業は機密データを保持する Amazon S3 バケットを運用しており、データ境界を確立するために 2 つの要件を同時に満たす必要があります。1 つ目は、社内 VPC 内の Amazon EC2 インスタンスから、自組織に属さないアカウントが所有する S3 バケットへデータをコピーできないようにすることです。2 つ目は、機密データバケットに対して自組織のプリンシパルからのアクセスのみを許可することです。ネットワークポリシーによりインターネット向け通信は禁止されており、S3 へのアクセスはすべて VPC エンドポイント経由で行われます。これらの要件を満たすステップの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "S3 のゲートウェイ VPC エンドポイントのエンドポイントポリシーで、aws:PrincipalOrgID が自組織の ID と一致し、かつ aws:ResourceOrgID が自組織の ID と一致する場合にのみ S3 のアクションを許可する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "機密データバケットのバケットポリシーに、aws:PrincipalOrgID が自組織の ID と一致しないプリンシパルからのすべてのアクションを明示的に拒否するステートメントを追加する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_090": {
+  "file": "DOP-C02_orig_b5.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インシデントおよびイベントへの対応",
+  "level": "hard",
+  "question": "ある企業は AWS Organizations で 90 のアカウントを管理しています。セキュリティポリシーでは、メンバーアカウントの root ユーザーの使用は緊急時に限って認められており、使用された場合はセキュリティ運用チームが数分以内に把握して調査を開始する必要があります。管理アカウントではすでに組織証跡 (organization trail) が有効化され、ログはログアーカイブアカウントの Amazon S3 バケットに配信されています。root ユーザーのサインインなどのグローバルサービスのイベントが us-east-1 に記録される点にも注意が必要です。運用負荷を最小限に抑えてこれらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "サービスマネージド型の AWS CloudFormation StackSets で、全アカウントの us-east-1 に Amazon EventBridge ルールをデプロイする。ルールでは root ユーザーによるサインインと API 呼び出しのイベントを照合し、セキュリティアカウントのカスタムイベントバスへ転送する。セキュリティアカウント側のルールで Amazon SNS 通知とチケット起票を行う。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_091": {
+  "file": "DOP-C02_orig_b5.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インシデントおよびイベントへの対応",
+  "level": "hard",
+  "question": "ある企業のアプリケーションは Auto Scaling グループの Amazon EC2 インスタンスで稼働しています。スケールインやヘルスチェック失敗によるインスタンスの置き換えが発生すると、そのインスタンスのローカルディスクに出力されていたアプリケーションの診断ダンプと一時ファイルが失われ、事後の原因分析ができない状況が続いています。運用チームは、インスタンスが終了する前にこれらのファイルを Amazon S3 にアップロードし、アップロードが完了してから終了処理が進むようにしたいと考えています。同時に、何らかの理由でアップロードが完了しない場合でも、インスタンスの終了が無期限に滞留しないようにする必要があります。運用負荷を最小限に抑えてこれらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Auto Scaling グループに EC2_INSTANCE_TERMINATING のライフサイクルフックを作成し、ハートビートタイムアウトとデフォルトの結果を設定する。フックのイベントを Amazon EventBridge で受けて AWS Systems Manager Automation を起動し、対象インスタンスで診断ファイルを S3 へアップロードしてから CompleteLifecycleAction を呼び出す。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_092": {
+  "file": "DOP-C02_orig_b5.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インシデントおよびイベントへの対応",
+  "level": "medium",
+  "question": "ある企業の 150 台の Amazon EC2 インスタンス (すべて AWS Systems Manager のマネージドインスタンス) では、アプリケーションログの肥大化によってルートボリュームの空き容量が枯渇し、サービスが停止する障害が四半期に数回発生しています。運用チームは、ルートボリュームの使用率が 85% を超えた時点で自動的にログのローテーションとアーカイブを実行し、同時に担当者へ通知したいと考えています。ログは監査のため一定期間保持する必要があるため単純な削除は認められず、稼働中のインスタンスを入れ替えて対処することもできません。追加のサーバーやスケジューラーを運用せずにこの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon CloudWatch エージェントでディスク使用率のカスタムメトリクスを収集し、85% を超えたら ALARM になる CloudWatch アラームを作成する。アラームのアクションに Amazon SNS 通知を設定し、アラームの状態変化を Amazon EventBridge ルールで捕捉して AWS Systems Manager Automation ランブックを起動し、対象インスタンスでログのローテーションとアーカイブを実行する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_093": {
+  "file": "DOP-C02_orig_b5.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インシデントおよびイベントへの対応",
+  "level": "hard",
+  "question": "ある企業は AWS Organizations 配下の 50 アカウントでワークロードを運用しており、各アカウントで発生する重要な運用イベント (Amazon EC2 の状態変化、AWS Health のイベント、Amazon GuardDuty の検出結果など) を中央の運用アカウントで一元的に受信して処理したいと考えています。要件は、送信側アカウントのアプリケーションを一切改修しないこと、イベントのニアリアルタイム性を確保すること、および将来アカウントが追加された場合にも同じ構成が自動的に適用されることです。これらの要件を満たすステップの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "中央の運用アカウントにカスタムイベントバスを作成し、そのリソースベースポリシーで aws:PrincipalOrgID が自組織の ID と一致するアカウントからの events:PutEvents を許可する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "対象イベントを中央アカウントのイベントバスへ転送する Amazon EventBridge ルールと、転送に必要な IAM ロールを、自動デプロイを有効にしたサービスマネージド型の AWS CloudFormation StackSets で全アカウントにデプロイする。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_094": {
+  "file": "DOP-C02_orig_b5.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "SDLC のオートメーション",
+  "level": "hard",
+  "question": "ある企業は、Application Load Balancer の背後にある Auto Scaling グループの Amazon EC2 インスタンスで Web アプリケーションを実行しています。現在は AWS CodeDeploy のインプレースデプロイを使用していますが、デプロイ中にインスタンスが順次サービスから外れるため処理能力が低下し、問題が判明した場合の切り戻しには旧リビジョンの再デプロイが必要で 30 分以上かかっています。DevOps チームは、デプロイ中も本来の処理能力を維持すること、切り替え後に問題が判明した場合は数分以内に旧環境へ戻せること、および切り替え直後に旧環境を一定時間残して調査できることを求めています。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "CodeDeploy のブルー/グリーンデプロイを構成し、置き換え先の Auto Scaling グループを新規に作成して ALB のターゲットグループに登録する。デプロイグループで元のインスタンスを終了するまでの待機時間を指定し、Amazon CloudWatch アラームに基づく自動ロールバックを有効にする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_095": {
+  "file": "DOP-C02_orig_b5.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "SDLC のオートメーション",
+  "level": "medium",
+  "question": "ある企業の AWS CodePipeline は、AWS CodeBuild で新しいコンテナイメージをビルドしてコミットハッシュをタグとして Amazon ECR にプッシュし、続く AWS CodeDeploy の Amazon ECS ブルー/グリーンアクションで ECS サービスを更新します。しかし、デプロイアクションが常にリポジトリにコミットされたタスク定義ファイルに書かれた古いイメージタグを使ってしまい、新しくビルドされたイメージが本番に反映されません。DevOps エンジニアは、ビルドされたイメージのタグが確実にタスク定義へ反映されるようにする必要があります。運用負荷を最小限に抑えてこの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "CodeBuild のビルド出力アーティファクトに imageDetail.json を含める。タスク定義ファイルのイメージ項目にはプレースホルダー (<IMAGE1_NAME>) を記述し、CodeDeploy の ECS デプロイアクションでタスク定義ファイル、AppSpec ファイル、およびイメージのアーティファクトを入力として指定して動的更新を構成する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_096": {
+  "file": "DOP-C02_orig_b5.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "構成管理と IaC",
+  "level": "hard",
+  "question": "ある企業はこれまで 5 つの AWS アカウントを個別に運用してきましたが、今後 2 年で 100 アカウント規模まで拡大する計画です。要件は、新規アカウントを標準化された手順でセルフサービス的に払い出せること、払い出し時にログ記録や ID フェデレーションを含むベースラインが自動的に適用されること、組織証跡の無効化やログバケットのパブリック化といった禁止構成を予防的および発見的に統制できること、および全アカウントの準拠状況を単一のダッシュボードで確認できることです。設計と維持にかける工数を最小限に抑えたい場合、最適なソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Control Tower でランディングゾーンをセットアップし、Account Factory で新規アカウントを払い出す。必須および強く推奨されるコントロールを OU に適用し、追加のベースラインリソースは AWS CloudFormation StackSets で展開する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_097": {
+  "file": "DOP-C02_orig_b5.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "構成管理と IaC",
+  "level": "medium",
+  "question": "ある DevOps エンジニアが、AWS CloudFormation テンプレートで Auto Scaling グループを作成し、UserData の中でアプリケーションのインストールと起動を行っています。しかし、インストールには数分かかるにもかかわらず、CloudFormation はインスタンスが起動した時点でリソースの作成を成功とみなしてスタック作成を完了させてしまいます。その結果、同じテンプレート内の後続リソースや別スタックの処理が、まだ準備できていないアプリケーションに接続して失敗しています。エンジニアは、指定した台数のインスタンスで初期化が完了するまでリソースの作成が完了扱いにならないようにし、一定時間内に完了しない場合はスタックを失敗させたいと考えています。最小限の実装でこの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Auto Scaling グループのリソースに CreationPolicy 属性を設定し、ResourceSignal の Count と Timeout を指定する。UserData の末尾で初期化の成否に応じて cfn-signal ヘルパースクリプトを実行し、CloudFormation にシグナルを送信する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_098": {
+  "file": "DOP-C02_orig_b5.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "耐障害性の高いクラウドソリューションの実装",
+  "level": "hard",
+  "question": "ある企業は Amazon EKS クラスターで複数のマイクロサービスを運用しています。マネージドノードグループの AMI バージョンを更新するたびに、複数のレプリカを持つサービスであっても一時的にすべての Pod が同時に停止し、数分間のリクエストエラーが発生しています。プラットフォームチームは、ノードの入れ替え中も各サービスで最小限の可用レプリカ数が常に維持されること、更新の進行が自動化されていること、および可用性を損なう構成の場合には更新が失敗して検知できることを求めています。運用負荷を最小限に抑えてこれらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "各 Deployment に PodDisruptionBudget を定義して最小可用レプリカ数を宣言し、Pod は topologySpreadConstraints で複数のノードと AZ に分散させる。ノードの入れ替えはマネージドノードグループの更新機能で段階的に実行する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_099": {
+  "file": "DOP-C02_orig_b5.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリングとロギング",
+  "level": "hard",
+  "question": "ある企業のサーバーレスアプリケーションでは、AWS Lambda 関数の中から顧客 ID と API 名をディメンションとするカスタムメトリクスを記録したいと考えています。現在は関数内で PutMetricData API を同期的に呼び出していますが、その呼び出しのレイテンシーが関数の実行時間に加算されてコストが増加しており、さらに API のスロットリングによってメトリクスが欠損することがあります。チームは、関数の実行時間への影響を最小限にしながらディメンション付きのカスタムメトリクスを確実に記録し、同時に元の詳細なログイベントも検索できるようにしたいと考えています。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "関数から CloudWatch 埋め込みメトリクスフォーマット (EMF) に準拠した JSON を標準出力に書き出す。CloudWatch Logs がこの構造化ログから自動的にメトリクスを抽出し、元のログイベントは CloudWatch Logs Insights で検索する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_100": {
+  "file": "DOP-C02_orig_b5.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリングとロギング",
+  "level": "medium",
+  "question": "ある企業は Amazon ECS on AWS Fargate で複数のサービスを運用しています。要件は 3 つあります。コンテナの標準出力ログを運用チームの調査用に Amazon CloudWatch Logs へ送ること。同じログを長期保管と分析のために Amazon S3 にも送ること。アプリケーションのコードを変更せずに、デバッグレベルのログを除外するなどの解析とフィルタリングをタスク内で行うことです。運用負荷を最小限に抑えてこれらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "タスク定義に FireLens (Fluent Bit) のログルーターをサイドカーコンテナとして追加し、アプリケーションコンテナの logConfiguration で awsfirelens ログドライバーを指定する。Fluent Bit の設定ファイルでフィルターと複数の出力先を定義する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_101": {
+  "file": "DOP-C02_orig_gap1.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "hard",
+  "question": "ある e コマース企業は、Application Load Balancer (ALB) の背後で稼働する Web アプリケーションを AWS WAF のウェブ ACL で保護しています。過去 2 週間、/api/login に対して単一の送信元 IP から 5 分間に数千回のログイン試行が繰り返されるクレデンシャルスタッフィング攻撃が観測されました。DevOps エンジニアは、商品検索や画像取得といった /api/login 以外のパスには一切レート制限をかけないという条件のもとで、送信元 IP ごとに 5 分あたり 100 リクエストを超えた分をブロックする必要があります。あわせて、事後分析のためにウェブ ACL が評価した全リクエストのログを Amazon S3 に蓄積し、Amazon Athena でクエリできるようにします。この要件を満たす対応を 2 つ選択してください。",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "レートベースルールを作成し、集約キーを送信元 IP アドレス、評価ウィンドウを 300 秒、リクエスト制限を 100 に設定する。さらに、URI パスが /api/login と一致することを条件とするスコープダウンステートメントをそのルールに指定する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "ウェブ ACL のログ記録を有効にし、ログの送信先として Amazon Data Firehose の配信ストリームを指定して、S3 バケットへ配信する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_102": {
+  "file": "DOP-C02_orig_gap1.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "hard",
+  "question": "ある企業は、Amazon CloudFront ディストリビューションに関連付けたウェブ ACL に、AWS マネージドルールのコアルールセット (CRS) を新たに追加しようとしています。このディストリビューションは 1 日あたり 4 億リクエストを処理する決済フローを含んでおり、セキュリティ責任者からは「誤検知で正規の決済リクエストがブロックされる事態は絶対に避けたい」と指示されています。DevOps エンジニアは、本番トラフィックを一切ブロックしないまま 7 日間ルールセットの影響を計測し、どのルールが何件一致したかを特定したうえで、問題がないと確認できたルールから順に実際のブロックへ切り替える必要があります。最も適切な方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "マネージドルールグループをウェブ ACL に追加し、ルールグループのアクションをすべて Count にオーバーライドする。ウェブ ACL のログ記録を有効にして 7 日間データを収集し、ログの ruleGroupList と CloudWatch のルール単位のメトリクスを分析したうえで、問題のないルールからオーバーライドを解除する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_103": {
+  "file": "DOP-C02_orig_gap1.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "耐障害性の高いクラウドソリューションの実装",
+  "level": "hard",
+  "question": "ある動画配信企業は、推論処理を行う EC2 Auto Scaling グループ (最小 20 台、最大 200 台) を運用しています。各インスタンスは起動後に 60 GB の機械学習モデルを Amazon S3 から EBS ボリュームへ展開し、初期化を完了するまでに約 14 分かかります。トラフィックのスパイクは予測不能で、DevOps エンジニアはスパイク検知から 3 分以内に追加容量をリクエスト処理可能な状態にする必要があります。一方で財務部門からは、平常時に 200 台分のコンピューティング料金を払い続けることは認められないと指示されています。この 2 つの制約を同時に満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Auto Scaling グループにウォームプールを作成し、プール内のインスタンスの状態を Stopped に設定する。EC2_INSTANCE_LAUNCHING のライフサイクルフックでモデルの展開を完了させてからインスタンスをウォームプールへ入れる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_104": {
+  "file": "DOP-C02_orig_gap1.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "SDLC のオートメーション",
+  "level": "hard",
+  "question": "ある企業は、EC2 Image Builder のパイプラインで毎月新しい AMI を作成し、その AMI を参照する起動テンプレートの新しいバージョン番号を発行しています。本番環境には 200 台のインスタンスを持つ Auto Scaling グループがあり、DevOps チームは次の 3 点を満たしたまま新 AMI へ入れ替える必要があります。(1) 入れ替え中も希望容量の 90% 以上が常に InService であること、(2) すでに新しい起動テンプレートバージョンで稼働しているインスタンスは置き換えないこと、(3) 入れ替え中に CloudWatch アラーム HighErrorRate が ALARM 状態になった場合、直前の起動テンプレートバージョンへ自動的に戻すこと。最も適切な方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "新しい起動テンプレートのバージョン番号を desired configuration として指定してインスタンスの更新 (instance refresh) を開始し、最小正常率を 90%、skip matching を有効、auto rollback を有効にして、アラーム仕様に HighErrorRate を指定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_105": {
+  "file": "DOP-C02_orig_gap1.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インシデントおよびイベントへの対応",
+  "level": "hard",
+  "question": "ある金融サービス企業は、Amazon GuardDuty が UnauthorizedAccess:EC2/MaliciousIPCaller.Custom の検出結果を出力した際に実行する封じ込めランブックを自動化しようとしています。ランブックは、(1) 対象インスタンスに隔離用セキュリティグループを適用し、(2) EBS ボリュームのスナップショットを取得し、(3) セキュリティ責任者が承認するまで待機し (承認までに最大 24 時間かかる)、(4) 承認後にインスタンスを終了する、という順序で進みます。監査要件として各ステップの開始・終了時刻と入出力が記録されている必要があり、API のスロットリングによる一時的な失敗は自動的に再試行しなければなりません。最も適切な構成はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "EventBridge ルールで GuardDuty の検出結果を捕捉し、AWS Step Functions の標準ワークフローを起動する。承認ステップはコールバックパターン (.waitForTaskToken) で実装し、各タスク状態には States.TaskFailed などを対象とする Retry を定義する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_106": {
+  "file": "DOP-C02_orig_gap1.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "SDLC のオートメーション",
+  "level": "hard",
+  "question": "ある企業の夜間バッチは、Amazon S3 上の約 20 万個の JSON オブジェクトを 1 つずつ AWS Lambda 関数で変換し、結果を別の S3 バケットへ書き出します。現在は AWS Step Functions の標準ワークフローで Map 状態 (インライン) を使っていますが、8 時間の実行時間枠に収まらなくなりました。DevOps エンジニアは、同時実行数を 1,000 まで引き上げ、入力データの不備による個別オブジェクトの失敗が全体の 1% 以内であれば処理を継続し、各オブジェクトの成功・失敗の内訳を S3 に出力する必要があります。最も適切な変更はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Map 状態を分散モード (Distributed Map) に変更し、ItemReader で S3 バケットのオブジェクト一覧を読み取り、MaxConcurrency を 1,000、ToleratedFailurePercentage を 1 に設定して、ResultWriter で結果を S3 バケットへ出力する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_107": {
+  "file": "DOP-C02_orig_gap1.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "hard",
+  "question": "ある企業は AWS Organizations で 400 のアカウントを管理し、AWS IAM Identity Center と外部 IdP を SAML と SCIM で連携しています。開発者は 60 のコストセンターに分かれており、各開発者は自分のコストセンターのタグが付いた EC2 インスタンスと Systems Manager ドキュメントだけを操作できなければなりません。人事異動でコストセンターが変わった場合、IdP 側の属性を更新するだけで AWS 側の権限が追従することが求められます。DevOps エンジニアは、管理対象となるアクセス許可セットの数を最小限に抑えたいと考えています。最も適切な方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "IAM Identity Center でアクセスコントロールの属性を有効にし、IdP から連携される costCenter 属性をセッションタグとして渡す。単一のアクセス許可セットのポリシーで aws:PrincipalTag/costCenter とリソースタグの一致を Condition で要求する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_108": {
+  "file": "DOP-C02_orig_gap1.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "medium",
+  "question": "ある DevOps チームは、AWS IAM Identity Center のアクセス許可セットを AWS CloudFormation で管理しています。新しいアクセス許可セットには、社内標準の権限をまとめた PlatformBaseline という名前のカスタマー管理ポリシーを含めるよう設計しました。このポリシーは各アカウントで運用チームが個別に更新できるようにするため、インラインポリシーではなくカスタマー管理ポリシーとして参照しています。しかし、新規に作成した 12 個のアカウントへアクセス許可セットを割り当てたところ、それらのアカウントでのみプロビジョニングがエラーになりました。既存のアカウントでは正常に割り当てられています。原因と対処として最も適切なものはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "カスタマー管理ポリシーはアクセス許可セットから名前とパスで参照されるだけで、IAM Identity Center が作成するわけではない。割り当て先の各アカウントに同じ名前とパスの IAM ポリシーが存在している必要があるため、CloudFormation StackSets などで新規アカウントに PlatformBaseline を先に配布する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_109": {
+  "file": "DOP-C02_orig_gap1.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "hard",
+  "question": "ある企業のネットワーク基盤アカウントは、Transit Gateway と集約 VPC のサブネットを組織内の 120 のアカウントへ AWS Resource Access Manager (AWS RAM) で共有しています。四半期ごとに 10 〜 20 の新規アカウントが組織単位 (OU) に追加されますが、その都度リソース共有の招待を送受信する運用は現実的ではありません。またセキュリティ部門からは、アカウントが組織から離脱した時点で共有リソースへのアクセスが失われることを保証するよう求められています。この要件を満たす設定はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Organizations の管理アカウントから AWS RAM コンソールまたは enable-sharing-with-aws-organization コマンドで組織内の共有を有効化し、共有先のプリンシパルとして個々のアカウントではなく OU を指定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_110": {
+  "file": "DOP-C02_orig_gap1.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "構成管理と IaC",
+  "level": "hard",
+  "question": "ある企業のプラットフォームチームは、集約アカウントで管理する Amazon VPC のサブネットとプレフィックスリストを、アプリケーションチームのアカウントへ AWS RAM で共有しています。監査で「共有先のアカウントに与えている操作は AWS RAM のマネージドアクセス許可の既定値そのままであり、業務上不要な操作まで許可されている」と指摘されました。DevOps エンジニアは、共有先に許可する操作を必要最小限に絞り込み、その定義自体もコードとしてバージョン管理し、CI/CD パイプラインからデプロイできるようにする必要があります。最も適切な方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "対象のリソースタイプに対するカスタマーマネージドアクセス許可を作成し、必要な操作と条件だけを記述したうえで、リソース共有にそのアクセス許可を関連付ける。定義は AWS::RAM::Permission リソースとして CloudFormation テンプレートで管理する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_111": {
+  "file": "DOP-C02_orig_gap1.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "hard",
+  "question": "ある企業は AWS Organizations で 200 のアカウントを運用しており、各アカウントのチームが自由に Application Load Balancer (ALB) を作成しています。セキュリティ部門は、Sandbox OU を除くすべてのアカウントの ALB に、共通の AWS WAF マネージドルールグループを含むウェブ ACL が必ず関連付けられている状態を保証したいと考えています。新しく作成された ALB についても、担当チームの作業を待たずに自動的に保護が適用されなければなりません。DevOps エンジニアが AWS Firewall Manager を使ってこれを実現する場合、必要な準備と設定の組み合わせとして正しいものを 2 つ選択してください。",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "組織のすべての機能を有効にしたうえで Firewall Manager の管理者アカウントを指定し、対象となるすべてのアカウントとリージョンで AWS Config を有効化する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "AWS WAF ポリシーを作成してマネージドルールグループを含むウェブ ACL を定義し、ポリシーの適用範囲で Sandbox OU を除外したうえで、自動修復 (自動的なリソースの修復) を有効にする。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_112": {
+  "file": "DOP-C02_orig_gap1.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "choice",
+  "domain": "インシデントおよびイベントへの対応",
+  "level": "hard",
+  "question": "ある企業のセキュリティ運用チームは、AWS Firewall Manager の管理者アカウントから、組織内の全 VPC に共通の AWS Network Firewall のルールグループを展開しようとしています。しかしポリシーを作成しても、対象アカウントの VPC が「保護されていない」状態のまま是正されません。あわせて運用チームは、ポリシーに準拠していないリソースと検出された攻撃の情報を、複数のアカウントの状況を 1 か所で追跡できる形で受け取り、重大な変化があった際に担当者へ通知したいと考えています。この状況で行うべき対応を 2 つ選択してください。",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS RAM で組織内のリソース共有を有効化する。Network Firewall ポリシーおよび DNS Firewall ポリシーは、この設定が有効でないと対象アカウントへ展開できない。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "Firewall Manager の管理者アカウントで AWS Security Hub CSPM を有効にし、Firewall Manager の検出結果を集約する。Security Hub の検出結果を EventBridge ルールで捕捉して Amazon SNS トピックへ通知する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DOP-C02_orig_211": {
+  "file": "mixed_orig_b1.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "ordering",
+  "domain": "SDLC のオートメーション",
+  "level": "medium",
+  "question": "ある企業が、Amazon ECS on AWS Fargate のサービスに対して AWS CodeDeploy によるブルー/グリーンデプロイを実行します。サービスは Application Load Balancer の背後で稼働しており、本番リスナーとは別にテストリスナーが構成されています。要件として、新しいバージョンを本番トラフィックに晒す前に検証すること、切り替え後に問題が判明した場合は数分以内に旧バージョンへ戻せること、そのために旧バージョンを切り替え直後には削除しないことが挙げられています。以下のリストから、デプロイ中に発生する処理を選択して正しい順に並べ替えてください。各処理を 1 回だけ選択するか、まったく選択しないでください。",
+  "n_correct": null,
+  "options": []
+ },
+ "DOP-C02_orig_212": {
+  "file": "mixed_orig_b1.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "ordering",
+  "domain": "構成管理と IaC",
+  "level": "medium",
+  "question": "ある DevOps エンジニアが、本番環境の AWS CloudFormation スタックを更新する必要があります。このスタックには Amazon RDS DB インスタンスと Amazon EC2 インスタンスが含まれており、意図しない置換が発生するとデータの損失やサービスの中断につながります。要件として、更新を適用する前にリソースごとの影響を確認すること、内容に問題があれば何も適用せずに取りやめられること、スタックを削除して作り直さないこと、更新が正常に完了したことを確認したうえで作業を終えることが挙げられています。以下のリストから、正しいステップを選択して正しい順に並べ替えてください。各ステップを 1 回だけ選択するか、まったく選択しないでください。",
+  "n_correct": null,
+  "options": []
+ },
+ "DOP-C02_orig_213": {
+  "file": "mixed_orig_b1.json",
+  "exam": "DOP-C02",
+  "set": "orig",
+  "type": "ordering",
+  "domain": "インシデントおよびイベントへの対応",
+  "level": "medium",
+  "question": "ある企業が、パブリックアクセスが許可された Amazon S3 バケットのように、準拠していないリソース設定を検出したときに、人手を介さずに設定を修正する仕組みを構築します。対象は 1 つのアカウント内のリソースで、検出から修正までを AWS のマネージドサービスだけで完結させ、運用担当者の手作業や独自のコード開発を伴わないことが求められています。また、修正処理が対象リソースの API を呼び出せる権限を持ち、実行時に権限不足で失敗しないようにする必要があります。以下のリストから、正しいステップを選択して正しい順に並べ替えてください。各ステップを 1 回だけ選択するか、まったく選択しないでください。",
+  "n_correct": null,
+  "options": []
+ }
+}
