@@ -745,7 +745,8 @@ function renderQ(){
     if(q.type==='ordering') head+=`<span class="tag warn">並び替え</span>`;
     else if(q.type==='matching') head+=`<span class="tag warn">マッチング</span>`;
     else if(q.n_correct>1) head+=`<span class="tag warn">${q.n_correct}つ選択</span>`;
-    head+=`<span style="margin-left:auto"><button class="iconbtn" onclick="quitMock()">中断</button></span></div>`;
+    head+=`<span style="margin-left:auto"><button class="iconbtn" style="padding:2px 7px;font-size:12px;color:var(--muted)" title="この問題を報告する" onclick="openReport()">🚩</button>`
+        + `<button class="iconbtn" style="margin-left:4px" onclick="quitMock()">中断</button></span></div>`;
   } else {
     // 学習者が知りたい順に並べる。内部IDは報告用なので最後に控えめに置く
     const denom = (mode==='queue')? sessionN+REVIEW_QUEUE.length : sessionLen();
@@ -756,7 +757,9 @@ function renderQ(){
     else if(q.n_correct>1) head+=`<span class="tag warn">${q.n_correct}つ選択</span>`;
     if(s!=='未出題') head+=`<span class="tag">${STATUS_LABEL[s]||s}</span>`;
     if(domFilter) head+=`<span class="tag" style="color:var(--accent);border-color:var(--accent)">分野別: ${esc(domFilter.slice(0,16))}</span>`;
-    head+=`<span class="tag" style="margin-left:auto;color:var(--muted);border:0">${q.id}</span></div>`;
+    // 内部IDと報告ボタン。読んでいる最中に「おかしい」と気づくことが多いので、回答前から押せるようにする
+    head+=`<span class="tag" style="margin-left:auto;color:var(--muted);border:0">${q.id}</span>`;
+    head+=`<button class="iconbtn" style="padding:2px 7px;font-size:12px;color:var(--muted)" title="この問題を報告する" onclick="openReport()">🚩</button></div>`;
   }
   let body = `<div class="qtext">${linkify(q.question)}</div>`;
   if(q.type==='ordering'){

@@ -28,6 +28,17 @@ const path = require('path');
   await page.locator('button:has-text("問題を解く")').click();
   // 選択肢のある問題で確かめる（マッチングや並び替えだと options が無い）
   await require('./answer').startChoiceQuestion(page);
+
+  // 回答前でも報告できること（問題を読んでいる最中に気づくことが多いため）
+  const flagBefore = page.locator('#q-card .qmeta button[title="この問題を報告する"]');
+  console.log('回答前の報告ボタン:', await flagBefore.count() > 0 ? 'あり' : '★なし');
+  if (await flagBefore.count() === 0) throw new Error('回答前に報告できない');
+  await flagBefore.click();
+  await page.waitForSelector('#repsheet.on');
+  const preQ = await page.locator('#rep-preview').textContent();
+  console.log('回答前の報告内容:', /この人の回答: 未回答/.test(preQ) ? '未回答として記録される' : '★回答状況が不正');
+  await page.locator('#repsheet .iconbtn').click();
+
   await require('./answer').answer(page);
 
   // 送信先が未設定のときは「コピー」だけ出る
