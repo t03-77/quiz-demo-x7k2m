@@ -111,6 +111,26 @@ def check_same_topic(mine):
     return hits
 
 
+def check_shape(off, mine):
+    """「正解数 × 選択肢数」の組み合わせを公式と比べる
+
+    複数選択の比率だけを見ていると、公式が採用していない形を見逃す。
+    実際、公式1070問は 1正解4肢 / 2正解5肢 / 3正解6肢 の3種類しかないのに、
+    自作には「1正解5肢」が166問あった。4つ目の誤答が水増しになりやすい形。
+    """
+    def shape(q):
+        nc = q.get("n_correct") or sum(1 for x in q["options"] if x.get("correct"))
+        return (nc, len(q["options"]))
+    co = Counter(shape(q) for q in off if q.get("options"))
+    cm = Counter(shape(q) for q in mine if q.get("options"))
+    rows, ng = [], []
+    for k in sorted(set(co) | set(cm)):
+        rows.append((k, co[k], cm[k]))
+        if co[k] == 0 and cm[k] >= 10:
+            ng.append((k, cm[k]))
+    return rows, ng
+
+
 def check_format(off, mine):
     """複数選択の比率を公式と比べる"""
     rows = []
@@ -188,6 +208,16 @@ def main():
         print("  計 %d 組" % len(same))
     else:
         print("  なし")
+
+    print()
+    print("=" * 74)
+    print("1c. 出題の形（正解数 × 選択肢数）")
+    rows, shape_ng = check_shape(off, mine)
+    for (nc, n), a, b in rows:
+        mark = "   ★公式にない形" if a == 0 and b >= 10 else ""
+        print("  %d正解 / %d肢   公式 %4d問   自作 %4d問%s" % (nc, n, a, b, mark))
+    if shape_ng:
+        ng += 1
 
     print()
     print("=" * 74)
