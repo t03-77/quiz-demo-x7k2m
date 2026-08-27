@@ -1,0 +1,3432 @@
+{
+ "SAA-C03_orig_001": {
+  "file": "SAA-C03_orig.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュアなアーキテクチャの設計",
+  "level": "easy",
+  "question": "ある企業がプライベートサブネット内の Amazon EC2 インスタンスでアプリケーションを実行しています。アプリケーションは処理結果を Amazon S3 バケットに保存する必要があります。同社のセキュリティポリシーでは、S3 へのトラフィックがインターネットを経由することを禁止しています。ソリューションアーキテクトは、追加のデータ処理料金を発生させずにこの要件を満たす必要があります。どのソリューションがこれらの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "S3 用のゲートウェイ型 VPC エンドポイントを作成し、プライベートサブネットのルートテーブルにエンドポイントへのルートを追加する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_002": {
+  "file": "SAA-C03_orig.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュアなアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業が本番ワークロードを AWS アカウントで運用しています。外部の監査法人が、監査法人自身の AWS アカウントから本番アカウント内のリソース設定を読み取り専用で確認する必要があります。同社のセキュリティポリシーでは、長期的な認証情報を外部組織と共有することを禁止しています。最も安全にこの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "本番アカウントに読み取り専用の権限を持つ IAM ロールを作成し、信頼ポリシーで監査法人の AWS アカウントを信頼するように設定して、監査法人にロールを引き受けさせる。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_003": {
+  "file": "SAA-C03_orig.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュアなアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある金融サービス企業が、顧客データを Amazon S3 バケットに保存しています。コンプライアンス要件により、バケット内のすべてのオブジェクトは同社が管理するカスタマーマネージド型の AWS KMS キーで暗号化されなければなりません。また、別の暗号化方式を指定したオブジェクトのアップロードは拒否する必要があります。ソリューションアーキテクトはどの組み合わせの手順を実行すべきですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "バケットのデフォルト暗号化を、カスタマーマネージド型 KMS キーを指定した SSE-KMS に設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "バケットポリシーで、s3:x-amz-server-side-encryption 条件キーが aws:kms 以外の値を指定する s3:PutObject リクエストを拒否する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_004": {
+  "file": "SAA-C03_orig.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "弾力性に優れたアーキテクチャの設計",
+  "level": "easy",
+  "question": "ある e コマース企業が、ウェブ層から注文処理層へ注文データを直接送信するアプリケーションを Amazon EC2 上で運用しています。セール期間中のトラフィック急増時に注文処理層が過負荷になり、一部の注文データが失われることがあります。同社は、注文データを失うことなく処理層が自分のペースで処理できるアーキテクチャを求めています。どのソリューションがこの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ウェブ層と注文処理層の間に Amazon SQS キューを配置し、処理層がキューからメッセージをポーリングして処理するように変更する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_005": {
+  "file": "SAA-C03_orig.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "弾力性に優れたアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業が、単一のアベイラビリティーゾーンで実行されている Amazon RDS for PostgreSQL DB インスタンスを業務アプリケーションで使用しています。最近発生したアベイラビリティーゾーンの障害でデータベースが数時間利用できなくなりました。同社は、アベイラビリティーゾーン障害時に自動的にフェイルオーバーする構成を、最小限の運用上のオーバーヘッドで実現したいと考えています。どのソリューションがこの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "DB インスタンスをマルチ AZ 配置に変更する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_006": {
+  "file": "SAA-C03_orig.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "弾力性に優れたアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある企業が、Amazon EC2 インスタンスと Amazon Aurora MySQL DB クラスターで構成される基幹アプリケーションを単一のリージョンで運用しています。同社は、リージョン規模の障害に備えた災害対策として、目標復旧時間 (RTO) を数分以内、目標復旧時点 (RPO) を数秒以内とすることを求めています。ただし、平常時のコストは可能な限り抑えたいと考えています。どの災害対策戦略がこれらの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "セカンダリリージョンに縮小構成の EC2 環境を常時稼働させ、Aurora グローバルデータベースでレプリケートするウォームスタンバイ戦略を採用し、災害時にスケールアウトしてフェイルオーバーする。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_007": {
+  "file": "SAA-C03_orig.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "高パフォーマンスなアーキテクチャの設計",
+  "level": "medium",
+  "question": "あるゲーム開発企業が、プレイヤープロファイルを Amazon DynamoDB テーブルに保存しています。読み取りリクエストが全体の 95% を占めており、同じプロファイルが繰り返し読み取られています。同社は、アプリケーションコードの変更を最小限に抑えながら、読み取りレイテンシーをマイクロ秒単位に短縮したいと考えています。どのソリューションがこの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "DynamoDB Accelerator (DAX) クラスターを作成し、アプリケーションのエンドポイントを DAX に変更する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_008": {
+  "file": "SAA-C03_orig.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "高パフォーマンスなアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある研究機関が、Amazon S3 バケットに保存された数百テラバイトのゲノムデータを、数百台の Amazon EC2 インスタンスで構成されるハイパフォーマンスコンピューティング (HPC) クラスターで解析する計画です。解析ジョブは、数百 GB/s のスループットとミリ秒未満のレイテンシーを持つ POSIX 準拠の共有ファイルシステムを必要とします。処理結果は S3 に書き戻す必要があります。どのソリューションがこれらの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "S3 バケットにリンクした Amazon FSx for Lustre ファイルシステムを作成し、HPC クラスターの各インスタンスからマウントする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_009": {
+  "file": "SAA-C03_orig.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "コストを最適化したアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業が、アプリケーションログを Amazon S3 バケットに保存しています。ログは最初の 30 日間は頻繁に分析されますが、その後 90 日目まではアクセス頻度が低くなるものの、即時の取り出しが必要です。90 日を過ぎると取り出しは年に数回で、5 時間以内に取り出せれば十分です。規制により、ログは 7 年間保持した後に削除する必要があります。最もコスト効率良くこれらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ライフサイクルルールを作成し、30 日後に S3 Standard-IA へ、90 日後に S3 Glacier Flexible Retrieval へ移行し、7 年後に削除する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_010": {
+  "file": "SAA-C03_orig.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "コストを最適化したアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある分析企業が、2 種類のワークロードを Amazon EC2 で実行しています。1 つ目は毎晩実行されるバッチ処理で、チェックポイントから再開できるため中断に耐性があります。2 つ目はウェブアプリケーションで、一定のベースライン容量が 24 時間 365 日必要であり、今後 1 年以上継続する見込みです。ソリューションアーキテクトは、コストを最も削減できる購入オプションの組み合わせを提案する必要があります。どの組み合わせの手順を実行すべきですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "バッチ処理ワークロードをスポットインスタンスで実行する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "ウェブアプリケーションのベースライン容量に対して 1 年間の Compute Savings Plans を購入する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_011": {
+  "file": "SAA-C03_orig_b2.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュアなアーキテクチャの設計",
+  "level": "easy",
+  "question": "ある企業のネットワークエンジニアが、パブリックサブネット内の Amazon EC2 インスタンスで HTTPS ウェブサーバーを構成しました。セキュリティグループではポート 443 のインバウンドトラフィックを許可しています。セキュリティ強化のため、サブネットのネットワーク ACL をポート 443 のインバウンドのみを許可するルールに変更したところ、クライアントがウェブサーバーに接続できなくなりました。この問題を解決するにはどうすればよいですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ネットワーク ACL に、エフェメラルポート (1024〜65535) へのアウトバウンドトラフィックを許可するルールを追加する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_012": {
+  "file": "SAA-C03_orig_b2.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュアなアーキテクチャの設計",
+  "level": "easy",
+  "question": "ある企業が、Amazon EC2 インスタンス上のアプリケーションから Amazon DynamoDB テーブルにアクセスしています。セキュリティレビューの結果、IAM ユーザーのアクセスキーがインスタンス内の設定ファイルに平文で保存されていることが判明しました。同社は、長期的な認証情報の保存をやめ、セキュリティのベストプラクティスに従いたいと考えています。どのソリューションがこの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "DynamoDB へのアクセス許可を持つ IAM ロールを作成し、インスタンスプロファイルとして EC2 インスタンスにアタッチする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_013": {
+  "file": "SAA-C03_orig_b2.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュアなアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業が、プライベートサブネット内の Amazon EC2 インスタンス群を管理するために、パブリックサブネットの踏み台サーバー経由で SSH 接続しています。セキュリティチームは、インバウンドの SSH ポートの開放と SSH キーの管理を廃止し、すべての操作セッションのログを記録することを求めています。最も運用負荷が低い方法でこれらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Systems Manager Session Manager を使用してインスタンスに接続し、セッションログを Amazon S3 または CloudWatch Logs に記録する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_014": {
+  "file": "SAA-C03_orig_b2.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュアなアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業が、Amazon S3 バケットに保存した静的コンテンツを Amazon CloudFront ディストリビューションで配信しています。セキュリティ監査で、ユーザーが CloudFront を経由せずに S3 バケットの URL に直接アクセスしてコンテンツを取得できることが指摘されました。CloudFront 経由のアクセスのみを許可するには、どうすればよいですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "オリジンアクセスコントロール (OAC) を構成し、バケットポリシーで該当ディストリビューションからの CloudFront サービスプリンシパルによるアクセスのみを許可する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_015": {
+  "file": "SAA-C03_orig_b2.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュアなアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業のアプリケーションが、Amazon RDS for MySQL データベースの認証情報をアプリケーションの設定ファイルに平文で保存しています。セキュリティポリシーにより、認証情報を安全に一元管理し、90 日ごとに自動でローテーションする必要があります。最も運用負荷が低いソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "認証情報を AWS Secrets Manager に保存し、RDS との統合による自動ローテーションを 90 日間隔で有効化する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_016": {
+  "file": "SAA-C03_orig_b2.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュアなアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある企業が AWS Organizations で複数の AWS アカウントを管理しています。コンプライアンス要件により、すべてのメンバーアカウントで、承認された 2 つのリージョン以外での AWS リソースの作成を禁止する必要があります。各アカウントの管理者権限を持つユーザーであっても、この制限を回避できないようにする必要があります。どのソリューションがこの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "aws:RequestedRegion 条件キーを使用して承認リージョン以外の操作を拒否するサービスコントロールポリシー (SCP) を作成し、対象の OU にアタッチする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_017": {
+  "file": "SAA-C03_orig_b2.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュアなアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある企業のセキュリティ監査で、本番の Amazon EC2 インスタンスにアタッチされている Amazon EBS ボリュームが暗号化されていないことが判明しました。同社は、このボリューム上の既存データを AWS KMS キーで暗号化された状態にする必要があります。どのソリューションがこの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ボリュームのスナップショットを作成し、暗号化を有効にしてスナップショットをコピーする。コピーから暗号化されたボリュームを作成し、元のボリュームと交換する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_018": {
+  "file": "SAA-C03_orig_b2.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュアなアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある企業が、VPC 内のすべての Amazon EC2 インスタンスからのアウトバウンド通信を、承認済みドメイン名のリストに含まれる宛先のみに制限する必要があります。承認されていないドメインへの通信は遮断し、フィルタリングルールは一元的に管理する必要があります。どのソリューションがこの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Network Firewall をデプロイし、ドメイン名の許可リストを使用するステートフルルールでアウトバウンドトラフィックをフィルタリングする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_019": {
+  "file": "SAA-C03_orig_b2.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュアなアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある企業が、Application Load Balancer (ALB) の背後で公開ウェブアプリケーションを運用しています。最近、SQL インジェクション攻撃の試行が複数確認されました。また、事業を展開していない特定の国からの不正アクセスの試行が多いため、その国からのアクセスをブロックしたいと考えています。どの組み合わせの手順を実行すべきですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS WAF のウェブ ACL を ALB に関連付け、SQL データベース用のマネージドルールグループを追加する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "ウェブ ACL に地理的一致 (geo match) ルールを追加し、対象国からのリクエストをブロックする。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_020": {
+  "file": "SAA-C03_orig_b2.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "弾力性に優れたアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業が、Auto Scaling グループ内の複数の Amazon EC2 インスタンスでウェブアプリケーションを実行しています。アプリケーションはユーザーのセッション情報を各インスタンスのメモリ内に保持しているため、スケールインや障害でインスタンスが終了するとユーザーが強制的にログアウトされてしまいます。すべてのインスタンスからミリ秒未満のレイテンシーでセッション情報を共有できるソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon ElastiCache for Redis クラスターを作成し、セッション情報を外部化して全インスタンスから参照する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_021": {
+  "file": "SAA-C03_orig_b2.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "弾力性に優れたアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業のコンテンツ管理システムが、複数のアベイラビリティーゾーンにまたがる複数の Amazon EC2 インスタンスで実行されています。各インスタンスは、ユーザーがアップロードした画像ファイルを共通のファイルシステムとして POSIX 互換の方式でマウントし、同時に読み書きする必要があります。最も運用負荷が低い方法でこの要件を満たすストレージはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon EFS ファイルシステムを作成し、すべてのインスタンスからマウントする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_022": {
+  "file": "SAA-C03_orig_b2.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "弾力性に優れたアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業が、プライマリリージョンの Application Load Balancer (ALB) でウェブサイトを提供しています。同社は、プライマリサイトに障害が発生した場合、Amazon S3 と Amazon CloudFront でホストしている静的なメンテナンスページへ自動的に切り替えたいと考えています。DNS は Amazon Route 53 で管理しています。どの組み合わせの手順を実行すべきですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "プライマリを ALB、セカンダリをメンテナンスページとするフェイルオーバールーティングポリシーのレコードを Route 53 に作成する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "プライマリエンドポイントを監視する Route 53 ヘルスチェックを作成し、プライマリレコードに関連付ける。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_023": {
+  "file": "SAA-C03_orig_b2.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "弾力性に優れたアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業のアプリケーションが、Amazon SQS 標準キューのメッセージを複数の Amazon EC2 コンシューマーで処理しています。1 件のメッセージの処理には最大 3 分かかりますが、キューの可視性タイムアウトはデフォルトの 30 秒のままです。その結果、処理が完了する前に同じメッセージが別のコンシューマーに配信され、重複して処理されています。この問題を解決するにはどうすればよいですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "キューの可視性タイムアウトを、メッセージの最大処理時間より長い値 (例: 5 分) に設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_024": {
+  "file": "SAA-C03_orig_b2.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "弾力性に優れたアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業が、Application Load Balancer (ALB) の背後の Auto Scaling グループでウェブアプリケーションを実行しています。アプリケーションプロセスが時折応答しなくなりますが、インスタンス自体は正常に稼働しているため、Auto Scaling グループは異常なインスタンスを置き換えません。ALB のターゲットヘルスチェックはアプリケーションの応答失敗を正しく検出しています。異常なインスタンスを自動的に置き換えるには、どうすればよいですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Auto Scaling グループのヘルスチェックタイプを ELB ヘルスチェックを含む設定に変更する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_025": {
+  "file": "SAA-C03_orig_b2.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "弾力性に優れたアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある企業の VPC は 3 つのアベイラビリティーゾーンにまたがり、各アベイラビリティーゾーンにパブリックサブネットとプライベートサブネットがあります。現在、プライベートサブネットからのアウトバウンドインターネット通信はすべて単一の NAT ゲートウェイを経由しています。先日、NAT ゲートウェイが配置されたアベイラビリティーゾーンの障害により、すべてのアベイラビリティーゾーンのアウトバウンド通信が停止しました。アベイラビリティーゾーン障害への耐性を高めるために、どの組み合わせの手順を実行すべきですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "各アベイラビリティーゾーンのパブリックサブネットに NAT ゲートウェイを 1 つずつ作成する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "各プライベートサブネットのルートテーブルを、同じアベイラビリティーゾーン内の NAT ゲートウェイに向けるように構成する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_026": {
+  "file": "SAA-C03_orig_b2.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "弾力性に優れたアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある e コマース企業では、注文が確定すると、在庫サービス、配送サービス、分析サービスの 3 つのシステムがそれぞれ同じ注文イベントを処理する必要があります。各サービスは互いに独立して動作し、一部のサービスが停止していてもイベントを失わず、復旧後に処理を再開できる必要があります。どのソリューションがこの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "注文イベントを Amazon SNS トピックに発行し、各サービス専用の Amazon SQS キューをトピックにサブスクライブさせるファンアウト構成にする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_027": {
+  "file": "SAA-C03_orig_b2.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "弾力性に優れたアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある企業が、重要な契約書類を Amazon S3 バケットに保存しています。誤操作による上書きや削除が発生した場合に以前の状態へ復元できること、およびリージョン規模の障害に備えて別リージョンにデータの複製を自動的に保持することが求められています。どの組み合わせの手順を実行すべきですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "バケットのバージョニングを有効化する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "別リージョンのバケットを宛先とするクロスリージョンレプリケーション (CRR) を構成する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_028": {
+  "file": "SAA-C03_orig_b2.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "高パフォーマンスなアーキテクチャの設計",
+  "level": "easy",
+  "question": "ある企業が、単一リージョンの Amazon S3 バケットで画像や動画を含む静的ウェブサイトをホストしています。世界中のユーザーから、バケットのリージョンから地理的に遠い地域ではコンテンツの読み込みが遅いという報告が寄せられています。最も少ない変更でグローバルな表示速度を改善するソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon CloudFront ディストリビューションを作成し、S3 バケットをオリジンとして配信する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_029": {
+  "file": "SAA-C03_orig_b2.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "高パフォーマンスなアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業が、オンプレミスの NAS に保存された数十 TB のデータを、AWS Direct Connect 接続経由で毎日 Amazon S3 バケットへ転送する必要があります。転送は増分を検出して自動化し、転送の整合性検証とスケジュール実行、帯域制御も行いたいと考えています。最も運用負荷が低いソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS DataSync エージェントをオンプレミスに導入し、S3 へのスケジュールされた転送タスクを構成する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_030": {
+  "file": "SAA-C03_orig_b2.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "高パフォーマンスなアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業が、Amazon EC2 上のビッグデータ処理ワークロードのために Amazon EBS ボリュームを選定しています。ワークロードは数 TB のログファイルを大きなシーケンシャル I/O で頻繁に読み取るもので、高いスループットが必要ですが、ランダム I/O の性能 (IOPS) はほとんど要求されません。ストレージコストはできる限り抑えたいと考えています。最も適切なボリュームタイプはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "スループット最適化 HDD (st1) ボリュームを使用する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_031": {
+  "file": "SAA-C03_orig_b2.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "高パフォーマンスなアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業が、ウェブサイトのクリックストリームデータをほぼリアルタイムで Amazon S3 に取り込み、後で分析に利用したいと考えています。保存前には軽微なデータ整形のみが必要です。取り込みインフラのプロビジョニングやスケーリングの管理は行いたくありません。最も運用負荷が低いソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon Kinesis Data Firehose の配信ストリームを作成し、必要に応じて AWS Lambda による変換を設定して S3 に配信する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_032": {
+  "file": "SAA-C03_orig_b2.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "高パフォーマンスなアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある企業が、Amazon SQS キューのメッセージを処理する Amazon EC2 インスタンスの Auto Scaling グループを運用しています。現在は CPU 使用率に基づくターゲット追跡スケーリングを使用していますが、メッセージが急増してもコンシューマーの CPU 使用率はすぐには上がらないため、スケールアウトが遅れてキューに大きな処理待ちが発生しています。処理需要に正確に追従してスケーリングするには、どうすればよいですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "キューの可視メッセージ数を実行中のインスタンス数で割った「インスタンスあたりのバックログ」をカスタムメトリクスとして発行し、ターゲット追跡スケーリングポリシーで使用する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_033": {
+  "file": "SAA-C03_orig_b2.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "高パフォーマンスなアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある企業のサーバーレスアプリケーションでは、多数の AWS Lambda 関数が Amazon RDS for MySQL データベースに接続しています。トラフィックの急増で関数の同時実行数が増えると、データベースへの接続数が上限に達し、接続エラーが多発します。アプリケーションロジックの大幅な変更なしにこの問題を解決するソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon RDS Proxy を作成してデータベース接続をプールおよび共有し、Lambda 関数の接続先をプロキシのエンドポイントに変更する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_034": {
+  "file": "SAA-C03_orig_b2.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "高パフォーマンスなアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある企業のウェブアプリケーションは Amazon RDS for MySQL データベースを使用しており、アクセスの約 90% が読み取りです。ピーク時間帯にはデータベースの読み取り負荷が高くなり、アプリケーション全体の応答が遅延しています。読み取りパフォーマンスを改善するために、どの組み合わせの手順を実行すべきですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "リードレプリカを追加し、アプリケーションの読み取りクエリをレプリカに分散させる。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "Amazon ElastiCache を導入し、頻繁に参照されるクエリ結果をキャッシュする。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_035": {
+  "file": "SAA-C03_orig_b2.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "コストを最適化したアーキテクチャの設計",
+  "level": "easy",
+  "question": "ある企業が、ユーザーが生成した大量のコンテンツを Amazon S3 に保存しています。オブジェクトごとのアクセスパターンは予測できず、頻繁にアクセスされ続けるものと、数か月間まったくアクセスされないものが混在しています。性能への影響や取り出し料金を発生させずに、ストレージコストを自動的に最適化するソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "オブジェクトを S3 Intelligent-Tiering に保存する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_036": {
+  "file": "SAA-C03_orig_b2.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "コストを最適化したアーキテクチャの設計",
+  "level": "easy",
+  "question": "ある企業の経理部門は、AWS の月額利用料金に 50,000 USD の予算を設定しています。過去に月末の請求書を見て初めて予算超過に気付いた経緯があり、今後は月の途中であっても、その月の利用実績から予測される請求額が予算の 80% と 100% に達する見込みになった時点で、複数の担当者がメールで通知を受け取りたいと考えています。通知の仕組みを自社で開発したり、担当者が毎日コンソールを確認したりする運用は避けたいと考えています。最も少ない労力でこの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Budgets でコスト予算を作成し、予測コストがしきい値を超えた場合のアラート通知を設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_037": {
+  "file": "SAA-C03_orig_b2.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "コストを最適化したアーキテクチャの設計",
+  "level": "medium",
+  "question": "あるスタートアップ企業のモバイルアプリケーションが Amazon DynamoDB テーブルを使用しています。トラフィックはキャンペーン開催時に突発的に数十倍へ急増し、平常時はごくわずかで、パターンの予測は困難です。現在のプロビジョンドキャパシティモードでは、スロットリングを避けるための過剰なプロビジョニングによりコストが高くなっています。最もコスト効率良くこの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "テーブルをオンデマンドキャパシティモードに変更する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_038": {
+  "file": "SAA-C03_orig_b2.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "コストを最適化したアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業では、5 つの部門が単一の AWS アカウントを共有し、同一リージョン内で Amazon EC2 インスタンス、Amazon RDS DB インスタンス、Amazon S3 バケットなど多数のリソースを運用しています。経営陣は、部門ごとの AWS 利用コストを毎月正確に把握し、実際の使用量に基づいて各部門へコストを配賦したいと考えています。部門を分けるためにアカウントやリージョンを分割する構成変更は、移行にかかる工数が大きいため現時点では実施できません。どのソリューションがこの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "部門を示すタグを全リソースに付与してコスト配分タグとして有効化し、AWS Cost Explorer でタグ別にコストを集計する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_039": {
+  "file": "SAA-C03_orig_b2.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "コストを最適化したアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある企業は、使用量が安定したワークロードを Amazon EC2 で実行しており、今後 1 年の間にその一部を AWS Fargate と AWS Lambda へ段階的に移行する計画です。同社は 1 年間のコミットメントによる割引を利用したいと考えていますが、移行後のコンピューティング使用にも割引が適用され続ける必要があります。この要件を満たす購入オプションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Compute Savings Plans を購入する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_040": {
+  "file": "SAA-C03_orig_b2.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "コストを最適化したアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある企業の開発環境では、Amazon EC2 インスタンスが平日の日中しか使用されないにもかかわらず 24 時間 365 日稼働しています。また、過去のプロジェクトで作成され、現在どのインスタンスにもアタッチされていない Amazon EBS ボリュームが多数課金され続けています。コストを削減するために、どの組み合わせの手順を実行すべきですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon EventBridge スケジュールと AWS Lambda を使用して、開発インスタンスを夜間と週末に自動停止し、平日の朝に自動起動する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "アタッチされていない EBS ボリュームのスナップショットを取得したうえで、ボリュームを削除する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_041": {
+  "file": "SAA-C03_orig_b3.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュアなアーキテクチャの設計",
+  "level": "easy",
+  "question": "ある企業のセキュリティチームは、AWS アカウント内での悪意のあるアクティビティ、異常な API 呼び出し、Amazon EC2 インスタンスの不正利用の兆候を継続的に検出したいと考えています。分析基盤の構築や検出ルールの作成は避けたいと考えています。最も運用負荷が低いソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon GuardDuty を有効化する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_042": {
+  "file": "SAA-C03_orig_b3.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュアなアーキテクチャの設計",
+  "level": "easy",
+  "question": "ある企業が、AWS アカウント内に多数の Amazon S3 バケットを保有しており、今後も増える予定です。同社は、既存および将来作成されるすべてのバケットについて、バケットポリシーや ACL の設定ミスによる意図しないパブリックアクセスを一律に防止したいと考えています。最も確実で簡単な方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "アカウントレベルで S3 のブロックパブリックアクセス設定を有効化する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_043": {
+  "file": "SAA-C03_orig_b3.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュアなアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業が、データレイクとして使用している複数の Amazon S3 バケットに、クレジットカード番号や氏名などの機密性の高い個人情報が含まれていないかを機械学習を用いて継続的に検査し、発見した場合にセキュリティチームへ自動通知する必要があります。最も運用負荷が低いソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon Macie を有効化して対象バケットの検出ジョブを構成し、検出結果を Amazon EventBridge 経由で通知する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_044": {
+  "file": "SAA-C03_orig_b3.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュアなアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業が、一般消費者向けの新しい Web アプリケーションに、ユーザー登録、サインイン、パスワードリセット、多要素認証 (MFA) の機能を追加する必要があります。想定ユーザー数は数十万人で、将来的にはソーシャルプロバイダーによるサインインへの対応も予定しています。要件として、パスワードの安全な保管やトークンの発行を含む認証基盤を自社で開発・運用する工数は最小限に抑える必要があります。なお、エンドユーザーが AWS のリソースを直接操作することはないため、AWS の一時的な認証情報を配布する必要はありません。どのソリューションがこの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon Cognito ユーザープールを作成し、アプリケーションの認証に統合する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_045": {
+  "file": "SAA-C03_orig_b3.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュアなアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業の公開ウェブアプリケーションは、Amazon CloudFront と Application Load Balancer を使用しています。同社は大規模な DDoS 攻撃を懸念しており、高度な攻撃に対する追加の検知と緩和、攻撃発生時に AWS の専門対応チームへ 24 時間連絡できる体制、および DDoS 攻撃に起因するリソースのスケーリング費用に対する保護を求めています。どのソリューションがこの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Shield Advanced のサブスクリプションを契約し、対象リソースを保護対象に追加する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_046": {
+  "file": "SAA-C03_orig_b3.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュアなアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業が AWS Organizations で複数の AWS アカウントを運用しています。コンプライアンス要件により、すべてのアカウントのすべての API アクティビティを一元的に記録し、記録されたログファイルが改ざんされていないことを後から証明できる必要があります。どの組み合わせの手順を実行すべきですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS CloudTrail の組織の証跡 (organization trail) を作成し、全アカウントのログを中央の Amazon S3 バケットに集約する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "証跡でログファイルの整合性検証を有効化する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_047": {
+  "file": "SAA-C03_orig_b3.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュアなアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業のウェブアプリケーションでは、ユーザーが数 GB の動画ファイルをアップロードします。現在はアプリケーションサーバーがファイルを受け取ってから Amazon S3 に転送しており、サーバーの帯域と CPU が逼迫しています。S3 バケットを公開することなく、ユーザーのブラウザから S3 へ直接かつ安全にアップロードさせる方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "バックエンドで有効期限付きの S3 署名付き URL を生成してブラウザに渡し、ブラウザから S3 へ直接アップロードさせる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_048": {
+  "file": "SAA-C03_orig_b3.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュアなアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある企業が、カスタマーマネージド型の AWS KMS キーで暗号化された Amazon EBS スナップショットを、同じリージョンにある別の AWS アカウントと共有する必要があります。共有先のアカウントは、スナップショットからボリュームを作成できる必要があります。どの組み合わせの手順を実行すべきですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "スナップショットのアクセス許可を変更し、共有先のアカウント ID に共有する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "KMS キーポリシーを更新し、共有先アカウントにキーの使用 (kms:Decrypt、kms:CreateGrant など) を許可する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_049": {
+  "file": "SAA-C03_orig_b3.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュアなアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある企業では、開発チームがアプリケーション用の IAM ロールを自分たちで作成できるようにして、開発速度を向上させたいと考えています。ただし、セキュリティチームは、開発者が定められた上限を超える権限を持つロールを作成できないように制限する必要があります。開発者のセルフサービスを維持しながらこの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "アクセス許可の境界 (permissions boundary) 用の管理ポリシーを定義し、開発者がロールを作成する際に境界のアタッチを必須とする IAM ポリシー条件を設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_050": {
+  "file": "SAA-C03_orig_b3.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュアなアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある証券会社が、金融規制に対応するため、取引記録を Amazon S3 に保存する仕組みを設計しています。規制では、記録は書き込まれた時点から 5 年間、AWS アカウントのルートユーザーを含むいかなるユーザーやロールによっても削除および上書きができない状態で保持されなければならず、保持期間を後から短縮することも認められません。監査人は、この保持がポリシーによる運用ではなく技術的に強制されていることの証跡を求めています。運用担当者の誤操作や、権限を昇格させた内部不正によってもデータが失われてはなりません。どのソリューションがこの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "S3 Object Lock を有効化したバケットを作成し、コンプライアンスモードで保持期間を 5 年に設定してオブジェクトを保存する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_051": {
+  "file": "SAA-C03_orig_b3.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュアなアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業が、数百台の Amazon EC2 インスタンスで構成されるフリートを運用しています。セキュリティチームは、OS とインストール済みソフトウェアパッケージの既知の脆弱性 (CVE) を継続的に検出すること、および OS のパッチ適用を定期的なメンテナンスウィンドウで自動化することを求めています。どの組み合わせの手順を実行すべきですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon Inspector を有効化して EC2 インスタンスを継続的にスキャンする。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "AWS Systems Manager Patch Manager でパッチベースラインを定義し、メンテナンスウィンドウで自動適用を構成する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_052": {
+  "file": "SAA-C03_orig_b3.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "弾力性に優れたアーキテクチャの設計",
+  "level": "easy",
+  "question": "ある企業のウェブアプリケーションは、単一の Amazon EC2 インスタンスで稼働しています。過去にインスタンスの障害とアベイラビリティーゾーンの障害でそれぞれサービス停止が発生しました。同社は、これらの障害が発生してもサービスを継続できる構成に変更したいと考えています。どのソリューションがこの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "複数のアベイラビリティーゾーンにまたがる Auto Scaling グループでインスタンスを起動し、Application Load Balancer でトラフィックを分散する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_053": {
+  "file": "SAA-C03_orig_b3.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "弾力性に優れたアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業が、注文データを Amazon DynamoDB テーブルで管理しています。アプリケーションの不具合による誤った書き込みや削除が発生した場合に、過去 35 日以内の任意の時点の状態へテーブルを復元できる必要があります。また、監査要件のためにバックアップを 1 年以上保持する必要もあります。どの組み合わせの手順を実行すべきですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "テーブルでポイントインタイムリカバリ (PITR) を有効化する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "定期的にオンデマンドバックアップを作成し、長期保持する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_054": {
+  "file": "SAA-C03_orig_b3.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "弾力性に優れたアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業が、Amazon EC2、Amazon EBS、Amazon RDS、Amazon EFS の各リソースのバックアップを、サービスごとに個別のスクリプトと手作業で管理しています。同社は、バックアップのスケジュールと保持期間をポリシーとして一元的に定義し、対象リソースへ自動適用して、バックアップ状況を横断的に監視したいと考えています。最も運用負荷が低いソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Backup でバックアッププランを作成し、タグに基づいて対象リソースを割り当てる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_055": {
+  "file": "SAA-C03_orig_b3.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "弾力性に優れたアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある企業が、IoT センサーから毎秒数千件のデータレコードを受信するシステムを構築しています。リアルタイムの異常検知、ダッシュボード更新、機械学習の 3 つの独立したアプリケーションが、それぞれ同じデータストリームを同時に読み取って処理する必要があります。また、アプリケーションの障害時には、過去 24 時間分のデータを遡って再処理できる必要があります。どのサービスがこの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon Kinesis Data Streams にデータを取り込み、各アプリケーションを独立したコンシューマーとして構成する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_056": {
+  "file": "SAA-C03_orig_b3.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "弾力性に優れたアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業の注文処理は、在庫確認、決済、請求書発行、通知という複数のステップで構成され、現在は Amazon EC2 上のスクリプトが逐次実行しています。ステップ単位の自動再試行、エラー時の分岐処理、実行状態の可視化を、オーケストレーション基盤を自作せずに実現したいと考えています。どのソリューションがこの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "各ステップを AWS Lambda 関数に分割し、AWS Step Functions のステートマシンでワークフローをオーケストレーションする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_057": {
+  "file": "SAA-C03_orig_b3.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "弾力性に優れたアーキテクチャの設計",
+  "level": "hard",
+  "question": "あるゲーム企業が、TCP のカスタムプロトコルを使用するマルチプレイヤーゲームサーバーを、2 つのリージョンの Network Load Balancer の背後で運用しています。世界中のプレイヤーを最適なリージョンに低レイテンシーで接続させ、リージョン障害時にはクライアント側の DNS キャッシュの影響を受けずに短時間で別リージョンへ切り替える必要があります。また、クライアントに設定させる IP アドレスは固定したいと考えています。どのソリューションがこの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Global Accelerator を構成して静的なエニーキャスト IP アドレスを取得し、両リージョンの NLB をエンドポイントとして登録する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_058": {
+  "file": "SAA-C03_orig_b3.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "弾力性に優れたアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある企業が、オンプレミスのデータセンターと AWS の VPC を AWS Direct Connect 接続で結び、基幹システムが常時通信しています。同社は、Direct Connect 回線の障害時にも接続を自動的に維持することを求めていますが、障害時には帯域幅が低下しても許容できます。最もコスト効率良くこの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Site-to-Site VPN をバックアップ接続として構成し、BGP の経路制御で自動フェイルオーバーさせる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_059": {
+  "file": "SAA-C03_orig_b3.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "弾力性に優れたアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある企業が、単一の DB インスタンスのみで構成される Amazon Aurora MySQL DB クラスターを本番環境で使用しています。DB インスタンスに障害が発生した場合のダウンタイムを最小化し、フェイルオーバーをアプリケーションに対して透過的にする必要があります。どの組み合わせの手順を実行すべきですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "別のアベイラビリティーゾーンに Aurora レプリカを追加する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "アプリケーションの接続先をクラスターの書き込みエンドポイントに設定する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_060": {
+  "file": "SAA-C03_orig_b3.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "弾力性に優れたアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある企業のオンプレミスのファイルサーバーが容量の限界に近づいています。同社は、ファイルデータを実質無制限に拡張できる Amazon S3 に保存したいと考えていますが、オンプレミスの業務アプリケーションからは引き続き SMB プロトコルでファイルにアクセスする必要があります。また、頻繁に使用するファイルにはオンプレミスから低レイテンシーでアクセスする必要があります。どのソリューションがこの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Storage Gateway の Amazon S3 ファイルゲートウェイをオンプレミスにデプロイし、SMB ファイル共有として公開する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_061": {
+  "file": "SAA-C03_orig_b3.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "高パフォーマンスなアーキテクチャの設計",
+  "level": "easy",
+  "question": "ある企業が、大規模なデータセットをすべてメモリ上に保持して高速に集計処理を行うインメモリ分析アプリケーションを Amazon EC2 で実行する計画です。このワークロードは大容量の RAM を必要としますが、CPU 使用率は中程度です。最も適切な EC2 インスタンスファミリーはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "メモリ最適化インスタンス (R ファミリーなど) を使用する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_062": {
+  "file": "SAA-C03_orig_b3.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "高パフォーマンスなアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業の REST API は、Amazon API Gateway と AWS Lambda で構築されています。商品カタログを返す GET エンドポイントには同一パラメータのリクエストが大量に発生しており、そのたびに Lambda 関数とデータベースが呼び出されています。カタログの更新頻度は 1 時間に 1 回程度です。バックエンドの負荷を減らして応答を高速化する、最も簡単なソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "API Gateway のステージでキャッシュを有効化し、適切な TTL を設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_063": {
+  "file": "SAA-C03_orig_b3.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "高パフォーマンスなアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある e コマース企業が、商品カタログに対して、キーワードの部分一致、あいまい検索、ファセット (絞り込み条件) 付きの全文検索機能をユーザーに提供したいと考えています。商品データは Amazon RDS に保存されており、SQL の LIKE 句による検索では性能と機能が不十分です。どのサービスを追加するのが最も適切ですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon OpenSearch Service にカタログデータのインデックスを作成し、検索クエリを処理させる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_064": {
+  "file": "SAA-C03_orig_b3.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "高パフォーマンスなアーキテクチャの設計",
+  "level": "hard",
+  "question": "あるメディア企業では、世界各地の記者が数 GB の動画ファイルを東京リージョンの Amazon S3 バケットへアップロードします。遠隔地からのアップロードは速度が遅く、また転送が途中で失敗すると最初からやり直しになっています。アップロードの速度と信頼性を改善するために、どの組み合わせの手順を実行すべきですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "マルチパートアップロードを使用してファイルを分割して転送する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "バケットで S3 Transfer Acceleration を有効化し、アクセラレーション用エンドポイント経由でアップロードする。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_065": {
+  "file": "SAA-C03_orig_b3.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "高パフォーマンスなアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある企業が、数万台の IoT デバイスから送信されるイベントを Amazon DynamoDB テーブルに書き込んでいます。テーブルのパーティションキーにはイベントの日付 (YYYY-MM-DD 形式) を使用しています。テーブル全体では十分な書き込みキャパシティをプロビジョニングしているにもかかわらず、書き込みのスロットリングが頻発しています。この問題を解決する最も適切な方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "デバイス ID のような高カーディナリティの属性をパーティションキーに採用し、書き込みを多数のパーティションに分散させる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_066": {
+  "file": "SAA-C03_orig_b3.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "高パフォーマンスなアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある企業が、Amazon CloudFront で配信するウェブサイトのすべてのリクエストに対して、ビューワーリクエスト時に URL の正規化と HTTP ヘッダーの簡単な書き換えを実行する必要があります。処理は 1 ミリ秒未満で完了する軽量なもので、リクエスト量は毎秒数十万件と非常に多いため、レイテンシーとコストへの影響を最小化したいと考えています。どのソリューションがこの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "CloudFront Functions で処理を実装し、ビューワーリクエストイベントに関連付ける。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_067": {
+  "file": "SAA-C03_orig_b3.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "高パフォーマンスなアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある研究機関が、ノード間で MPI による通信を頻繁に行う密結合の HPC シミュレーションを、数十台の Amazon EC2 インスタンスで実行する計画です。ノード間通信のレイテンシーを最小化し、高いスループットを確保する必要があります。どのソリューションがこの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "インスタンスをクラスタープレイスメントグループに配置し、Elastic Fabric Adapter (EFA) をサポートするインスタンスタイプを使用する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_068": {
+  "file": "SAA-C03_orig_b3.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "コストを最適化したアーキテクチャの設計",
+  "level": "easy",
+  "question": "ある企業の Amazon CloudWatch Logs には、数百のロググループにアプリケーションログが保持期間の設定なしで無期限に蓄積され続けており、保存データ量が毎月およそ 2 TB ずつ増加してコストを押し上げています。社内規定では、ログは直近 90 日間参照できれば十分で、それより古いログを保持する必要はありません。ログの出力自体は障害調査に不可欠なため停止できません。また、削除処理のコードを開発して定期実行するような、運用の手間が増える方法は避けたいと考えています。最も簡単にコストを削減する方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "各ロググループの保持期間を 90 日に設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_069": {
+  "file": "SAA-C03_orig_b3.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "コストを最適化したアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業が、Amazon S3 に Apache Parquet 形式で保存された数 TB のアクセスログを蓄積しています。セキュリティ調査の担当者は、月に数回だけ、期間や条件を指定したアドホックな SQL クエリを実行してログを調査します。クエリの実行に数分かかることは許容できますが、利用のない時間帯にも分析専用のインフラを常時稼働させて課金され続けることは避けたいと考えています。また、調査のたびにデータを別のデータストアへロードする手間や、クラスターのパッチ適用などの管理作業も発生させたくありません。最もコスト効率良くこの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon Athena を使用して S3 上のデータを直接クエリする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_070": {
+  "file": "SAA-C03_orig_b3.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "コストを最適化したアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業が数百台の Amazon EC2 インスタンスを運用しており、その多くが実際の負荷に対して過剰なサイズでプロビジョニングされている疑いがあります。同社は、実際の使用状況メトリクスの分析に基づいて、より適切なインスタンスタイプやサイズの推奨を自動的に取得したいと考えています。最も少ない労力でこの要件を満たす AWS のサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Compute Optimizer を有効化して推奨事項を確認する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_071": {
+  "file": "SAA-C03_orig_b4.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュアなアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある企業が、自社の VPC 内のアプリケーションから、サードパーティのソフトウェアベンダーが AWS 上で提供する API サービスを利用する必要があります。ベンダーのサービスは、別の AWS アカウントの VPC で Network Load Balancer の背後にホストされています。同社のセキュリティ要件では、この通信がインターネットを一切経由しないこと、および両社の VPC の CIDR 範囲が重複していても接続できることが求められます。最も運用負荷が低くこの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ベンダーが Network Load Balancer を対象とする VPC エンドポイントサービスを作成し、同社が自社 VPC にインターフェイス VPC エンドポイント (AWS PrivateLink) を作成して接続する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_072": {
+  "file": "SAA-C03_orig_b4.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュアなアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業が AWS Organizations で 40 個の AWS アカウントを運用しています。従業員は既に社内の SAML 2.0 対応 ID プロバイダー (IdP) のアカウントを保有しており、同社はその ID を使って従業員が職務に応じた権限で複数の AWS アカウントにサインインできるようにしたいと考えています。アカウントごとに IAM ユーザーを作成して管理する運用は避けたいと考えています。最も運用負荷が低いソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS IAM Identity Center を有効化し、社内 IdP を ID ソースとして接続する。許可セットを作成し、各アカウントに対してグループ単位で割り当てる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_073": {
+  "file": "SAA-C03_orig_b4.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュアなアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある企業が、有料会員だけがダウンロードできる動画ファイルを Amazon S3 に保存し、Amazon CloudFront で配信しています。会員がダウンロードを要求したときに発行されるリンクは 15 分間だけ有効で、そのリンクが第三者に共有されても期限を過ぎればアクセスできない必要があります。また、ユーザーが CloudFront を経由せずに S3 バケットへ直接アクセスすることは引き続き禁止しなければなりません。どのソリューションがこれらの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "アプリケーションで有効期限付きの CloudFront 署名付き URL を生成し、信頼されたキーグループを使用してディストリビューションでビューワーアクセスを制限する。S3 バケットへの直接アクセスはオリジンアクセスコントロール (OAC) で防ぐ。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_074": {
+  "file": "SAA-C03_orig_b4.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュアなアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業のウェブアプリケーションは、Auto Scaling グループ内の Amazon EC2 インスタンス (アプリケーション層) と Amazon RDS for MySQL の DB インスタンス (データベース層) で構成されています。スケーリングによってアプリケーション層インスタンスのプライベート IP アドレスは頻繁に変化します。セキュリティチームは、データベース層のポート 3306 へのアクセスをアプリケーション層のインスタンスのみに限定し、IP アドレスの変化に伴う手動でのルール更新を不要にしたいと考えています。最も運用負荷が低いソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "データベース層のセキュリティグループのインバウンドルールで、ポート 3306 のソースとしてアプリケーション層のセキュリティグループ ID を指定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_075": {
+  "file": "SAA-C03_orig_b4.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュアなアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある企業のコンプライアンス要件では、アカウント内のすべての Amazon S3 バケットでパブリックアクセスブロックが有効でなければなりません。開発者が新しいバケットを作成する際に設定を漏らすことがあるため、同社は要件から逸脱したバケットを継続的に検出し、検出後は人手を介さずに準拠状態へ自動的に修復したいと考えています。最も運用負荷が低いソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Config のマネージドルールでバケットの設定を継続的に評価し、非準拠と判定されたリソースに対して AWS Systems Manager Automation ランブックによる自動修復アクションを設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_076": {
+  "file": "SAA-C03_orig_b4.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュアなアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある企業が、機密データを保存する Amazon S3 バケットについて次の 2 つの要件を満たす必要があります。(1) バケットへのアクセスは、同社の VPC に作成した S3 用ゲートウェイ VPC エンドポイントを経由するリクエストのみに限定する。(2) 暗号化されていない HTTP によるリクエストはすべて拒否する。ソリューションアーキテクトはどの組み合わせの手順を実行すべきですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "バケットポリシーに、aws:SourceVpce 条件キーの値が該当する VPC エンドポイントの ID と一致しないリクエストを拒否する明示的な Deny ステートメントを追加する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "バケットポリシーに、aws:SecureTransport が false のリクエストを拒否する明示的な Deny ステートメントを追加する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_077": {
+  "file": "SAA-C03_orig_b4.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュアなアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業のモバイルアプリケーションでは、ユーザーが撮影した写真を Amazon S3 バケットにアップロードします。各ユーザーは、自分の識別子に対応するプレフィックス配下のオブジェクトにのみ読み書きできる必要があります。アプリケーションのバイナリに AWS の認証情報を埋め込むことは避けなければなりません。どのソリューションが最も安全にこの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon Cognito ユーザープールでユーザーを認証し、Cognito ID プールを通じて IAM ロールの一時的な認証情報を取得する。ロールのポリシーで ${cognito-identity.amazonaws.com:sub} のポリシー変数を使用し、アクセスできるプレフィックスをユーザーごとに制限する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_078": {
+  "file": "SAA-C03_orig_b4.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュアなアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある企業のアプリケーションで、VPC 内の Amazon EC2 インスタンスから別のサブネットにあるインスタンスへの接続が断続的に失敗しています。ネットワークチームは、どの送信元 IP アドレスとポートの組み合わせのトラフィックが許可され、どれが拒否されたかを継続的に記録し、後から Amazon CloudWatch Logs Insights でクエリして分析できるようにしたいと考えています。パケットの内容そのものを保存する必要はありません。最も運用負荷が低いソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "VPC フローログを有効化し、送信先を Amazon CloudWatch Logs に設定して、ACCEPT と REJECT の両方のトラフィックを記録する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_079": {
+  "file": "SAA-C03_orig_b4.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュアなアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある企業のオンプレミスデータセンターで稼働する多数のバッチサーバーが、AWS の API を呼び出して処理結果を Amazon S3 にアップロードしています。現在は IAM ユーザーのアクセスキーを各サーバーの設定ファイルに保存していますが、セキュリティポリシーの変更により長期的な認証情報をサーバー上に保存することが禁止されました。同社は既に、社内のプライベート認証局 (CA) が発行する X.509 証明書を各サーバーに配布して管理しています。最も運用負荷が低くこの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Identity and Access Management (IAM) Roles Anywhere を設定し、社内のプライベート CA をトラストアンカーとして登録して、サーバーの証明書を使って一時的な認証情報を取得させる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_080": {
+  "file": "SAA-C03_orig_b4.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "弾力性に優れたアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業の決済処理システムでは、同一の顧客口座に対する取引メッセージを送信された順序どおりに処理する必要があります。また、ネットワークの再送などによって同じメッセージが二重に処理されると残高の不整合が発生します。一方で、異なる顧客口座の取引は並行して処理し、全体のスループットを確保したいと考えています。どのソリューションがこれらの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon SQS FIFO キューを使用し、顧客口座 ID をメッセージグループ ID として設定して、重複排除を有効にする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_081": {
+  "file": "SAA-C03_orig_b4.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "弾力性に優れたアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある企業のイベント駆動アプリケーションでは、Amazon S3 のオブジェクト作成イベントによって AWS Lambda 関数が非同期に呼び出されます。関数が呼び出すダウンストリームの API が一時的に停止すると関数は失敗し、自動再試行の後にイベントが破棄されて未処理のファイルが発生しています。同社は、再試行後も失敗したイベントを保持して後から再処理できるようにし、失敗の発生を運用チームに通知する必要があります。どの組み合わせの手順を実行すべきですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Lambda 関数の非同期呼び出し設定で、オンフェイラーの送信先 (Lambda destinations) として Amazon SQS キューを指定する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "失敗イベントを保持するキューの ApproximateNumberOfMessagesVisible メトリクスを監視する Amazon CloudWatch アラームを作成し、Amazon SNS トピック経由で運用チームに通知する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_082": {
+  "file": "SAA-C03_orig_b4.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "弾力性に優れたアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある企業のモバイルゲームは、北米、欧州、アジアのユーザーに提供されています。プレイヤーの進行状況は現在、単一リージョンの Amazon DynamoDB テーブルに保存されています。同社は、各地域のユーザーが最寄りのリージョンに対して低レイテンシーで読み取りと書き込みを行えるようにし、1 つのリージョンが利用不能になっても他のリージョンでサービスを継続できるようにしたいと考えています。最も運用負荷が低いソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "DynamoDB グローバルテーブルを構成し、3 つのリージョンにレプリカテーブルを作成する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_083": {
+  "file": "SAA-C03_orig_b4.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "弾力性に優れたアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業のウェブアプリケーションは、Auto Scaling グループの Amazon EC2 インスタンスで実行されています。各インスタンスは起動後にアプリケーションの成果物と大量の参照データをダウンロードして展開するため、リクエストを処理できる状態になるまで約 10 分かかります。トラフィックが急増した際にスケールアウトが間に合わず、その間の応答が遅延しています。アプリケーションのコードを変更せずにこの問題を解消するソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Auto Scaling グループにウォームプールを構成し、初期化を完了した停止状態のインスタンスをあらかじめ準備しておく。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_084": {
+  "file": "SAA-C03_orig_b4.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "弾力性に優れたアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある企業が、オンプレミスの Windows ファイルサーバーを AWS へ移行しています。既存の業務アプリケーションは SMB プロトコルでファイル共有にアクセスし、NTFS のアクセス許可と Active Directory によるユーザー認証に依存しています。同社は、アベイラビリティーゾーンの障害が発生してもファイル共有を継続して利用できることを求めており、ファイルサーバーの OS 管理は行いたくないと考えています。どのソリューションがこれらの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "マルチ AZ 構成の Amazon FSx for Windows File Server ファイルシステムを作成し、AWS Directory Service の AWS Managed Microsoft AD に参加させる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_085": {
+  "file": "SAA-C03_orig_b4.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "弾力性に優れたアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業の社内アプリケーションは、平日の午前 9 時前後にトラフィックが急増し、夜間と週末はほとんど利用されないという明確なパターンを毎週繰り返しています。現在はターゲット追跡スケーリングポリシーのみを使用していますが、朝の急増に対してインスタンスの追加が追いつかず、最初の 15 分ほど応答が遅くなります。追加コストを最小限に抑えながらこの問題を解決するソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Auto Scaling グループで予測スケーリングを有効にし、過去のメトリクス履歴から予測される需要増加の前に容量を追加する。ターゲット追跡ポリシーは予測外の変動に備えて併用する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_086": {
+  "file": "SAA-C03_orig_b4.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "弾力性に優れたアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある企業が、Amazon ElastiCache (Redis OSS) の単一ノードクラスターをアプリケーションのキャッシュ層として使用しています。先日そのノードで障害が発生し、キャッシュされていたデータがすべて失われた結果、バックエンドのデータベースに負荷が集中してアプリケーション全体が停止しました。同社は、ノード障害時のデータ損失とダウンタイムを最小限に抑え、手動操作なしで復旧できるようにしたいと考えています。どの組み合わせの手順を実行すべきですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "レプリケーショングループを構成し、プライマリノードとは別のアベイラビリティーゾーンにリードレプリカノードを追加する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "クラスターでマルチ AZ を有効にし、プライマリノードの障害時にレプリカへ自動的にフェイルオーバーさせる。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_087": {
+  "file": "SAA-C03_orig_b4.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "弾力性に優れたアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある企業のステートレスな画像変換サービスは、Auto Scaling グループの Amazon EC2 インスタンスで実行され、Amazon SQS キューから取得したメッセージ単位で処理が完結します。同社はコスト削減のためスポットインスタンスを活用したいと考えていますが、特定のインスタンスタイプの容量不足やスポットの中断によってサービスの処理が完全に停止することは避けなければなりません。どの組み合わせの手順を実行すべきですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Auto Scaling グループで混合インスタンスポリシーを構成し、複数のインスタンスタイプと複数のアベイラビリティーゾーンを指定する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "スポットの割り当て戦略に容量最適化 (capacity-optimized) を指定し、オンデマンドのベース容量を設定して最低限の処理能力を確保する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_088": {
+  "file": "SAA-C03_orig_b4.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "高パフォーマンスなアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業の注文管理アプリケーションは、注文 ID をパーティションキーとする Amazon DynamoDB テーブルを使用しています。新たに、カスタマーサポート担当者が顧客のメールアドレスを条件にその顧客の注文を検索する機能が必要になりました。現在の実装ではテーブル全体をスキャンしてフィルタしているため、応答に時間がかかり、読み取りキャパシティも大量に消費しています。最もパフォーマンスが高いソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "メールアドレスをパーティションキーとするグローバルセカンダリインデックス (GSI) を作成し、そのインデックスに対して Query を実行する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_089": {
+  "file": "SAA-C03_orig_b4.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "高パフォーマンスなアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある企業の顧客向け API は、Amazon API Gateway と AWS Lambda で構成されています。関数は大きな依存ライブラリを読み込む Java で実装されています。トラフィックが少ない時間帯の後に呼び出しが増えると、一部のリクエストで数秒の遅延が発生し、レイテンシーの SLA を満たせません。定常的なリクエスト数は多くありませんが、レスポンスのレイテンシーを一貫して低く保つことが最優先です。どのソリューションがこの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Lambda 関数のバージョンまたはエイリアスにプロビジョニングされた同時実行を設定し、初期化済みの実行環境を常に確保しておく。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_090": {
+  "file": "SAA-C03_orig_b4.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "高パフォーマンスなアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業が、2 つのリージョンに同一構成のウェブアプリケーションをデプロイし、それぞれのリージョンに Application Load Balancer を配置しています。同社は、世界中のユーザーからのリクエストをネットワーク的に最も応答が速いリージョンへ振り分け、一方のリージョンが異常になった場合には残ったリージョンへ自動的に切り替えたいと考えています。どのソリューションがこれらの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon Route 53 で 2 つの ALB を指すレイテンシーベースルーティングのレコードを作成し、各レコードに Route 53 ヘルスチェックを関連付ける。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_091": {
+  "file": "SAA-C03_orig_b4.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "高パフォーマンスなアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある企業が、複数の業務システムから集約した数十テラバイトの履歴データを Amazon RDS for PostgreSQL の単一 DB インスタンスに保存し、BI ツールから多数のテーブルを結合する複雑な集計クエリを実行しています。クエリの完了に数時間かかるうえ、同じインスタンスで動作しているトランザクション処理の性能も低下しています。分析クエリの性能を大幅に改善するソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "分析対象のデータを Amazon Redshift クラスターに移行し、列指向ストレージと超並列処理 (MPP) アーキテクチャで集計クエリを実行する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_092": {
+  "file": "SAA-C03_orig_b4.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "高パフォーマンスなアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある企業が、Amazon S3 のデータレイクに毎日大量の JSON 形式のログファイルを保存し、Amazon Athena で分析しています。分析クエリの多くは特定の 1 日分のデータに含まれる数個の列だけを参照しますが、クエリの実行時間が長く、スキャンしたデータ量に応じた料金も高額になっています。クエリ性能を改善し、スキャン量を削減するために実行すべき手順の組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "データを Apache Parquet などの列指向フォーマットに変換して保存する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "日付をキーとしたプレフィックス構造でデータを配置してテーブルをパーティション分割し、パーティションをカタログに登録する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_093": {
+  "file": "SAA-C03_orig_b4.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "高パフォーマンスなアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業が、Amazon EC2 インスタンス上で自己管理型のリレーショナルデータベースを実行する予定です。このデータベースはランダムな読み書きが中心で、1 桁ミリ秒台の低レイテンシーと高く安定した IOPS を必要とします。また、インスタンスを停止して再起動してもデータが保持されなければなりません。どのストレージ構成がこれらの要件を最も満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "プロビジョンド IOPS SSD (io2) の Amazon EBS ボリュームを使用し、EBS 最適化インスタンスにアタッチする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_094": {
+  "file": "SAA-C03_orig_b4.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "高パフォーマンスなアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある企業が Amazon CloudFront で商品ページを配信していますが、オリジンサーバーの負荷が高く、キャッシュヒット率が非常に低い状態です。調査の結果、クライアントはリクエストごとに異なる値を持つマーケティング用のクエリ文字列パラメータとユーザー固有の Cookie を送信しており、それらがすべてキャッシュキーに含まれていることが判明しました。これらの値はオリジンが返すコンテンツの内容に影響しません。キャッシュヒット率を高めるソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "キャッシュポリシーを見直し、レスポンスの内容に影響しないクエリ文字列パラメータと Cookie をキャッシュキーから除外する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_095": {
+  "file": "SAA-C03_orig_b4.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "コストを最適化したアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業が、Amazon S3 に保存した数百 GB のソフトウェアインストーラーを世界中のユーザーに直接ダウンロードさせています。同じファイルが繰り返しダウンロードされており、S3 からインターネットへのデータ転送料金が月々の請求の大部分を占めるようになりました。ダウンロード性能を維持または向上させながら、最もコスト効率よく転送料金を削減するソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "S3 バケットをオリジンとする Amazon CloudFront ディストリビューションを作成し、ユーザーには CloudFront のドメイン経由でダウンロードさせる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_096": {
+  "file": "SAA-C03_orig_b4.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "コストを最適化したアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業では、数百個の Amazon EBS ボリュームのスナップショットを運用チームの独自スクリプトで毎日作成しています。古いスナップショットの削除は担当者が手作業で行っているため取り残しが多く、スナップショットのストレージコストが増加し続けています。同社は、スナップショットの作成と保持期間に基づく削除を自動化し、運用負荷とコストの両方を削減したいと考えています。最も運用負荷が低いソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon Data Lifecycle Manager でスナップショットのライフサイクルポリシーを作成し、対象ボリュームをタグで指定して作成スケジュールと保持ルールを設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_097": {
+  "file": "SAA-C03_orig_b4.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "コストを最適化したアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある企業は AWS Organizations で 12 個の AWS アカウントを運用しています。各アカウントのチームがそれぞれ独立してリザーブドインスタンスや Savings Plans を購入した結果、あるアカウントでは購入した割引を使い切れず、別のアカウントではオンデマンド料金を支払っている状況です。また、Amazon S3 の使用量が各アカウントに分散しているため、使用量に応じた階層的な割引が十分に適用されていません。ソリューションアーキテクトはどの組み合わせの手順を実行すべきですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "組織の一括請求 (Consolidated Billing) を利用して、全アカウントの使用量を管理アカウントで合算し、使用量に応じた階層的な割引を適用させる。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "管理アカウントでリザーブドインスタンスと Savings Plans の割引共有を有効にし、あるアカウントで使い切れなかった割引が組織内の他のアカウントの使用量に適用されるようにする。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_098": {
+  "file": "SAA-C03_orig_b4.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "コストを最適化したアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある企業の社内レポートアプリケーションは Amazon Aurora PostgreSQL の DB クラスターを使用しています。データベースには月末の 3 日間だけ高い負荷がかかり、それ以外の期間はほぼアイドル状態ですが、負荷が立ち上がるタイミングは正確に予測できず、アプリケーションを停止することもできません。現在はピークに合わせた大きな DB インスタンスクラスを常時稼働させています。最もコスト効率が良いソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "DB クラスターを Aurora Serverless v2 に変更し、最小と最大の Aurora キャパシティユニット (ACU) を設定して負荷に応じて自動的にスケーリングさせる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_099": {
+  "file": "SAA-C03_orig_b4.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "コストを最適化したアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業が、大容量のファイルをマルチパートアップロードで Amazon S3 バケットにアップロードしています。ネットワークの問題によってアップロードが中断されることが定期的に発生しています。請求内容を確認したところ、バケット内のオブジェクト一覧から算出される合計サイズよりも、課金対象のストレージ使用量が大幅に大きいことが判明しました。この差分を解消してコストを最適化するソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "バケットに、開始から指定日数を経過した未完了のマルチパートアップロードを削除するライフサイクルルールを設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_100": {
+  "file": "SAA-C03_orig_b4.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "コストを最適化したアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある企業が、オンプレミスデータセンターに保存されている 600 TB のアーカイブデータを Amazon S3 へ移行する必要があります。データセンターのインターネット回線は 200 Mbps で、通常の業務トラフィックにも使用されているため移行に割ける帯域は限られています。移行は 1 か月以内に完了する必要があり、移行後に継続的なデータ転送を行う予定はありません。最もコスト効率が良く、かつ期限を満たせるソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Snowball Edge Storage Optimized デバイスを複数台注文してデータをコピーし、AWS に返送して Amazon S3 にインポートする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_301": {
+  "file": "SAA-C03_orig_gap1.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "コストを最適化したアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業が、AWS Fargate 起動タイプの Amazon ECS サービスで、アップロードされた画像のサムネイルを生成するワーカーを運用しています。ワーカーは Amazon SQS キューからメッセージを取得して処理し、タスクが処理の途中で停止した場合は、可視性タイムアウトの経過後にメッセージがキューへ戻り、別のタスクが再処理します。処理の完了が数分遅れることは業務上許容されます。ソリューションアーキテクトは、常時 4 タスク分の処理能力は確実に確保したうえで、それを超える分のコンピューティングコストを最も削減する必要があります。どのソリューションを選択すべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "クラスターに FARGATE と FARGATE_SPOT の 2 つの容量プロバイダーを関連付け、FARGATE の base を 4 に、FARGATE_SPOT の weight を大きく設定した容量プロバイダー戦略でサービスを実行する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_302": {
+  "file": "SAA-C03_orig_gap1.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "高パフォーマンスなアーキテクチャの設計",
+  "level": "hard",
+  "question": "ある企業が、オンプレミスで稼働している Linux ベースのコンテンツ管理システムを、AWS Fargate 起動タイプの Amazon ECS へ移行しています。このアプリケーションは、複数のプロセスが同じディレクトリに対してユーザーのアップロードした画像やドキュメントを読み書きする前提で実装されており、この動作を変更する改修は行えません。ECS サービスは 3 つのアベイラビリティーゾーンで合計 12 タスクを実行し、タスクは負荷に応じて随時起動と終了を繰り返します。書き込まれたファイルは、タスクが置き換えられた後も保持され、すべてのタスクから即座に参照できる必要があります。どのソリューションがこの要件を満たしますか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon EFS ファイルシステムを作成して各アベイラビリティーゾーンにマウントターゲットを配置し、タスク定義の volumes で efsVolumeConfiguration を指定して、コンテナの mountPoints からマウントする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SAA-C03_orig_201": {
+  "file": "mixed_orig_b1.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "matching",
+  "domain": "弾力性に優れたアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業が、オンプレミスのデータセンターから複数のワークロードを AWS へ移行するにあたり、それぞれに適したストレージサービスを選定しています。移行対象には、複数の Web サーバーがコンテンツを共有する Linux アプリケーション、単一サーバー上で稼働するデータベース、静的コンテンツやバックアップの保管、既存の Windows ファイルサーバーが含まれます。いずれのワークロードもアプリケーションのコードを変更せず、現在と同じアクセス方式やプロトコルで利用できることが条件です。以下のリストから、各要件に対する正しい AWS ストレージサービスを選択してください。各サービスを 1 回以上選択しても構いません。",
+  "n_correct": null,
+  "options": []
+ },
+ "SAA-C03_orig_202": {
+  "file": "mixed_orig_b1.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "matching",
+  "domain": "高パフォーマンスなアーキテクチャの設計",
+  "level": "medium",
+  "question": "あるソリューションアーキテクトが、1 つの e コマースプラットフォームを構成する複数のコンポーネントについて、それぞれに適したデータストアを選定しています。プラットフォームには、ユーザーセッションの管理、商品カタログの参照、受注と在庫の管理、経営層向けの売上レポートという 4 つの用途があり、用途ごとにデータモデル、求められる応答時間、クエリの形状が異なります。運用負荷を抑えるため、いずれもマネージドサービスを使用します。以下のリストから、各データアクセスパターンに対する正しい AWS のデータベースまたはキャッシュサービスを選択してください。各サービスを 1 回以上選択しても構いません。",
+  "n_correct": null,
+  "options": []
+ },
+ "SAA-C03_orig_203": {
+  "file": "mixed_orig_b1.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "matching",
+  "domain": "セキュアなアーキテクチャの設計",
+  "level": "medium",
+  "question": "あるソリューションアーキテクトが、パブリックサブネットとプライベートサブネットを持つ VPC に 3 層構成の Web アプリケーションを配置しています。アプリケーション層のインスタンスはプライベートサブネットに置き、インターネットからの着信接続は受け付けませんが、外部 API の呼び出しと Amazon S3 へのアクセスは必要です。セキュリティチームは、サブネット単位とインスタンス単位の両方でトラフィックを制御し、Amazon S3 への通信をインターネットに出さないことを求めています。以下のリストから、各 VPC の要件や動作に対する正しいコンポーネントを選択してください。各コンポーネントを 1 回以上選択しても構いません。",
+  "n_correct": null,
+  "options": []
+ },
+ "SAA-C03_orig_211": {
+  "file": "mixed_orig_b1.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "ordering",
+  "domain": "セキュアなアーキテクチャの設計",
+  "level": "medium",
+  "question": "ある企業が、独自ドメイン名と HTTPS で静的ウェブサイトを公開しようとしています。オブジェクトへの直接アクセスは禁止し、Amazon CloudFront 経由のアクセスのみを許可する必要があります。以下のリストから、この構成を実現するための正しいステップを選択して正しい順に並べ替えてください。各ステップを 1 回だけ選択するか、まったく選択しないでください。",
+  "n_correct": null,
+  "options": []
+ },
+ "SAA-C03_orig_212": {
+  "file": "mixed_orig_b1.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "ordering",
+  "domain": "弾力性に優れたアーキテクチャの設計",
+  "level": "medium",
+  "question": "あるソリューションアーキテクトが、単一の Amazon EC2 インスタンスで稼働している Web 層を、複数のアベイラビリティーゾーンにまたがる可用性の高い構成へ作り替えています。要件は、いずれか 1 つのアベイラビリティーゾーンが利用できなくなっても残りのゾーンで処理を継続できること、インスタンスの障害だけでなくアプリケーションの応答異常も検知して自動的に置き換えること、そして需要の変動に応じて台数が自動で増減することです。インスタンスをロードバランサーに手作業で登録する運用は認められません。以下のリストから、必要なステップを選択して正しい順に並べ替えてください。各ステップを 1 回だけ選択するか、まったく選択しないでください。",
+  "n_correct": null,
+  "options": []
+ },
+ "SAA-C03_orig_213": {
+  "file": "mixed_orig_b1.json",
+  "exam": "SAA-C03",
+  "set": "orig",
+  "type": "ordering",
+  "domain": "コストを最適化したアーキテクチャの設計",
+  "level": "easy",
+  "question": "ある企業が、アクセス頻度が時間とともに低下するログデータに S3 ライフサイクルルールを適用しようとしています。以下のリストから、Amazon S3 のストレージクラスを選択して、保存コストが高く取り出しが速いものから、保存コストが低く取り出しに時間がかかるものの順に並べ替えてください。各ストレージクラスを 1 回だけ選択するか、まったく選択しないでください。",
+  "n_correct": null,
+  "options": []
+ }
+}

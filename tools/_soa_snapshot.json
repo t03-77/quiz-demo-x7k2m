@@ -1,0 +1,4072 @@
+{
+ "SOA-C03_orig_001": {
+  "file": "SOA-C03_orig.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリング、ロギング、分析、修復、パフォーマンスの最適化",
+  "level": "easy",
+  "question": "ある企業が Amazon EC2 インスタンス上で社内向け Web アプリケーションを運用しています。CloudOps エンジニアは Amazon CloudWatch のコンソールで CPU 使用率を確認できますが、メモリ使用率のメトリクスが表示されないことに気づきました。同社はメモリ使用率を CloudWatch で監視し、しきい値超過時にアラームを発報させたいと考えています。この要件を満たすには、CloudOps エンジニアは何をすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "各 EC2 インスタンスに CloudWatch エージェントをインストールして設定し、メモリ使用率をカスタムメトリクスとして CloudWatch に発行する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_002": {
+  "file": "SOA-C03_orig.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリング、ロギング、分析、修復、パフォーマンスの最適化",
+  "level": "medium",
+  "question": "ある企業が Amazon EC2 上のアプリケーションのログを Amazon CloudWatch Logs に集約しています。アプリケーションはエラー発生時にログへ「ERROR」という文字列を出力します。運用チームは、5 分間に「ERROR」が 10 回以上出力された場合に Amazon SNS 経由で通知を受け取りたいと考えています。運用上のオーバーヘッドを最小限に抑えてこの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "CloudWatch Logs のロググループにメトリクスフィルターを作成して「ERROR」の出現回数をメトリクスとして発行し、そのメトリクスに対して CloudWatch アラームを作成して SNS トピックに通知する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_003": {
+  "file": "SOA-C03_orig.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "信頼性とビジネス継続性",
+  "level": "medium",
+  "question": "ある企業が単一のアベイラビリティーゾーンで Amazon RDS for MySQL の DB インスタンスを運用しています。先日、アベイラビリティーゾーンの障害によりデータベースが数時間利用できなくなりました。同社は、インフラストラクチャ障害が発生した場合でもデータベースが自動的にフェイルオーバーし、アプリケーションの接続文字列を変更せずに運用を継続できるようにしたいと考えています。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "DB インスタンスをマルチ AZ 配置に変更し、別のアベイラビリティーゾーンに同期スタンバイレプリカを維持する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_004": {
+  "file": "SOA-C03_orig.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "信頼性とビジネス継続性",
+  "level": "hard",
+  "question": "ある企業がグローバル向け金融アプリケーションのデータベースとして Amazon Aurora MySQL クラスターを単一リージョンで運用しています。同社の事業継続計画では、リージョン全体の障害に備えて、目標復旧時点 (RPO) を 1 秒程度、目標復旧時間 (RTO) を 1 分程度とすることが求められています。また、平常時には海外拠点からの読み取りレイテンシーも低減したいと考えています。これらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "Aurora Global Database を構成して別のリージョンにセカンダリクラスターを追加し、リージョン障害時にセカンダリクラスターを昇格させる。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_005": {
+  "file": "SOA-C03_orig.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ、プロビジョニング、自動化",
+  "level": "medium",
+  "question": "ある企業は AWS Organizations で 30 の AWS アカウントを管理しています。セキュリティチームは、すべてのアカウントの複数のリージョンに、標準化された AWS Config ルールと Amazon CloudWatch アラームを含む AWS CloudFormation テンプレートをデプロイする必要があります。また、組織に新しいアカウントが追加された場合には、同じテンプレートが自動的にデプロイされるようにしたいと考えています。運用上のオーバーヘッドを最小限に抑えてこの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "サービスマネージド型のアクセス許可で CloudFormation StackSets を使用し、組織の対象 OU をデプロイターゲットに指定して自動デプロイを有効にする。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_006": {
+  "file": "SOA-C03_orig.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ、プロビジョニング、自動化",
+  "level": "hard",
+  "question": "ある企業の CloudOps エンジニアが、本番環境の AWS CloudFormation スタックの更新を実行したところ、更新が失敗してロールバックが開始されました。しかし、スタック外で手動変更されていたリソースが原因でロールバックも失敗し、スタックは UPDATE_ROLLBACK_FAILED 状態になりました。スタック内の他のリソースは本番トラフィックを処理しており、スタックの削除は許容されません。スタックを正常な状態に戻すために、CloudOps エンジニアはまず何をすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "ロールバック失敗の原因となったリソースを修正または調査したうえで、ロールバックの続行 (ContinueUpdateRollback) を実行し、必要に応じて問題のリソースをスキップ対象に指定する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_007": {
+  "file": "SOA-C03_orig.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "easy",
+  "question": "ある企業が Amazon EC2 上のアプリケーションから Amazon RDS for PostgreSQL データベースに接続しています。現在、データベースの認証情報はアプリケーションの設定ファイルに平文で保存されています。セキュリティ監査により、認証情報を安全に保管し、90 日ごとに自動でローテーションすることが求められました。運用上のオーバーヘッドを最小限に抑えてこの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "認証情報を AWS Secrets Manager に保存し、Amazon RDS との統合による自動ローテーションを 90 日間隔で設定する。アプリケーションは実行時に Secrets Manager から認証情報を取得する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_008": {
+  "file": "SOA-C03_orig.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "hard",
+  "question": "ある企業が機密性の高い顧客データを Amazon S3 バケットに保存しています。コンプライアンス要件により、バケット内のオブジェクトが誤ってインターネットに公開されることを防止し、かつバケットへのすべてのアクセスを暗号化された通信 (HTTPS) に限定する必要があります。これらの要件を満たすアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "バケットで S3 ブロックパブリックアクセスの 4 つの設定をすべて有効にする。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "条件キー aws:SecureTransport が false の場合にすべてのアクションを拒否するステートメントをバケットポリシーに追加する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_009": {
+  "file": "SOA-C03_orig.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ネットワークとコンテンツ配信",
+  "level": "medium",
+  "question": "ある企業がプライベートサブネット内の Amazon EC2 インスタンス群から Amazon S3 に大量のデータを毎日アップロードしています。現在、この通信は NAT ゲートウェイを経由しており、NAT ゲートウェイのデータ処理料金が月額コストの大きな割合を占めています。同社は、アーキテクチャの変更を最小限に抑えながら、この S3 向けトラフィックのコストを削減したいと考えています。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "VPC に S3 用のゲートウェイ VPC エンドポイントを作成し、プライベートサブネットのルートテーブルにエンドポイントへのルートを追加する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_010": {
+  "file": "SOA-C03_orig.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ネットワークとコンテンツ配信",
+  "level": "hard",
+  "question": "ある企業がパブリックサブネット内の Amazon EC2 インスタンスで Web サーバーを起動しました。セキュリティグループにはインターネットからの TCP ポート 443 のインバウンドを許可するルールを設定済みで、インスタンスにはパブリック IP アドレスが割り当てられ、ルートテーブルにはインターネットゲートウェイへのルートも存在します。しかし、外部クライアントから HTTPS でアクセスすると接続がタイムアウトします。調査の結果、サブネットにはデフォルトではないカスタムネットワーク ACL が関連付けられており、インバウンドの TCP ポート 443 は許可されていることが分かりました。この問題の原因として最も可能性が高いものはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ネットワーク ACL のアウトバウンドルールで、戻りのトラフィックが使用するエフェメラルポート (1024〜65535) が許可されていない。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_011": {
+  "file": "SOA-C03_orig_b2.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリング、ロギング、分析、修復、パフォーマンスの最適化",
+  "level": "easy",
+  "question": "ある企業が多数の AWS Lambda 関数を運用しており、実行ログが Amazon CloudWatch Logs のロググループに出力されています。ロググループはデフォルト設定のままであるため、ログが無期限に保持され続けており、CloudWatch Logs のストレージコストが毎月増加しています。同社のポリシーでは、ログの保持は 90 日間で十分とされています。運用上のオーバーヘッドを最小限に抑えてコストを削減するには、CloudOps エンジニアは何をすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "各ロググループの保持期間設定を 90 日に変更し、期限を過ぎたログイベントを自動的に削除させる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_012": {
+  "file": "SOA-C03_orig_b2.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリング、ロギング、分析、修復、パフォーマンスの最適化",
+  "level": "medium",
+  "question": "ある企業がバッチ処理用の Amazon EC2 インスタンスを日中のみ稼働させ、夜間は停止しています。インスタンス上のアプリケーションは稼働中にカスタムメトリクスを Amazon CloudWatch に発行しており、このメトリクスに対してしきい値超過を検知するアラームが設定されています。インスタンスが夜間に停止するとメトリクスが発行されなくなり、アラームが意図せず ALARM 状態に遷移して深夜に通知が発報されてしまいます。夜間の誤報を防ぐには、CloudOps エンジニアは何をすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "アラームの欠落データの処理方法を「欠落データを適正 (notBreaching) として処理」に変更する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_013": {
+  "file": "SOA-C03_orig_b2.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリング、ロギング、分析、修復、パフォーマンスの最適化",
+  "level": "hard",
+  "question": "ある企業が 3 層構成の Web アプリケーションを運用しており、ロードバランサー、アプリケーションサーバー、データベースのそれぞれに複数の Amazon CloudWatch アラームを設定しています。データベース障害が発生すると、依存する上位レイヤーのアラームも連鎖的に発報し、オンコール担当者に数十件の通知が一斉に届いてしまいます。運用チームは、関連するアラームが同時に発生した場合には集約された 1 件の通知のみを受け取り、アラート疲れを軽減したいと考えています。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "関連する複数のアラームを論理条件で組み合わせた複合アラーム (composite alarm) を作成し、通知アクションは複合アラームにのみ設定して、個々のアラームからは通知アクションを削除する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_014": {
+  "file": "SOA-C03_orig_b2.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリング、ロギング、分析、修復、パフォーマンスの最適化",
+  "level": "medium",
+  "question": "ある企業が Auto Scaling グループに属さない単一の Amazon EC2 インスタンスで社内アプリケーションを運用しています。過去に、基盤となるホストのハードウェア障害によりシステムステータスチェックが失敗し、手動でインスタンスを停止・起動するまでサービスが停止しました。同社は、同様の障害が発生した際に、インスタンス ID、プライベート IP アドレス、アタッチされた Amazon EBS ボリュームを維持したまま自動的に復旧させたいと考えています。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "StatusCheckFailed_System メトリクスに対する CloudWatch アラームを作成し、アラームアクションに EC2 インスタンスの復旧 (recover) アクションを設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_015": {
+  "file": "SOA-C03_orig_b2.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリング、ロギング、分析、修復、パフォーマンスの最適化",
+  "level": "medium",
+  "question": "ある企業の本番環境で、重要な Amazon EC2 インスタンスが昨日の夕方に予告なく終了されていたことが判明しました。CloudOps エンジニアは、どの IAM ユーザーまたはロールが、いつ、どの IP アドレスからこのインスタンスの終了操作を実行したのかを特定する必要があります。この情報を最も直接的に確認できる方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS CloudTrail のイベント履歴で TerminateInstances イベントを検索し、呼び出し元の ID、時刻、送信元 IP アドレスを確認する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_016": {
+  "file": "SOA-C03_orig_b2.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリング、ロギング、分析、修復、パフォーマンスの最適化",
+  "level": "medium",
+  "question": "ある CloudOps エンジニアが、Amazon CloudWatch Logs に保存されているアプリケーションログを調査しています。障害対応のため、過去 3 時間のログから発生頻度の高いエラーメッセージを種類別に集計し、上位 10 件を特定する必要があります。追加のインフラストラクチャを構築せずに、CloudWatch のコンソールから直接この分析を実行するには、どの機能を使用すべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "CloudWatch Logs Insights で対象ロググループに対してクエリを実行し、filter、stats、sort コマンドでエラーを集計する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_017": {
+  "file": "SOA-C03_orig_b2.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリング、ロギング、分析、修復、パフォーマンスの最適化",
+  "level": "hard",
+  "question": "ある企業が Amazon EC2 上で取引処理アプリケーションを運用しています。アプリケーションには数十秒間だけ処理キューの深さが急上昇する瞬間的なスパイクが発生しており、この間に処理遅延が起きています。現在はキューの深さをカスタムメトリクスとして 1 分間隔で CloudWatch に発行していますが、1 分の粒度ではスパイクが平均化されて検知できません。スパイクを数十秒以内に検知してアラームを発報するには、CloudOps エンジニアは何をすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "カスタムメトリクスを 1 秒単位の高解像度メトリクスとして発行し、10 秒の期間 (ピリオド) を指定した高解像度アラームを作成する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_018": {
+  "file": "SOA-C03_orig_b2.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリング、ロギング、分析、修復、パフォーマンスの最適化",
+  "level": "medium",
+  "question": "ある企業の Amazon RDS for MySQL データベースで、毎日特定の時間帯に応答が遅くなる事象が発生しています。CloudWatch で CPU 使用率の上昇は確認できましたが、CloudOps エンジニアはどの SQL クエリがデータベース負荷の主な原因になっているかを特定する必要があります。最小限の労力でこの分析を行うには、どのサービスまたは機能を使用すべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon RDS Performance Insights を有効化し、データベース負荷の内訳を待機イベントと上位 SQL 別に分析する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_019": {
+  "file": "SOA-C03_orig_b2.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリング、ロギング、分析、修復、パフォーマンスの最適化",
+  "level": "hard",
+  "question": "ある企業が Amazon EC2 インスタンスにアタッチした 100 GiB の gp2 タイプの Amazon EBS ボリューム上でデータベースを運用しています。日次バッチ処理の実行中、最初の数十分は高速に処理が進みますが、その後ディスク I/O 性能が大きく低下します。CloudWatch を確認すると、性能低下のタイミングでボリュームの BurstBalance メトリクスが 0 に近づいていることが分かりました。継続的に必要な IOPS を確保しつつコスト効率よくこの問題を解決するには、CloudOps エンジニアは何をすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ボリュームタイプを gp3 に変更し、ワークロードに必要な IOPS とスループットをベースライン性能としてプロビジョニングする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_020": {
+  "file": "SOA-C03_orig_b2.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリング、ロギング、分析、修復、パフォーマンスの最適化",
+  "level": "medium",
+  "question": "ある企業の Web アプリケーションへのリクエスト数は、平日と週末、昼間と夜間で大きく変動する周期的なパターンを持っています。現在はリクエスト数に静的なしきい値を設定した CloudWatch アラームで異常を監視していますが、夜間の正常な減少で発報しないようしきい値を低くすると、昼間の異常な減少を検知できないというジレンマに陥っています。運用上のオーバーヘッドを最小限に抑えて、時間帯ごとの正常なパターンからの逸脱を検知するには、どうすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "CloudWatch 異常検出 (anomaly detection) を有効にし、機械学習が生成する予測帯域からの逸脱でアラームを発報させる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_021": {
+  "file": "SOA-C03_orig_b2.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "信頼性とビジネス継続性",
+  "level": "medium",
+  "question": "ある企業が単一の Amazon EC2 インスタンスで顧客向け Web アプリケーションを運用しています。先月、アベイラビリティーゾーンの障害とインスタンス障害の両方でダウンタイムが発生しました。同社は、単一のインスタンスや単一のアベイラビリティーゾーンの障害が発生してもサービスを継続できるアーキテクチャに変更したいと考えています。この要件を満たすアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "複数のアベイラビリティーゾーンのサブネットにまたがる Auto Scaling グループを作成し、複数のインスタンスを起動する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "Application Load Balancer を作成して、複数のインスタンスにトラフィックを分散する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_022": {
+  "file": "SOA-C03_orig_b2.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "信頼性とビジネス継続性",
+  "level": "medium",
+  "question": "ある企業が数百台の Amazon EC2 インスタンスを運用しており、特定のタグが付いた Amazon EBS ボリュームについて、毎日深夜にスナップショットを取得し、14 日分の世代を保持して古いものは自動削除する必要があります。カスタムスクリプトを開発・保守せずにこの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon Data Lifecycle Manager でライフサイクルポリシーを作成し、対象タグ、日次スケジュール、14 日の保持ルールを定義する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_023": {
+  "file": "SOA-C03_orig_b2.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "信頼性とビジネス継続性",
+  "level": "medium",
+  "question": "ある企業が単一の AWS アカウント内で Amazon EC2、Amazon RDS、Amazon EFS、Amazon DynamoDB を利用しています。コンプライアンス要件として、これらすべてのリソースのバックアップを一元的なポリシーで管理し、リソースに付与された特定のタグに基づいて自動的にバックアップ対象へ組み入れ、保持期間も統一的に適用する必要があります。運用上のオーバーヘッドを最小限に抑えてこの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Backup でバックアッププランを作成し、タグベースのリソース割り当てを設定して、スケジュールと保持期間を一元的に定義する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_024": {
+  "file": "SOA-C03_orig_b2.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "信頼性とビジネス継続性",
+  "level": "medium",
+  "question": "ある企業の開発者が、本番の Amazon RDS for MySQL データベース (自動バックアップ有効、保持期間 7 日) に対して誤った DELETE 文を実行し、重要なテーブルの大量の行を削除してしまいました。誤操作の正確な時刻は判明しています。削除直前の時点のデータを取得して復旧するには、CloudOps エンジニアは何をすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ポイントインタイムリカバリを使用して、誤操作の直前の時刻を指定した新しい DB インスタンスを作成し、そこから対象データを回収する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_025": {
+  "file": "SOA-C03_orig_b2.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "信頼性とビジネス継続性",
+  "level": "hard",
+  "question": "ある企業がグローバルに展開するモバイルアプリケーションのバックエンドで Amazon DynamoDB テーブルを使用しています。ユーザーは北米、欧州、アジアに分布しており、それぞれの地域で読み取りと書き込みの両方を低レイテンシーで実行できることと、リージョン規模の障害が発生してもアプリケーションを継続できることが求められています。運用上のオーバーヘッドを最小限に抑えてこの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "DynamoDB グローバルテーブルを構成して、各地域のリージョンにレプリカテーブルを配置する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_026": {
+  "file": "SOA-C03_orig_b2.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "信頼性とビジネス継続性",
+  "level": "medium",
+  "question": "ある企業が単一リージョンの Application Load Balancer (ALB) 配下で Web アプリケーションを運用し、Amazon Route 53 でドメインを管理しています。同社は、アプリケーションが利用できなくなった場合に、ユーザーを自動的に「メンテナンス中」の静的ページへ誘導したいと考えています。静的ページは Amazon S3 の静的ウェブサイトホスティングで用意済みです。この要件を満たすアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ALB を指すフェイルオーバールーティングポリシーのプライマリレコードを作成し、Route 53 ヘルスチェックを関連付ける。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "S3 の静的ウェブサイトを指すフェイルオーバールーティングポリシーのセカンダリレコードを作成する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_027": {
+  "file": "SOA-C03_orig_b2.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "信頼性とビジネス継続性",
+  "level": "hard",
+  "question": "ある企業が基幹業務アプリケーションを単一の AWS リージョンで運用しており、リージョン全体の障害に備えた災害対策 (DR) 戦略を策定しています。要件は、データベースのデータを DR リージョンへ継続的にレプリケートすること、目標復旧時間 (RTO) は数十分程度であること、そして平常時の DR リージョンのコストを可能な限り抑えることです。これらの要件に最も適した DR 戦略はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "パイロットライト戦略を採用し、DR リージョンにはデータベースのレプリケーションなど中核要素のみを常時稼働させ、アプリケーションサーバーは災害時にプロビジョニングして起動する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_028": {
+  "file": "SOA-C03_orig_b2.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "信頼性とビジネス継続性",
+  "level": "easy",
+  "question": "ある企業が業務ドキュメントを Amazon S3 バケットに保存しています。先週、ユーザーが誤って重要なファイルを新しい内容で上書きし、元の内容を復元できませんでした。同社は今後、オブジェクトが上書きまたは削除された場合でも、以前の内容を迅速に復元できるようにしたいと考えています。この要件を満たすために有効化すべき機能はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "バケットで S3 バージョニングを有効化する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_029": {
+  "file": "SOA-C03_orig_b2.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "信頼性とビジネス継続性",
+  "level": "hard",
+  "question": "ある企業のコンプライアンス要件により、東京リージョンの Amazon S3 バケットに保存される新規オブジェクトを、大阪リージョンの別のバケットへ自動的にレプリケートする必要があります。CloudOps エンジニアはクロスリージョンレプリケーション (CRR) のルールを設定しようとしています。レプリケーションを機能させるために必要な設定の組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ソースバケットとレプリケート先バケットの両方でバージョニングを有効化する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "S3 がソースからオブジェクトを読み取り、レプリケート先へ複製するための権限を持つ IAM ロールをレプリケーション設定に指定する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_030": {
+  "file": "SOA-C03_orig_b2.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "信頼性とビジネス継続性",
+  "level": "medium",
+  "question": "ある e コマース企業の注文処理システムでは、フロントエンドの Web サーバーが受け付けた注文を、バックエンドの Amazon EC2 インスタンス群が即時に処理しています。セール期間中に注文が予測不能に急増すると、バックエンドが処理しきれずに注文データが失われることがありました。同社は、急増時にも注文を失わず、バックエンドの処理能力を負荷に応じて調整できる構成にしたいと考えています。この要件を満たすアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "フロントエンドとバックエンドの間に Amazon SQS キューを導入し、注文をキューに送信してバックエンドがポーリングで処理する構成に変更する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "バックエンドの Auto Scaling グループに、キューの未処理メッセージ数 (ApproximateNumberOfMessagesVisible) に基づくスケーリングポリシーを設定する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_031": {
+  "file": "SOA-C03_orig_b2.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ、プロビジョニング、自動化",
+  "level": "easy",
+  "question": "ある CloudOps エンジニアが、本番環境の AWS CloudFormation スタックに対してテンプレートの更新を適用しようとしています。過去に、意図しないリソースの置き換えが発生してダウンタイムを招いたことがあるため、今回は更新を実行する前に、どのリソースが追加・変更・削除されるのか、また置き換えが発生するのかを確認したいと考えています。この要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "変更セット (change set) を作成して更新内容のプレビューを確認し、問題がなければ変更セットを実行する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_032": {
+  "file": "SOA-C03_orig_b2.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ、プロビジョニング、自動化",
+  "level": "hard",
+  "question": "ある企業が、Amazon EC2 インスタンス、セキュリティグループ、Amazon RDS DB インスタンスを含む検証環境を AWS CloudFormation スタックで管理しています。検証の終了時にはスタックを削除して環境を廃棄しますが、RDS DB インスタンスに蓄積された検証データは次回の検証のために残しておく必要があります。スタック削除時に DB インスタンスだけを削除させないようにするには、CloudOps エンジニアは何をすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "テンプレートの DB インスタンスリソースに DeletionPolicy 属性で Retain を設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_033": {
+  "file": "SOA-C03_orig_b2.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ、プロビジョニング、自動化",
+  "level": "medium",
+  "question": "ある企業が数百台の Amazon EC2 インスタンス (すべて AWS Systems Manager のマネージドノード) を運用しています。セキュリティポリシーにより、OS の重要な更新プログラムを毎月第 2 土曜日の深夜の作業時間帯に自動適用し、適用状況を一元的に把握する必要があります。この要件を満たすアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Systems Manager Patch Manager で承認ルールを定義したパッチベースラインを設定し、対象インスタンスをパッチグループに関連付ける。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "毎月第 2 土曜日の深夜に実行されるメンテナンスウィンドウを作成し、パッチ適用タスク (AWS-RunPatchBaseline) を登録する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_034": {
+  "file": "SOA-C03_orig_b2.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ、プロビジョニング、自動化",
+  "level": "easy",
+  "question": "ある CloudOps エンジニアは、AWS Systems Manager のマネージドノードとして登録されている 50 台の Amazon EC2 インスタンスすべてで、同じ設定変更スクリプトを一度に実行する必要があります。各インスタンスに SSH で接続することなく、実行結果も一元的に確認したいと考えています。この要件を満たす機能はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Systems Manager Run Command を使用して、タグまたはインスタンス ID で対象を指定し、スクリプトを一斉実行する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_035": {
+  "file": "SOA-C03_orig_b2.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ、プロビジョニング、自動化",
+  "level": "hard",
+  "question": "ある企業では、ネットワークチームが VPC、サブネット、セキュリティグループを AWS CloudFormation の「ネットワークスタック」で管理し、複数のアプリケーションチームがそれぞれ別のスタックでその VPC 上にリソースをデプロイしています。同一アカウント・同一リージョン内で、アプリケーションスタックがネットワークスタックの作成したサブネット ID などを参照できるようにし、かつ参照されている間はネットワークスタック側の該当リソース定義が誤って削除されないよう保護したいと考えています。この要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ネットワークスタックの Outputs で値を Export し、アプリケーションスタックで Fn::ImportValue を使用して参照する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_036": {
+  "file": "SOA-C03_orig_b2.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ、プロビジョニング、自動化",
+  "level": "hard",
+  "question": "ある企業が AWS CloudFormation テンプレートで Amazon EC2 インスタンスをデプロイしています。インスタンスの起動後、ユーザーデータ内のスクリプトがアプリケーションのインストールと初期化を実行しますが、この処理には 10 分程度かかります。現在はインスタンスリソースが起動直後に CREATE_COMPLETE となるため、アプリケーションの初期化が失敗してもスタックは成功扱いになってしまいます。初期化の完了を確認してからリソースを完了状態にし、失敗時にはスタック作成を失敗させるには、どうすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "インスタンスリソースに CreationPolicy 属性を設定し、初期化スクリプトの最後に cfn-signal で成功シグナルを送信させる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_037": {
+  "file": "SOA-C03_orig_b2.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ、プロビジョニング、自動化",
+  "level": "medium",
+  "question": "ある企業では、社内標準のセキュリティ設定と最新の OS パッチを適用したゴールデン AMI を毎月作成し、各チームに配布しています。現在はエンジニアが手動でインスタンスを起動し、設定スクリプトを実行し、テストしてから AMI を作成しており、作業に丸一日かかっています。ビルド、テスト、配布までのプロセスをマネージドサービスで自動化するには、どうすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "EC2 Image Builder でイメージパイプラインを作成し、ビルドコンポーネント、テストフェーズ、配布設定、月次の実行スケジュールを定義する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_038": {
+  "file": "SOA-C03_orig_b2.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ、プロビジョニング、自動化",
+  "level": "hard",
+  "question": "ある企業が起動テンプレートを使用する Auto Scaling グループで Web アプリケーションを運用しています。新しいゴールデン AMI が承認されたため、グループ内の既存インスタンスをすべて新しい AMI ベースのインスタンスへ入れ替える必要があります。入れ替えの間もサービスを継続するため、一定割合の正常なインスタンスを常に維持しながら段階的に置き換えたいと考えています。運用作業を最小限に抑えてこの要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "新しい AMI を指定した起動テンプレートの新バージョンを作成し、Auto Scaling グループのインスタンスの更新 (instance refresh) を最小正常率を指定して開始する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_039": {
+  "file": "SOA-C03_orig_b2.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "easy",
+  "question": "ある企業の Amazon EC2 インスタンス上のアプリケーションが、Amazon S3 バケットへファイルをアップロードしています。現在は IAM ユーザーのアクセスキー ID とシークレットアクセスキーがインスタンス内の設定ファイルに保存されていますが、セキュリティ監査でこの方式が問題として指摘されました。長期的な認証情報をインスタンスに保存せずに S3 へのアクセスを許可するには、どうすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "S3 への必要な権限を持つ IAM ロールを作成し、インスタンスプロファイルとして EC2 インスタンスにアタッチする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_040": {
+  "file": "SOA-C03_orig_b2.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "hard",
+  "question": "ある企業のセキュリティ監査で、本番の Amazon EC2 インスタンス (すべて AWS Systems Manager のマネージドノード) に対して、インターネットから SSH ポートへ接続できる状態で管理アクセスが行われていることが指摘されました。同社は、SSH ポートを外部に公開せずに管理者のシェルアクセスを実現し、すべての操作セッションを記録できるようにする必要があります。この要件を満たすアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Systems Manager Session Manager を使用してシェルアクセスを行うように運用を変更し、セッションログを Amazon S3 または CloudWatch Logs に記録するよう設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "セキュリティグループからポート 22 のインバウンドルールを削除する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_041": {
+  "file": "SOA-C03_orig_b3.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリング、ロギング、分析、修復、パフォーマンスの最適化",
+  "level": "easy",
+  "question": "ある企業の運用チームは、本番環境の Amazon EC2 インスタンス 25 台のいずれかが停止 (stopped) 状態に遷移した場合に、1 分以内にオンコール担当者のメールアドレスへ通知を受け取りたいと考えています。停止は意図しない操作や自動化の不具合によって発生する可能性があり、検知の遅れがサービス断につながります。チームは、追加のコードを開発・保守せず、定期的なポーリングも行わずにこの要件を満たしたいと考えています。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "EC2 インスタンスの状態変化イベントを検知する Amazon EventBridge ルールを作成し、ターゲットにメール購読済みの Amazon SNS トピックを設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_042": {
+  "file": "SOA-C03_orig_b3.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリング、ロギング、分析、修復、パフォーマンスの最適化",
+  "level": "medium",
+  "question": "ある企業が 3 つの AWS リージョンで同じ Web アプリケーションを運用しています。運用チームは、各リージョンの Application Load Balancer のリクエスト数とターゲットの応答時間を、単一の画面でまとめて確認できるようにしたいと考えています。追加のツールを導入せずにこの要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon CloudWatch で 1 つのダッシュボードを作成し、各リージョンのメトリクスを表示するウィジェットを追加する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_043": {
+  "file": "SOA-C03_orig_b3.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリング、ロギング、分析、修復、パフォーマンスの最適化",
+  "level": "hard",
+  "question": "ある企業のセキュリティチームは、複数のアプリケーションが出力する Amazon CloudWatch Logs のログイベントを、発生からほぼリアルタイムで Amazon S3 の分析用バケットに集約する必要があります。集約されたログは社内の SIEM ツールが S3 から取り込みます。カスタムコードの開発と管理を最小限に抑えてこの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "各ロググループにサブスクリプションフィルターを作成し、Amazon Data Firehose 配信ストリームを経由して S3 バケットへ配信する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_044": {
+  "file": "SOA-C03_orig_b3.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリング、ロギング、分析、修復、パフォーマンスの最適化",
+  "level": "medium",
+  "question": "ある企業の経理部門は、AWS の月額利用料金の管理を強化したいと考えています。要件は、月の途中で実際のコストが月次予算額の 80% に達した時点と、月末時点のコストが予算を超えると予測された時点の 2 つのタイミングで、担当者にメール通知を送ることです。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Budgets でコスト予算を作成し、実際のコストが 80% に達した場合と予測コストが 100% を超える場合の 2 つのアラートを設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_045": {
+  "file": "SOA-C03_orig_b3.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリング、ロギング、分析、修復、パフォーマンスの最適化",
+  "level": "hard",
+  "question": "ある企業では、すべての AWS リソースに CostCenter タグを付与するルールを数か月前から徹底しており、タグの付与状況も確認済みです。しかし、経理担当者が AWS Cost Explorer で CostCenter タグ別のコスト集計を行おうとしたところ、グループ化の条件として CostCenter タグが選択肢に表示されませんでした。この問題を解決するには、何をすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "請求コンソール (Billing and Cost Management) のコスト配分タグの設定で、CostCenter タグをコスト配分タグとして有効化する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_046": {
+  "file": "SOA-C03_orig_b3.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリング、ロギング、分析、修復、パフォーマンスの最適化",
+  "level": "hard",
+  "question": "ある CloudOps エンジニアが Amazon EC2 インスタンスの障害調査を行っています。Amazon CloudWatch を確認すると、このインスタンスでは StatusCheckFailed_Instance メトリクスが 1 を示している一方、StatusCheckFailed_System メトリクスは 0 のままです。この状況の原因として最も可能性が高いものはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "OS の起動失敗、ネットワーク設定の誤り、メモリの枯渇など、インスタンス内部 (ゲスト OS レベル) の問題が発生している。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_047": {
+  "file": "SOA-C03_orig_b3.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリング、ロギング、分析、修復、パフォーマンスの最適化",
+  "level": "medium",
+  "question": "ある企業のニュース配信 Web サイトでは、Amazon RDS データベースへの読み取りクエリが負荷の大部分を占めています。アクセス解析の結果、リクエストの多くは同じ人気記事のデータを繰り返し取得していることが分かりました。同社は、データベースの負荷を軽減し、繰り返しアクセスされるデータをミリ秒未満のレイテンシーで返せるようにしたいと考えています。この要件に最も適したソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon ElastiCache クラスターを導入し、頻繁にアクセスされるクエリ結果をキャッシュしてアプリケーションから参照させる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_048": {
+  "file": "SOA-C03_orig_b3.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリング、ロギング、分析、修復、パフォーマンスの最適化",
+  "level": "hard",
+  "question": "ある企業の Amazon RDS for PostgreSQL DB インスタンスで、FreeStorageSpace メトリクスの低下により空きストレージの逼迫が不定期に発生しています。過去には空き容量の枯渇によりデータベースが書き込みを受け付けなくなる障害も起きました。CloudOps エンジニアは、今後ストレージ不足が発生しないように、手動での容量拡張作業をなくしたいと考えています。運用上のオーバーヘッドを最小限に抑えてこの要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "DB インスタンスでストレージの自動スケーリングを有効化し、最大ストレージしきい値を設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_049": {
+  "file": "SOA-C03_orig_b3.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリング、ロギング、分析、修復、パフォーマンスの最適化",
+  "level": "easy",
+  "question": "ある企業の CloudOps エンジニアは、月次のコスト削減活動の一環として、使用率の低い Amazon EC2 インスタンス、アイドル状態のロードバランサー、関連付けられていない Elastic IP アドレスなどを AWS アカウント全体から洗い出したいと考えています。これらの情報をまとめて確認できる AWS のサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Trusted Advisor のコスト最適化のチェック項目を確認する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_050": {
+  "file": "SOA-C03_orig_b3.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "信頼性とビジネス継続性",
+  "level": "medium",
+  "question": "ある企業がセッション管理のために、単一ノードで構成された Amazon ElastiCache for Redis クラスターを運用しています。先日、ノード障害によりキャッシュ全体が利用できなくなり、アプリケーションの応答が悪化しました。同社は、ノードやアベイラビリティーゾーンの障害が発生しても自動的に復旧できる構成に変更したいと考えています。この要件を満たすアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "レプリケーショングループに、プライマリとは別のアベイラビリティーゾーンのリードレプリカノードを追加する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "レプリケーショングループでマルチ AZ の自動フェイルオーバーを有効化する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_051": {
+  "file": "SOA-C03_orig_b3.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "信頼性とビジネス継続性",
+  "level": "hard",
+  "question": "ある企業が 1 つのライターと 3 つの Aurora レプリカで構成された Amazon Aurora MySQL クラスターを運用しています。レプリカのうち 1 つはライターと同じ大きなインスタンスクラスで、残りの 2 つはレポート処理用の小さなインスタンスクラスです。運用チームは、ライターに障害が発生した場合のフェイルオーバー先として、必ず大きなインスタンスクラスのレプリカが最優先で昇格されるようにしたいと考えています。この要件を満たす設定はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "大きなインスタンスクラスのレプリカに最も小さい番号の昇格優先順位 (プロモーション階層) を割り当てる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_052": {
+  "file": "SOA-C03_orig_b3.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "信頼性とビジネス継続性",
+  "level": "easy",
+  "question": "ある企業の勤怠管理システムは Auto Scaling グループの Amazon EC2 インスタンスで稼働しています。毎営業日の午前 9 時前後に従業員の打刻アクセスが集中することが分かっており、負荷の上昇に反応する動的スケーリングでは、インスタンスの起動が間に合わずに応答遅延が発生しています。この問題を解決する最も簡単な方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "営業日の午前 8 時 30 分に希望容量を増やすスケジュールされたスケーリングアクションを設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_053": {
+  "file": "SOA-C03_orig_b3.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "信頼性とビジネス継続性",
+  "level": "medium",
+  "question": "ある企業が Auto Scaling グループで Web アプリケーションを運用しています。トラフィックは不規則に増減しますが、経験上、グループ全体の平均 CPU 使用率を約 50% に保てば快適な応答性能を維持できることが分かっています。スケーリングの設定と調整の手間を最小限に抑えて、この状態を自動的に維持するには、どのスケーリングポリシーを使用すべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "平均 CPU 使用率 50% を目標値としたターゲット追跡スケーリングポリシーを設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_054": {
+  "file": "SOA-C03_orig_b3.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "信頼性とビジネス継続性",
+  "level": "hard",
+  "question": "ある企業が Application Load Balancer (ALB) 配下の Auto Scaling グループで Web アプリケーションを運用しています。アプリケーションプロセスが時々ハングアップし、ALB のターゲットヘルスチェックでは unhealthy と判定されてトラフィックから切り離されるものの、Auto Scaling グループはそのインスタンスを終了せず、縮退したまま放置されることが分かりました。ハングアップしたインスタンスを自動的に置き換えさせるには、CloudOps エンジニアは何をすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Auto Scaling グループのヘルスチェックタイプに ELB ヘルスチェックを追加する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_055": {
+  "file": "SOA-C03_orig_b3.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "信頼性とビジネス継続性",
+  "level": "medium",
+  "question": "ある金融企業の規制要件により、東京リージョンで取得している Amazon RDS と Amazon EC2 のバックアップの複製を、地理的に離れた別の AWS リージョンにも保管する必要があります。同社はすでに AWS Backup のバックアッププランで日次バックアップを取得しています。運用上のオーバーヘッドを最小限に抑えてこの要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "既存のバックアッププランのルールに、別リージョンのバックアップボールトへのコピーの設定を追加する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_056": {
+  "file": "SOA-C03_orig_b3.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "信頼性とビジネス継続性",
+  "level": "hard",
+  "question": "ある企業がAuto Scaling グループの Amazon EC2 インスタンスでバッチ処理ワーカーを運用しています。スケールイン時にインスタンスが即座に終了されるため、処理中のジョブが中断され、ローカルディスク上の処理結果ファイルも失われることがあります。同社は、スケールインでインスタンスが終了される前に、実行中のジョブを完了させて結果ファイルを Amazon S3 にアップロードする処理を実行させたいと考えています。この要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Auto Scaling グループに終了時のライフサイクルフックを設定し、インスタンスを Terminating:Wait 状態に保留させて、その間にジョブの完了と S3 へのアップロードを実行してから終了を続行させる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_057": {
+  "file": "SOA-C03_orig_b3.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "信頼性とビジネス継続性",
+  "level": "medium",
+  "question": "ある企業が重要な業務データを Amazon DynamoDB テーブルに保存しています。データ保護の要件は 2 つあります。第一に、誤操作によるデータ破損が起きた場合に、直近 35 日以内の任意の時点の状態へ復元できること。第二に、月次のバックアップを規制対応のために 7 年間保持することです。これらの要件を満たすアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "テーブルでポイントインタイムリカバリ (PITR) を有効化する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "AWS Backup のバックアッププランで月次バックアップを作成し、保持期間を 7 年に設定する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_058": {
+  "file": "SOA-C03_orig_b3.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ、プロビジョニング、自動化",
+  "level": "medium",
+  "question": "ある企業では、本番インフラストラクチャをすべて AWS CloudFormation で管理する方針ですが、先日の障害対応時に、誰かがセキュリティグループのルールをコンソールから直接変更した可能性が浮上しました。CloudOps エンジニアは、スタックが管理するリソースの実際の設定がテンプレートの定義から逸脱していないかを確認し、逸脱している場合はどのプロパティが異なるのかを特定する必要があります。この要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "スタックに対してドリフト検出を実行し、各リソースのドリフトステータスと差分の詳細を確認する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_059": {
+  "file": "SOA-C03_orig_b3.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ、プロビジョニング、自動化",
+  "level": "medium",
+  "question": "ある企業の一次対応チームは、特定の障害の際に「対象の Amazon EC2 インスタンスの EBS スナップショットを取得してからインスタンスを再起動する」という定型復旧手順を実施しています。現在は熟練エンジニアが AWS CLI で手作業しており、深夜対応の遅れや手順ミスが課題です。一次対応チームには EC2 への広範な権限を与えずに、この手順を標準化された方法で実行させたいと考えています。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "スナップショット取得と再起動の手順を AWS Systems Manager Automation ランブックとして定義し、一次対応チームにはそのランブックの実行権限のみを付与する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_060": {
+  "file": "SOA-C03_orig_b3.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ、プロビジョニング、自動化",
+  "level": "hard",
+  "question": "ある企業のセキュリティポリシーでは、すべての Amazon EC2 インスタンスで監視エージェントが常に実行されていることが求められています。しかし、トラブルシューティングの際に担当者がエージェントを停止したまま戻し忘れるケースが繰り返し発生しています。同社は、エージェントの構成が定義された状態から逸脱した場合に、自動的に定義どおりの状態へ戻す仕組みを導入したいと考えています。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Systems Manager State Manager でエージェントのインストールと起動を定義した関連付け (association) を作成し、スケジュールに基づいて対象インスタンスへ繰り返し適用する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_061": {
+  "file": "SOA-C03_orig_b4.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ネットワークとコンテンツ配信",
+  "level": "hard",
+  "question": "ある企業が Application Load Balancer (ALB) の背後にある Amazon EC2 インスタンスでレポート生成 API を運用しています。大量データのレポートを要求するリクエストでは、クライアントが常におよそ 60 秒後に HTTP 504 (Gateway Timeout) を受け取ります。ターゲットインスタンス上のアプリケーションログを確認すると、該当リクエストは 90 秒前後で正常にレスポンスを生成し終えており、エラーは記録されていません。ターゲットグループのヘルスチェックもすべて healthy です。この問題を解決するには、CloudOps エンジニアは何をすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ALB のアイドルタイムアウト属性を、アプリケーションの処理時間より長い値 (たとえば 120 秒) に引き上げる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_062": {
+  "file": "SOA-C03_orig_b4.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ネットワークとコンテンツ配信",
+  "level": "medium",
+  "question": "ある企業が Amazon Route 53 のパブリックホストゾーンで example.com を管理しています。CloudOps エンジニアは、ゾーン頂点 (Zone Apex) である example.com への HTTP リクエストを、新しく作成した Application Load Balancer (ALB) へルーティングする必要があります。ALB のノードの IP アドレスは動的に変化するため、固定の IP アドレスに依存しない構成が必要です。この要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "example.com に対して、ALB をターゲットとするエイリアス (Alias) レコードを作成する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_063": {
+  "file": "SOA-C03_orig_b4.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ネットワークとコンテンツ配信",
+  "level": "hard",
+  "question": "ある企業が Amazon S3 バケットに保存した静的コンテンツを Amazon CloudFront で配信しています。セキュリティレビューにより、利用者が S3 のオブジェクト URL に直接アクセスしてコンテンツを取得できてしまう点が問題として指摘されました。同社は、コンテンツへのアクセスを CloudFront ディストリビューション経由に限定し、S3 へのパブリックアクセスは一切許可しない構成にする必要があります。この要件を満たすアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "オリジンアクセスコントロール (OAC) を作成し、CloudFront ディストリビューションの S3 オリジンに関連付ける。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "S3 バケットポリシーで、cloudfront.amazonaws.com サービスプリンシパルからの s3:GetObject を、該当ディストリビューションの ARN を条件として許可し、ブロックパブリックアクセスは有効のままにする。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_064": {
+  "file": "SOA-C03_orig_b4.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ネットワークとコンテンツ配信",
+  "level": "hard",
+  "question": "ある企業には VPC A、VPC B、VPC C の 3 つの VPC があり、CIDR は重複していません。VPC A と VPC B の間、および VPC B と VPC C の間には VPC ピア接続が確立されており、それぞれのペアでは相互に通信できます。しかし、VPC A のインスタンスから VPC C のインスタンスへは通信できません。両者のルートテーブルとセキュリティグループを確認しましたが、VPC A から VPC C への経路に関する設定は存在しませんでした。この状況の原因と対処として正しいものはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "VPC ピア接続は推移的ではないため、VPC A と VPC C の間に新たなピア接続を作成し、両 VPC のルートテーブルに相手の CIDR 宛のルートを追加する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_065": {
+  "file": "SOA-C03_orig_b4.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ネットワークとコンテンツ配信",
+  "level": "hard",
+  "question": "ある企業のセキュリティポリシーにより、プライベートサブネットの Amazon EC2 インスタンスからインターネットへのアウトバウンド通信が全面的に禁止され、NAT ゲートウェイが削除されました。その後、CloudOps エンジニアが AWS Systems Manager Session Manager でこれらのインスタンスに接続しようとしたところ、インスタンスがマネージドノードとして表示されなくなりました。インスタンスには SSM Agent がインストールされ、AmazonSSMManagedInstanceCore ポリシーを含む IAM インスタンスプロファイルもアタッチされています。インターネット経由の通信を追加せずに Session Manager を利用できるようにするには、どのアクションの組み合わせが必要ですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "VPC に com.amazonaws.<region>.ssm、com.amazonaws.<region>.ssmmessages、com.amazonaws.<region>.ec2messages の 3 つのインターフェイス VPC エンドポイントを作成する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "エンドポイントでプライベート DNS を有効にし、エンドポイントのセキュリティグループでインスタンスのサブネットからの TCP 443 インバウンドを許可する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_066": {
+  "file": "SOA-C03_orig_b4.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ネットワークとコンテンツ配信",
+  "level": "medium",
+  "question": "ある企業の VPC 内で、アプリケーションサブネットの Amazon EC2 インスタンスからデータベースサブネットのインスタンスへの TCP 接続がタイムアウトします。CloudOps エンジニアは、通信がセキュリティグループとネットワーク ACL のどちらで、どの方向において拒否されているのかを実際のトラフィックの記録から切り分ける必要があります。この目的に最も適した方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "VPC フローログを有効にして対象の ENI のレコードを収集し、ACCEPT と REJECT の記録を送信元・送信先と方向ごとに確認する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_067": {
+  "file": "SOA-C03_orig_b4.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ネットワークとコンテンツ配信",
+  "level": "medium",
+  "question": "ある企業が、HTTP を使用しない独自の TCP プロトコルで通信するレガシーな取引システムを AWS へ移行しています。要件は次のとおりです。(1) 取引先のファイアウォールで許可リストに登録するため、エンドポイントに固定の IP アドレスが必要である。(2) アプリケーションが接続元の判定にクライアントの送信元 IP アドレスをそのまま利用している。(3) 極めて低いレイテンシーが求められる。これらの要件を満たす負荷分散の構成はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Network Load Balancer を作成し、各アベイラビリティーゾーンのサブネットに Elastic IP アドレスを割り当てる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_068": {
+  "file": "SOA-C03_orig_b4.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ネットワークとコンテンツ配信",
+  "level": "hard",
+  "question": "ある企業は 30 個の VPC を運用しており、業務要件により大半の VPC 同士が相互に通信する必要があります。現在は VPC ピア接続を個別に作成して対応していますが、接続数とルートテーブルのエントリが増え続け、管理が破綻しかけています。さらに、オンプレミスのデータセンターからの AWS Site-to-Site VPN 接続も、すべての VPC から到達できるようにする必要があります。運用上のオーバーヘッドを最小限に抑えてこれらの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Transit Gateway を作成し、各 VPC と Site-to-Site VPN 接続をアタッチして、Transit Gateway のルートテーブルで通信を制御する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_069": {
+  "file": "SOA-C03_orig_b4.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ネットワークとコンテンツ配信",
+  "level": "hard",
+  "question": "ある企業が、社内サービスの名前解決のために Amazon Route 53 のプライベートホストゾーン internal.example.com を作成し、対象の VPC に関連付けました。しかし、その VPC 内の Amazon EC2 インスタンスから db.internal.example.com を名前解決しようとすると NXDOMAIN が返されます。ホストゾーンにはレコードが正しく作成されており、インスタンスは Amazon 提供の DNS サーバーを使用するよう構成されています。この VPC は数年前に AWS CLI で作成されたものです。この問題を解決するために必要なアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "VPC の enableDnsSupport 属性を有効にする。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "VPC の enableDnsHostnames 属性を有効にする。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_070": {
+  "file": "SOA-C03_orig_b4.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ネットワークとコンテンツ配信",
+  "level": "medium",
+  "question": "ある企業が Application Load Balancer (ALB) と Auto Scaling グループで社内の申請システムを運用しています。このアプリケーションはログインセッションの情報を各インスタンスのメモリ上に保持しており、利用者が申請画面を操作している途中で突然ログイン画面に戻される事象が多発しています。アプリケーションの改修には数か月を要するため、まずは構成変更で暫定的に事象を解消する必要があります。この要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ターゲットグループでスティッキーセッション (期間ベースの Cookie) を有効にして、同一クライアントのリクエストを同じターゲットに送る。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_071": {
+  "file": "SOA-C03_orig_b4.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ネットワークとコンテンツ配信",
+  "level": "hard",
+  "question": "ある企業が Amazon CloudFront で画像コンテンツを配信していますが、オリジンへのリクエスト数が想定より大幅に多く、キャッシュヒット率が 20% 程度にとどまっています。調査の結果、マーケティングチームがすべてのリンクに utm_source や utm_campaign といったトラッキング用のクエリ文字列を付与しており、CloudFront のキャッシュポリシーがすべてのクエリ文字列をキャッシュキーに含める設定になっていることが分かりました。返却される画像自体はこれらのパラメータの値によって変化しません。キャッシュヒット率を改善するには、CloudOps エンジニアは何をすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "キャッシュポリシーを変更し、キャッシュキーに含めるクエリ文字列を、コンテンツの出し分けに実際に必要なパラメータだけに限定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_072": {
+  "file": "SOA-C03_orig_b4.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "hard",
+  "question": "ある企業は AWS Organizations ですべての機能を有効化して複数のアカウントを管理しています。CloudOps エンジニアは、あるメンバーアカウントで AdministratorAccess ポリシーがアタッチされた IAM ロールを引き受けて作業していますが、AWS CloudTrail の証跡のログ記録を停止しようとすると操作が拒否されます。エラーメッセージには、サービスコントロールポリシー (SCP) による明示的な拒否が原因である旨が示されています。この状況に対する適切な理解と対処はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "SCP による明示的な拒否はメンバーアカウント内のどの IAM ポリシーよりも優先されるため、管理アカウントで当該アカウントまたは所属 OU に適用されている SCP を確認し、必要であれば組織のポリシーとして例外を設計する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_073": {
+  "file": "SOA-C03_orig_b4.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "hard",
+  "question": "ある企業の開発アカウントでは、開発者が動作確認のために 0.0.0.0/0 からの TCP ポート 22 を許可するセキュリティグループルールを繰り返し追加してしまいます。セキュリティチームは、このようなルールが追加された場合に、人手を介さずに検出して該当ルールを自動的に削除する仕組みを導入したいと考えています。運用上のオーバーヘッドを最小限に抑えてこの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Config のマネージドルール (restricted-ssh) を有効化し、非準拠と評価されたリソースに対する自動修復アクションとして AWS Systems Manager Automation ランブックを関連付ける。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_074": {
+  "file": "SOA-C03_orig_b4.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "hard",
+  "question": "ある企業が、外部監査法人が保有する別の AWS アカウントに対して、Amazon RDS の DB スナップショットを共有するよう求められました。対象のスナップショットは手動で作成されたものですが、既定の AWS 管理キー (aws/rds) で暗号化されています。CloudOps エンジニアがコンソールでスナップショットの共有を試みたところ、他のアカウントへの共有を設定できませんでした。この要件を満たすために CloudOps エンジニアは何をすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "カスタマー管理の AWS KMS キーで暗号化したスナップショットのコピーを作成し、その KMS キーのキーポリシーで監査法人のアカウントに復号を許可したうえで、コピーしたスナップショットを共有する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_075": {
+  "file": "SOA-C03_orig_b4.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "medium",
+  "question": "ある企業のセキュリティチームは、AWS 環境における脅威を継続的に検出したいと考えています。具体的には、既知の悪意ある IP アドレスとの通信、Amazon EC2 インスタンス上での暗号通貨マイニングの兆候、通常と異なる場所からの異常な API 呼び出しなどを検知することが目的です。エージェントの導入やログ収集基盤の構築を行わずにこの要件を満たすサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon GuardDuty を有効化する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_076": {
+  "file": "SOA-C03_orig_b4.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "hard",
+  "question": "ある金融機関の規制要件により、取引の監査ログを Amazon S3 に 7 年間保管し、その期間中は AWS アカウントのルートユーザーを含む誰も、オブジェクトを削除または上書きできないようにする必要があります。この要件を満たすアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "対象の S3 バケットで S3 バージョニングを有効にする。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "S3 Object Lock をコンプライアンスモードで有効にし、7 年間の保持期間を設定する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_077": {
+  "file": "SOA-C03_orig_b4.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "medium",
+  "question": "ある企業のセキュリティチームは、自社のアカウント内にある Amazon S3 バケット、IAM ロール、AWS KMS キー、Amazon SQS キューなどのリソースのうち、リソースベースのポリシーによって組織の外部のエンティティ (外部の AWS アカウント、フェデレーティッドユーザー、匿名ユーザーなど) にアクセスを許可しているものを洗い出す必要があります。この要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "IAM Access Analyzer で外部アクセスアナライザーを作成し、信頼ゾーンの外部からアクセス可能なリソースの検出結果を確認する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_078": {
+  "file": "SOA-C03_orig_b4.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "hard",
+  "question": "ある企業は AWS Organizations で 40 の AWS アカウントを管理しています。監査部門からの要求は次の 2 点です。(1) 組織内のすべてのアカウントとリージョンの API アクティビティを、単一の中央 Amazon S3 バケットに継続的に収集すること。(2) 収集されたログファイルが保存後に改ざんされていないことを検証できるようにすること。運用上のオーバーヘッドを最小限に抑えてこれらの要件を満たすアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "管理アカウントまたは委任された管理者アカウントで組織の証跡 (organization trail) を作成し、全リージョンを対象として中央の S3 バケットへログを配信する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "証跡でログファイルの整合性検証を有効にし、CloudTrail が出力するダイジェストファイルを用いてログファイルの改ざんの有無を検証する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_079": {
+  "file": "SOA-C03_orig_b4.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "medium",
+  "question": "ある企業では Amazon GuardDuty、Amazon Inspector、Amazon Macie、AWS Config を有効化していますが、検出結果がそれぞれのコンソールに分散しており、セキュリティチームは全体像の把握と優先順位付けに苦労しています。同社は、これらの検出結果を単一のビューに集約し、業界標準のセキュリティベストプラクティスに対する準拠状況もあわせて確認したいと考えています。運用上のオーバーヘッドを最小限に抑えてこの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Security Hub を有効化し、各サービスとの統合を有効にして検出結果を集約し、セキュリティ標準による自動チェックを実行する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_080": {
+  "file": "SOA-C03_orig_b4.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "hard",
+  "question": "ある企業では、監査用アカウントの IAM ユーザーが、本番アカウントに作成された読み取り専用の IAM ロールを引き受けて調査作業を行う運用を計画しています。本番アカウントの CloudOps エンジニアはこのロールを作成し、ReadOnlyAccess ポリシーをアタッチしました。しかし監査用アカウントのユーザーが sts:AssumeRole を実行すると、AccessDenied エラーが返されます。この問題を解決するために必要な設定はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "本番アカウントのロールの信頼ポリシーで監査用アカウント (またはその IAM ユーザー) をプリンシパルとして sts:AssumeRole を許可し、あわせて監査用アカウント側で当該ユーザーに対象ロールへの sts:AssumeRole を許可する ID ベースのポリシーを付与する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_081": {
+  "file": "SOA-C03_orig_b5.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリング、ロギング、分析、修復、パフォーマンスの最適化",
+  "level": "hard",
+  "question": "ある企業の利用者から、Application Load Balancer (ALB) 経由で公開している Web アプリケーションで HTTP 502 と 503 のエラーが断続的に返されるという報告がありました。CloudOps エンジニアが Amazon CloudWatch を確認したところ、HTTPCode_ELB_5XX_Count は明確に増加している一方で、HTTPCode_Target_5XX_Count はほぼゼロのまま推移しています。この観測結果から導かれる調査の方向性として最も適切なものはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "エラーはロードバランサー自身が生成しているため、ターゲットグループに正常なターゲットが存在するか、ターゲットへの接続が確立できているか (セキュリティグループ、ポート、ターゲットの応答) を調査する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_082": {
+  "file": "SOA-C03_orig_b5.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリング、ロギング、分析、修復、パフォーマンスの最適化",
+  "level": "hard",
+  "question": "ある企業は AWS Organizations で 50 の AWS アカウントを運用しており、アプリケーションはアカウントをまたいで配置されています。運用チームは専用の監視用アカウントを持っており、そこから各アカウントの Amazon CloudWatch のメトリクスとロググループを横断的に検索・可視化し、単一のダッシュボードに表示したいと考えています。カスタムのデータ転送処理を作らずにこの要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "CloudWatch のクロスアカウントオブザーバビリティを構成し、運用チームのアカウントをモニタリングアカウント、他のアカウントをソースアカウントとしてリンクする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_083": {
+  "file": "SOA-C03_orig_b5.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリング、ロギング、分析、修復、パフォーマンスの最適化",
+  "level": "medium",
+  "question": "ある企業の経営層から、Amazon EC2 の費用が実際の利用状況に対して過大ではないかという指摘がありました。CloudOps エンジニアは、各インスタンスの過去の CPU、メモリ、ネットワーク、ディスクの使用実績に基づいて、より適切なインスタンスタイプとサイズの推奨を機械的に取得したいと考えています。この目的に最も適した AWS のサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Compute Optimizer を有効化して EC2 インスタンスの推奨事項を確認する。メモリの評価には CloudWatch エージェントによるメモリメトリクスの収集を併用する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_084": {
+  "file": "SOA-C03_orig_b5.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリング、ロギング、分析、修復、パフォーマンスの最適化",
+  "level": "medium",
+  "question": "ある企業の AWS 利用形態は 2 種類に分かれています。1 つは 24 時間 365 日稼働しており今後 1 年以上の継続が確実な基幹アプリケーションの Amazon EC2 インスタンス群、もう 1 つは 1 日数回、任意のタイミングで実行される中断可能な動画エンコード処理です。エンコード処理は中断されても自動的に再実行できるよう設計されています。可用性の要件を損なわずに EC2 の総コストを削減するには、どのアクションの組み合わせが最も効果的ですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "基幹アプリケーションの常時稼働分に相当するコンピューティング使用量に対して Compute Savings Plans を購入する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "中断可能な動画エンコード処理を Amazon EC2 スポットインスタンスで実行する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_085": {
+  "file": "SOA-C03_orig_b5.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリング、ロギング、分析、修復、パフォーマンスの最適化",
+  "level": "hard",
+  "question": "ある企業のアプリケーションは、処理したリクエストの総数とエラーの発生件数を、それぞれ別のカスタムメトリクスとして Amazon CloudWatch に発行しています。運用チームは「エラー件数がリクエスト総数の 5% を超えた場合」に通知を受け取りたいと考えています。トラフィック量は時間帯によって数十倍の差があるため、エラー件数そのものに固定のしきい値を設定する方法では適切に検知できません。追加のコードを開発せずにこの要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "CloudWatch のメトリクスマス (metric math) で、エラー件数をリクエスト総数で割って 100 を掛ける式を定義し、その式の結果に対して CloudWatch アラームを作成する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_086": {
+  "file": "SOA-C03_orig_b5.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリング、ロギング、分析、修復、パフォーマンスの最適化",
+  "level": "medium",
+  "question": "ある企業のアプリケーションは、Amazon API Gateway、複数の AWS Lambda 関数、Amazon DynamoDB、および外部の HTTP API から構成されるマイクロサービスアーキテクチャです。利用者から一部のリクエストの応答が非常に遅いという報告がありますが、どのコンポーネントで時間を消費しているのかが分かりません。個々のリクエストが通過した経路と各区間の所要時間を可視化するには、どのサービスを使用すべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS X-Ray を有効化し、サービスマップとトレースでセグメントおよびサブセグメントごとのレイテンシーを分析する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_087": {
+  "file": "SOA-C03_orig_b5.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリング、ロギング、分析、修復、パフォーマンスの最適化",
+  "level": "medium",
+  "question": "ある企業では、Amazon SQS キューに投入された注文メッセージをコンシューマーアプリケーションが処理しています。先日、コンシューマー側の不具合により処理が停止し、メッセージが数時間にわたって滞留していたことに気づくのが遅れました。運用チームは、メッセージが一定時間以上処理されずに残っている状態を早期に検知して通知を受け取りたいと考えています。この要件に最も適したソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ApproximateAgeOfOldestMessage メトリクスに CloudWatch アラームを設定し、しきい値を超えたら Amazon SNS で通知する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_088": {
+  "file": "SOA-C03_orig_b5.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "信頼性とビジネス継続性",
+  "level": "hard",
+  "question": "ある企業が Application Load Balancer (ALB) と Auto Scaling グループで API を運用しています。スケールインやデプロイに伴ってインスタンスがターゲットグループから登録解除されるたびに、利用者に少数の接続エラーが返されるという苦情が出ています。この API のリクエストは処理完了までに最長で 60 秒かかります。処理中のリクエストを最後まで完了させてからインスタンスを切り離すには、CloudOps エンジニアは何をすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ターゲットグループの登録解除の遅延 (deregistration delay) を、最長のリクエスト処理時間を上回る値に設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_089": {
+  "file": "SOA-C03_orig_b5.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "信頼性とビジネス継続性",
+  "level": "medium",
+  "question": "ある企業のコンテンツ管理システムは、3 つのアベイラビリティーゾーンにまたがる Auto Scaling グループの Amazon EC2 インスタンス上で稼働しています。利用者がアップロードしたファイルは現在、リクエストを受け付けたインスタンスの Amazon EBS ボリュームに保存されているため、別のインスタンスに振り分けられた後続のリクエストではファイルが見つからないという問題が起きています。すべてのインスタンスが同じファイル群を POSIX 準拠のファイルシステムとして同時に読み書きできるようにするには、どうすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon EFS ファイルシステムを作成し、各アベイラビリティーゾーンにマウントターゲットを作成して、すべてのインスタンスからマウントする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_090": {
+  "file": "SOA-C03_orig_b5.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "信頼性とビジネス継続性",
+  "level": "medium",
+  "question": "ある企業が数十テラバイトの分析用データセットを Amazon S3 Standard に保存しています。データサイエンスチームによるアクセスは不規則で、数か月アクセスされないオブジェクトもあれば、突然頻繁に参照されるようになるオブジェクトもあり、アクセスパターンを事前に予測できません。また、参照時には即座にデータを取得できる必要があります。ストレージコストを最適化するために最も適した方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "オブジェクトを S3 Intelligent-Tiering ストレージクラスに保存し、アクセス頻度に応じて自動的に階層を移動させる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_091": {
+  "file": "SOA-C03_orig_b5.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "信頼性とビジネス継続性",
+  "level": "hard",
+  "question": "ある企業は、東京リージョンでカスタマー管理の AWS KMS キーによって暗号化された Amazon EBS スナップショットを取得しています。災害対策の要件により、これらのスナップショットを大阪リージョンへ定期的にコピーし、コピー先でも暗号化された状態で保持する必要があります。同一の AWS アカウント内での作業です。この要件を満たすために必要なアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "コピー先である大阪リージョンにカスタマー管理の KMS キーを作成する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "スナップショットのコピー操作で、コピー先リージョンと、そのリージョンの KMS キーを暗号化キーとして指定する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_092": {
+  "file": "SOA-C03_orig_b5.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "信頼性とビジネス継続性",
+  "level": "hard",
+  "question": "ある企業が、平均 CPU 使用率 60% を目標値とするターゲット追跡スケーリングポリシーを設定した Auto Scaling グループで Web アプリケーションを運用しています。負荷が上昇するとスケールアウトが実行されますが、新しいインスタンスが起動してアプリケーションの初期化を終える前にグループの平均 CPU 使用率が急落するため、直後にスケールインが発生し、その数分後にまたスケールアウトするという増減の繰り返し (フラッピング) が起きています。この問題を解決するには、CloudOps エンジニアは何をすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Auto Scaling グループにインスタンスのウォームアップ時間 (デフォルトインスタンスウォームアップ) を設定し、初期化が完了していないインスタンスがスケーリングの判断に使われるメトリクスの集計に含まれないようにする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_093": {
+  "file": "SOA-C03_orig_b5.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "信頼性とビジネス継続性",
+  "level": "hard",
+  "question": "ある映像制作会社が、Auto Scaling グループの Amazon EC2 インスタンスでレンダリングジョブを処理しています。ジョブは中断されても途中から再開できるよう設計されているため、コスト削減のためにスポットインスタンスの活用を検討しています。ただし、スポットの中断が一度に大量発生して処理能力が急激に失われる事態は避けたいと考えています。この要件を満たすアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Auto Scaling グループで、複数のインスタンスタイプと複数のアベイラビリティーゾーンを指定した混合インスタンスポリシーを構成し、スポットの割り当て戦略に容量最適化 (capacity-optimized) を指定する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "Auto Scaling グループでキャパシティリバランス (Capacity Rebalancing) を有効化し、中断のリスク上昇の通知を受けた時点で代替インスタンスを事前に起動させる。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_094": {
+  "file": "SOA-C03_orig_b5.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "信頼性とビジネス継続性",
+  "level": "hard",
+  "question": "ある企業の IoT アプリケーションは、プロビジョンドキャパシティモードの Amazon DynamoDB テーブルにセンサーデータを書き込んでいます。CloudWatch のメトリクスでは、テーブル全体の ConsumedWriteCapacityUnits はプロビジョニング済みキャパシティの 30% 程度にとどまっているにもかかわらず、WriteThrottleEvents が継続的に発生しています。パーティションキーには「センサーの設置国コード」が使われており、データの大半は 1 か国に集中しています。この状況を根本的に解決する方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "パーティションキーをカーディナリティの高い値 (センサー ID など) に変更するか、書き込みシャーディングによってキーの値を分散させるようにテーブル設計を見直す。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_095": {
+  "file": "SOA-C03_orig_b5.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ、プロビジョニング、自動化",
+  "level": "medium",
+  "question": "ある企業では、社内の複数チームがそれぞれ AWS CloudFormation テンプレートで Amazon EC2 インスタンスをデプロイしています。各テンプレートには社内標準のゴールデン AMI の ID がハードコードされているため、毎月新しいゴールデン AMI が発行されるたびに、すべてのテンプレートを編集してコミットし直す作業が発生しています。この繰り返し作業をなくすには、CloudOps エンジニアは何をすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "最新のゴールデン AMI の ID を AWS Systems Manager パラメータストアのパラメータに格納し、各テンプレートでは AWS::SSM::Parameter::Value<AWS::EC2::Image::Id> 型のパラメータとしてその値を参照する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_096": {
+  "file": "SOA-C03_orig_b5.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ、プロビジョニング、自動化",
+  "level": "medium",
+  "question": "ある企業が Application Load Balancer と Auto Scaling グループの Amazon EC2 インスタンス上で本番の Web アプリケーションを運用しています。新バージョンのリリース時にダウンタイムを発生させず、かつリリース後に問題が判明した場合には直ちに旧バージョンへ切り戻せるようにする必要があります。切り戻しの判断は CloudWatch アラームに基づいて自動的に行われることが望ましいと考えています。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS CodeDeploy のブルー/グリーンデプロイを構成し、新バージョンの置き換え環境へトラフィックを切り替える。デプロイに CloudWatch アラームを関連付け、アラーム発報時には自動ロールバックさせる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_097": {
+  "file": "SOA-C03_orig_b5.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ、プロビジョニング、自動化",
+  "level": "hard",
+  "question": "ある企業では、本番環境の Amazon RDS DB インスタンスとアプリケーションリソースが単一の AWS CloudFormation スタックで管理されています。過去にテンプレートの記述ミスによって DB インスタンスの置き換えが発生し、長時間のダウンタイムを招きました。同社は、今後のスタック更新において、他のリソースの更新は通常どおり許可しつつ、DB インスタンスに対する置き換えと削除だけは CloudFormation のレベルで確実に拒否したいと考えています。この要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "スタックポリシーを設定し、DB インスタンスの論理 ID を対象として Update:Replace と Update:Delete を Deny するステートメントを定義する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_098": {
+  "file": "SOA-C03_orig_b5.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ、プロビジョニング、自動化",
+  "level": "hard",
+  "question": "ある企業が AWS Elastic Beanstalk 環境で本番アプリケーションを運用しています。新バージョンのデプロイに関する要件は次のとおりです。(1) デプロイ中もサービスの処理能力を 100% 維持すること。(2) 新旧のバージョンが同時に稼働してリクエストを処理する状態を発生させないこと。(3) デプロイが失敗した場合は、既存の稼働中インスタンスに一切影響を与えずに素早く元の状態へ戻せること。これらの要件を満たすデプロイポリシーはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "イミュータブル (Immutable) デプロイポリシーを使用する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_099": {
+  "file": "SOA-C03_orig_b5.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ、プロビジョニング、自動化",
+  "level": "medium",
+  "question": "ある企業では、開発・ステージング・本番の 3 つの環境ごとに異なる設定値 (外部サービスのエンドポイント URL、機能フラグ、タイムアウト秒数など) を、AWS CloudFormation テンプレートやアプリケーションのコードに直接埋め込んで管理しています。設定値を変更するたびにコードの修正とデプロイが必要になっており、環境間での設定の食い違いも発生しています。これらの値は機密情報ではありません。設定値を一元管理して環境ごとに切り替えられるようにする、最もコスト効率のよい方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Systems Manager パラメータストアに /app/dev/、/app/staging/、/app/prod/ のような階層構造で設定値を保存し、CloudFormation やアプリケーションからパラメータ名を指定して取得する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_100": {
+  "file": "SOA-C03_orig_b5.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ、プロビジョニング、自動化",
+  "level": "hard",
+  "question": "ある企業が AWS CloudFormation スタックで Amazon EC2 インスタンスをデプロイし、ユーザーデータのスクリプトでアプリケーションの設定ファイルを配置しています。設定内容を変更したいのですが、ユーザーデータを書き換えて更新するとインスタンスが置き換えられてしまうか、既存のインスタンスではスクリプトが再実行されないため、変更が反映されません。インスタンスを置き換えることなく、スタックの更新に応じて実行中のインスタンスへ設定変更を反映させるには、どうすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "設定内容を AWS::CloudFormation::Init メタデータとして定義し、インスタンス上で cfn-init を実行するとともに cfn-hup デーモンを構成して、メタデータの変更を検知したときに設定を再適用させる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_101": {
+  "file": "SOA-C03_orig_gap1.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ、プロビジョニング、自動化",
+  "level": "hard",
+  "question": "ある企業は Amazon EKS のマネージドノードグループで社内 API を運用しています。CloudOps エンジニアが update-nodegroup-version で新しい AMI リリースバージョンへの更新を実行したところ、新しいノードは Ready になったものの、しばらくして更新が PodEvictionFailure エラーで失敗しました。調査すると、対象ノードでは replicas を 1 に設定した Deployment が稼働しており、その Pod には minAvailable を 1 とする PodDisruptionBudget (PDB) が適用されていました。恒久的な対処として最も適切なものはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Deployment の replicas を 2 以上に増やしたうえで、PDB の minAvailable が全レプリカ数を下回るように設定し直す。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_102": {
+  "file": "SOA-C03_orig_gap1.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ネットワークとコンテンツ配信",
+  "level": "hard",
+  "question": "ある企業の Amazon EKS クラスターは、m5.large のマネージドノード 6 台で構成され、Amazon VPC CNI プラグインを使用しています。新しい Deployment をスケールしたところ、Pod が Pending のまま「0/6 nodes are available: 6 Too many pods」というイベントを出し続けます。ノードの CPU 使用率は 30%、メモリ使用率は 40% にとどまり、ノードが配置されているサブネットには 3,000 以上の未使用 IP アドレスが残っています。ノードのインスタンスタイプを変えずに 1 ノードあたりの Pod 数を増やす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "VPC CNI プラグインでプレフィックス委譲 (IP プレフィックスの割り当て) を有効にし、その設定を適用した新しいノードグループを作成して Pod を移行する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_103": {
+  "file": "SOA-C03_orig_gap1.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ、プロビジョニング、自動化",
+  "level": "medium",
+  "question": "ある企業は、AWS Fargate 上の Amazon ECS サービス (ローリングアップデートのデプロイコントローラー) で社内ポータルを運用しています。先週、設定ファイルの不備を含むコンテナイメージをデプロイしたところ、新しいタスクが起動直後に異常終了し続けました。ECS は新しいタスクの起動を繰り返し、担当者が気づくまで 40 分間デプロイが滞留しました。CloudOps エンジニアは、同種の失敗を自動的に直前の正常なデプロイへ戻し、かつ失敗の発生を運用チームへ即座に通知する必要があります。行うべき対応を 2 つ選択してください。",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ECS サービスのデプロイサーキットブレーカーを有効にし、ロールバックのオプションも有効にする。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "eventName が SERVICE_DEPLOYMENT_FAILED のサービスデプロイ状態変更イベントに一致する Amazon EventBridge ルールを作成し、Amazon SNS トピックへ通知する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_104": {
+  "file": "SOA-C03_orig_gap1.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ、プロビジョニング、自動化",
+  "level": "hard",
+  "question": "ある研究機関は、GPU インスタンスを必要とする画像解析ジョブを Amazon ECS on EC2 のクラスターで実行しています。ジョブが集中するとタスクが PROVISIONING のまま滞留し、「利用可能なコンテナインスタンスがメモリ要件を満たさない」という理由で配置に失敗します。一方、ジョブがない夜間も EC2 インスタンスが起動したままで無駄が生じています。ライセンスの都合で AWS Fargate は利用できません。CloudOps エンジニアが運用負荷を最小限に抑えつつ、需要に応じて EC2 容量を増減させる方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "GPU インスタンスの Auto Scaling グループを Amazon ECS のキャパシティープロバイダーとして登録し、マネージドスケーリングを有効にしてターゲットキャパシティーを設定する。サービスとタスクではキャパシティープロバイダー戦略を指定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_105": {
+  "file": "SOA-C03_orig_gap1.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "信頼性とビジネス継続性",
+  "level": "medium",
+  "question": "ある企業の Web アプリケーションは、Application Load Balancer (ALB) の背後にある EC2 Auto Scaling グループで稼働しています。現在はターゲット追跡スケーリングポリシーで ASGAverageCPUUtilization を 60% に維持する設定です。しかしこのアプリケーションは外部 API の応答待ちが処理時間の大半を占めるため、リクエストが増えても CPU 使用率は 40% を超えず、スケールアウトが発生しないまま応答時間だけが悪化します。負荷試験では、1 台あたり同時 1,000 リクエストを超えると応答時間が急激に悪化することが分かっています。最も適切な対処はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ALBRequestCountPerTarget を事前定義メトリクスとするターゲット追跡スケーリングポリシーを作成し、目標値を 1,000 に設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_106": {
+  "file": "SOA-C03_orig_gap1.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ、プロビジョニング、自動化",
+  "level": "hard",
+  "question": "ある企業の EC2 Auto Scaling グループでは、インスタンスの起動時に構成管理サーバーへの登録と 20 GB のリファレンスデータの取得が必要で、この処理に約 8 分かかります。またスケールイン時には、インスタンス上のジョブキューを退避してから終了する必要があります。現在は起動直後にインスタンスが InService となってエラー応答を返し、スケールイン時には退避前に終了されてジョブが失われています。CloudOps エンジニアがこれらを解決する方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Auto Scaling グループに EC2_INSTANCE_LAUNCHING と EC2_INSTANCE_TERMINATING のライフサイクルフックを追加し、EventBridge で受け取ったイベントから処理を実行して、完了時に CompleteLifecycleAction を呼び出す。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_107": {
+  "file": "SOA-C03_orig_gap1.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "hard",
+  "question": "ある企業は AWS Organizations で 80 のアカウントを管理しています。監査の結果、あるチームが AWS Resource Access Manager (AWS RAM) で組織外の AWS アカウントに対してサブネットを共有していたことが判明しました。セキュリティ部門は、組織内のどのアカウントからも、組織外のプリンシパルを許可するリソース共有を新規に作成できないようにしたいと考えています。組織内のアカウント間の共有は従来どおり継続できる必要があります。最も適切な対応はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "サービスコントロールポリシー (SCP) を作成し、ram:RequestedAllowsExternalPrincipals が true の場合に ram:CreateResourceShare を Deny する条件を設定して、ルート組織単位に適用する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_108": {
+  "file": "SOA-C03_orig_gap1.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ネットワークとコンテンツ配信",
+  "level": "hard",
+  "question": "ある企業のネットワークアカウントは、AWS RAM を使って共有 VPC のプライベートサブネットを 5 つのアプリケーションアカウントへ共有しています。アプリケーションチームは共有サブネットに EC2 インスタンスを起動できていますが、外部 API を呼び出すための NAT ゲートウェイを自分のアカウントで作成しようとして失敗し、既定のセキュリティグループを指定したインスタンスの起動も拒否されました。CloudOps エンジニアが状況を正しく整理した記述はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "NAT ゲートウェイとルートテーブルは VPC 所有者だけが作成・管理できるため、ネットワークアカウントで作成してルートを設定する。参加者は自分で作成したセキュリティグループを使ってインスタンスを起動する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_109": {
+  "file": "SOA-C03_orig_gap1.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "medium",
+  "question": "ある企業は、データベースの認証情報を AWS Systems Manager Parameter Store に SecureString 型で保存し、暗号化にはカスタマー管理の AWS KMS キーを使用しています。アプリケーションは EC2 インスタンスプロファイルの認証情報で GetParameter を WithDecryption 付きで呼び出しますが、AccessDeniedException が返されます。インスタンスプロファイルのロールには ssm:GetParameter が対象パラメータに対して許可されており、暗号化されていない String 型のパラメータは同じロールで問題なく取得できています。原因として最も可能性が高いものはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "インスタンスプロファイルのロールに、暗号化に使用しているカスタマー管理キーに対する kms:Decrypt が許可されていない。またはそのキーのキーポリシーがロールからの利用を許可していない。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_110": {
+  "file": "SOA-C03_orig_gap1.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "デプロイ、プロビジョニング、自動化",
+  "level": "hard",
+  "question": "ある企業は、CloudFormation テンプレートからアプリケーション設定を AWS Systems Manager Parameter Store へ大量に登録しています。現在 9,200 個のパラメータがあり、今後 3 か月で 15,000 個まで増える見込みです。さらに、一部の設定値は JSON 形式で 6 KB あり、一時的な認証情報を保存するパラメータには 15 日後に自動的に期限切れとなるパラメータポリシーを適用したいという要求があります。財務部門からは、追加料金の対象となるパラメータを必要最小限に留めるよう求められています。CloudOps エンジニアが取るべき対応はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "アカウントとリージョンの既定のパラメータティアを Intelligent-Tiering に設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_111": {
+  "file": "SOA-C03_orig_gap1.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ネットワークとコンテンツ配信",
+  "level": "medium",
+  "question": "ある企業のバッチ処理は、インターネットゲートウェイを持たない VPC のプライベートサブネットで稼働する EC2 インスタンス群から、Amazon SQS と AWS Systems Manager を大量に呼び出しています。現在は NAT ゲートウェイ経由で通信しており、月間 40 TB のデータ処理料金が問題になっています。CloudOps エンジニアは、これらの API 呼び出しを AWS のネットワーク内に閉じてコストを削減し、さらに自社の AWS Organizations に属するアカウントのプリンシパルからの利用だけを許可する必要があります。最も適切な構成はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon SQS と Systems Manager のインターフェイス VPC エンドポイントを作成してプライベート DNS を有効にし、各エンドポイントのエンドポイントポリシーで aws:PrincipalOrgID を条件に自社組織のプリンシパルのみを許可する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_112": {
+  "file": "SOA-C03_orig_gap1.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ネットワークとコンテンツ配信",
+  "level": "hard",
+  "question": "ある SaaS 事業者は、Network Load Balancer を背後に持つ VPC エンドポイントサービスを公開し、顧客が AWS PrivateLink 経由で自社サービスを利用できるようにしました。顧客の既存アプリケーションは、これまでインターネット経由で https://api.example.com を呼び出しています。事業者は、顧客がアプリケーションのコードや設定を一切変更せずに、同じホスト名のままインターフェイスエンドポイント経由でアクセスできるようにしたいと考えています。CloudOps エンジニアが行うべき対応はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "エンドポイントサービスにプライベート DNS 名として api.example.com を設定し、指定された TXT レコードを example.com の DNS に追加してドメインの所有権を検証する。顧客はインターフェイスエンドポイントの作成時にプライベート DNS を有効にする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_113": {
+  "file": "SOA-C03_orig_gap1.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "hard",
+  "question": "ある金融機関の監査部門は、本番タグが付いたすべてのリソースについて、(1) いずれかのバックアッププランに含まれていること、(2) 復旧ポイントの保持期間が 35 日以上であること、(3) 別リージョンへのバックアップコピーが設定されていること、を継続的に評価し、その結果を毎日 CSV 形式の証跡として Amazon S3 に残すよう求めています。CloudOps エンジニアが AWS Backup を使ってこれを実現する手順として正しいものはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "リソース追跡を有効にして AWS Config で AWS Backup のリソースタイプを記録し、3 つのコントロールを含むフレームワークを作成する。そのフレームワークを対象とするコンプライアンスレポートのレポートプランを作成し、配信先の S3 バケットを指定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_114": {
+  "file": "SOA-C03_orig_gap1.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "信頼性とビジネス継続性",
+  "level": "hard",
+  "question": "ある企業の事業継続計画では、基幹の Amazon DynamoDB テーブルの目標復旧時間 (RTO) を 4 時間と定めています。内部監査から「復旧が実際に RTO 以内で完了することを定期的に実証し、その結果を継続的に評価できる形で残すこと」を求められました。CloudOps エンジニアは AWS Backup を使ってこれに対応します。最も適切な構成はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Backup の復元テストプランを作成して定期的に復元テストジョブを実行し、AWS Backup Audit Manager のフレームワークに「リソースの復元時間が目標を満たす」コントロールを目標 240 分で追加する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_115": {
+  "file": "SOA-C03_orig_gap1.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "セキュリティとコンプライアンス",
+  "level": "hard",
+  "question": "ある企業は Amazon SES から notify@example.com を差出人として取引通知メールを送信しています。ドメイン example.com には DMARC のポリシーレコード (p=reject) を公開していますが、大手メールプロバイダーで DMARC 検証に失敗して配信されない事例が報告されました。確認したところ、MAIL FROM ドメインは SES 既定の amazonses.com のサブドメインのままで、DKIM の設定も行われていませんでした。DMARC の検証を通過させるために有効な対応を 2 つ選択してください。",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "example.com のサブドメイン (例: mail.example.com) をカスタム MAIL FROM ドメインとして設定し、そのサブドメインに SES が指示する MX レコードと SPF の TXT レコードを公開する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "example.com のドメイン ID で Easy DKIM を有効にし、SES が発行する CNAME レコードを example.com の DNS に公開する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_116": {
+  "file": "SOA-C03_orig_gap1.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "choice",
+  "domain": "モニタリング、ロギング、分析、修復、パフォーマンスの最適化",
+  "level": "medium",
+  "question": "あるマーケティング部門は Amazon SES から月に 12 のキャンペーンメールを配信しています。バウンス率がアカウント全体で上昇傾向にあり、運用チームはどのキャンペーンがバウンスと苦情を発生させているかをキャンペーン単位で切り分けたうえで、しきい値を超えた時点でアラームを受け取り、さらに個々のバウンスイベントの明細を Amazon S3 に蓄積して分析したいと考えています。CloudOps エンジニアが取るべき対応を 2 つ選択してください。",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "キャンペーンごとに設定セットを作成し、それぞれに Amazon CloudWatch のイベント送信先を追加してバウンスと苦情のイベントを発行させ、CloudWatch アラームを設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "同じ設定セットに Amazon Data Firehose のイベント送信先を追加し、バウンスイベントの明細を S3 バケットへ配信する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "SOA-C03_orig_201": {
+  "file": "mixed_orig_b1.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "matching",
+  "domain": "モニタリング、ロギング、分析、修復、パフォーマンスの最適化",
+  "level": "medium",
+  "question": "ある企業の SysOps 管理者が、Amazon EC2 上の業務システムの監視を整備しています。現在は CPU 使用率しか監視できず、メモリ不足やディスクの枯渇に気付けていません。障害時には、蓄積された大量のログイベントから該当箇所をその場で絞り込む必要もあります。あわせて、しきい値の超過が評価期間続いた場合の通知と、AWS のサービスが発行する状態変化を契機とした自動処理の起動も求められています。以下のリストから、各モニタリング要件に対する正しい AWS のサービスまたは機能を選択してください。各サービスまたは機能を 1 回以上選択しても構いません。",
+  "n_correct": null,
+  "options": []
+ },
+ "SOA-C03_orig_202": {
+  "file": "mixed_orig_b1.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "matching",
+  "domain": "信頼性とビジネス継続性",
+  "level": "medium",
+  "question": "ある企業の SysOps 管理者が、本番環境の可用性とデータ保護を見直しています。Amazon RDS では、レポート用の参照系クエリが増えて書き込み性能に影響が出ており、単一のアベイラビリティーゾーンの障害でも業務を継続できる構成も必要です。さらに、複数サービスのバックアップを共通のスケジュールと保持期間で管理すること、Amazon S3 のオブジェクトが誤って上書き・削除されても元に戻せることが要件です。以下のリストから、各可用性およびデータ保護の要件に対する正しい AWS の機能を選択してください。各機能を 1 回以上選択しても構いません。",
+  "n_correct": null,
+  "options": []
+ },
+ "SOA-C03_orig_203": {
+  "file": "mixed_orig_b1.json",
+  "exam": "SOA-C03",
+  "set": "orig",
+  "type": "matching",
+  "domain": "デプロイ、プロビジョニング、自動化",
+  "level": "medium",
+  "question": "ある SysOps 管理者が、プライベートサブネットの Amazon EC2 インスタンス群の運用を整備しています。ポリシーによりインバウンドポートの開放と踏み台サーバーの設置は禁止ですが、調査用の対話型シェルは必要です。OS のパッチは承認基準を定めて定期適用します。また、データベースの認証情報は暗号化して保管し定期的に自動更新すること、環境ごとの設定値は階層的な名前で参照することが求められています。以下のリストから、各運用タスクに対する正しい AWS のサービスまたは機能を選択してください。各サービスまたは機能を 1 回以上選択しても構いません。",
+  "n_correct": null,
+  "options": []
+ }
+}

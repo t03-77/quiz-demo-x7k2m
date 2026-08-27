@@ -1,0 +1,3474 @@
+{
+ "DEA-C01_orig_001": {
+  "file": "DEA-C01_orig.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データの取り込みと変換",
+  "level": "easy",
+  "question": "ある企業が数百台の IoT デバイスから送信されるテレメトリデータをニアリアルタイムで Amazon S3 に保存したいと考えています。データエンジニアリングチームは小規模で、ストリーミング基盤のサーバーやシャードのキャパシティ管理は行いたくありません。また、S3 に書き込む前にデータを一定サイズまたは一定時間でバッファリングしてまとめたいと考えています。運用上のオーバーヘッドを最小限に抑えてこの要件を満たすサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon Data Firehose の配信ストリームを作成し、送信先として Amazon S3 を設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_002": {
+  "file": "DEA-C01_orig.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データの取り込みと変換",
+  "level": "medium",
+  "question": "ある企業が AWS Glue の ETL ジョブを毎晩実行し、Amazon S3 の入力プレフィックスに日々追加される JSON ファイルを変換して別の S3 ロケーションに書き込んでいます。現在のジョブは実行のたびに入力プレフィックス内のすべてのファイルを再処理しており、実行時間とコストが日ごとに増加しています。データエンジニアは、各実行で前回の実行以降に追加された新しいファイルのみを処理するようにしたいと考えています。最小限の変更でこの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Glue ジョブでジョブブックマークを有効にして、処理済みデータの状態を追跡させる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_003": {
+  "file": "DEA-C01_orig.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データの取り込みと変換",
+  "level": "hard",
+  "question": "ある企業がクリックストリームデータを Amazon Kinesis Data Streams で収集しています。このストリームには 5 つの独立したコンシューマーアプリケーションが接続しており、それぞれがすべてのレコードを読み取る必要があります。最近、コンシューマーの読み取り遅延が増大し、ReadProvisionedThroughputExceeded エラーが頻発しています。調査の結果、書き込み側のスループットはシャードあたりの上限に達していないことが分かりました。読み取り遅延を解消するソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "各コンシューマーアプリケーションに拡張ファンアウト (Enhanced Fan-Out) を設定し、シャードごとに専用の読み取りスループットを割り当てる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_004": {
+  "file": "DEA-C01_orig.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データストア管理",
+  "level": "easy",
+  "question": "ある企業が Amazon S3 のデータレイクにアプリケーションログを保存しています。ログは最初の 30 日間は頻繁に分析されますが、その後はほとんどアクセスされません。ただし、コンプライアンス要件により 7 年間の保存が必要で、まれに監査対応のため数時間以内に取り出せる必要があります。ストレージコストを削減するために、データエンジニアは何をすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "S3 ライフサイクルルールを作成し、30 日後にオブジェクトを S3 Glacier Flexible Retrieval に移行して、7 年後に失効させる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_005": {
+  "file": "DEA-C01_orig.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データストア管理",
+  "level": "medium",
+  "question": "ある企業が Amazon Redshift クラスターで直近 1 年分の販売データを分析しています。5 年以上前までの過去データは Apache Parquet 形式で Amazon S3 に保存されています。アナリストは四半期に数回、過去データと直近データを結合した集計クエリを実行する必要があります。同社は、Redshift クラスターのストレージを増やさず、過去データを Redshift にロードすることなくこの要件を満たしたいと考えています。データエンジニアは何をすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Redshift Spectrum を使用して、AWS Glue データカタログに登録した S3 の過去データを外部スキーマ経由でクエリし、ローカルテーブルと結合する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_006": {
+  "file": "DEA-C01_orig.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データストア管理",
+  "level": "hard",
+  "question": "ある企業が Amazon S3 上のデータレイクに顧客マスタデータを Parquet 形式で保存し、Amazon Athena で分析しています。上流の基幹システムからは毎日、既存レコードの更新と削除を含む変更データが届きます。現在は変更を反映するためにデータセット全体を書き換えており、処理時間が長く、書き換え中のクエリ結果が不整合になることがあります。データエンジニアは、行レベルの更新・削除を ACID トランザクションとして実行でき、Athena からそのままクエリできる構成に変更したいと考えています。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "データセットを Apache Iceberg テーブル形式に移行し、AWS Glue または Athena から MERGE INTO などの DML で行レベルの更新・削除を適用する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_007": {
+  "file": "DEA-C01_orig.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ運用とサポート",
+  "level": "medium",
+  "question": "ある企業が Amazon S3 に保存された数 TB のアクセスログを Amazon Athena で分析しています。ログは gzip 圧縮された JSON 形式で単一のプレフィックスに保存されており、アナリストのクエリのほとんどは特定の日付範囲を条件に少数の列だけを参照します。しかし、クエリのたびにデータセット全体がスキャンされるため、クエリ料金が高く、実行時間も長くなっています。スキャン量を削減してコストとパフォーマンスを改善するアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "データを Apache Parquet などの列指向形式に変換して保存する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "データを日付でパーティション分割した S3 プレフィックス構成に再編成し、テーブルにパーティションを定義する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_008": {
+  "file": "DEA-C01_orig.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ運用とサポート",
+  "level": "hard",
+  "question": "ある企業が毎晩の ETL パイプラインで、上流システムから届く顧客データを AWS Glue ジョブで変換し、Amazon Redshift にロードしています。最近、上流システムの不具合により、必須列が NULL のレコードや形式不正なメールアドレスを含むデータがロードされ、下流の BI レポートに影響が出ました。データエンジニアは、ロード前にデータ品質ルールを評価し、ルール違反があった場合はロードを中止して通知する仕組みを、最小限のカスタムコードで組み込みたいと考えています。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Glue Data Quality を使用して DQDL でルールセット (完全性チェック、パターン一致など) を定義し、Glue ジョブ内で評価結果に応じて処理を中止させ、失敗イベントを Amazon EventBridge 経由で Amazon SNS に通知する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_009": {
+  "file": "DEA-C01_orig.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データセキュリティとガバナンス",
+  "level": "medium",
+  "question": "ある企業が Amazon S3 上のデータレイクを AWS Glue データカタログに登録し、複数の部門のアナリストが Amazon Athena でクエリしています。顧客テーブルには個人情報を含む列があり、マーケティング部門のアナリストには個人情報以外の列のみを参照させ、コンプライアンス部門にはすべての列を参照させる必要があります。テーブルの複製やビューの個別管理を行わずに、一元的なアクセス制御でこの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Lake Formation でデータレイクの権限管理を有効にし、マーケティング部門には列レベルの許可 (個人情報列の除外) を、コンプライアンス部門にはテーブル全体の許可を付与する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_010": {
+  "file": "DEA-C01_orig.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データセキュリティとガバナンス",
+  "level": "hard",
+  "question": "ある企業がアカウント A の Amazon S3 バケットに、カスタマーマネージド型 AWS KMS キー (SSE-KMS) で暗号化した分析データを保存しています。同じ企業のアカウント B にあるデータ分析チームの IAM ロールからこのオブジェクトを読み取ろうとすると、s3:GetObject の許可をロールに付与したにもかかわらず AccessDenied エラーが発生します。クロスアカウントでオブジェクトを読み取れるようにするために必要なアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "アカウント A のバケットポリシーに、アカウント B の IAM ロールに対して s3:GetObject を許可するステートメントを追加する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "アカウント A の KMS キーのキーポリシーに、アカウント B の IAM ロールに対して kms:Decrypt を許可するステートメントを追加する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_011": {
+  "file": "DEA-C01_orig_b2.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データの取り込みと変換",
+  "level": "hard",
+  "question": "ある企業がオンプレミスの Oracle データベースを業務システムとして利用しており、このデータを Amazon S3 のデータレイクに取り込みたいと考えています。まず既存データ全体を初回ロードし、その後は業務を止めずに発生し続ける変更 (挿入・更新・削除) を継続的に S3 へ反映する必要があります。ソースデータベースへの負荷と運用の手間を最小限に抑えたいと考えています。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS DMS のレプリケーションタスクを「既存のデータを移行して、進行中の変更をレプリケートする (フルロード + CDC)」で構成し、ターゲットを Amazon S3 に設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_012": {
+  "file": "DEA-C01_orig_b2.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データの取り込みと変換",
+  "level": "medium",
+  "question": "ある企業がプロビジョンドモードの Amazon Kinesis Data Streams に注文イベントを書き込んでいます。最近、書き込み時に ProvisionedThroughputExceededException が頻発するようになりました。調査の結果、パーティションキーに店舗 ID を使用しており、大規模店舗のレコードが特定のシャードに集中していることと、ストリーム全体の書き込み量も増加していることが分かりました。この問題を解決するアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "シャード数を増やして、ストリーム全体の書き込みスループットを引き上げる。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "パーティションキーを、レコードがシャード間でより均等に分散する高カーディナリティの値 (注文 ID など) に変更する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_013": {
+  "file": "DEA-C01_orig_b2.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データの取り込みと変換",
+  "level": "medium",
+  "question": "ある企業がアプリケーションのイベントを JSON 形式で Amazon Data Firehose に送信し、Amazon S3 に保存して Amazon Athena で分析しています。分析効率を高めるため、S3 に書き込む前にデータを Apache Parquet 形式に変換したいと考えています。データエンジニアは変換用のコードを自前で開発・運用したくありません。最小限の労力でこの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Firehose のレコード形式変換機能を有効にし、AWS Glue データカタログのテーブルスキーマを参照して JSON を Parquet に変換して配信する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_014": {
+  "file": "DEA-C01_orig_b2.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データの取り込みと変換",
+  "level": "easy",
+  "question": "ある企業がオンプレミスで Apache Kafka クラスターを運用し、多数のプロデューサーとコンシューマーのアプリケーションが Kafka のクライアントライブラリで接続しています。同社はデータ基盤を AWS に移行するにあたり、アプリケーションコードの変更を最小限に抑えつつ、ブローカーのパッチ適用やクラスター管理の負担を減らしたいと考えています。この要件を満たすサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon MSK (Amazon Managed Streaming for Apache Kafka) にクラスターを移行する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_015": {
+  "file": "DEA-C01_orig_b2.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データの取り込みと変換",
+  "level": "easy",
+  "question": "ある企業の ETL パイプラインが、毎日新しい日付のプレフィックス (例: s3://bucket/logs/dt=2026-08-25/) 配下に Amazon S3 へデータを出力しています。テーブルは AWS Glue データカタログに登録されており、アナリストは Amazon Athena でクエリしています。しかし、新しい日付のデータがカタログに反映されず、当日のデータをクエリできないという問い合わせが毎朝発生しています。運用の手間を抑えてこの問題を解決する方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Glue クローラーをデータ出力後に実行されるようにスケジュールし、新しいパーティションを自動的にカタログへ追加する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_016": {
+  "file": "DEA-C01_orig_b2.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データの取り込みと変換",
+  "level": "medium",
+  "question": "あるデータエンジニアが、毎日 Amazon S3 に届く数十 MB 程度の CSV ファイルを整形して別のプレフィックスに出力する処理を、AWS Glue の Apache Spark ジョブ (10 ワーカー) で実行しています。処理内容は列の選択と簡単な文字列整形のみで、pandas ライブラリで十分に処理できる規模です。処理を Glue 上で継続しながらコストを削減する方法として最も適切なものはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ジョブを AWS Glue の Python シェルジョブに変更し、pandas で処理を実装する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_017": {
+  "file": "DEA-C01_orig_b2.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データの取り込みと変換",
+  "level": "hard",
+  "question": "ある企業が Amazon Kinesis Data Streams のイベントを AWS Lambda 関数 (イベントソースマッピング) で処理しています。書き込みスループットはシャードあたりの上限に対して十分に余裕がありますが、1 件あたりの処理に時間がかかるため、コンシューマーの処理遅延 (イテレーター経過時間) が増大しています。コスト増加につながるシャードの追加は避けたいと考えています。パーティションキーごとの処理順序を維持したまま遅延を解消する方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "イベントソースマッピングの並列化係数 (ParallelizationFactor) を増やし、1 つのシャードを複数の Lambda 実行で並行処理させる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_018": {
+  "file": "DEA-C01_orig_b2.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データの取り込みと変換",
+  "level": "hard",
+  "question": "ある企業が Amazon Kinesis Data Streams で受信する取引イベントを、Amazon S3 上の参照データ (店舗マスタ) と結合して属性を付加し、数分以内に Parquet 形式で S3 のデータレイクに書き込みたいと考えています。変換には Apache Spark の DataFrame 操作を使いたいものの、ストリーム処理クラスターの構築や常時管理は行いたくありません。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Glue のストリーミング ETL ジョブを作成し、Kinesis をソースとしてマイクロバッチで参照データと結合し、Parquet 形式で S3 に書き込む。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_019": {
+  "file": "DEA-C01_orig_b2.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データの取り込みと変換",
+  "level": "hard",
+  "question": "ある企業が Amazon Data Firehose を使用して JSON 形式のイベントを Amazon S3 に配信しています。Amazon Athena のクエリはほぼ常に顧客 ID とイベント種別で絞り込むため、S3 のプレフィックスを「customer_id=xxx/event_type=yyy/」のようにイベントの中身に基づいて分けて配信し、パーティションプルーニングを効かせたいと考えています。後処理のジョブを追加せずにこの要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Firehose の動的パーティショニングを有効にし、JSON 内のキーからパーティションキーを抽出して S3 プレフィックスの式に指定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_020": {
+  "file": "DEA-C01_orig_b2.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データの取り込みと変換",
+  "level": "easy",
+  "question": "ある企業のマーケティングチームが、Salesforce に蓄積されている商談データを毎日 Amazon S3 のデータレイクに取り込み、分析に利用したいと考えています。開発リソースが限られているため、API 連携のコードを開発せず、スケジュール実行やフィールドのマッピングを設定ベースで構成したいと考えています。この要件を満たすサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon AppFlow のフローを作成し、Salesforce をソース、S3 を送信先としてスケジュール実行する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_021": {
+  "file": "DEA-C01_orig_b2.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データの取り込みと変換",
+  "level": "easy",
+  "question": "ある企業が、オンプレミスの NFS ファイルサーバーに蓄積される測定データを、毎週 Amazon S3 のデータレイクへ転送して分析します。サーバーには約 2,000 万個のファイルがあり、毎週の増分は 500 GB 程度です。転送は 1 Gbps の AWS Direct Connect 経由で、週末の 8 時間のメンテナンス枠内に完了させる必要があります。要件は、増分のみを転送すること、転送後にチェックサムによる整合性検証を自動で行うこと、進捗と結果を Amazon CloudWatch で確認できることです。転送スクリプトの開発や管理を避けてこの要件を満たすサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS DataSync エージェントをオンプレミスに導入し、NFS から S3 への転送タスクを週次スケジュールで実行する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_022": {
+  "file": "DEA-C01_orig_b2.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データの取り込みと変換",
+  "level": "easy",
+  "question": "ある企業がオンプレミスのストレージにある約 800 TB の過去ログデータを Amazon S3 に移行し、データレイクの初期データとして利用する計画です。データセンターのインターネット回線は 1 Gbps で、他の業務でも共有されているため転送に使える帯域は限られています。移行は 1 か月程度で完了させる必要があります。この要件を満たす移行方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Snowball Edge デバイスを複数台注文し、オフラインでデータをコピーして AWS に返送する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_023": {
+  "file": "DEA-C01_orig_b2.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データの取り込みと変換",
+  "level": "medium",
+  "question": "あるデータエンジニアが、Amazon S3 にある約 500 GB の CSV データを 1 つの巨大なファイルのまま COPY コマンドで Amazon Redshift のテーブルにロードしています。ロードには非常に長い時間がかかっており、クラスターのコンピューティングノードが十分に活用されていないことが分かりました。ロード時間を短縮するアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ファイルをほぼ均等なサイズの複数ファイルに分割し、1 回の COPY コマンドで並列ロードさせる。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "ファイルを gzip などで圧縮してから COPY でロードする。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_024": {
+  "file": "DEA-C01_orig_b2.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データの取り込みと変換",
+  "level": "hard",
+  "question": "ある企業のプロデューサーアプリケーションが、平均 200 バイト程度の小さなレコードを毎秒数万件、Amazon Kinesis Data Streams に送信しています。バイト数ベースのスループットはシャードあたりの上限に対して余裕があるにもかかわらず、シャードあたりのレコード数の上限によりスロットリングが発生しています。シャード数を増やさずにこの問題を解決する方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Kinesis Producer Library (KPL) のレコード集約 (アグリゲーション) を使用して、複数のユーザーレコードを 1 つの Kinesis レコードにまとめて送信する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_025": {
+  "file": "DEA-C01_orig_b2.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データの取り込みと変換",
+  "level": "hard",
+  "question": "ある製造業の企業が、工場のセンサーデータを Amazon Kinesis Data Streams に取り込んでいます。センサーごとに 1 分間のタンブリングウィンドウで平均値と最大値を計算し、遅れて到着するイベントもイベント時刻に基づいて正しく集計したうえで、結果を数秒以内にダッシュボード用のデータストアへ書き込む必要があります。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon Managed Service for Apache Flink のアプリケーションを作成し、イベント時間ベースのウィンドウ集計を実装してストリームを処理する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_026": {
+  "file": "DEA-C01_orig_b2.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データの取り込みと変換",
+  "level": "medium",
+  "question": "ある企業がクリックストリームの取り込み基盤を設計しています。要件は次のとおりです。リアルタイム異常検知と広告最適化という 2 つの独立したアプリケーションが同じデータをそれぞれ読み取ること、および障害時に過去 48 時間分のレコードを再読み取り (リプレイ) できることです。また、クラスターやブローカーの管理は行いたくありません。この要件を満たすサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon Kinesis Data Streams を使用し、保持期間を 48 時間以上に設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_027": {
+  "file": "DEA-C01_orig_b2.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データの取り込みと変換",
+  "level": "medium",
+  "question": "あるデータエンジニアが AWS Step Functions のステートマシンで複数の AWS Glue ジョブを順次実行する ETL パイプラインを構築しています。Glue ジョブは API の一時的なスロットリングなどの一過性のエラーで時々失敗しますが、少し待って再実行すると成功します。一過性のエラーは自動で再試行し、再試行してもなお失敗した場合のみ運用チームに通知したいと考えています。実施すべきアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Glue ジョブを実行するステートに Retry フィールドを定義し、間隔とバックオフ率を指定して自動再試行させる。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "同じステートに Catch フィールドを定義し、最終的な失敗時に Amazon SNS トピックへ発行するステートに遷移させる。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_028": {
+  "file": "DEA-C01_orig_b2.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データの取り込みと変換",
+  "level": "easy",
+  "question": "ある企業がオンプレミスのサーバーで Apache Airflow を運用し、数十個の DAG でデータパイプラインをオーケストレーションしています。Airflow サーバーの管理やバージョンアップの負担をなくすため AWS への移行を検討していますが、既存の DAG のコードはできる限りそのまま使いたいと考えています。この要件を満たすサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon Managed Workflows for Apache Airflow (MWAA) の環境を作成し、既存の DAG を移行する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_029": {
+  "file": "DEA-C01_orig_b2.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データの取り込みと変換",
+  "level": "hard",
+  "question": "ある企業が Amazon S3 バケットに保存された数百万個の小さな JSON ファイルを 1 つずつ検証・変換する処理を AWS Step Functions でオーケストレーションしたいと考えています。標準の Map ステートで実装したところ、同時実行数の制限とステートマシンに渡せるデータ量の制限により、大規模なファイル群を処理しきれないことが分かりました。大規模な並列処理を実現する方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Map ステートを分散モード (Distributed Map) に変更し、S3 バケットのオブジェクト一覧を入力ソースとして大規模並列で子ワークフローを実行する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_030": {
+  "file": "DEA-C01_orig_b2.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データの取り込みと変換",
+  "level": "easy",
+  "question": "あるデータエンジニアが、日次の ETL パイプラインとして AWS Glue のワークフローを、毎日午前 2 時 (日本標準時) に起動したいと考えています。パイプラインの所要時間は 30 分程度で、起動は 1 日 1 回だけです。要件として、スケジュール実行のためにサーバーを稼働させないこと、次の実行時刻まで待機する処理を自分で実装しないこと、待機している時間に対して料金が発生しないこと、起動に失敗した場合はデッドレターキューに記録して後から追跡できることが挙げられています。運用負荷を最小限に抑えてこの要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon EventBridge のスケジュールルール (cron 式) を作成し、Glue ワークフローを起動する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_031": {
+  "file": "DEA-C01_orig_b2.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データの取り込みと変換",
+  "level": "hard",
+  "question": "ある企業のパートナーが 1 日に数回、不定期なタイミングで Amazon S3 バケットの incoming/ プレフィックスにデータファイルをアップロードします。データエンジニアは、このプレフィックスにオブジェクトが作成されたら即座に AWS Step Functions のステートマシンを起動して検証と変換を行いたいと考えています。実施すべきアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "S3 バケットのプロパティで Amazon EventBridge へのイベント通知送信を有効にする。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "「Object Created」イベントを対象に、キーのプレフィックス条件でフィルタリングする EventBridge ルールを作成し、ターゲットにステートマシンを指定する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_032": {
+  "file": "DEA-C01_orig_b2.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データの取り込みと変換",
+  "level": "hard",
+  "question": "ある企業が Amazon RDS for MySQL 上の注文テーブルの変更 (挿入・更新・削除) をニアリアルタイムで捕捉し、不正検知とレコメンデーションという複数のストリーム処理アプリケーションに配信したいと考えています。アプリケーションはそれぞれ独立してレコードを読み取る必要があります。データベースへの負荷を抑えつつこの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS DMS の CDC タスクを構成し、ターゲットとして Amazon Kinesis Data Streams を指定して変更イベントをストリームに配信する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_033": {
+  "file": "DEA-C01_orig_b2.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データの取り込みと変換",
+  "level": "medium",
+  "question": "ある企業の日次 AWS Glue ETL ジョブ (Apache Spark) は、処理するデータ量が日によって 10 倍以上変動します。現在はピーク日に合わせて 50 ワーカーを固定で割り当てているため、データ量が少ない日には多くのワーカーがアイドル状態となりコストが無駄になっています。ジョブの構成変更のみでコストを最適化する方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ジョブで Auto Scaling を有効にし、ワーカー数の上限を設定して負荷に応じてワーカーを自動的に増減させる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_034": {
+  "file": "DEA-C01_orig_b2.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データの取り込みと変換",
+  "level": "easy",
+  "question": "あるデータエンジニアが AWS Lambda 関数で日次のデータ変換処理を実行しています。データ量の増加に伴い処理時間が延び、最近は Lambda の最大実行時間である 15 分の制限に達して処理が途中で強制終了されるようになりました。処理は今後さらに長時間化する見込みで、現在は約 1 時間かかると試算されています。この処理を確実に完了させるための最も適切な移行先はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "処理を AWS Glue ジョブに移行する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_035": {
+  "file": "DEA-C01_orig_b2.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データの取り込みと変換",
+  "level": "medium",
+  "question": "ある企業が新しいモバイルアプリのイベントを Amazon Kinesis Data Streams で収集する計画です。アプリはリリース直後で、トラフィックがどの程度になるか予測できず、キャンペーン時には急激なスパイクも見込まれます。チームはシャードのキャパシティ計画やリシャーディングの運用を行いたくありません。この要件を満たすストリームの構成はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ストリームをオンデマンドキャパシティモードで作成する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_036": {
+  "file": "DEA-C01_orig_b2.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データの取り込みと変換",
+  "level": "hard",
+  "question": "ある企業が Amazon Kinesis Data Streams に流れる IoT テレメトリデータを Amazon Redshift の分析に取り込んでいます。現在は Firehose で S3 に配信してから定期的に COPY コマンドでロードしており、データが Redshift でクエリ可能になるまで数分から十数分の遅延があります。この遅延を数秒レベルに短縮し、中間の S3 ステージングを不要にしたいと考えています。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Redshift のストリーミング取り込みを構成し、Kinesis Data Streams を参照する外部スキーマとマテリアライズドビューを作成してストリームから直接データを取り込む。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_037": {
+  "file": "DEA-C01_orig_b2.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データの取り込みと変換",
+  "level": "hard",
+  "question": "ある企業が Amazon Data Firehose でストリーミングデータを Amazon S3 に配信し、Amazon Athena で分析しています。Firehose のバッファ間隔を最小近くに設定しているため、S3 には数十 KB 程度の小さなファイルが毎日数十万個作成されており、Athena のクエリ実行時間が大幅に悪化しています。分析要件上、データ到着の遅延は 15 分程度まで許容できます。クエリパフォーマンスを改善するアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Firehose のバッファサイズとバッファ間隔を大きくして、1 ファイルあたりのサイズを増やす。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "既存の小さなファイルを定期的な AWS Glue ジョブで読み取り、大きなファイルに統合 (コンパクション) する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_038": {
+  "file": "DEA-C01_orig_b2.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データの取り込みと変換",
+  "level": "hard",
+  "question": "あるデータエンジニアが AWS Glue の ETL ジョブで、複数の上流システムから届く JSON データを DynamicFrame として読み込み、Parquet 形式で Amazon S3 に出力しています。ソースデータの「amount」フィールドはシステムによって文字列型で送られる場合と数値型で送られる場合があり、出力時に型の競合によるエラーや不正なスキーマが発生しています。ジョブ内でこの問題を解決する適切な方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "DynamicFrame の resolveChoice 変換を使用し、競合するフィールドを単一の型にキャストしてから出力する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_039": {
+  "file": "DEA-C01_orig_b2.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データの取り込みと変換",
+  "level": "medium",
+  "question": "あるデータサイエンスチームが、週に数回、数時間かかる Apache Spark のバッチ処理を実行しています。現在は処理のたびに Amazon EMR クラスター (EC2 ベース) を手動で起動・終了しており、クラスターのサイジングや終了忘れによる無駄なコストが課題です。チームは Spark のコードは変えずに、インフラのプロビジョニングと管理をなくし、ジョブ実行中のリソース使用分のみ支払いたいと考えています。この要件を満たすサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon EMR Serverless のアプリケーションに Spark ジョブを投入する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_040": {
+  "file": "DEA-C01_orig_b2.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データの取り込みと変換",
+  "level": "hard",
+  "question": "ある企業が Amazon MSK のトピックでイベントを処理しています。トピックのパーティション数は 4 で、1 つのコンシューマーグループに属する 4 つのコンシューマーが処理していますが、イベント量の増加により各コンシューマーの CPU 使用率が高止まりし、コンシューマーラグが増え続けています。ブローカー側のリソースには余裕があります。処理のスループットを高めてラグを解消するアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "トピックのパーティション数を増やす。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "コンシューマーグループ内のコンシューマー数を増やす。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_041": {
+  "file": "DEA-C01_orig_b3.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データストア管理",
+  "level": "medium",
+  "question": "ある企業が IoT デバイスの測定値を Amazon DynamoDB テーブルに書き込んでいます。パーティションキーには測定日 (YYYY-MM-DD) を使用しているため、その日のすべての書き込みが同じパーティションキー値に集中し、書き込みスロットリングが頻発しています。テーブルのキャパシティ設定には全体として十分な余裕があります。この問題を解決する設計変更の組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "デバイス ID のような高カーディナリティの属性をパーティションキーに採用し、書き込みを多数のパーティションに分散させる。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "パーティションキーに計算されたサフィックス (シャード番号など) を付加する書き込みシャーディングを導入する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_042": {
+  "file": "DEA-C01_orig_b3.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データストア管理",
+  "level": "medium",
+  "question": "ある企業の注文管理アプリケーションが Amazon DynamoDB テーブルを使用しています。テーブルのパーティションキーは注文 ID です。新しい要件として、配送ステータスと更新日時を条件に該当する注文を効率的に検索する必要が生じました。現在はテーブル全体の Scan とフィルタで実装しており、遅くコストも高くなっています。この検索を効率化する方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "配送ステータスをパーティションキー、更新日時をソートキーとするグローバルセカンダリインデックス (GSI) を作成し、Query 操作で検索する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_043": {
+  "file": "DEA-C01_orig_b3.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データストア管理",
+  "level": "easy",
+  "question": "ある企業が Web アプリケーションのセッション情報を Amazon DynamoDB テーブルに保存しています。セッションは作成から 24 時間経過すると不要になりますが、現在は削除されずに蓄積し続けており、ストレージコストが増加しています。追加コストや独自の削除処理の運用なしに、期限切れのアイテムを自動的に削除する方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "アイテムに有効期限のタイムスタンプ属性を追加し、テーブルで TTL (Time to Live) を有効にする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_044": {
+  "file": "DEA-C01_orig_b3.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データストア管理",
+  "level": "medium",
+  "question": "ある EC サイトが商品情報を Amazon DynamoDB テーブルで管理しています。商品情報が追加・更新されるたびに、検索サービス用のインデックスをニアリアルタイムで更新する必要があります。アプリケーション本体のコードには手を入れず、テーブルへの変更を確実に捕捉して下流処理に伝搬させたいと考えています。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "DynamoDB Streams を有効にし、ストリームをイベントソースとする AWS Lambda 関数で検索インデックスを更新する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_045": {
+  "file": "DEA-C01_orig_b3.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データストア管理",
+  "level": "easy",
+  "question": "ある企業が新規サービスのバックエンドに Amazon DynamoDB を採用します。アクセス量はまだ予測がつかず、テレビ CM の放映時には数分で通常の数十倍に達するスパイクが見込まれます。チームはキャパシティの計画や調整の運用を行わず、使用した分だけ支払う形にしたいと考えています。テーブルのキャパシティ設定として最も適切なものはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "オンデマンドキャパシティモードでテーブルを作成する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_046": {
+  "file": "DEA-C01_orig_b3.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データストア管理",
+  "level": "medium",
+  "question": "ある企業の商品カタログアプリケーションが Amazon DynamoDB テーブルから読み込みを行っています。読み込みは同じ人気商品への参照が大部分を占め、結果整合性のある読み込みで問題ありません。ピーク時にはミリ秒未満 (マイクロ秒レベル) の読み込みレイテンシが求められています。アプリケーションのコード変更を最小限にしてこの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "DynamoDB Accelerator (DAX) クラスターを導入し、アプリケーションのエンドポイントを DAX に切り替える。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_047": {
+  "file": "DEA-C01_orig_b3.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データストア管理",
+  "level": "hard",
+  "question": "ある企業の Amazon Redshift クラスターで、巨大なファクトテーブルと複数のディメンションテーブルを結合する分析クエリが遅くなっています。実行プランを確認すると、結合のたびにノード間で大量のデータ再分散 (DS_DIST 系の操作) が発生していることが分かりました。ノードを追加せずに結合パフォーマンスを改善するテーブル設計のアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ファクトテーブルと最も大きいディメンションテーブルの結合列を両テーブルの分散キー (DISTKEY) に設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "小さいディメンションテーブルには分散スタイル ALL を設定し、全ノードに完全なコピーを配置する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_048": {
+  "file": "DEA-C01_orig_b3.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データストア管理",
+  "level": "medium",
+  "question": "ある企業の Amazon Redshift クラスターにある売上明細テーブルには数十億行が保存されており、分析クエリのほとんどは「過去 7 日間」や「特定の月」など販売日時の範囲を条件に絞り込みます。しかし現在のクエリはテーブルの大部分のブロックを読み取っており、実行時間が長くなっています。テーブル設計の変更でクエリの読み取り量を削減する方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "販売日時の列をソートキーに設定し、範囲条件で不要なブロックをスキップできるようにする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_049": {
+  "file": "DEA-C01_orig_b3.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データストア管理",
+  "level": "hard",
+  "question": "ある企業の Amazon Redshift クラスターでは、営業時間中のピーク帯に BI ダッシュボードからの短いクエリと大規模な集計クエリが集中し、クエリがキューで長時間待機しています。ピーク帯以外は余裕があるため、クラスターの恒久的な増強はコスト面から避けたいと考えています。ピーク時の同時実行性を改善し、短いクエリの待機を減らすアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Concurrency Scaling を有効にし、キューが混雑した際に一時的なクラスター容量を自動追加させる。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "ショートクエリアクセラレーション (SQA) を有効にし、実行時間が短いクエリを専用の領域で優先実行させる。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_050": {
+  "file": "DEA-C01_orig_b3.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データストア管理",
+  "level": "hard",
+  "question": "ある企業の BI ダッシュボードが、Amazon Redshift 上の複数の大規模テーブルを結合・集計するクエリを数分おきに繰り返し実行しており、表示に毎回数十秒かかっています。ベースとなるテーブルには継続的にデータが追加されます。クエリを書き換える負担を最小限にしながら、集計結果を事前計算して表示を高速化し、結果を自動的に最新に保つ方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "集計クエリをマテリアライズドビューとして定義し、自動リフレッシュ (AUTO REFRESH) を有効にする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_051": {
+  "file": "DEA-C01_orig_b3.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データストア管理",
+  "level": "easy",
+  "question": "あるスタートアップ企業のアナリティクスチームが、週に数時間だけ実行するアドホック分析のために Amazon Redshift を利用したいと考えています。クラスターのサイジングやノード管理は行いたくなく、分析を実行していない時間帯にはコンピューティング費用が発生しないようにしたいと考えています。この要件を満たす構成はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon Redshift Serverless のワークグループと名前空間を作成して分析を実行する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_052": {
+  "file": "DEA-C01_orig_b3.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データストア管理",
+  "level": "hard",
+  "question": "ある企業では中央のデータエンジニアリングチームが Amazon Redshift クラスターで整備した売上データマートを管理しています。複数の部門がそれぞれ自前の Redshift クラスターや Redshift Serverless ワークグループを持っており、この売上データを常に最新の状態で参照したいと考えています。データのコピーや ETL パイプラインの構築なしにこの要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Redshift のデータ共有 (datashare) を作成し、部門のクラスターやワークグループをコンシューマーとして追加して読み取りアクセスを許可する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_053": {
+  "file": "DEA-C01_orig_b3.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データストア管理",
+  "level": "medium",
+  "question": "ある企業の Amazon Redshift クラスターでは、毎晩のバッチ処理で大量の行の削除と更新を行っています。数週間の運用後、テーブルの使用ストレージが実データ量に比べて肥大化し、クエリの実行プランも非効率になってパフォーマンスが低下しています。この状況を改善するために実行すべき操作の組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "VACUUM を実行して、削除済み行の領域を回収しテーブルを再ソートする。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "ANALYZE を実行して、テーブルの統計情報を最新化する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_054": {
+  "file": "DEA-C01_orig_b3.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データストア管理",
+  "level": "hard",
+  "question": "ある企業のアナリストが、Amazon Redshift のデータウェアハウスにある売上集計データと、Amazon Aurora PostgreSQL 上の業務システムにあるライブの在庫データを組み合わせたレポートを作成する必要があります。在庫データは分単位で変化するため、コピーした時点で古くなるバッチ連携は避けたいと考えています。ETL パイプラインを構築せずにこの要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Redshift の横串検索 (フェデレーテッドクエリ) を構成し、Aurora PostgreSQL を参照する外部スキーマを作成してライブデータと直接結合する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_055": {
+  "file": "DEA-C01_orig_b3.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データストア管理",
+  "level": "easy",
+  "question": "ある企業のデータレイクの Amazon S3 バケットには、さまざまなチームが利用する多様なデータセットが保存されています。データセットごとにアクセス頻度が大きく異なるうえ、時間の経過とともにアクセスパターンが変化するものも多く、一律のライフサイクルルールの設計が困難です。取り出しの性能に影響を与えず、運用の手間をかけずにストレージコストを自動で最適化する方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "オブジェクトを S3 Intelligent-Tiering ストレージクラスに保存する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_056": {
+  "file": "DEA-C01_orig_b3.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データストア管理",
+  "level": "medium",
+  "question": "あるアナリストチームが、Amazon S3 に保存された大量の CSV データを Amazon Athena で繰り返し分析しています。クエリ効率を上げるため、このデータを日付でパーティション化された Apache Parquet 形式のテーブルに変換したいと考えています。チームは SQL のスキルはありますが、Spark ジョブの開発経験はありません。最小限の労力でこの変換を実現する方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Athena の CTAS (CREATE TABLE AS SELECT) クエリで、格納形式に Parquet、パーティション列に日付を指定して新しいテーブルを作成する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_057": {
+  "file": "DEA-C01_orig_b3.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データストア管理",
+  "level": "hard",
+  "question": "ある企業の Amazon S3 データレイクには、日付とリージョンで整理されたログテーブルがあり、毎日多数の新しいパーティションが追加されます。現在は AWS Glue クローラーを高頻度で実行してパーティションをカタログに登録していますが、クローラーの実行コストと登録までのタイムラグが課題です。パーティションの値は日付とリージョンの決まったパターンで機械的に決まります。パーティション管理そのものを不要にする方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Athena のパーティション射影 (Partition Projection) を構成し、テーブルプロパティにパーティションの型・範囲・パスのテンプレートを定義する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_058": {
+  "file": "DEA-C01_orig_b3.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データストア管理",
+  "level": "medium",
+  "question": "ある企業が新しいゲームアプリケーションのプレイヤープロファイルストアを設計しています。要件は、プレイヤー ID をキーとした 1 桁ミリ秒台の読み書き、数千万人規模へのシームレスなスケーリング、そしてプレイヤーごとに保持する属性が異なる柔軟なスキーマです。複雑な複数テーブルの結合は必要ありません。この要件に最も適したデータストアはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon DynamoDB"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_059": {
+  "file": "DEA-C01_orig_b3.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データストア管理",
+  "level": "medium",
+  "question": "ある企業の運用チームが、マイクロサービス群のアプリケーションログをニアリアルタイムで検索できる基盤を求めています。要件は、任意のキーワードによる全文検索、フィールドを組み合わせた絞り込み、そして傾向を可視化するダッシュボードです。チームは以前 Elasticsearch と Kibana を利用した経験があります。この要件に最も適した構成はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ログを Amazon Data Firehose 経由で Amazon OpenSearch Service に取り込み、OpenSearch Dashboards で検索・可視化する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_060": {
+  "file": "DEA-C01_orig_b3.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データストア管理",
+  "level": "hard",
+  "question": "ある企業が Amazon S3 上の Apache Iceberg テーブルを Amazon Athena で運用しています。ストリーミングパイプラインが数分おきに小さな書き込みを続けているため、数か月の運用でデータファイルが細分化し、古いスナップショットのファイルも蓄積してクエリ性能の低下とストレージ増加が起きています。Athena の SQL でこの状態を改善する操作の組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "OPTIMIZE テーブル名 REWRITE DATA USING BIN_PACK を実行して、小さなデータファイルを統合する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "VACUUM テーブル名 を実行して、保持期間を過ぎたスナップショットと不要になったファイルを削除する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_061": {
+  "file": "DEA-C01_orig_b3.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データストア管理",
+  "level": "medium",
+  "question": "ある金融企業が、Amazon Redshift のプロビジョンドクラスターで運用するデータウェアハウスについて、リージョン障害に備えた災害対策を求められています。要件は、別リージョンでクラスターを復元してデータを利用できることで、目標復旧時点 (RPO) は数時間です。普段から 2 つ目のクラスターを稼働させるコストは避けたいと考えています。この要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "クラスターのクロスリージョンスナップショットコピーを設定し、自動スナップショットを別リージョンに自動コピーさせる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_062": {
+  "file": "DEA-C01_orig_b3.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データストア管理",
+  "level": "easy",
+  "question": "ある企業の重要な Amazon DynamoDB テーブルで、アプリケーションの不具合により誤ったデータ更新が行われるインシデントが発生しました。再発に備えて、テーブルを過去 35 日以内の任意の時点の状態に復元できるようにしたいと考えています。日々のバックアップ運用の手間はかけたくありません。この要件を満たす機能はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "テーブルでポイントインタイムリカバリ (PITR) を有効にする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_063": {
+  "file": "DEA-C01_orig_b3.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データストア管理",
+  "level": "medium",
+  "question": "ある企業のコンプライアンス部門が、規制対応のため Amazon S3 バケットに保存する取引データのコピーを別リージョンのバケットにも自動的に保持することを求めています。データエンジニアは、新しく書き込まれるオブジェクトが自動的に別リージョンへ複製されるように構成する必要があります。実施すべきアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "送信元バケットと送信先バケットの両方でバージョニングを有効にする。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "送信元バケットに、別リージョンのバケットを送信先とするレプリケーションルールを作成し、S3 が使用する IAM ロールを設定する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_064": {
+  "file": "DEA-C01_orig_b3.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データストア管理",
+  "level": "hard",
+  "question": "ある企業が本番ワークロードで使用中の Amazon DynamoDB テーブルの全データを、Amazon Athena を使った大規模な分析に利用したいと考えています。分析は月次で実行され、当日のデータである必要はありません。本番テーブルの読み込みキャパシティを消費してアプリケーションの性能に影響を与えることは避けなければなりません。この要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "テーブルのポイントインタイムリカバリを有効にし、DynamoDB の S3 へのエクスポート機能でデータを S3 に出力して Athena でクエリする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_065": {
+  "file": "DEA-C01_orig_b3.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ運用とサポート",
+  "level": "easy",
+  "question": "ある企業の夜間 ETL パイプラインは 30 本ほどの AWS Glue ジョブで構成されており、その中核となるジョブがまれに失敗します。現在は担当者が翌朝にコンソールで実行結果を確認しており、失敗に気付くのが遅れて、午前 9 時までに提出する下流のレポート業務に影響が出ています。要件として、ジョブが失敗した時点で運用チームのメーリングリストへ通知が届くこと、ドライバーの異常終了やジョブのタイムアウトを含むどの失敗要因でも確実に捕捉できること、ポーリングを行うスクリプトや AWS Lambda 関数を新たに開発・保守しないことが挙げられています。最小限の構成でこれを実現する方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Glue ジョブの状態変化イベント (FAILED) に一致する Amazon EventBridge ルールを作成し、ターゲットに Amazon SNS トピックを設定してメール購読させる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_066": {
+  "file": "DEA-C01_orig_b3.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ運用とサポート",
+  "level": "medium",
+  "question": "ある企業の BI ダッシュボードは、バックエンドで Amazon Athena に同一の SQL クエリを 1 日に何百回も発行しています。基になるデータセットは 1 日 1 回の夜間バッチでしか更新されません。クエリのたびに同じデータがスキャンされ、コストとレイテンシが無駄になっています。アプリケーション側の変更を最小限にしてこの無駄を削減する Athena の機能はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "クエリ結果の再利用 (query result reuse) を有効にし、指定した有効期間内は保存済みの結果を返すようにする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_067": {
+  "file": "DEA-C01_orig_b3.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ運用とサポート",
+  "level": "medium",
+  "question": "ある企業が Amazon Kinesis Data Streams のストリームを独自のコンシューマーアプリケーションで処理しています。過去に、コンシューマーの処理遅延によりレコードが保持期間を超えて失われる寸前まで未処理のまま滞留したことがありました。データエンジニアは、コンシューマーの処理がストリームの最新データからどれだけ遅れているかを監視し、遅延が拡大したらアラートを受け取りたいと考えています。アラームを設定すべきメトリクスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "GetRecords.IteratorAgeMilliseconds"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_068": {
+  "file": "DEA-C01_orig_b3.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ運用とサポート",
+  "level": "hard",
+  "question": "ある企業の AWS Glue の Apache Spark ジョブが、データ量の増加に伴い大規模なテーブル同士のシャッフルを伴う結合処理でメモリ不足のエラーを起こして失敗するようになりました。ジョブは現在 G.1X ワーカー 10 個で実行されています。ジョブを安定して完了させるための構成変更の組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ワーカータイプを G.1X からメモリの大きい G.2X に変更する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "ワーカー数を増やして、データをより多くのエグゼキューターに分散させる。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_069": {
+  "file": "DEA-C01_orig_b3.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ運用とサポート",
+  "level": "hard",
+  "question": "ある企業のセキュリティ監査で、Amazon Redshift のプロビジョンドクラスターに対して「どのユーザーがいつ、どの SQL を実行したか」を長期間さかのぼって追跡できることが要求されました。クラスター内のシステムテーブルの保持期間は限られているため、監査記録はクラスターの外部に永続化する必要があります。この要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "クラスターで監査ログ記録を有効にし、パラメータグループで enable_user_activity_logging を true に設定して、接続ログとユーザーアクティビティログを Amazon S3 または CloudWatch Logs に出力する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_070": {
+  "file": "DEA-C01_orig_b3.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ運用とサポート",
+  "level": "hard",
+  "question": "ある企業が Amazon Data Firehose の配信ストリームで AWS Lambda によるレコード変換を行い、結果を Amazon S3 に配信しています。最近、上流のデータ形式の変化により一部のレコードで変換が失敗していることが判明しました。データエンジニアは、変換に失敗したレコードがどうなっているかを確認し、後から調査・再処理できるようにしたいと考えています。失敗レコードについて正しい説明はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "変換に失敗したレコードは、Firehose により配信先の S3 バケットの専用のエラープレフィックス (processing-failed) にエラー情報とともに出力されるため、そこから調査・再処理できる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_071": {
+  "file": "DEA-C01_orig_b4.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データセキュリティとガバナンス",
+  "level": "hard",
+  "question": "ある大企業のデータレイクには AWS Glue データカタログに登録された数千のテーブルがあり、毎週数十の新しいテーブルが追加されます。テーブルは「機密度 (public / internal / confidential)」と「所管部門 (finance / marketing / hr)」という 2 つの観点で分類されています。現在はデータスチュワードが新しいテーブルが追加されるたびに、部門ごとのプリンシパルに対して個別のテーブル許可を手作業で付与しており、付与漏れや過剰付与が頻発しています。データエンジニアは、テーブルの分類に基づいて権限が一貫して適用され、新規テーブルの追加時に個別の許可付与作業が不要になる仕組みを構築する必要があります。運用上のオーバーヘッドを最小限に抑えながらこの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Lake Formation の LF-Tag (タグベースのアクセスコントロール) を定義し、データベース・テーブル・列に分類を表す LF-Tag を付与する。プリンシパルには LF-Tag 式に対して許可を付与する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_072": {
+  "file": "DEA-C01_orig_b4.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データセキュリティとガバナンス",
+  "level": "hard",
+  "question": "ある多国籍企業が、全世界の販売実績を単一の売上テーブルとして Amazon S3 のデータレイクに保持し、AWS Glue データカタログに登録して Amazon Athena でクエリしています。各国のアナリストは、テーブルのすべての列を参照してよいものの、自国 (country 列の値) に対応する行だけを参照できるようにする必要があります。データエンジニアは、国ごとのテーブル複製や国ごとのビューを個別に作成・保守することは避けたいと考えています。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Lake Formation で行フィルター式 (例: country='JP') を持つデータフィルターを作成し、各国のアナリストのプリンシパルに対してそのデータフィルターを使用した SELECT 許可を付与する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_073": {
+  "file": "DEA-C01_orig_b4.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データセキュリティとガバナンス",
+  "level": "medium",
+  "question": "ある小売企業が Amazon Redshift の顧客テーブルにクレジットカード番号の列を保持しています。BI アナリストのグループはレポート作成のためにこの列を参照しますが、表示できるのは下 4 桁のみに制限する必要があります。一方、不正調査チームは調査業務のため完全な値を参照できる必要があります。データエンジニアは、テーブルを複製したり、グループごとに別々のビューを作成・保守したりせずに、単一のテーブルに対してこの要件を満たしたいと考えています。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon Redshift の動的データマスキング (DDM) を使用し、クレジットカード番号列に対して下 4 桁のみを残すマスキングポリシーを作成して BI アナリストのロールに適用し、不正調査チームのロールには適用しない。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_074": {
+  "file": "DEA-C01_orig_b4.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データセキュリティとガバナンス",
+  "level": "medium",
+  "question": "ある企業では複数の事業部門が独自の判断で Amazon S3 のデータレイクにデータセットを投入しており、どのバケットやプレフィックスに個人情報 (氏名、メールアドレス、クレジットカード番号など) が含まれているかを把握できていません。コンプライアンス部門は、機密データの所在を定期的に自動で検出し、検出結果を一元的に確認できるようにすることを求めています。データエンジニアは、検出ロジックを自前で開発・保守することは避けたいと考えています。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon Macie を有効化し、対象バケットに対する機密データ検出ジョブを定期実行するようスケジュールして、検出結果を Amazon EventBridge 経由で通知および集約する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_075": {
+  "file": "DEA-C01_orig_b4.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データセキュリティとガバナンス",
+  "level": "medium",
+  "question": "ある企業の Amazon S3 データレイクは、カスタマーマネージド型 AWS KMS キーによる SSE-KMS で暗号化されています。データレイクには数億個の小さめの Parquet オブジェクトがあり、Amazon EMR と Amazon Athena のジョブが毎日大量のオブジェクトを読み取ります。最近、請求書を確認したところ AWS KMS のリクエスト料金が想定を大きく上回っていることが判明しました。同社は、カスタマーマネージドキーで暗号化するという統制要件は維持したまま、KMS へのリクエスト数に起因するコストを削減したいと考えています。データエンジニアは何をすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "対象バケットで S3 バケットキーを有効にし、既存オブジェクトについてもバケットキーを使用するように再暗号化する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_076": {
+  "file": "DEA-C01_orig_b4.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データセキュリティとガバナンス",
+  "level": "hard",
+  "question": "あるデータエンジニアが、VPC のプライベートサブネットに配置された Amazon Aurora MySQL クラスターから JDBC でデータを読み取り、変換結果を Amazon S3 に書き込む AWS Glue の ETL ジョブを構築しています。Glue の接続 (Connection) に VPC、サブネット、セキュリティグループを指定しましたが、接続のテストが失敗します。また、テスト的にデータベースアクセスを除いて S3 への書き込みだけを行うジョブを実行すると、処理がタイムアウトします。Glue ジョブロールには必要な IAM 権限が付与済みです。この問題を解決するために必要なアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Glue 接続に指定したセキュリティグループに、同じセキュリティグループを送信元とするすべての TCP ポートのインバウンドルール (自己参照ルール) を追加する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "Glue 接続で使用するサブネットのルートテーブルに、Amazon S3 用のゲートウェイ VPC エンドポイントを関連付ける。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_077": {
+  "file": "DEA-C01_orig_b4.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データセキュリティとガバナンス",
+  "level": "medium",
+  "question": "ある企業の複数の AWS Glue ETL ジョブが、オンプレミスおよび Amazon RDS 上のデータベースに JDBC で接続しています。現在、データベースのユーザー名とパスワードは各ジョブスクリプト内にハードコードされており、ソースコードリポジトリにも平文で格納されています。セキュリティ監査により、認証情報を平文で保持しないことと、90 日ごとにパスワードを自動的にローテーションすることが求められました。データエンジニアは、ジョブ側の変更を最小限に抑えつつこの要件を満たしたいと考えています。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "認証情報を AWS Secrets Manager のシークレットとして保存し、自動ローテーションを 90 日間隔で有効にする。Glue ジョブの実行ロールに当該シークレットの取得を許可し、ジョブ実行時にシークレットを取得して接続する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_078": {
+  "file": "DEA-C01_orig_b4.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データセキュリティとガバナンス",
+  "level": "medium",
+  "question": "ある企業では多数のアナリストが Amazon Athena を使用しています。Athena のクエリ結果は Amazon S3 に保存されますが、現在はアナリストが各自の JDBC クライアントや SDK の設定で任意の出力先バケットを指定でき、暗号化なしで結果を書き出すこともできてしまいます。セキュリティ部門は、すべてのクエリ結果が指定された 1 つのバケットに AWS KMS で暗号化されて保存されることを、クライアント側の設定に依存せずに強制するよう求めています。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Athena のワークグループを作成し、クエリ結果の出力先と SSE-KMS による暗号化を設定したうえで「クライアント側の設定を上書きする」オプションを有効にする。IAM ポリシーでアナリストがそのワークグループでのみクエリを実行できるようにする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_079": {
+  "file": "DEA-C01_orig_b4.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データセキュリティとガバナンス",
+  "level": "hard",
+  "question": "ある持株会社では、中央のデータレイクアカウントで Amazon S3 と AWS Glue データカタログを AWS Lake Formation により一元管理しています。子会社は別々の AWS アカウントを持ち、その分析チームが中央データレイクの特定のテーブルについて、機密列を除いた一部の列だけを Amazon Athena でクエリする必要があります。中央のデータエンジニアリングチームは、データを子会社アカウントに複製することなく、権限を中央で一元的に管理し続けたいと考えています。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Lake Formation で対象テーブルに対する列レベルの許可を子会社アカウント (またはプリンシパル) に付与し、AWS RAM 経由で共有する。子会社アカウント側ではリソースリンクを作成し、Athena からクエリする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_080": {
+  "file": "DEA-C01_orig_b4.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データセキュリティとガバナンス",
+  "level": "hard",
+  "question": "ある企業のカスタマーサポートシステムから届くデータには、問い合わせ内容の自由記述テキスト列が含まれています。この列には、入力者の判断でメールアドレス、電話番号、クレジットカード番号などの個人情報が混入することがあり、どのレコードのどの位置に含まれるかは事前に分かりません。データエンジニアは、AWS Glue の ETL 処理の中でこれらの個人情報を検出し、マスクまたは削除したうえでデータレイクに書き込む必要があります。検出用の正規表現やパターンを自前で開発・保守することは避けたいと考えています。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Glue Studio の機密データ検出 (Detect Sensitive Data) 変換を ETL ジョブに追加し、検出対象のエンティティタイプを選択して、検出された値をマスクまたは編集するアクションを設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_081": {
+  "file": "DEA-C01_orig_b4.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データセキュリティとガバナンス",
+  "level": "medium",
+  "question": "ある企業では、Amazon S3 から Amazon Redshift のプロビジョンドクラスターへデータをロードするために COPY コマンドを使用しています。現在の COPY 文には IAM ユーザーのアクセスキー ID とシークレットアクセスキーが直接記述されており、この SQL は複数の運用担当者が保持するスクリプトに含まれています。セキュリティ監査により、長期的なアクセスキーを配布・保持しない方式に変更するよう指摘されました。データエンジニアは何をすべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "S3 バケットへの読み取り権限を持つ IAM ロールを作成して Redshift クラスターに関連付け、COPY コマンドで IAM_ROLE パラメータにそのロールの ARN を指定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_082": {
+  "file": "DEA-C01_orig_b4.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データセキュリティとガバナンス",
+  "level": "hard",
+  "question": "ある金融企業が、VPC のプライベートサブネットに配置した Amazon EMR クラスターから Amazon S3 のデータレイクを読み取っています。現在は NAT ゲートウェイ経由で S3 にアクセスしています。セキュリティ部門は、S3 へのトラフィックがインターネットを経由しないようにすることと、当該バケットへのアクセスをこの VPC 経由のリクエストのみに限定することを要求しています。この要件を満たすアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon S3 用のゲートウェイ VPC エンドポイントを作成し、EMR クラスターのサブネットに関連付けられたルートテーブルにエンドポイントのルートを追加する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "S3 バケットポリシーに、aws:SourceVpce が該当する VPC エンドポイント ID と一致しないリクエストを拒否する Deny ステートメントを追加する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_083": {
+  "file": "DEA-C01_orig_b4.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データセキュリティとガバナンス",
+  "level": "hard",
+  "question": "ある証券会社が、規制対応のため取引ログを Amazon S3 に 7 年間保存する必要があります。規制要件では、保持期間中はいかなる利用者もオブジェクトを削除または上書きできないこと、そしてアカウントのルートユーザーや管理者であっても保持設定を短縮・解除できないことが求められています。この要件を満たすために必要なアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "取引ログを保存する S3 バケットでバージョニングを有効にする。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "S3 Object Lock を有効にし、コンプライアンスモードで 7 年の保持期間をデフォルトの保持設定として構成する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_084": {
+  "file": "DEA-C01_orig_b4.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ運用とサポート",
+  "level": "hard",
+  "question": "ある企業が Amazon EMR on EC2 のクラスターで、毎日 3〜4 時間かかる Apache Spark のバッチ処理を実行しています。中間データの一部は HDFS に書き出され、最終結果は Amazon S3 に出力されます。財務部門からコンピューティングコストの大幅な削減を求められていますが、データエンジニアは、インスタンスの中断によってジョブ全体が失敗して再実行が必要になる事態は避けたいと考えています。この要件を満たすアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "プライマリノードとコアノードはオンデマンド (またはリザーブド/Savings Plans の対象) で実行し、タスクノードのみスポットインスタンスで実行する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "インスタンスフリートを使用し、複数のインスタンスタイプと複数のアベイラビリティーゾーンを候補として指定してスポット容量を確保しやすくする。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_085": {
+  "file": "DEA-C01_orig_b4.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ運用とサポート",
+  "level": "medium",
+  "question": "ある企業の AWS Glue の Apache Spark ジョブが、数か月前と比べて実行時間が 3 倍に延びています。データ量は緩やかにしか増えておらず、ワーカー数も変更していません。データエンジニアは、ジョブのどのステージやタスクで時間を消費しているのか、データの偏りやシャッフルが発生していないかを詳細に分析したいと考えていますが、そのために新たなサーバーやクラスターを構築・管理することは避けたいと考えています。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Glue ジョブで Spark UI と継続的ログ記録 (continuous logging) を有効にし、出力された Spark イベントログと Amazon CloudWatch Logs のドライバー/エグゼキューターログからステージとタスクの実行状況を分析する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_086": {
+  "file": "DEA-C01_orig_b4.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ運用とサポート",
+  "level": "hard",
+  "question": "ある企業の S3 データレイクには、日付でパーティション化された Parquet 形式の取引テーブルが AWS Glue データカタログに登録されています。先月、上流システムが amount 列のデータ型を int から bigint に変更したため、それ以降に追加されたパーティションのファイルは bigint で書き込まれています。AWS Glue クローラーの実行後、Amazon Athena で過去 3 か月分を対象にクエリを実行すると HIVE_PARTITION_SCHEMA_MISMATCH エラーが発生するようになりました。古いパーティションと新しいパーティションの両方を 1 つのクエリで参照できるようにする必要があります。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "テーブル定義の amount 列を bigint に更新し、Glue クローラーの設定でテーブルレベルのスキーマ更新と、その定義をすべての新規および既存パーティションに反映するオプションを使用して、パーティションのスキーマをテーブル定義に一致させる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_087": {
+  "file": "DEA-C01_orig_b4.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ運用とサポート",
+  "level": "hard",
+  "question": "ある企業のアナリストは、Amazon S3 のデータレイクに保存された履歴の注文データを Amazon Athena で分析しています。新たな要件として、この履歴データを Amazon RDS for PostgreSQL 上の業務システムが保持する最新の商品マスタと結合したレポートが必要になりました。商品マスタは頻繁に更新されるため、日次コピーでは鮮度が不足します。結合対象となる商品マスタは小規模で、レポートの実行頻度も 1 日数回程度のため RDS への負荷は問題になりません。データエンジニアは、新しいデータウェアハウスを導入せず、データのコピーも行わずにこの要件を満たしたいと考えています。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Athena Federated Query の PostgreSQL 用データソースコネクタ (AWS Lambda ベース) をデプロイし、Athena にデータソースとして登録して、1 つの SQL 文で S3 のテーブルと RDS のテーブルを結合する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_088": {
+  "file": "DEA-C01_orig_b4.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ運用とサポート",
+  "level": "medium",
+  "question": "ある企業の経営ダッシュボードは Amazon QuickSight で構築され、データセットは Amazon Athena への直接クエリとして設定されています。利用者が全社に拡大した結果、朝の時間帯にダッシュボードの表示に数十秒かかるようになり、同じ集計クエリが繰り返し実行されることで Athena のスキャン料金も増加しています。基になるデータは 1 日 1 回の夜間バッチでのみ更新されます。パフォーマンスとコストの両方を改善するソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "データセットを SPICE にインポートするよう変更し、夜間バッチの完了後に実行されるスケジュール更新を構成する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_089": {
+  "file": "DEA-C01_orig_b4.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ運用とサポート",
+  "level": "medium",
+  "question": "ある企業では、多数のアナリストが Amazon Athena でアドホック分析を行っています。先月、あるアナリストが WHERE 句のパーティション条件を付け忘れた結果、数百 TB をスキャンするクエリが実行され、想定を大きく超える請求が発生しました。データエンジニアは、(1) 1 つのクエリが一定量を超えるデータをスキャンした場合にそのクエリを自動的にキャンセルすること、および (2) 一定期間内のスキャン量の累計が閾値を超えた場合に運用チームへ通知することを実現したいと考えています。この要件を満たすアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Athena のワークグループでクエリごとのデータ使用量コントロール (スキャンバイト数の上限) を設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "Athena のワークグループでワークグループ単位のデータ使用量コントロール (指定期間内のスキャン量の閾値) を設定し、閾値超過時のアクションとして Amazon SNS への通知を構成する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_090": {
+  "file": "DEA-C01_orig_b4.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ運用とサポート",
+  "level": "medium",
+  "question": "ある企業が Amazon MWAA (Managed Workflows for Apache Airflow) でデータパイプラインをオーケストレーションしています。ある DAG のタスクが断続的に失敗しますが、Airflow の UI ではタスクのログが表示されず、失敗の原因を特定できません。データエンジニアは、タスクの標準出力や例外のスタックトレースを含む詳細なログを永続的に保存し、後から検索できるようにする必要があります。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "MWAA 環境の Airflow ログ記録設定でタスクログ (およびスケジューラログ) の Amazon CloudWatch Logs への送信を有効にし、必要なログレベルを指定して CloudWatch Logs Insights で検索する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_091": {
+  "file": "DEA-C01_orig_b4.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ運用とサポート",
+  "level": "hard",
+  "question": "ある企業の日次データパイプラインは AWS Step Functions のステートマシンで構成され、複数の AWS Glue ジョブと AWS Lambda 関数を順番に実行します。このパイプラインには「毎朝 6 時までに完了する」という SLA があります。ときどき下流のシステムの応答待ちなどで 1 つのステップが数時間ハングしたまま進まなくなり、失敗もせずに実行が継続するため、担当者が朝になって初めて遅延に気付いています。データエンジニアは、実行が想定時間を超えた場合に自動的に処理を打ち切り、運用チームに通知する仕組みを構築する必要があります。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ステートマシンおよび個々のタスク状態に TimeoutSeconds を設定し、States.Timeout エラーを Catch して Amazon SNS への通知を行う状態に遷移させる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_092": {
+  "file": "DEA-C01_orig_b4.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ運用とサポート",
+  "level": "hard",
+  "question": "ある企業の Amazon Redshift プロビジョンドクラスターでは、一部のアナリストが結合条件を誤った探索的なクエリを実行してしまい、数時間にわたって大量のディスクスピルを発生させながら実行を続けることがあります。その結果、同じクラスターで動作する定時バッチや BI ダッシュボードのクエリが待たされています。一方で、深夜に実行される正当な長時間バッチクエリは中断してはいけません。データエンジニアは、問題のあるクエリを人手の監視なしに検知して記録し、必要に応じて自動的に中止する仕組みを構築する必要があります。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "アナリスト用の WLM キューにクエリモニタリングルール (QMR) を定義し、実行時間やディスクスピル量などのメトリクスの閾値に対してログ記録および中止 (abort) アクションを設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_093": {
+  "file": "DEA-C01_orig_b4.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ運用とサポート",
+  "level": "medium",
+  "question": "ある企業には開発、検証、本番の 3 つの AWS アカウントがあり、同じ ETL パイプラインを各環境にデプロイしています。現在は AWS Glue のジョブ、接続、クローラーを各アカウントのコンソールから手作業で作成しており、ワーカータイプやジョブパラメータの設定漏れによって、検証環境では成功したジョブが本番で失敗する事象が繰り返し発生しています。データエンジニアは、環境間で構成の一貫性を保証し、再現性のあるデプロイを実現する必要があります。この要件を満たすアクションの組み合わせはどれですか。(2 つ選択してください。)",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Glue のジョブ、接続、クローラーを AWS CloudFormation (または AWS CDK) のテンプレートとして定義し、バージョン管理したうえで CI/CD パイプラインから各環境にデプロイする。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "バケット名、データベース接続名、並列度などの環境固有の値をテンプレートのパラメータおよび Glue のジョブパラメータとして外出しし、環境ごとに値だけを切り替える。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_094": {
+  "file": "DEA-C01_orig_b4.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データストア管理",
+  "level": "hard",
+  "question": "ある企業の上流システムは、毎日 1 つの gzip 圧縮された約 20 GB の CSV ファイルを Amazon S3 に出力します。データエンジニアはこのファイルを Amazon EMR 上の Apache Spark で処理していますが、実行中に確認するとタスクが 1 つしか起動せず、クラスターの大部分がアイドル状態になっています。ワーカーノードを増やしても処理時間はほとんど変わりません。処理の並列度を高め、さらに下流の Amazon Athena によるクエリ効率も改善する必要があります。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "取り込み処理で元ファイルを Snappy 圧縮の Apache Parquet に変換し、適度なサイズ (数百 MB 程度) の複数ファイルとして S3 に書き出したうえで、以降の処理はその Parquet を入力とする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_095": {
+  "file": "DEA-C01_orig_b4.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データストア管理",
+  "level": "medium",
+  "question": "ある企業では、複数の開発チームがそれぞれのアプリケーションから Amazon MSK のトピックへ Apache Avro 形式のイベントを送信しています。先週、あるチームが必須フィールドを削除する後方互換性のないスキーマ変更をリリースしたため、下流のコンシューマーが一斉にデシリアライズエラーで停止しました。データエンジニアは、スキーマを中央で管理し、互換性のない変更が行われた場合はプロデュース時点で検証して拒否できるようにする必要があります。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Glue スキーマレジストリにスキーマを登録して互換性モード (後方互換など) を設定し、プロデューサーのシリアライザーがレジストリに対してスキーマを検証するように構成する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_096": {
+  "file": "DEA-C01_orig_b4.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データストア管理",
+  "level": "hard",
+  "question": "ある企業が Amazon OpenSearch Service のドメインにアプリケーションログを日次インデックスとして格納しています。運用チームの分析によると、直近 7 日間のインデックスは全文検索とダッシュボードで頻繁に参照されますが、8 日目から 90 日目までのインデックスは調査目的で月に数回検索される程度で、90 日を超えたものは不要です。現在はすべてのインデックスをホットストレージに保持しているため、クラスターのストレージコストが増大しています。低頻度アクセス期間のデータについても、追加の復元作業なしにそのまま検索できる必要があります。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ドメインで UltraWarm を有効にし、Index State Management (ISM) ポリシーで 7 日経過したインデックスを UltraWarm に移行し、90 日経過したインデックスを削除する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_097": {
+  "file": "DEA-C01_orig_b4.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データストア管理",
+  "level": "hard",
+  "question": "ある企業の Amazon S3 データレイクには約 5 TB の Parquet 形式のイベントテーブルがあり、すでに日付でパーティション化されています。しかし、アナリストのクエリの大半は特定の user_id を等価条件で指定して数か月分を横断的に検索するもので、日付パーティションによる絞り込みが効かず、大量のデータがスキャンされています。user_id は数千万の一意な値を持つため、user_id を追加のパーティションキーにするとパーティション数が膨大になり、メタデータの肥大化とクエリプランニングの遅延を招くことが検証で判明しました。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Athena の CTAS または INSERT INTO で、日付によるパーティション化を維持したまま user_id をバケット化キーとして指定し (CLUSTERED BY user_id INTO N BUCKETS)、テーブルを書き直す。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_098": {
+  "file": "DEA-C01_orig_b4.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データの取り込みと変換",
+  "level": "hard",
+  "question": "ある企業が Amazon Aurora MySQL 互換エディションで基幹の受注システムを運用し、分析基盤として Amazon Redshift を使用しています。現在は AWS DMS で変更データを取得し、AWS Glue ジョブで整形して Redshift にロードするパイプラインを自前で構築・運用していますが、レプリケーションインスタンスの障害対応や、上流のスキーマ変更への追従作業に多くの時間を費やしています。同社はニアリアルタイムの分析要件を維持しつつ、この ETL パイプラインの構築・運用そのものをやめたいと考えています。運用上のオーバーヘッドを最小限に抑えてこの要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Aurora MySQL と Amazon Redshift の間でゼロ ETL 統合を構成し、変更がマネージドサービスによって自動的に Redshift へレプリケートされるようにする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_099": {
+  "file": "DEA-C01_orig_b4.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データの取り込みと変換",
+  "level": "hard",
+  "question": "ある企業が、深くネストしたオブジェクトと可変長の配列 (1 件の注文に複数の明細行) を含む JSON ファイルを Amazon S3 で受け取っています。データエンジニアは AWS Glue の ETL ジョブでこのデータを処理し、Amazon Redshift に「注文ヘッダー」と「注文明細」という 2 つの正規化されたリレーショナルテーブルとしてロードする必要があります。チームは、ネスト構造を再帰的に解析するカスタムコードを開発・保守することは避けたいと考えています。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "DynamicFrame の Relationalize 変換を使用して、ネストされた構造を平坦化し配列を別の DynamicFrame に分割したうえで、生成された各フレームを Redshift の対応するテーブルにロードする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_100": {
+  "file": "DEA-C01_orig_b4.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データの取り込みと変換",
+  "level": "hard",
+  "question": "ある企業のバッチ処理は、Amazon S3 の特定プレフィックスを指定した COPY コマンドで Amazon Redshift にデータをロードしています。同じプレフィックスには別のプロセスが一時的な作業ファイルを書き込むことがあり、意図しないファイルが取り込まれる事故が発生しました。また、上流の出力が完了する前に COPY を実行してしまい、一部のファイルが取り込まれないまま処理が「成功」として扱われたこともあります。データエンジニアは、ロード対象のファイルを明示的に指定し、指定したファイルが 1 つでも存在しない場合は COPY を失敗させる必要があります。この要件を満たすソリューションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ロード対象ファイルの URL を列挙し、各エントリの mandatory を true に設定したマニフェストファイルを作成して、COPY コマンドで MANIFEST オプションとともに指定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_101": {
+  "file": "DEA-C01_orig_gap1.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データセキュリティとガバナンス",
+  "level": "medium",
+  "question": "あるデータエンジニアリングチームが、取引先から売上データを受け取るために Amazon API Gateway の REST API を公開し、受信したレコードを Amazon Data Firehose 経由で S3 のデータレイクに取り込んでいます。最近、認証を通過しない大量のリクエストが特定の送信元 IP アドレスから送り付けられて取り込みが不安定になり、クエリ文字列に SQL インジェクションを狙う文字列を含むリクエストも観測されました。API のアプリケーションコードを変更せずに、これらのリクエストを取り込みの前段で遮断する必要があります。どのソリューションを選択すべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS WAF の Web ACL を作成し、レートベースルールと AWS マネージドルールグループを設定して、API Gateway の REST API のステージに関連付ける。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_102": {
+  "file": "DEA-C01_orig_gap1.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "データ運用とサポート",
+  "level": "medium",
+  "question": "ある企業のデータプラットフォームチームが、分析ダッシュボードを保護している AWS WAF の Web ACL について、そのトラフィックログを既存の Amazon S3 のデータレイクに蓄積し、Amazon Athena で調査したいと考えています。ログは 1 日あたり数十 GB に達する見込みで、ルールの評価結果を含む全項目を長期間保持したうえで、SQL による調査に使います。管理するコンポーネントをできるだけ増やさず、運用の手間を最小限に抑えてこの要件を満たすには、どのように構成すべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Web ACL のログ記録を有効にし、送信先として aws-waf-logs- で始まる名前の Amazon S3 バケットを直接指定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "DEA-C01_orig_201": {
+  "file": "mixed_orig_b1.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "matching",
+  "domain": "データの取り込みと変換",
+  "level": "medium",
+  "question": "あるデータチームが、複数のワークロードを AWS へ再構成しています。センサーのレコードは、不正検知チームとダッシュボードチームが保持期間内に独立して読み取ります。Web のクリックログは、変換して数分以内に Amazon S3 へ配信できればよく、コンシューマーの実装は避けたいと考えています。夜間のバッチ変換は既存の Spark 処理を流用し、テーブル定義はカタログから取得します。アナリストは S3 のデータを移動せずに標準 SQL で参照します。以下のリストから、各データパイプラインの要件に対する正しい AWS のサービスを選択してください。各サービスを 1 回以上選択しても構いません。",
+  "n_correct": null,
+  "options": []
+ },
+ "DEA-C01_orig_202": {
+  "file": "mixed_orig_b1.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "matching",
+  "domain": "データストア管理",
+  "level": "medium",
+  "question": "ある企業が、Amazon S3 上のデータレイクを刷新しています。現在はすべて CSV のため、Amazon Athena のスキャン量が多くコストが増大し、削除要求に応じて特定の行だけを削除したり過去時点の状態を参照したりできないことが課題です。あわせて、テーブル定義とパーティション情報を Athena と Amazon EMR で共有したい、Amazon Redshift へロードせずに S3 の履歴データを直接参照したいという要望があります。以下のリストから、各データレイクの要件に対する正しい技術またはサービスを選択してください。各技術またはサービスを 1 回以上選択しても構いません。",
+  "n_correct": null,
+  "options": []
+ },
+ "DEA-C01_orig_203": {
+  "file": "mixed_orig_b1.json",
+  "exam": "DEA-C01",
+  "set": "orig",
+  "type": "matching",
+  "domain": "データ運用とサポート",
+  "level": "medium",
+  "question": "あるデータチームが、オーケストレーションとガバナンスの基盤を整理しています。オンプレミスには Python で書かれた既存の DAG が多数あり、書き換えずに活用します。一方、新規の処理では複数の AWS のサービスを連携させる流れを、リトライや並列実行を含めてコードなしで定義したいと考えています。Glue のクローラーとジョブで完結する ETL は Glue 内で管理します。さらに、分析者ごとに参照できる列を制限する必要があります。以下のリストから、各オーケストレーションおよびガバナンスの要件に対する正しい AWS のサービスを選択してください。各サービスを 1 回以上選択しても構いません。",
+  "n_correct": null,
+  "options": []
+ }
+}
