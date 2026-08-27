@@ -250,6 +250,8 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
   </div>
   <div class="card">
     <h2>AI連携(任意)</h2>
+    <div class="formrow"><label><input type="checkbox" id="set-demo" onchange="saveSettings()"> デモモード(APIキーなしで動きを見る)</label></div>
+    <div class="note" id="demo-note" style="display:none">APIには接続せず、あらかじめ用意した応答を返します。人に見せるときや、機能の雰囲気を確かめたいときに使ってください。料金はかかりません。</div>
     <div class="formrow"><label>APIキー(Anthropic)</label><input type="password" id="set-key" placeholder="sk-ant-..." onchange="saveSettings()"></div>
     <div class="formrow"><label>使用モデル</label>
       <select id="set-model" style="width:100%" onchange="saveSettings()">
@@ -970,15 +972,54 @@ function updateUsageUI(){
   const el=document.getElementById('set-usage'); if(el) el.textContent=u;
   document.querySelectorAll('.ai-usage-inline').forEach(x=>x.textContent=u);
 }
+function demoMode(){ return !!SETTINGS.demo; }
 function aiReady(){
+  if(demoMode()) return true;   // デモモードはAPIに接続しないのでキー不要
   const key=(SETTINGS.key||'').trim();
-  if(!key){ alert('APIキーが未設定です。設定タブで登録してください。\n(キーがなくてもAI以外の全機能は使えます)'); return false; }
+  if(!key){ alert('APIキーが未設定です。設定タブで登録してください。\n(設定のデモモードを使うと、キーなしでAI機能の動きを確認できます)'); return false; }
   if(!key.startsWith('sk-ant')){ alert('現在はAnthropicのAPIキー(sk-ant-...)のみ対応しています'); return false; }
   const budget=parseFloat(SETTINGS.budget??2);
   if(budget>0 && aiUsage()>=budget){ alert(`月の予算上限($${budget})に達したため、AI機能を自動停止しています。設定で上限を引き上げると再開できます`); return false; }
   return true;
 }
+/* デモ用の応答を組み立てる。APIには接続しないので料金はかからない。
+   その問題の解説を使って返すため、実際の使用感に近いものが見られる。 */
+function demoReply(messages, opts){
+  if(opts.schema){   // 問題のAI変換
+    return JSON.stringify({questions:[{
+      question:'(デモ) 貼り付けたテキストから、このような問題が作られます。',
+      n_correct:1,
+      options:[
+        {letter:'A', text:'デモモードのため、この内容は固定です', correct:true,
+         explanation:'正解です。APIキーを設定すると、貼り付けた文章が実際に問題へ変換されます。'},
+        {letter:'B', text:'ダミーの選択肢', correct:false,
+         explanation:'不正解です。デモモードで表示している固定データです。'},
+      ],
+    }]});
+  }
+  const ask=(messages[messages.length-1]?.content||'').replace(aiChat.ctx||'','').trim();
+  const expl=((aiChat.ctx||'').split('【解説】')[1]||'').trim();
+  const head='**これはデモ応答です。**（APIには接続していません）\n\n';
+  if(/簡単|かみくだ/.test(ask))
+    return head+'かみくだいて言うと、次のとおりです。\n\n'+
+      (expl ? expl.split('\n').slice(0,2).join('\n') : '(この問題の解説がここに表示されます)')+
+      '\n\n要件のうち何を優先するかで、選ぶべき構成が決まります。';
+  if(/他の選択肢|不正解|なぜ/.test(ask))
+    return head+(expl || '(選択肢ごとの解説がここに表示されます)');
+  if(/例え/.test(ask))
+    return head+'例えるなら、引っ越しで「全部の荷物を新居へ先に運ぶ」か「必要なものだけ運んで残りは後から」かを選ぶのに似ています。\n\n'+
+      '速さを取るか、手間とコストを取るかというトレードオフで、この問題も同じ考え方で選択肢を絞れます。';
+  if(/実務|現場/.test(ask))
+    return head+'実務では、まず要件(復旧までの許容時間、コスト上限、運用にあてられる人数)を数字で決めてから構成を選びます。\n\n'+
+      'この問題の正解にあたる構成は、要件がはっきりしている場面でよく使われます。逆に要件が固まっていない段階では、小さく始めて計測することが多いです。';
+  return head+'「'+ask.slice(0,40)+(ask.length>40?'…':'')+'」について、実際のAIがこの問題の文脈をふまえて答えます。\n\n'+
+    '設定でAPIキーを入れると本物の応答に切り替わります。デモモードでは固定の文章を返しています。';
+}
 async function aiCall(messages, opts={}){
+  if(demoMode()){
+    await new Promise(r=>setTimeout(r, 700));   // 応答を待つ感じを再現する
+    return demoReply(messages, opts);
+  }
   const model=SETTINGS.model||'claude-haiku-4-5';
   const body={model, max_tokens:opts.maxTokens||4096, messages};
   if(opts.system) body.system=opts.system;
@@ -1018,7 +1059,7 @@ function buildQuestionCtx(q){
 function openAiChat(ctx, title){
   if(!aiReady()) return;
   aiChat={ctx, history:[], busy:false};
-  document.getElementById('ai-title').textContent='🤖 '+title;
+  document.getElementById('ai-title').textContent='🤖 '+title+(demoMode()? '（デモ）':'');
   document.getElementById('ai-presets').innerHTML=AI_PRESETS.map(p=>
     `<button class="chip" onclick="askAi('${p}')">${p}</button>`).join('');
   renderAiChat(); updateUsageUI();
@@ -1133,7 +1174,19 @@ function saveSettings(){
   SETTINGS.key=document.getElementById('set-key').value;
   SETTINGS.budget=document.getElementById('set-budget').value;
   SETTINGS.model=document.getElementById('set-model').value;
+  SETTINGS.demo=document.getElementById('set-demo').checked;
   lsSet(SETTINGS_KEY, SETTINGS);
+  syncDemoUI();
+}
+function syncDemoUI(){
+  const on=demoMode();
+  const note=document.getElementById('demo-note');
+  if(note) note.style.display = on? 'block':'none';
+  // デモ中は課金されないので、使用額と予算の欄は意味がない
+  ['set-key','set-model','set-budget'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.disabled=on;
+  });
 }
 function exportProgress(){
   const dump={exams:{}};
@@ -1217,6 +1270,8 @@ document.getElementById('set-budget').value=SETTINGS.budget||2;
 document.getElementById('set-model').value=SETTINGS.model||'claude-haiku-4-5';
 document.getElementById('set-shuffle').checked = SETTINGS.shuffle===true;
 document.getElementById('set-srs').checked = SETTINGS.srs!==false;
+document.getElementById('set-demo').checked = SETTINGS.demo===true;
+syncDemoUI();
 document.getElementById('cv-exam').innerHTML=EXAMS.filter(e=>!e.retired).map(e=>`<option value="${e.id}">AWS ${e.short} (${e.id})</option>`).join('');
 updateUsageUI();
 switchView('exams');
