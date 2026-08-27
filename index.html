@@ -622,7 +622,9 @@ function matchPool(q){ return shuffled([...new Set(q.statements.map(s=>s.answer)
 /* 選択肢の表示順。シャッフル時は表示記号を振り直し、判定は元の記号(orig)で行う */
 function displayOpts(q){
   if(!q.options) return [];
-  if(SETTINGS.shuffle===false || SETTINGS.shuffle===undefined)
+  // 既定でシャッフルする。作問の都合で正解がAに寄っているため、
+  // そのまま出すと「Aを選べば当たる」状態になり、本番の練習にならない。
+  if(SETTINGS.shuffle===false)
     return q.options.map(o=>({...o, orig:o.letter}));
   const L='ABCDEFGH';
   return shuffled(q.options, 'opt:'+q.id).map((o,i)=>({...o, orig:o.letter, letter:L[i]}));
@@ -1325,7 +1327,7 @@ else if(matchMedia('(prefers-color-scheme: dark)').matches) document.documentEle
 document.getElementById('set-key').value=SETTINGS.key||'';
 document.getElementById('set-budget').value=SETTINGS.budget||2;
 document.getElementById('set-model').value=SETTINGS.model||'claude-haiku-4-5';
-document.getElementById('set-shuffle').checked = SETTINGS.shuffle===true;
+document.getElementById('set-shuffle').checked = SETTINGS.shuffle!==false;
 document.getElementById('set-srs').checked = SETTINGS.srs!==false;
 document.getElementById('set-demo').checked = SETTINGS.demo===true;
 syncDemoUI();
