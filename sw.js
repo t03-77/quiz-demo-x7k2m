@@ -2,7 +2,7 @@
    アプリ本体と問題データを最初の訪問でキャッシュし、以後はネットワークが無くても起動する。
    音声(audio/)は容量が大きいので自動キャッシュしない — 再生した分だけブラウザが保持する。 */
 
-const VERSION = 'v1';
+const VERSION = 'v2';   // 上げると古いキャッシュを破棄する
 const CACHE = `certquiz-${VERSION}`;
 
 // 起動に必要な最小構成。data/audio_tracks.js は無い環境もあるため別扱いにする
@@ -41,6 +41,9 @@ self.addEventListener('fetch', (e) => {
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return;       // 外部APIはキャッシュしない
   if (url.pathname.includes('/audio/')) return;          // 音声は大きいので対象外
+  // デモ用キーは差し替えることがある。キャッシュを返すと古いキーのままになり、
+  // 新しいパスワードで解錠できなくなる（実際にそれが起きた）
+  if (url.pathname.endsWith('/data/demo_key.js')) return;
 
   // まずキャッシュを返して即座に起動し、裏で最新を取り込む
   e.respondWith((async () => {

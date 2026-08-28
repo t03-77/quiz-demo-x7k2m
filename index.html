@@ -447,8 +447,10 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
 <script src="data/report.js"></script><!-- 不具合報告の送信先(未設定ならコピーのみ) -->
 <script>
 /* デモ用の暗号化キーは配布するときだけ置かれる。
-   無いときに404のエラーを出さないよう、動的に読み込んで失敗を握りつぶす。 */
-(function(){ var s=document.createElement('script'); s.src='data/demo_key.js';
+   無いときに404のエラーを出さないよう、動的に読み込んで失敗を握りつぶす。
+   キーを差し替えたのに古いものが読まれると新しいパスワードで解錠できなくなるため、
+   毎回取り直す。デモ機能はAI APIを呼ぶのでオンラインが前提であり、これで困らない。 */
+(function(){ var s=document.createElement('script'); s.src='data/demo_key.js?t='+Date.now();
   s.onerror=function(){}; s.onload=function(){ if(window.syncDemoUI) syncDemoUI(); };
   document.head.appendChild(s); })();
 </script>
