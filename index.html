@@ -390,7 +390,7 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
       <h3 style="flex:1">この問題を報告</h3>
       <button class="iconbtn" onclick="document.getElementById('repsheet').classList.remove('on')">閉じる</button>
     </div>
-    <div class="note" style="margin-bottom:10px"><b>問題文や選択肢を書き写す必要はありません。</b>どの問題かは自動で添えられます。</div>
+    <div class="note" style="margin-bottom:10px"><b>問題文や選択肢を書き写す必要はありません。</b>下に書いた内容と、問題の中身（問題文・全選択肢・正解・解説）がひとまとめになります。</div>
     <div class="formrow"><label>どうしましたか</label>
       <select id="rep-kind" style="width:100%">
         <option>正解や解説がおかしい</option>
@@ -1003,8 +1003,8 @@ function openReport(){
   box.innerHTML = window.REPORT_ENDPOINT
     ? `<button class="btn" onclick="sendReport()">送信する</button>
        <button class="btn sub" style="margin-top:6px" onclick="copyReport()">内容をコピーする</button>`
-    : `<button class="btn" onclick="copyReport()">内容をコピーする</button>
-       <div class="note" style="margin-top:6px">コピーした内容を、メールやチャットで管理者に送ってください。</div>`;
+    : `<button class="btn" onclick="copyReport()">📋 報告文をコピーする</button>
+       <div class="note" style="margin-top:6px">コピーした内容を、<b>メールやチャットに貼り付けて</b>管理者に送ってください。<br>貼り付けるだけで、どの問題のどこがおかしいかが伝わります。</div>`;
   document.getElementById('repsheet').classList.add('on');
 }
 function syncReportPreview(){
@@ -1013,10 +1013,16 @@ function syncReportPreview(){
 async function copyReport(){
   const msg=document.getElementById('rep-msg');
   try{
-    await navigator.clipboard.writeText(reportText(REPORT_Q));
-    msg.innerHTML='<b>コピーしました。</b>メールやチャットに貼り付けて送ってください。';
+    const t=reportText(REPORT_Q);
+    await navigator.clipboard.writeText(t);
+    msg.innerHTML=`<b>コピーしました（${t.length.toLocaleString()}字）。</b>メールやチャットに貼り付けて送ってください。`;
   }catch(e){
-    msg.textContent='コピーできませんでした。下の「送る内容を確認する」から手動で選択してください。';
+    // クリップボードが使えない環境（古いブラウザ、http接続など）向けに、選択できる状態にする
+    const pre=document.getElementById('rep-preview');
+    pre.closest('details').open=true;
+    const r=document.createRange(); r.selectNodeContents(pre);
+    const sel=window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+    msg.innerHTML='<b>自動コピーができませんでした。</b>下に報告文を開いて選択したので、そのままコピー（Ctrl+C）してください。';
   }
 }
 async function sendReport(){
