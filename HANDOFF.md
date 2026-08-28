@@ -78,6 +78,41 @@ AWS認定資格の学習ウェブアプリ。静的HTML1枚（`index.html`）＋
 
 ## 残作業（優先度順）
 
+### 0. 誤答肢の書き直し（進行中・2026-08-28）
+
+**やり方が確立したので、まずこれを続けるのが効率的。**
+
+短い誤答を、正解と要素を共有した切りにくい誤答に置き換える。**正解肢は触らない。**
+短い誤答は同時に質も低い（「手動で突き合わせ」「問題文が否定済みの方法」など、
+中身を知らなくても切れるもの）ため、長さを揃えることが質を上げることと一致する。
+
+手順:
+1. `python -X utf8 tools/audit_difficulty.py` で「正解が最長」が公式より高い資格を選ぶ
+2. 対象問題を抽出（下のコマンド）
+3. パッチJSONを書く → `python tools/{資格}_apply_patch.py <patch> --dry` で長さを確認
+   - **各問で誤答を1つは正解より長くする**。同値でも「正解が最長」の判定に引っかかる
+4. 適用 → `build_orig_data.py` → `smoke_test.js` と `audit_consistency.py`
+5. 10問ごとにコミット
+
+```
+python -X utf8 -c "
+import json
+js=open('data/orig.js',encoding='utf-8').read(); n=json.loads(js[js.index('['):js.rindex(']')+1])
+for ex in ['DVA-C02','MLA-C01']:
+    qs=[q for q in n if q.get('exam')==ex and q.get('set')=='orig' and q.get('options')]
+    hit=[q['id'] for q in qs if min(len(o['text']) for o in q['options'] if o['correct']) > max(len(o['text']) for o in q['options'] if not o['correct'])]
+    print(ex, len(hit), '問'); json.dump(hit, open('資料/生成/_longest_%s.json'%ex,'w'), ensure_ascii=False)
+"
+```
+
+済み: DVA-C02 30問 / MLA-C01 11問。**残り DVA-C02 18問・MLA-C01 23問。**
+他資格は公式並みのため、この2資格を終えたらいったん完了とする。
+
+> **2文以上（40% vs 23%）はこの作業では増えない。** 公式で多いのは
+> 正解肢自体が「操作A。操作B。」の2文構造だから。誤答だけ直しても動かないことを
+> 実測で確認済み（`資料/生成/_予測_長さと構造_2026-08-28.md`）。
+> 着手するなら鉄則3の手順で正解肢を含めて組み直すこと。
+
 ### 1. O-3: 正解と1点だけ違う誤答を増やす（5.2% → 30%）
 
 **難易度に最も効く。** 公式は正解とほぼ同文で1点だけ違う誤答を隣に置く。
