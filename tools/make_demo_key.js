@@ -13,16 +13,24 @@
  * 上の4点を守れば、最悪破られても損害は上限額までに収まる。
  *
  * 使い方:
- *   node tools/make_demo_key.js "sk-ant-xxxxx" "20文字以上のパスワード"
+ *   node tools/make_demo_key.js "sk-ant-xxxxx" "20文字以上のパスワード" [ワークスペースID]
+ *
+ * ワークスペースに紐づいたキーの場合は、第3引数に wrkspc_ から始まるIDを渡す。
+ * これを入れておけば、受け取った人は設定をいじらずに使える。
+ * （IDは秘密情報ではないので暗号化せずに持たせる）
  */
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 
-const [apiKey, password] = process.argv.slice(2);
+const [apiKey, password, workspace] = process.argv.slice(2);
 
 if (!apiKey || !password) {
-  console.error('使い方: node tools/make_demo_key.js "<APIキー>" "<パスワード>"');
+  console.error('使い方: node tools/make_demo_key.js "<APIキー>" "<パスワード>" [ワークスペースID]');
+  process.exit(1);
+}
+if (workspace && !/^wrkspc[_-]/.test(workspace)) {
+  console.error('ワークスペースIDは wrkspc_ で始まる文字列です。渡された値: ' + workspace);
   process.exit(1);
 }
 if (password.length < 20) {
@@ -49,6 +57,7 @@ const payload = {
   salt: b64(salt), iv: b64(iv),
   data: b64(Buffer.concat([enc, tag])),
 };
+if (workspace) payload.workspace = workspace;   // 秘密ではないので平文で持たせる
 
 const out = path.resolve(__dirname, '..', 'data', 'demo_key.js');
 fs.writeFileSync(out,
@@ -59,6 +68,13 @@ fs.writeFileSync(out,
 console.log('作成しました: data/demo_key.js');
 console.log('  キーの先頭:', apiKey.slice(0, 10) + '...');
 console.log('  反復回数  :', ITER.toLocaleString());
+console.log('  ワークスペース:', workspace || '(指定なし)');
+if (!workspace && /^sk-ant/.test(apiKey)) {
+  console.log();
+  console.log('  ※ 「anthropic-workspace-id is required」というエラーが出る場合は、');
+  console.log('     第3引数に wrkspc_ から始まるIDを渡して作り直してください。');
+  console.log('     入れておけば、受け取った人は設定をいじらずに使えます。');
+}
 console.log();
 console.log('このあとの手順:');
 console.log('  1. 提供元の管理画面で、このキーに低い上限額（$1〜5）を設定する');

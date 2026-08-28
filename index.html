@@ -1350,7 +1350,8 @@ async function fetchModels(){
       : {'x-api-key':key, 'anthropic-version':'2023-06-01',
          'anthropic-dangerous-direct-browser-access':'true'};
     // 一覧の取得もワークスペースの指定が要る場合がある
-    const ws=(SETTINGS.workspace||'').trim();
+    const ws=(SETTINGS.workspace||'').trim()
+      || (UNLOCKED_KEY && !(SETTINGS.key||'').trim() && window.DEMO_KEY?.workspace) || '';
     if(!openai && ws) head['anthropic-workspace-id']=ws;
     const res=await fetch(openai? 'https://api.openai.com/v1/models'
                                 : 'https://api.anthropic.com/v1/models?limit=100', {headers:head});
@@ -1452,8 +1453,10 @@ async function callAnthropic(model, key, messages, opts){
     'anthropic-version':'2023-06-01',
     'anthropic-dangerous-direct-browser-access':'true',
   };
-  // ワークスペースに紐づいたキーは、どのワークスペースでの利用かを添える必要がある
-  const ws=(SETTINGS.workspace||'').trim();
+  // ワークスペースに紐づいたキーは、どのワークスペースでの利用かを添える必要がある。
+  // デモ用キーに同梱されている場合は、受け取った人が設定しなくても使えるようにする
+  const ws=(SETTINGS.workspace||'').trim()
+    || (UNLOCKED_KEY && !(SETTINGS.key||'').trim() && window.DEMO_KEY?.workspace) || '';
   if(ws) head['anthropic-workspace-id']=ws;
   const res=await fetch('https://api.anthropic.com/v1/messages',{
     method:'POST', headers:head, body:JSON.stringify(body),
