@@ -5,14 +5,22 @@ const path = require('path');
 
 const PASS = 'Test-Passphrase-For-E2E-2026-0827';
 
-// デモ用キーは配布するときだけ置くファイル。無ければこのテストは対象外にする
-const fs = require('fs');
-const KEY_FILE = path.resolve('C:/Users/na7sh/Works/95_work/aws/01_projects/cert_quiz_app/data/demo_key.js');
-if (!fs.existsSync(KEY_FILE)) {
-  console.log('デモ用キーが配置されていないためスキップします');
-  console.log('  試すには: node tools/make_demo_key.js "sk-ant-test-demo-key-for-e2e-only" "' + PASS + '"');
-  console.log('JSエラーなし');
-  process.exit(0);
+/* テスト用のキーをページ内で作って差し込む。
+   配布中の本物の demo_key.js に依存すると、パスワードが違って解錠できず
+   テストが落ちる（実際にそれで落ちた）。本物のキーには触れない。 */
+async function seedKey(page) {
+  await page.evaluate(async (pass) => {
+    const enc = new TextEncoder();
+    const salt = crypto.getRandomValues(new Uint8Array(16));
+    const iv = crypto.getRandomValues(new Uint8Array(12));
+    const base = await crypto.subtle.importKey('raw', enc.encode(pass), 'PBKDF2', false, ['deriveBits']);
+    const bits = await crypto.subtle.deriveBits({ name: 'PBKDF2', salt, iterations: 1000, hash: 'SHA-256' }, base, 256);
+    const k = await crypto.subtle.importKey('raw', bits, 'AES-GCM', false, ['encrypt']);
+    const ct = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, k, enc.encode('sk-ant-test-demo-key-for-e2e'));
+    const b64 = b => btoa(String.fromCharCode(...new Uint8Array(b)));
+    window.DEMO_KEY = { v: 1, iter: 1000, salt: b64(salt), iv: b64(iv), data: b64(ct) };
+    if (window.syncDemoUI) syncDemoUI();
+  }, PASS);
 }
 
 (async () => {
@@ -36,6 +44,7 @@ if (!fs.existsSync(KEY_FILE)) {
   const url = 'file:///' + path.resolve('C:/Users/na7sh/Works/95_work/aws/01_projects/cert_quiz_app/index.html').replace(/\\/g, '/');
   await page.goto(url);
   await page.waitForSelector('.examcard');
+  await seedKey(page);
 
   // デモモードをONにすると解錠の入口が出る
   await page.locator('nav button[data-v="settings"]').click();
@@ -80,12 +89,24 @@ if (!fs.existsSync(KEY_FILE)) {
   console.log('localStorage内のキー:', saved.key === '' ? '(空)' : '★保存されている');
   if (saved.hasUnlocked) throw new Error('復号したキーが端末に保存されてしまっている');
 
-  // 再読み込みすると解錠が解ける
+  // 再読み込みしても解錠が続くこと。
+  // スマホでアプリを切り替えるとブラウザがページを破棄して再読み込みするため、
+  // ここで解けると学習中にAI機能が使えなくなる（実際にその指摘を受けた）
   await page.reload();
   await page.waitForSelector('.examcard');
-  const afterReload = await page.evaluate(() => demoMode());
-  console.log('再読み込み後にデモモードへ戻る:', afterReload);
-  if (!afterReload) throw new Error('リロードしてもキーが残っている');
+  const stillUnlocked = await page.evaluate(() => !!UNLOCKED_KEY);
+  console.log('再読み込み後も解錠が続く:', stillUnlocked);
+  if (!stillUnlocked) throw new Error('再読み込みで解錠が解けてしまう');
+
+  // タブを閉じれば消えること（sessionStorage なので別コンテキストには残らない）
+  const other = await browser.newContext({ viewport: { width: 420, height: 900 } });
+  const p2 = await other.newPage();
+  await p2.goto(url);
+  await p2.waitForSelector('.examcard');
+  const fresh = await p2.evaluate(() => !UNLOCKED_KEY);
+  console.log('別のタブでは解錠されていない:', fresh);
+  if (!fresh) throw new Error('別タブにキーが漏れている');
+  await other.close();
 
   console.log(errors.length ? 'JSエラー ' + errors.length + '件: ' + errors[0] : 'JSエラーなし');
   await browser.close();

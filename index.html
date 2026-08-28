@@ -1243,8 +1243,13 @@ function demoMode(){ return !!SETTINGS.demo && !UNLOCKED_KEY; }
 /* デモ用キーの解錠。
    暗号文は公開されるので、パスワードの強度がそのまま防御力になる。
    運用（デモ専用キー・低い上限額・使用後に無効化）は tools/make_demo_key.js に書いてある。
-   復号したキーは変数にだけ置き、localStorage には保存しない（画面を閉じれば消える）。 */
-let UNLOCKED_KEY = null;
+
+   復号したキーは sessionStorage に置く。localStorage には保存しない。
+   変数だけに持たせていたときは、スマホでアプリを切り替えるとブラウザが
+   ページを破棄して再読み込みするため、そのたびに解錠が解けてしまった。
+   sessionStorage ならタブを閉じるまで保つ一方、端末には残らない。 */
+const UNLOCK_KEY_STORE = 'certquiz_demo_unlocked';
+let UNLOCKED_KEY = (() => { try { return sessionStorage.getItem(UNLOCK_KEY_STORE) || null; } catch(e){ return null; } })();
 async function unlockDemoKey(){
   const msg=document.getElementById('demo-key-msg');
   const pass=document.getElementById('demo-pass').value;
@@ -1259,15 +1264,26 @@ async function unlockDemoKey(){
     const key=await crypto.subtle.importKey('raw', bits, 'AES-GCM', false, ['decrypt']);
     const plain=await crypto.subtle.decrypt({name:'AES-GCM', iv:b(d.iv)}, key, b(d.data));
     UNLOCKED_KEY=new TextDecoder().decode(plain);
-    msg.innerHTML='<b>解錠しました。</b>実際のAIに接続します（この画面を閉じるとキーは消えます）。';
+    try{ sessionStorage.setItem(UNLOCK_KEY_STORE, UNLOCKED_KEY); }catch(e){}
     document.getElementById('demo-pass').value='';
+    syncDemoUI();   // 先に画面を整えてから、結果のメッセージで上書きする
+    msg.innerHTML='<b>解錠しました。</b>実際のAIに接続します（タブを閉じるとキーは消えます）。'
+      +'<button class="dangerlink" style="margin-left:8px" onclick="lockDemoKey()">解除する</button>';
     updateUsageUI();
   }catch(e){
     UNLOCKED_KEY=null;
+    try{ sessionStorage.removeItem(UNLOCK_KEY_STORE); }catch(e2){}
     msg.textContent='パスワードが違うようです。';
   }
 }
 function activeKey(){ return UNLOCKED_KEY || (SETTINGS.key||'').trim(); }
+function lockDemoKey(){
+  UNLOCKED_KEY=null;
+  try{ sessionStorage.removeItem(UNLOCK_KEY_STORE); }catch(e){}
+  const km=document.getElementById('demo-key-msg');
+  if(km) km.textContent='解除しました。デモ応答に戻ります。';
+  updateUsageUI();
+}
 
 /* モデル名は次々に増える。アプリに書いた候補はすぐ古くなるので、
    提供元のAPIから実際に使える一覧を取れるようにしている。
@@ -1564,6 +1580,12 @@ function syncDemoUI(){
   // デモ用キーが配布されているときだけ、解錠の入口を出す
   const row=document.getElementById('demo-key-row');
   if(row) row.style.display = (on && window.DEMO_KEY)? 'block':'none';
+  // すでに解錠済みなら、その旨と解除の手立てを出す（解けたのか続いているのか分かるように）
+  const km=document.getElementById('demo-key-msg');
+  if(km && UNLOCKED_KEY && on){
+    km.innerHTML='<b>解錠済みです。</b>実際のAIに接続します。'
+      +'<button class="dangerlink" style="margin-left:8px" onclick="lockDemoKey()">解除する</button>';
+  }
   // デモ中は課金されないので、使用額と予算の欄は意味がない
   ['set-key','set-model','set-budget'].forEach(id=>{
     const el=document.getElementById(id);
