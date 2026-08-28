@@ -137,6 +137,21 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
 .bankbar .st{flex:1}
 .setrow{display:flex; justify-content:space-between; font-size:13px; padding:7px 0; border-bottom:1px solid var(--grid)}
 .setrow:last-child{border:0}
+/* AIの回答は Markdown で返ってくる。記号のまま出ると読みにくいので整形する */
+.md>*:first-child{margin-top:0}
+.md>*:last-child{margin-bottom:0}
+.md p{margin:7px 0}
+.md h1,.md h2,.md h3{font-size:14px; font-weight:700; margin:11px 0 5px; line-height:1.35}
+.md h1{font-size:15px}
+.md ul,.md ol{margin:6px 0; padding-left:1.25em}
+.md li{margin:3px 0}
+.md code{background:var(--page); border:1px solid var(--grid); border-radius:4px; padding:0 4px; font-size:.92em}
+.md pre{background:var(--page); border:1px solid var(--grid); border-radius:8px; padding:8px; overflow-x:auto; margin:7px 0}
+.md pre code{background:none; border:0; padding:0}
+.md hr{border:0; border-top:1px solid var(--grid); margin:9px 0}
+.md table{border-collapse:collapse; margin:7px 0; font-size:.92em; display:block; overflow-x:auto}
+.md th,.md td{border:1px solid var(--grid); padding:4px 7px; text-align:left}
+.md th{background:var(--page); font-weight:700}
 </style>
 </head>
 <body>
@@ -580,6 +595,56 @@ function shuffled(arr, seedStr){
 /* ---------- 用語リンク ---------- */
 const TERMS_SORTED = Object.keys(GLOSSARY).sort((a,b)=>b.length-a.length);
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+
+/* AIの回答は Markdown で返ってくる。ライブラリを足さずに、よく使う記法だけ整形する。
+   必ず esc() を通してから記号を解釈するので、回答にHTMLが混ざっても実行されない。 */
+function mdToHtml(src){
+  const lines = String(src==null?'':src).replace(/\r\n?/g,'\n').split('\n');
+  const out=[]; let para=[], list=null, code=null;
+  const inline = s => esc(s)
+    .replace(/`([^`]+)`/g, (m,c)=>'<code>'+c+'</code>')
+    .replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>')
+    .replace(/__([^_]+)__/g, '<b>$1</b>');
+  const endPara = ()=>{ if(para.length){ out.push('<p>'+para.map(inline).join('<br>')+'</p>'); para=[]; } };
+  const endList = ()=>{ if(list){ out.push('</'+list+'>'); list=null; } };
+  const close   = ()=>{ endPara(); endList(); };
+  const openList= t =>{ endPara(); if(list!==t){ endList(); out.push('<'+t+'>'); list=t; } };
+  const cells   = r => r.trim().replace(/^\|/,'').replace(/\|$/,'').split('|').map(c=>c.trim());
+
+  for(let i=0;i<lines.length;i++){
+    const ln=lines[i];
+    if(code!==null){                                   // コードブロックの中
+      if(/^```/.test(ln.trim())){ out.push('<pre><code>'+esc(code.join('\n'))+'</code></pre>'); code=null; }
+      else code.push(ln);
+      continue;
+    }
+    if(/^```/.test(ln.trim())){ close(); code=[]; continue; }
+    if(!ln.trim()){ close(); continue; }
+    let m;
+    if(m=ln.match(/^(#{1,6})\s+(.*)$/)){               // 見出し
+      close(); const l=Math.min(m[1].length,3);
+      out.push('<h'+l+'>'+inline(m[2])+'</h'+l+'>'); continue;
+    }
+    if(/^([-*_])\1{2,}\s*$/.test(ln.trim())){ close(); out.push('<hr>'); continue; }
+    if(/^\s*\|.*\|\s*$/.test(ln) && /^\s*\|[\s:|-]+\|\s*$/.test(lines[i+1]||'')){   // 表
+      close();
+      let h='<table><tr>'+cells(ln).map(c=>'<th>'+inline(c)+'</th>').join('')+'</tr>';
+      i++;                                             // 区切り行を読み飛ばす
+      while(/^\s*\|.*\|\s*$/.test(lines[i+1]||'')){
+        i++; h+='<tr>'+cells(lines[i]).map(c=>'<td>'+inline(c)+'</td>').join('')+'</tr>';
+      }
+      out.push(h+'</table>'); continue;
+    }
+    if(m=ln.match(/^\s*[-*+]\s+(.*)$/)){   openList('ul'); out.push('<li>'+inline(m[1])+'</li>'); continue; }
+    if(m=ln.match(/^\s*\d+[.)]\s+(.*)$/)){ openList('ol'); out.push('<li>'+inline(m[1])+'</li>'); continue; }
+    endList(); para.push(ln.trim());
+  }
+  // 生成が途中で切れてコードブロックが閉じていないことがある
+  if(code!==null) out.push('<pre><code>'+esc(code.join('\n'))+'</code></pre>');
+  close();
+  return out.join('');
+}
+
 function linkify(text){
   let segs=[{t:String(text), term:false}];
   for(const t of TERMS_SORTED){
@@ -1533,7 +1598,7 @@ function renderAiChat(){
   box.innerHTML = aiChat.history.map(h=>
     h.role==='user'
       ? `<div style="text-align:right;margin:6px 0"><span style="display:inline-block;background:var(--accent-soft);border-radius:10px;padding:7px 11px;max-width:85%">${esc(h.content)}</span></div>`
-      : `<div style="margin:6px 0"><span style="display:inline-block;background:var(--page);border:1px solid var(--grid);border-radius:10px;padding:7px 11px;max-width:92%;white-space:pre-wrap">${esc(h.content)}</span></div>`
+      : `<div style="margin:6px 0"><div class="md" style="background:var(--page);border:1px solid var(--grid);border-radius:10px;padding:9px 11px;max-width:92%">${mdToHtml(h.content)}</div></div>`
   ).join('') + (aiChat.busy?'<div class="note">考え中…</div>':'');
   box.scrollTop=box.scrollHeight;
 }
