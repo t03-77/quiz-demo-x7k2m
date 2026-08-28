@@ -157,6 +157,26 @@ def expl_stats(qs):
     }
 
 
+def per_exam(off, mine, fn, key):
+    """資格ごとに公式と自作を比べる。
+
+    全資格をまとめた平均で比べてはいけない。
+    実際、語の重なりは公式が SAP-C02 0.409 / DOP-C02 0.438 に対し
+    CLF-C02 0.119 / AIF-C01 0.157 と3倍以上の開きがある。
+    全体平均(0.267)を目標にすると、基礎資格には過剰な水増しを強いることになる
+    （実際にそれで CLF-C02 に不要な作業を指示しかけた）。
+    """
+    rows = []
+    for ex in sorted({q["exam"] for q in mine}):
+        o = [q for q in off if q.get("exam") == ex]
+        m = [q for q in mine if q["exam"] == ex]
+        if not o or not m:
+            continue
+        ov, mv = fn(o).get(key, 0), fn(m).get(key, 0)
+        rows.append((ex, ov, mv))
+    return rows
+
+
 def main():
     off, mine = load()
     groups = [
@@ -191,12 +211,30 @@ def main():
     print()
     print("=" * 74)
     if gaps:
-        print("次に直すべき箇所:")
+        print("次に直すべき箇所（★は全資格をまとめた値。資格ごとの内訳を必ず見ること）:")
         for t, k, ov, mv in gaps:
             print("   [%s] %s … 公式 %s に対し 自作 %s" % (t.split(". ")[1], k, ov, mv))
-    else:
+
+    # 全資格をまとめた平均は資格差に埋もれる。主要な項目は必ず資格ごとにも出す。
+    # （公式の語の重なりは SAP 0.409 / CLF 0.119 と3倍以上違う）
+    ng_exam = []
+    for title, fn, key in [("2. 選択肢の文法", option_stats, "2文以上"),
+                           ("3. 選択肢どうしの関係", overlap_stats, "肢どうしの語の重なり")]:
+        print()
+        print("  ▼ %s（資格ごと。全体平均では資格差が埋もれる）" % key)
+        for ex, ov, mv in per_exam(off, mine, fn, key):
+            ratio = (mv / ov) if ov else 1
+            mark = "" if ratio >= 0.9 else ("   ★不足 %.0f%%" % (100 * ratio))
+            if ratio < 0.9:
+                ng_exam.append((key, ex, ov, mv))
+            print("     %-9s 公式 %-8s 自作 %-8s%s" % (ex, round(ov, 3), round(mv, 3), mark))
+
+    print()
+    if ng_exam:
+        print("資格ごとに見て公式に届いていないもの: %d件" % len(ng_exam))
+    elif not gaps:
         print("この観点では、公式と目立った差はありません")
-    return 1 if gaps else 0
+    return 1 if (gaps or ng_exam) else 0
 
 
 if __name__ == "__main__":

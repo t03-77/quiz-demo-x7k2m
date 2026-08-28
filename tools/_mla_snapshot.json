@@ -1,0 +1,3478 @@
+{
+ "MLA-C01_orig_001": {
+  "file": "MLA-C01_orig.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "機械学習 (ML) のためのデータ準備",
+  "level": "easy",
+  "question": "ある企業の ML チームが、複数のモデルで共通して使用する顧客属性の特徴量を作成しています。トレーニング時にはポイントインタイムの履歴データを使用し、リアルタイム推論時には同じ特徴量を数ミリ秒のレイテンシーで取得する必要があります。また、チーム間で特徴量の定義を再利用し、トレーニングと推論の間の特徴量の不整合を防ぎたいと考えています。これらの要件を満たす AWS のサービスまたは機能はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon SageMaker Feature Store を使用して、オンラインストアとオフラインストアの両方に特徴量を保存する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_002": {
+  "file": "MLA-C01_orig.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "機械学習 (ML) のためのデータ準備",
+  "level": "medium",
+  "question": "ある金融企業が、クレジットカードの不正取引を検出する二値分類モデルをトレーニングしています。トレーニングデータセットでは不正取引 (陽性クラス) が全体の 0.3% しかありません。最初のトレーニングでは、モデルがほぼすべての取引を「正常」と予測してしまい、不正取引をほとんど検出できませんでした。この問題に対処するためにデータサイエンティストが取るべきアクションはどれですか。",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "SMOTE などの手法で少数派クラスの合成サンプルを生成する。トレーニング分割のクラス比率を改善したうえで再トレーニングする。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "損失関数のクラス重みを調整し、少数派クラスの誤分類に大きなペナルティを課す。トレーニングデータの件数は変えずに再トレーニングする。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_003": {
+  "file": "MLA-C01_orig.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "機械学習 (ML) のためのデータ準備",
+  "level": "hard",
+  "question": "ある企業が Amazon SageMaker AI で数百 GB のデータセットを使用してモデルをトレーニングしています。データは Amazon S3 に多数のファイルとして保存されています。現在は File モードを使用しているため、トレーニングジョブの開始前にデータセット全体がトレーニングインスタンスのストレージにダウンロードされ、ジョブの開始が大幅に遅延しています。また、大きな EBS ボリュームをプロビジョニングする必要がありコストも増加しています。トレーニングコードの変更を最小限に抑えながら、ジョブの開始時間を短縮できる方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "入力データの設定を FastFile モードに変更し、S3 からオンデマンドでデータをストリーミングする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_004": {
+  "file": "MLA-C01_orig.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML モデルの開発",
+  "level": "easy",
+  "question": "ある企業のデータサイエンティストが、需要予測モデルをトレーニングしています。トレーニングデータに対する誤差は非常に小さいものの、検証データに対する誤差が大きく、両者の差が学習の進行とともに拡大しています。この状況の原因と、最初に試すべき対処として適切なものはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "モデルが過学習しているため、正則化の追加やモデルの複雑さの削減を行う。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_005": {
+  "file": "MLA-C01_orig.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML モデルの開発",
+  "level": "medium",
+  "question": "ある企業が Amazon SageMaker AI の自動モデルチューニング (ハイパーパラメータチューニング) を使用して XGBoost モデルを最適化しています。チューニング対象のハイパーパラメータが多く、1 回のトレーニングに時間がかかるため、できるだけ少ないトレーニングジョブ数で良好なハイパーパラメータの組み合わせを見つけ、さらに見込みのないジョブの計算コストを削減したいと考えています。どの設定の組み合わせが最も適切ですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "検索戦略にベイズ最適化を選択し、チューニングジョブで早期停止を有効にする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_006": {
+  "file": "MLA-C01_orig.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML モデルの開発",
+  "level": "hard",
+  "question": "ある医療系スタートアップが、検査画像から疾患の可能性をスクリーニングする二値分類モデルを開発しています。疾患を見逃す偽陰性は患者の治療機会の喪失につながるため、ビジネス上のコストが極めて高い一方、偽陽性は追加検査で確認できるため許容されます。現在のモデルはデフォルトの分類しきい値 0.5 で運用されており、偽陰性が多く発生しています。モデルを再トレーニングせずに偽陰性を減らし、その効果を適切に評価するためのアクションの組み合わせはどれですか。",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "分類しきい値を 0.5 より低い値に調整し、陽性と判定される範囲を広げる。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "再現率 (recall) を主要な評価指標として、しきい値変更前後のモデルを比較する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_007": {
+  "file": "MLA-C01_orig.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ワークフローのデプロイとオーケストレーション",
+  "level": "medium",
+  "question": "ある企業が、社内ツール用の ML モデルを Amazon SageMaker AI にデプロイしようとしています。推論リクエストは営業時間中に散発的に発生し、リクエストがない時間帯が長く続きます。トラフィックは予測不能ですが、各リクエストのペイロードは小さく、初回リクエスト時の数秒程度のコールドスタートによる遅延は許容できます。推論インフラストラクチャのコストを最小限に抑えられるデプロイオプションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "SageMaker AI のサーバーレス推論エンドポイントにモデルをデプロイする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_008": {
+  "file": "MLA-C01_orig.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ワークフローのデプロイとオーケストレーション",
+  "level": "hard",
+  "question": "ある企業が Amazon SageMaker Pipelines でモデルの再トレーニングパイプラインを構築し、生成されたモデルを SageMaker Model Registry に登録しています。ガバナンス要件により、ML リーダーがモデルレジストリ上でモデルパッケージを手動で承認した場合にのみ、本番エンドポイントへのデプロイを自動的に開始する必要があります。追加のポーリング処理を実装せずにこの要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "モデルパッケージの承認ステータス変更イベントを Amazon EventBridge のルールで検知し、デプロイ用の AWS CodePipeline または AWS Lambda 関数を起動する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_009": {
+  "file": "MLA-C01_orig.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ソリューションのモニタリング、保守、セキュリティ",
+  "level": "medium",
+  "question": "ある e コマース企業が、商品レコメンデーションモデルを Amazon SageMaker AI のリアルタイムエンドポイントで運用しています。デプロイから数か月後、ユーザー行動の変化により本番の入力データの統計的な分布がトレーニングデータから徐々に乖離し、モデルの精度が低下していることが判明しました。今後はこのようなデータの乖離を自動的に検出し、しきい値を超えた場合に運用チームに通知したいと考えています。最も少ない運用オーバーヘッドでこの要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "SageMaker Model Monitor のデータ品質モニタリングを設定し、違反を Amazon CloudWatch 経由で通知する。ベースラインはトレーニングデータから作成する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_010": {
+  "file": "MLA-C01_orig.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ソリューションのモニタリング、保守、セキュリティ",
+  "level": "hard",
+  "question": "ある企業が、機密性の高い顧客データを使用して Amazon SageMaker AI でトレーニングジョブを実行します。セキュリティ要件として、トレーニングコンテナからインターネットへのアウトバウンド通信を禁止し、すべてのデータアクセスを企業の VPC 内のプライベートなネットワーク経路に限定する必要があります。トレーニングデータは Amazon S3 に保存されています。この要件を満たすために実施すべきアクションはどれですか。",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "トレーニングジョブの作成時に VPC 設定 (プライベートサブネットとセキュリティグループ) を指定し、ネットワーク分離 (EnableNetworkIsolation) を有効にする。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "VPC に Amazon S3 用のゲートウェイ型 VPC エンドポイントを作成し、プライベートサブネットのルートテーブルに関連付ける。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_011": {
+  "file": "MLA-C01_orig_b2.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "機械学習 (ML) のためのデータ準備",
+  "level": "easy",
+  "question": "ある企業が、Amazon S3 に保存されたアプリケーションログを ML プロジェクトの事前調査のためにアドホックに分析したいと考えています。分析は不定期で、専任のインフラ管理者はいません。データを移動させずに標準 SQL でクエリでき、実行したクエリに対してのみ料金が発生するサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon Athena を使用して S3 上のデータを直接クエリする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_012": {
+  "file": "MLA-C01_orig_b2.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "機械学習 (ML) のためのデータ準備",
+  "level": "easy",
+  "question": "ある ML エンジニアが、複数の部門から Amazon S3 に集約された多様な形式 (CSV、JSON、Parquet) のデータセットを ML パイプラインで利用しようとしています。各データセットのスキーマを手作業で定義するのは負担が大きいため、スキーマを自動的に検出してメタデータを一元管理し、Amazon Athena や AWS Glue ジョブから参照できるようにしたいと考えています。この要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Glue クローラーを実行してスキーマを自動検出し、AWS Glue データカタログにテーブルとして登録する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_013": {
+  "file": "MLA-C01_orig_b2.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "機械学習 (ML) のためのデータ準備",
+  "level": "medium",
+  "question": "あるデータサイエンティストが、顧客の年収を含むデータセットでモデルをトレーニングする準備をしています。年収の列には約 5% の欠損値があり、また少数の超高額所得者による極端な外れ値が含まれています。行数を減らさずに欠損値を補完したいと考えています。この状況に最も適した補完方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "年収列の中央値で欠損値を補完する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_014": {
+  "file": "MLA-C01_orig_b2.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "機械学習 (ML) のためのデータ準備",
+  "level": "medium",
+  "question": "ある ML エンジニアが、アパレル商品の販売予測モデル用のデータセットを準備しています。データセットにはサイズ (S、M、L、XL) の列と、色 (赤、青、緑など) の列というカテゴリカル特徴量が含まれています。線形モデルでの利用を想定し、それぞれの特徴量の性質を適切に表現するエンコードを行いたいと考えています。最も適切なアプローチはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "サイズは順序を保持する序数エンコーディングを適用し、色はワンホットエンコーディングを適用する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_015": {
+  "file": "MLA-C01_orig_b2.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "機械学習 (ML) のためのデータ準備",
+  "level": "medium",
+  "question": "ある小売企業が、過去 3 年間の日次売上データを使用して将来の売上を予測する時系列モデルを開発しています。データサイエンティストは、トレーニングデータと検証データへの分割方法を検討しています。本番運用時の予測条件を正しく再現した評価を行うために取るべきアクションはどれですか。",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "データをランダムにシャッフルせず、過去の期間をトレーニングに、それより新しい期間を検証に割り当てる時間順の分割を行う。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "予測時点では入手できない将来の情報から計算された特徴量が含まれていないか確認し、含まれていれば除外する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_016": {
+  "file": "MLA-C01_orig_b2.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "機械学習 (ML) のためのデータ準備",
+  "level": "medium",
+  "question": "あるデータサイエンティストが、新しい ML プロジェクトの探索的データ分析と前処理を開始します。データの品質確認、可視化、欠損値処理、エンコードなどの変換をできるだけコードを書かずにビジュアルインターフェイスで行い、完成した変換フローを SageMaker のパイプラインや処理ジョブとして再利用できる形でエクスポートしたいと考えています。この要件を満たす機能はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "SageMaker Data Wrangler でデータ変換フローを作成する。ビジュアルインターフェイスで変換を組み立て、処理ジョブやパイプラインとしてエクスポートする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_017": {
+  "file": "MLA-C01_orig_b2.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "機械学習 (ML) のためのデータ準備",
+  "level": "medium",
+  "question": "ある企業が、Web アプリケーションから継続的に発生するクリックストリームデータを、ML モデルのトレーニングデータとして Amazon S3 に蓄積したいと考えています。取り込みインフラの管理を最小限に抑え、S3 への配信時にデータを分析効率の良い Apache Parquet 形式へ自動変換したいという要件があります。この要件を満たすサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon Data Firehose (Kinesis Data Firehose) の配信ストリームを使用し、形式変換を有効にして S3 に配信する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_018": {
+  "file": "MLA-C01_orig_b2.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "機械学習 (ML) のためのデータ準備",
+  "level": "hard",
+  "question": "ある通信企業が、顧客の解約を予測する分類モデルを開発しました。検証データでの精度は 99% と非常に高かったものの、本番環境にデプロイすると予測性能が大幅に低下しました。調査の結果、トレーニングデータに「解約手続き完了日」から派生した特徴量が含まれており、この値は解約が確定した後にのみ記録されることが判明しました。この問題への最も適切な対処はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ターゲットリーケージの原因となっている特徴量をデータセットから除去し、予測時点で利用可能な特徴量のみでモデルを再トレーニングする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_019": {
+  "file": "MLA-C01_orig_b2.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "機械学習 (ML) のためのデータ準備",
+  "level": "hard",
+  "question": "ある保険会社が、社外秘の保険金請求書類の画像 10 万件にラベルを付けて、書類分類モデルをトレーニングする計画です。機密保持契約により、ラベル付け作業は自社の審査担当者のみが行えます。また、全件を人手でラベル付けするコストを可能な限り削減したいと考えています。Amazon SageMaker Ground Truth を使用する場合、これらの要件を満たすアクションはどれですか。",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "自社の審査担当者で構成するプライベートワークフォースを作成する。そのワークフォースをラベリングジョブに割り当てて 10 万件をラベル付けする。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "ラベリングジョブで自動データラベリングを有効にする。人手のラベルから学習したモデルで信頼度の高いデータを自動的にラベル付けする。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_020": {
+  "file": "MLA-C01_orig_b2.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "機械学習 (ML) のためのデータ準備",
+  "level": "hard",
+  "question": "ある企業が、カスタマーサポートの問い合わせ記録を使用して分類モデルをトレーニングする計画です。記録には氏名、電話番号、メールアドレスなどの個人情報 (PII) が自由記述のテキストや列に含まれている可能性があります。コンプライアンス要件により、PII を含むデータをそのままトレーニングに使用することは禁止されています。AWS Glue の ETL パイプラインでこの要件に対応するために実施すべきアクションはどれですか。",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Glue の機密データ検出機能を ETL ジョブに組み込み、PII エンティティを自動的に識別する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "検出された PII をマスキングまたはハッシュ化などで秘匿化した変換済みデータセットを作成し、それをトレーニングに使用する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_021": {
+  "file": "MLA-C01_orig_b2.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML モデルの開発",
+  "level": "easy",
+  "question": "ある ML エンジニアが、大規模な画像データセットを使用して深層学習の画像分類モデルを Amazon SageMaker AI でトレーニングしています。現在は汎用の CPU インスタンスを使用しており、1 回のトレーニングに数日かかっています。トレーニング時間を大幅に短縮するために最初に検討すべきアクションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "GPU を搭載したアクセラレーテッドコンピューティングインスタンスにトレーニングインスタンスを変更する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_022": {
+  "file": "MLA-C01_orig_b2.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML モデルの開発",
+  "level": "easy",
+  "question": "ある企業のデータサイエンスチームが、数値とカテゴリの列で構成される表形式の顧客データから、購入の有無を予測する二値分類モデルを構築します。アルゴリズムの実装やコンテナの準備にかける工数を最小限に抑え、表形式データで高い実績のある手法を使いたいと考えています。最も適切な選択肢はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon SageMaker AI の組み込みアルゴリズムを使用する。手法には勾配ブースティング決定木の XGBoost を選ぶ。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_023": {
+  "file": "MLA-C01_orig_b2.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML モデルの開発",
+  "level": "medium",
+  "question": "ある企業が、Amazon SageMaker AI で長時間かかる実験的なトレーニングジョブを頻繁に実行しており、トレーニングのコンピューティングコストの削減を求められています。ジョブの完了が多少遅れることは許容できますが、インスタンスの中断によってそれまでの学習の進捗が失われることは避けたいと考えています。最も適切な方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "マネージドスポットトレーニングを有効にし、チェックポイントを Amazon S3 に保存するように設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_024": {
+  "file": "MLA-C01_orig_b2.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML モデルの開発",
+  "level": "medium",
+  "question": "あるデータサイエンスチームが、モデル開発の過程で異なるアルゴリズム、ハイパーパラメータ、データセットバージョンを組み合わせた数百回のトレーニングを実行しています。各実行の設定と評価メトリクスを体系的に記録し、実行同士を比較して最良のモデルを特定できるようにしたいと考えています。運用オーバーヘッドを最小限に抑えてこの要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon SageMaker AI の実験管理機能 (SageMaker Experiments / マネージド MLflow) を使用して、各実行のパラメータとメトリクスを追跡・比較する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_025": {
+  "file": "MLA-C01_orig_b2.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML モデルの開発",
+  "level": "medium",
+  "question": "ある製造業の企業が、自社製品の外観検査用に不良品を検出する画像分類モデルを開発したいと考えています。しかし、収集できた不良品の画像は数百枚程度しかなく、ゼロから深層学習モデルをトレーニングするにはデータが不足しています。限られたデータで実用的な精度を達成するために最も適切なアプローチはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "大規模データセットで事前トレーニングされた画像分類モデルを使う。数百枚の自社の画像でファインチューニングする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_026": {
+  "file": "MLA-C01_orig_b2.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML モデルの開発",
+  "level": "medium",
+  "question": "ある物流企業が、荷物の配送所要時間を予測する回帰モデルを評価しています。ビジネス上、数分程度の小さな誤差は問題になりませんが、数時間単位の大きな予測外れは顧客対応コストが非常に高いため、大きな誤差に強いペナルティを与える評価指標を主要指標としたいと考えています。最も適切な評価指標はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "RMSE (二乗平均平方根誤差) を主要指標に採用する。誤差を二乗して平均し、その平方根を取った値でモデルを比較する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_027": {
+  "file": "MLA-C01_orig_b2.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML モデルの開発",
+  "level": "hard",
+  "question": "ある ML エンジニアが、Amazon SageMaker AI で深いニューラルネットワークをトレーニングしていますが、途中から損失が下がらなくなりました。勾配消失や重みの更新停止といったトレーニング内部の問題が起きていないかを、トレーニング中のテンソルを自動的に分析して検出し、問題検出時にジョブを停止するなどの対応につなげたいと考えています。この要件に最も適した SageMaker AI の機能はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon SageMaker Debugger の組み込みルールを設定し、トレーニング中のテンソルをキャプチャして勾配消失などの問題を自動検出する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_028": {
+  "file": "MLA-C01_orig_b2.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML モデルの開発",
+  "level": "hard",
+  "question": "ある研究チームが、数十億パラメータの大規模な深層学習モデルを Amazon SageMaker AI でトレーニングしようとしています。しかし、モデルのパラメータが大きすぎて、利用可能な最大の GPU 1 基のメモリにもモデル全体が収まらず、トレーニングを開始できません。この問題を解決する分散トレーニングのアプローチはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "モデル並列化を使用して、モデルのパラメータを複数の GPU に分割して配置する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_029": {
+  "file": "MLA-C01_orig_b2.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML モデルの開発",
+  "level": "hard",
+  "question": "ある ML エンジニアが深層学習モデルのトレーニングを開始したところ、最初の数エポックで損失が激しく振動し、その後 NaN になってトレーニングが破綻しました。原因はトレーニングが不安定で発散していることだと考えられます。この問題を解消するために取るべきアクションはどれですか。",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "学習率を現在より小さい値に下げる。1 ステップあたりの重み更新量を抑えて再トレーニングする。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "勾配クリッピングを適用して勾配のノルムに上限を設ける。1 ステップあたりの重み更新量を抑えて再トレーニングする。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_030": {
+  "file": "MLA-C01_orig_b2.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML モデルの開発",
+  "level": "hard",
+  "question": "あるデータサイエンティストが、約 800 件しかない小規模なデータセットで分類モデルを開発しています。データを一度だけトレーニングセットと検証セットに分割して評価したところ、分割の乱数シードを変えるたびに検証精度が大きく変動し、モデルの真の性能を安定して見積もることができませんでした。限られたデータで信頼性の高い性能推定を得る方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "k 分割交差検証を使用し、すべてのデータが一度ずつ検証に使われるように複数回の学習と評価を行って結果を平均する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_031": {
+  "file": "MLA-C01_orig_b2.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ワークフローのデプロイとオーケストレーション",
+  "level": "easy",
+  "question": "ある企業が、トレーニング済みの解約予測モデルを使用して、毎晩 1 回、全顧客 500 万人分の解約スコアを計算し、結果を Amazon S3 に保存してマーケティングシステムに連携したいと考えています。リアルタイムの予測要件はなく、常時稼働する推論インフラのコストは避けたいと考えています。最も適切な推論オプションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon SageMaker AI のバッチ変換ジョブを毎晩実行して S3 の入力データを一括推論する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_032": {
+  "file": "MLA-C01_orig_b2.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ワークフローのデプロイとオーケストレーション",
+  "level": "medium",
+  "question": "ある企業が、Amazon SageMaker AI のリアルタイム推論エンドポイントでレコメンデーションモデルを運用しています。トラフィックは日中に増加し夜間に減少しますが、日によって変動パターンが異なり正確には予測できません。レイテンシー要件を維持しながら、トラフィックの変動に自動的に追従してインスタンス数を調整し、コストを最適化したいと考えています。最も適切な方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "エンドポイントに Application Auto Scaling のターゲット追跡スケーリングポリシーを設定し、インスタンスあたりの呼び出し数などのメトリクスに基づいてスケールさせる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_033": {
+  "file": "MLA-C01_orig_b2.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ワークフローのデプロイとオーケストレーション",
+  "level": "medium",
+  "question": "ある SaaS 企業が、テナントごとに個別にトレーニングした同一フレームワークの需要予測モデルを 300 個保有しています。各モデルの呼び出し頻度は低く、テナントごとに専用のリアルタイムエンドポイントを作成するとインフラコストが膨大になります。呼び出しのレイテンシー要件は比較的緩やかです。コストを大幅に削減しながらすべてのモデルをリアルタイムで提供する方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "マルチモデルエンドポイントを作成し、S3 に保存した複数のモデルを共有インスタンス上で動的にロードして提供する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_034": {
+  "file": "MLA-C01_orig_b2.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ワークフローのデプロイとオーケストレーション",
+  "level": "medium",
+  "question": "ある金融機関が、審査業務に使用する重要な ML モデルを Amazon SageMaker AI のリアルタイムエンドポイントで運用する計画です。現在の設計ではエンドポイントに 1 つのインスタンスのみを割り当てていますが、可用性の観点からアベイラビリティーゾーン (AZ) の障害時にもサービスを継続できる構成が求められています。この要件を満たすために取るべきアクションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "エンドポイントのインスタンス数を 2 以上に設定し、SageMaker AI に複数のアベイラビリティーゾーンへインスタンスを分散配置させる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_035": {
+  "file": "MLA-C01_orig_b2.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ワークフローのデプロイとオーケストレーション",
+  "level": "hard",
+  "question": "ある企業が、本番の Amazon SageMaker AI リアルタイムエンドポイントで稼働中のモデルを新バージョンに更新します。更新時にはまず少量のトラフィックだけを新バージョンに流して問題がないことを確認してから全トラフィックを移行し、エラー率の上昇などの問題を検出した場合は人手を介さずに自動で旧バージョンに戻したいと考えています。この要件を満たすアクションはどれですか。",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "エンドポイント更新時にブルー/グリーンデプロイのカナリアトラフィックシフトを設定し、まず一部のトラフィックのみを新バージョンに転送する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "エラー率などを監視する Amazon CloudWatch アラームを自動ロールバックの条件としてデプロイ設定に指定する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_036": {
+  "file": "MLA-C01_orig_b2.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ワークフローのデプロイとオーケストレーション",
+  "level": "hard",
+  "question": "ある企業の ML チームが、本番稼働中の不正検出モデルの新バージョンを開発しました。新バージョンを本番と同じ実際のトラフィックで検証したいのですが、検証が完了するまでは新バージョンの予測結果を業務判断に一切使用してはならないという制約があります。ユーザーへの影響なしに実トラフィックでの動作を検証できる方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "シャドウテストを設定し、本番トラフィックのコピーをシャドウバリアントの新モデルに送信して、レスポンスは記録のみ行い本番の応答には使用しない。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_037": {
+  "file": "MLA-C01_orig_b2.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ワークフローのデプロイとオーケストレーション",
+  "level": "hard",
+  "question": "ある企業が Amazon SageMaker Pipelines で、前処理、トレーニング、評価、モデル登録のステップからなるパイプラインを構築しています。ガバナンス要件として、評価ステップで算出した精度が事前に定めたしきい値以上の場合のみモデル登録ステップへ進み、しきい値未満の場合は登録せずにパイプラインを失敗として終了させる必要があります。この品質ゲートをパイプライン内で自動化する方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "評価ステップのメトリクスをしきい値と比較する条件ステップ (ConditionStep) を追加する。条件を満たす場合だけ登録ステップへ進み、満たさなければ失敗ステップへ分岐させる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_038": {
+  "file": "MLA-C01_orig_b2.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ソリューションのモニタリング、保守、セキュリティ",
+  "level": "easy",
+  "question": "ある企業で、本番稼働中の Amazon SageMaker AI エンドポイントが何者かによって削除されるインシデントが発生しました。セキュリティチームは、いつ、どの IAM プリンシパルが、どの API を呼び出してエンドポイントを削除したのかを特定する必要があります。この調査に使用すべき AWS のサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS CloudTrail のイベント履歴を調べる。DeleteEndpoint API を呼び出した IAM プリンシパルと時刻を特定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_039": {
+  "file": "MLA-C01_orig_b2.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ソリューションのモニタリング、保守、セキュリティ",
+  "level": "medium",
+  "question": "ある医療機関が、患者データを使用して Amazon SageMaker AI でトレーニングジョブを実行します。コンプライアンス要件として、S3 上のトレーニングデータと、トレーニングインスタンスにアタッチされるストレージボリュームの両方を、自社が管理する AWS KMS カスタマーマネージドキーで保存時に暗号化する必要があります。この要件を満たすアクションはどれですか。",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "トレーニングデータを保存する S3 バケットで、カスタマーマネージドキーを指定した SSE-KMS 暗号化を設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "トレーニングジョブの作成時に、ボリューム暗号化用の KMS キー (VolumeKmsKeyId) としてカスタマーマネージドキーを指定する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_040": {
+  "file": "MLA-C01_orig_b2.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ソリューションのモニタリング、保守、セキュリティ",
+  "level": "hard",
+  "question": "ある企業が、ローン審査モデルを Amazon SageMaker AI のリアルタイムエンドポイントで運用しています。運用チームは、本番環境でのモデルの予測精度 (実際の返済結果と予測の一致度) が時間とともに低下していないかを、Amazon SageMaker Model Monitor のモデル品質モニタリングで定期的に監視したいと考えています。この監視を機能させるために必要なアクションはどれですか。",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "エンドポイントのデータキャプチャを有効にする。推論のリクエストとレスポンスを Amazon S3 に記録する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "実際の返済結果をグラウンドトゥルースラベルとして S3 に継続的にアップロードする。キャプチャした予測と結合して評価するモニタリングスケジュールを設定する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_041": {
+  "file": "MLA-C01_orig_b3.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "機械学習 (ML) のためのデータ準備",
+  "level": "easy",
+  "question": "ある企業のビジネスアナリストチームが、ML プロジェクト用のデータセットのクリーニングと正規化を担当することになりました。チームにはプログラミングの経験がなく、コードを書かずにビジュアルなインターフェイスでデータのプロファイリング、クリーニング、変換を行いたいと考えています。この要件に最も適した AWS のサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Glue DataBrew を使用して、ノーコードのビジュアルインターフェイスでデータをプロファイリング・変換する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_042": {
+  "file": "MLA-C01_orig_b3.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "機械学習 (ML) のためのデータ準備",
+  "level": "medium",
+  "question": "あるデータサイエンティストが、SageMaker のノートブック上で scikit-learn を使用した特徴量エンジニアリングのスクリプトを実行しています。データ量の増加に伴い、ノートブックインスタンスではメモリ不足が発生し、処理にも数時間かかるようになりました。前処理の実行のためだけに大きなノートブックインスタンスを常時稼働させることは避けたいと考えています。最も適切な方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon SageMaker Processing ジョブとしてスクリプトを実行し、ジョブ実行中のみ適切なサイズのインスタンスをプロビジョニングして S3 と入出力する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_043": {
+  "file": "MLA-C01_orig_b3.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "機械学習 (ML) のためのデータ準備",
+  "level": "medium",
+  "question": "ある ML エンジニアが、約 2,000 枚の画像で画像分類モデルをトレーニングしたところ、トレーニング精度は高いものの検証精度が大幅に低く、過学習が発生しています。新しい画像を追加で収集することは短期的には困難です。既存の画像データを活用してトレーニングデータの実質的な多様性を増やし、過学習を緩和する手法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "回転、反転、明度変更などのデータ拡張を適用して、既存画像から多様なバリエーションを生成する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_044": {
+  "file": "MLA-C01_orig_b3.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "機械学習 (ML) のためのデータ準備",
+  "level": "medium",
+  "question": "あるデータサイエンティストが、陽性クラスが全体の 2% しかない不均衡なデータセットをトレーニングセットと検証セットに完全ランダムに分割したところ、たまたま検証セットに陽性サンプルがほとんど含まれず、検証メトリクスが安定しませんでした。両方のセットで元のデータセットと同じクラス比率を維持する分割手法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "クラスラベルに基づく層化サンプリング (stratified sampling) を使用して分割する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_045": {
+  "file": "MLA-C01_orig_b3.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "機械学習 (ML) のためのデータ準備",
+  "level": "medium",
+  "question": "ある企業が、Amazon S3 上の生データを毎日変換して ML トレーニング用のデータセットを生成する Apache Spark ベースの ETL 処理を運用したいと考えています。クラスターのプロビジョニングや管理は行わず、サーバーレスでジョブ単位の課金となる構成を希望しています。既存の Spark コードの資産を活かせる、最も運用負荷の小さいサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Glue の ETL ジョブとして Spark 処理を実行する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_046": {
+  "file": "MLA-C01_orig_b3.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "機械学習 (ML) のためのデータ準備",
+  "level": "hard",
+  "question": "ある ML エンジニアが、線形モデルの特徴量として顧客の郵便番号 (約 30,000 種類の値) を使用しようとしています。ワンホットエンコーディングを試したところ、特徴量の次元が爆発的に増加し、メモリ消費とトレーニング時間が許容できないレベルになりました。予測に有用な情報を保持しながら次元を抑えるアプローチとして最も適切なものはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ターゲットエンコーディングや埋め込み表現など、カテゴリを低次元の数値表現に変換する手法を適用する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_047": {
+  "file": "MLA-C01_orig_b3.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "機械学習 (ML) のためのデータ準備",
+  "level": "hard",
+  "question": "ある企業のデータレイクでは、数 TB のイベントデータが Amazon S3 に非圧縮の CSV ファイルとして保存されています。ML チームは Amazon Athena で特定の日付範囲と少数の列だけを抽出するクエリを頻繁に実行していますが、毎回データ全体がスキャンされるためクエリが遅く、スキャン量に基づく課金も高額になっています。クエリのパフォーマンスを改善しコストを削減するアクションはどれですか。",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "データを日付ベースのキーでパーティション分割して保存し、クエリでパーティションを絞り込めるようにする。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "データを Apache Parquet などの圧縮された列指向形式に変換する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_048": {
+  "file": "MLA-C01_orig_b3.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "機械学習 (ML) のためのデータ準備",
+  "level": "hard",
+  "question": "あるデータサイエンティストが、データセット全体に対して標準化 (平均 0、分散 1 へのスケーリング) を適用してから、トレーニングセットとテストセットに分割してモデルを開発しました。レビュー担当者から、この手順はテストデータの情報がトレーニングに漏れるデータリーケージにあたると指摘されました。リーケージを防ぐ正しい手順はどれですか。",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "先にデータをトレーニングセットとテストセットに分割し、標準化の平均や分散などの統計量はトレーニングセットのみから計算する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "トレーニングセットで学習した変換の統計量を、そのままテストセットへの変換にも適用する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_049": {
+  "file": "MLA-C01_orig_b3.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML モデルの開発",
+  "level": "easy",
+  "question": "ある企業の開発チームが、テキスト要約のユースケースを検証するため、公開されている事前トレーニング済みの基盤モデルを最小限の作業で試したいと考えています。Amazon SageMaker AI の環境から、事前トレーニング済みモデルを検索し、数クリックでデプロイやファインチューニングを開始できる機能はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon SageMaker JumpStart から事前トレーニング済みモデルを選択してデプロイする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_050": {
+  "file": "MLA-C01_orig_b3.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML モデルの開発",
+  "level": "medium",
+  "question": "ある企業のチームには ML の深い専門知識を持つメンバーが少なく、表形式データからの解約予測モデルを構築する必要があります。データの前処理、アルゴリズム選択、ハイパーパラメータ最適化を自動で実行してくれるうえに、生成された候補モデルの中身や手順を確認できる透明性も求めています。この要件を満たす Amazon SageMaker AI の機能はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon SageMaker Autopilot (AutoML) を使用して候補モデルを自動生成し、生成されたノートブックやレポートで内容を確認する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_051": {
+  "file": "MLA-C01_orig_b3.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML モデルの開発",
+  "level": "medium",
+  "question": "あるデータサイエンティストが、単一の決定木モデルを使用したところ、トレーニングデータのわずかな変化で予測結果が大きく変わる、分散の大きい不安定なモデルになりました。複数の木を組み合わせるアンサンブル手法で分散を低減し、予測を安定させたいと考えています。この目的に最も合致する手法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "バギングを使用し、ブートストラップサンプルで独立に多数の木を学習させる。各木の予測を平均・多数決して最終的な予測を得る。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_052": {
+  "file": "MLA-C01_orig_b3.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML モデルの開発",
+  "level": "hard",
+  "question": "ある ML エンジニアが、独自のトレーニングコンテナを使用して Amazon SageMaker AI でモデルをトレーニングしています。トレーニングスクリプトは検証損失などのメトリクスを標準出力にログとして出力しています。エンジニアは、これらのメトリクスを Amazon CloudWatch のメトリクスとして発行し、SageMaker AI のコンソールでトレーニングの進捗曲線を確認したり、ハイパーパラメータチューニングの目的メトリクスとして利用したりしたいと考えています。どうすればよいですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "トレーニングジョブの定義にメトリクス名と正規表現のペアを指定してログから検証損失の値を抽出する。抽出した値は CloudWatch のメトリクスとして発行される。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_053": {
+  "file": "MLA-C01_orig_b3.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML モデルの開発",
+  "level": "medium",
+  "question": "あるデータサイエンティストが、面積、部屋数、築年数、最寄り駅からの距離を特徴量とする住宅価格予測モデルを、単純な線形モデルでトレーニングしました。その結果、トレーニングデータと検証データの両方で誤差が大きく、しかも両者の差はほとんどありません。エポックを重ねてもどちらの誤差もほぼ横ばいのままで、トレーニングデータを 2 倍に増やしても改善しませんでした。この状態の診断と対処として最も適切なものはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "モデルが学習不足 (アンダーフィッティング) の状態にあると診断する。より表現力の高いモデルへの変更や有用な特徴量の追加を行う。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_054": {
+  "file": "MLA-C01_orig_b3.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML モデルの開発",
+  "level": "hard",
+  "question": "ある ML チームが、TensorFlow で記述した独自のトレーニングスクリプトを持っており、これを Amazon SageMaker AI のトレーニングジョブとして実行したいと考えています。チームは Docker イメージのビルドや管理は行いたくありませんが、スクリプト内の独自のモデル定義と学習ロジックはそのまま使用する必要があります。最も少ない労力でこれを実現する方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "SageMaker AI が提供する TensorFlow のフレームワークコンテナを使用し、スクリプトモードで独自のトレーニングスクリプトをエントリポイントとして指定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_055": {
+  "file": "MLA-C01_orig_b3.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML モデルの開発",
+  "level": "hard",
+  "question": "ある ML エンジニアが、先週 Amazon SageMaker AI のハイパーパラメータチューニングジョブを 100 回のトレーニングで実行し、有望なハイパーパラメータの領域がある程度判明しました。今回、同じアルゴリズムとデータセットで追加のチューニングを行うにあたり、前回のジョブで得られた知見をゼロから探索し直すことなく活用したいと考えています。最も適切な方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "前回のチューニングジョブを親ジョブに指定したウォームスタート設定で、新しいチューニングジョブを開始する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_056": {
+  "file": "MLA-C01_orig_b3.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML モデルの開発",
+  "level": "hard",
+  "question": "ある銀行が、融資審査を支援する ML モデルを Amazon SageMaker AI で開発しました。規制対応のため、審査で否認と予測された個々の申請について、どの特徴量が予測にどの程度寄与したのかを定量的に説明できる必要があります。この要件を満たす方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon SageMaker Clarify を使用して SHAP 値に基づく特徴量の寄与度を算出し、予測ごとの説明を提供する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_057": {
+  "file": "MLA-C01_orig_b3.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML モデルの開発",
+  "level": "hard",
+  "question": "ある企業の監査部門が、本番で使用中の ML モデルについて「6 か月後でも同一のモデルを再現してトレーニングし直せること」を要件として提示しました。現在はノートブックを都度上書きしながら開発しており、当時のデータやコードの状態を後から特定できません。モデルの再現性を確保するために実施すべきアクションはどれですか。",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "トレーニングに使用したデータセットのスナップショットを S3 バージョニングで不変に保持する。バージョン ID をモデルのメタデータに記録する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "トレーニングコード、コンテナイメージ、ハイパーパラメータをバージョン管理する。各実行のメタデータを実験管理とモデルレジストリに記録する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_058": {
+  "file": "MLA-C01_orig_b3.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ワークフローのデプロイとオーケストレーション",
+  "level": "easy",
+  "question": "ある企業が、モバイルアプリの検索機能に ML モデルによるクエリ補完を組み込みます。リクエストは 1 日を通して継続的に発生し、各リクエストには 100 ミリ秒未満での応答が求められます。ペイロードは小さく、処理は短時間で完了します。この要件に最も適した Amazon SageMaker AI の推論オプションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "リアルタイム推論エンドポイントにモデルをデプロイする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_059": {
+  "file": "MLA-C01_orig_b3.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ワークフローのデプロイとオーケストレーション",
+  "level": "medium",
+  "question": "ある ML チームが、トレーニング時に scikit-learn で実装した特徴量変換 (スケーリングとエンコード) を行ってから XGBoost モデルを学習させました。リアルタイム推論でも同一の変換を確実に適用する必要がありますが、クライアント側に変換処理を再実装すると変換ロジックの不整合が発生するリスクがあります。単一のエンドポイントで前処理と推論を一貫して実行する方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "前処理コンテナとモデルコンテナを 1 つのエンドポイントに直列に連結して配置する。推論パイプラインとして SageMaker が順番に実行する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_060": {
+  "file": "MLA-C01_orig_b3.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ワークフローのデプロイとオーケストレーション",
+  "level": "medium",
+  "question": "ある企業が、新しい ML モデルをリアルタイムエンドポイントにデプロイするにあたり、レイテンシー要件とスループット要件を満たしつつコスト効率の良いインスタンスタイプとインスタンス数を決めたいと考えています。当てずっぽうで選ぶのではなく、複数のインスタンス構成に対して負荷テストを実行し、性能とコストの比較結果に基づいて選定できる Amazon SageMaker AI の機能はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "SageMaker Inference Recommender で候補インスタンスタイプの負荷テストを実行する。レイテンシーとコストの比較結果から構成を選定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_061": {
+  "file": "MLA-C01_orig_b3.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ワークフローのデプロイとオーケストレーション",
+  "level": "medium",
+  "question": "ある企業では、パートナー企業から新しいトレーニングデータが不定期に Amazon S3 バケットへアップロードされます。ML チームは、新しいデータファイルが S3 に到着したことをきっかけに、Amazon SageMaker Pipelines の再トレーニングパイプラインを自動的に開始したいと考えています。ポーリングを行わないイベント駆動の構成として最も適切なものはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "S3 バケットのオブジェクト作成イベントを Amazon EventBridge のルールで検知し、パイプラインの実行を開始するターゲットを設定する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_062": {
+  "file": "MLA-C01_orig_b3.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ワークフローのデプロイとオーケストレーション",
+  "level": "hard",
+  "question": "ある ML エンジニアが、社内独自の推論フレームワークを使用するため、独自の Docker コンテナイメージを構築して Amazon SageMaker AI のリアルタイム推論エンドポイントにデプロイしようとしています。SageMaker AI のホスティング環境で独自コンテナが正しく動作するために、コンテナが満たすべき要件はどれですか。",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "コンテナはポート 8080 で待ち受ける。/invocations パスへの POST リクエストを受け付け、推論結果を返すように実装する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "コンテナはポート 8080 で待ち受ける。/ping パスへの GET リクエストに HTTP 200 を返すヘルスチェック応答を実装する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_063": {
+  "file": "MLA-C01_orig_b3.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ワークフローのデプロイとオーケストレーション",
+  "level": "hard",
+  "question": "ある企業が、ML ワークフローの全体自動化を計画しています。ワークフローには SageMaker AI でのトレーニングだけでなく、AWS Glue での ETL、Amazon DynamoDB の更新、担当者の確認を待つ長時間の待機、エラー時の分岐やリトライなど、複数の AWS サービスにまたがる多様な処理が含まれます。このワークフロー全体をサーバーレスにオーケストレーションするのに最も適したサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Step Functions のステートマシンでワークフロー全体を定義する。各 AWS サービスとのネイティブ統合、待機、分岐、リトライを構成する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_064": {
+  "file": "MLA-C01_orig_b3.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ワークフローのデプロイとオーケストレーション",
+  "level": "hard",
+  "question": "ある企業が、24 時間 365 日稼働している Amazon SageMaker AI のリアルタイム推論エンドポイントのモデルを新バージョンに入れ替える必要があります。切り替えの間も推論リクエストを 1 件も取りこぼさず、ダウンタイムなしで更新を完了することが要件です。この要件を満たす更新方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "新しいモデルを含む新しいエンドポイント設定を作成し、既存エンドポイントに対して更新 (UpdateEndpoint) を実行して SageMaker AI に置き換えを処理させる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_065": {
+  "file": "MLA-C01_orig_b3.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ソリューションのモニタリング、保守、セキュリティ",
+  "level": "easy",
+  "question": "ある ML チームが、稼働中の Amazon SageMaker AI リアルタイムエンドポイントに対して、将来的にデータドリフトの分析やモデル品質の監視を行えるように、推論のリクエストとレスポンスの内容を記録として蓄積し始めたいと考えています。最初に行うべき設定はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "エンドポイントのデータキャプチャを有効にして、推論の入力と出力を Amazon S3 に保存する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_066": {
+  "file": "MLA-C01_orig_b3.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ソリューションのモニタリング、保守、セキュリティ",
+  "level": "medium",
+  "question": "ある企業の ML ワークロードは、24 時間 365 日安定して稼働する本番推論エンドポイント群と、不定期に実行され中断しても再開できる実験的なトレーニングジョブ群で構成されています。ワークロードの特性に合わせて全体のコストを最適化するアクションはどれですか。",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "安定して稼働する推論エンドポイントの使用量を対象にする。SageMaker Savings Plans を購入して割引を適用する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "不定期に実行され中断を許容できるトレーニングジョブを対象にする。マネージドスポットトレーニングを使用して割引を適用する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_067": {
+  "file": "MLA-C01_orig_b3.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ソリューションのモニタリング、保守、セキュリティ",
+  "level": "medium",
+  "question": "ある企業のアプリケーションは、VPC 内のプライベートサブネットで稼働しており、Amazon SageMaker AI のリアルタイムエンドポイントを呼び出して推論を行います。セキュリティ要件により、推論の呼び出しトラフィックがインターネットを経由することは許可されていません。VPC からエンドポイントへの呼び出しをプライベートに保つ方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "SageMaker Runtime 用のインターフェイス VPC エンドポイント (AWS PrivateLink) を VPC に作成し、そのプライベート経路で推論 API を呼び出す。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_068": {
+  "file": "MLA-C01_orig_b3.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ソリューションのモニタリング、保守、セキュリティ",
+  "level": "medium",
+  "question": "ある ML チームの SageMaker Processing ジョブは、社内のリレーショナルデータベースからトレーニングデータを抽出します。コードレビューで、データベースのユーザー名とパスワードが処理スクリプト内にハードコードされていることが指摘されました。認証情報を安全に管理し、定期的なローテーションも可能にする修正方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "認証情報を AWS Secrets Manager に保存し、ジョブの実行ロールに取得権限を付与して実行時に API で取得する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_069": {
+  "file": "MLA-C01_orig_b3.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ソリューションのモニタリング、保守、セキュリティ",
+  "level": "hard",
+  "question": "ある企業の Amazon SageMaker AI リアルタイムエンドポイントで、応答時間の p99 が悪化しているという報告がありました。ML エンジニアが Amazon CloudWatch を確認したところ、エンドポイントの ModelLatency メトリクスが全体のレイテンシーのほぼすべてを占めており、OverheadLatency はごくわずかでした。この分析から導かれる、最も適切な改善の方向性はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ボトルネックはモデルコンテナ内の推論処理にあると判断する。より高性能なインスタンスタイプへの変更やモデル自体の最適化を行う。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_070": {
+  "file": "MLA-C01_orig_b3.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ソリューションのモニタリング、保守、セキュリティ",
+  "level": "hard",
+  "question": "ある企業では、データサイエンティストが開発環境で自由にモデルを実験できる一方、本番環境へのモデルデプロイは承認済みの CI/CD パイプラインを通じてのみ行われるべきというガバナンス方針があります。現在は権限が緩く、データサイエンティストが本番エンドポイントを直接作成・変更できてしまいます。この方針を技術的に強制するためのアクションはどれですか。",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "本番環境でのエンドポイント作成・更新の権限を CI/CD パイプラインが引き受ける IAM ロールのみに付与し、データサイエンティストのロールからは本番リソースへのデプロイ系権限を除外する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "開発環境と本番環境を別々の AWS アカウントに分離し、本番アカウントへのデプロイは CI/CD が使用するクロスアカウントロール経由のみに限定する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_071": {
+  "file": "MLA-C01_orig_b4.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "機械学習 (ML) のためのデータ準備",
+  "level": "easy",
+  "question": "ある ML チームが、Amazon SageMaker AI で分類モデルを開発しています。チームはハイパーパラメータの探索を数百回繰り返し、複数のアルゴリズムを比較したうえで、最終的に採用するモデルを 1 つ選定する予定です。新人エンジニアが、データセットをトレーニングセット、検証セット、テストセットの 3 つに分割する理由と、それぞれをどの工程で使うのかを確認しています。このうちテストセットの正しい役割はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "モデルの選択やチューニングには一切使用せず、最終的に選ばれたモデルの汎化性能を偏りなく見積もるために最後に評価する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_072": {
+  "file": "MLA-C01_orig_b4.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "機械学習 (ML) のためのデータ準備",
+  "level": "medium",
+  "question": "ある企業の再トレーニングパイプラインは、上流システムから毎週届くデータをそのままトレーニングに使用しています。あるとき、上流の不具合により大量の欠損値と範囲外の値を含む不良データがそのままトレーニングに使われ、品質の低いモデルが生成されてしまいました。今後、不良データによるトレーニングを防ぐために実施すべきアクションはどれですか。",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Glue Data Quality で欠損率や値の範囲などの品質ルールを定義する。取り込んだデータをパイプラインで毎回自動検証する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "品質検証に失敗したときはパイプラインの後続処理を停止する。取り込んだデータをトレーニングに渡さず、Amazon SNS で運用チームに通知する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_073": {
+  "file": "MLA-C01_orig_b4.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "機械学習 (ML) のためのデータ準備",
+  "level": "medium",
+  "question": "あるフードデリバリー企業が、注文量を予測するモデルを開発しています。データセットには各注文の発生日時を表すタイムスタンプ列があります。注文量には曜日や時間帯による強い周期的なパターンがあることが分かっています。線形モデルがこのパターンを学習できるようにするための、タイムスタンプ列の最も適切な扱いはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "タイムスタンプから曜日、時間帯、月、祝日フラグなどの特徴量を抽出して追加する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_074": {
+  "file": "MLA-C01_orig_b4.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "機械学習 (ML) のためのデータ準備",
+  "level": "medium",
+  "question": "ある企業が、Amazon S3 と AWS Glue データカタログで構成されるデータレイクを複数の ML チームで共用しています。ガバナンス要件により、チームごとにアクセスできるデータベース、テーブル、さらにはテーブル内の特定の列を細かく制御し、これらの権限を一元的に管理する必要があります。この要件に最も適したサービスはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Lake Formation を使用して、データベース、テーブル、列レベルのアクセス許可を一元管理する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_075": {
+  "file": "MLA-C01_orig_b4.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "機械学習 (ML) のためのデータ準備",
+  "level": "hard",
+  "question": "あるデータエンジニアが、単一インスタンス上の pandas スクリプトで約 2 TB の生データから特徴量を生成しようとしましたが、メモリ不足でジョブが失敗し続けています。データ全体を使用する要件は変えられず、今後もデータ量は増加する見込みです。この前処理をスケーラブルに実行するための最も適切なアプローチはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "AWS Glue や Amazon EMR の Apache Spark で複数ノードに分散して実行する。データセット全体を対象に特徴量を生成する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_076": {
+  "file": "MLA-C01_orig_b4.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "機械学習 (ML) のためのデータ準備",
+  "level": "hard",
+  "question": "ある製造企業が、工場のセンサーデータから設備の異常予兆を検出するモデルを開発しています。データには、センサーの通信エラーによって物理的にあり得ない極端なスパイク値が散発的に記録されています。各行にはほかのセンサーの正常で貴重な測定値も含まれているため、行ごと削除するとデータの損失が大きくなります。この外れ値への最も適切な対処はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "物理的に妥当な範囲を定義し、範囲外の値をクリッピング (上下限で丸める) するか欠損値として扱って補完する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_077": {
+  "file": "MLA-C01_orig_b4.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML モデルの開発",
+  "level": "easy",
+  "question": "ある ML チームが、勾配ブースティング木を使った与信モデルの開発で、学習率、木の最大深さ、木の本数をどう決めるかに悩んでおり、Amazon SageMaker AI の自動モデルチューニングの利用を検討しています。この検討の中で、モデルの「パラメータ」と「ハイパーパラメータ」は何が違うのか、それぞれいつ誰が決める値なのかが議論になりました。ハイパーパラメータの説明として正しいものはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "学習率や決定木の深さのように、トレーニングの開始前に人間または探索プロセスが設定する、学習の挙動を制御する値である。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_078": {
+  "file": "MLA-C01_orig_b4.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML モデルの開発",
+  "level": "medium",
+  "question": "ある ML エンジニアが SageMaker Python SDK を使用してトレーニングスクリプトを開発しています。スクリプトの小さな修正を確認するたびにマネージドなトレーニングジョブを起動しており、インスタンスのプロビジョニング待ちで毎回数分を浪費しています。本格的なトレーニングの前に、コードの動作確認のイテレーションを高速化する方法として最も適切なものはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "SageMaker のローカルモードでスクリプトを実行する。入力は少量のサンプルデータに絞って動作確認のイテレーションを回す。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_079": {
+  "file": "MLA-C01_orig_b4.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML モデルの開発",
+  "level": "medium",
+  "question": "あるデータサイエンティストが、ニューラルネットワークを 200 エポックの固定回数でトレーニングしています。学習曲線を確認すると、およそ 60 エポック目以降は検証損失が上昇に転じており、それ以降の学習は過学習を進行させながら計算リソースを浪費していることが分かりました。この問題への最も適切な対処はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "検証損失を監視する早期停止 (early stopping) を導入し、改善が見られなくなった時点でトレーニングを打ち切って最良時点のモデルを採用する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_080": {
+  "file": "MLA-C01_orig_b4.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML モデルの開発",
+  "level": "medium",
+  "question": "ある ML チームが、二値分類のユースケースに対して 2 つの候補モデルを開発しました。運用時の分類しきい値はまだ決まっておらず、ビジネス側の要件によって後から変更される可能性があります。特定のしきい値に依存せずに、2 つのモデルの識別能力を総合的に比較できる評価指標はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ROC 曲線の下の面積 (AUC) を主要指標にする。分類しきい値を全範囲で動かしたときの真陽性率と偽陽性率の関係から 2 つのモデルを比較する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_081": {
+  "file": "MLA-C01_orig_b4.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML モデルの開発",
+  "level": "hard",
+  "question": "ある企業が、単一の GPU のメモリに問題なく収まるサイズの深層学習モデルを、数億件のサンプルを含む巨大なデータセットでトレーニングしています。単一 GPU では 1 エポックに数日かかるため、複数の GPU やノードを使ってトレーニングのスループットを向上させたいと考えています。この状況に適した分散トレーニング戦略はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "分散データ並列を使用し、各 GPU にモデルのレプリカを配置してデータのミニバッチを分担処理させ、勾配を同期する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_082": {
+  "file": "MLA-C01_orig_b4.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML モデルの開発",
+  "level": "hard",
+  "question": "ある ML エンジニアが、Amazon SageMaker AI の自動モデルチューニングで学習率を 0.0001 から 0.1 の範囲で探索しています。デフォルトの線形スケールでは、サンプリングされる値のほとんどが 0.01 より大きい領域に集中し、有望である可能性が高い小さい値の領域 (0.0001〜0.001 など) がほとんど探索されないことに気づきました。この問題への最も適切な対処はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "学習率のパラメータ範囲に対数スケーリングを指定し、桁 (オーダー) が異なる領域が均等に探索されるようにする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_083": {
+  "file": "MLA-C01_orig_b4.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML モデルの開発",
+  "level": "hard",
+  "question": "ある企業が、採用の書類選考を支援する ML モデルの開発を計画しています。トレーニングデータは過去の選考記録から作成されますが、特定の属性グループのサンプル数が極端に少なく、合格ラベルの比率にもグループ間で大きな差があることが懸念されています。トレーニングを開始する前に、この懸念に対処するためのアクションはどれですか。",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "SageMaker Clarify のトレーニング前バイアスメトリクスを実行する。クラス不均衡やラベル比率の差として、グループ間の偏りを定量的に測定する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "測定結果に基づいてトレーニングデータを補正する。過小に表現されているグループのデータ拡充や再サンプリングで、グループ間の偏りを緩和する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_084": {
+  "file": "MLA-C01_orig_b4.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ワークフローのデプロイとオーケストレーション",
+  "level": "easy",
+  "question": "ある ML チームでは、トレーニング済みモデルの成果物が個人の S3 バケットに散在しており、どのバージョンが検証済みでどれが本番稼働中なのか分からなくなっています。モデルをバージョン管理し、承認ステータスやメタデータとともに一元管理するための Amazon SageMaker AI の機能はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "SageMaker Model Registry にモデルパッケージグループを作成する。モデルをバージョン付きで登録し、承認ステータスとメタデータを管理する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_085": {
+  "file": "MLA-C01_orig_b4.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ワークフローのデプロイとオーケストレーション",
+  "level": "medium",
+  "question": "ある e コマース企業が、レコメンデーションモデルの新バージョンを開発しました。新旧モデルのどちらがクリック率の向上に寄与するかを、実際のユーザートラフィックの一部を新モデルに割り当てて比較する A/B テストを、既存のエンドポイントの仕組みの中で実施したいと考えています。この要件を満たすアクションはどれですか。",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "同一エンドポイント上に旧モデルと新モデルの 2 つの本番バリアントをデプロイする。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "バリアントのトラフィック重みを設定して、一部のリクエスト (例: 10%) を新モデルのバリアントに配分し、バリアントごとのメトリクスを比較する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_086": {
+  "file": "MLA-C01_orig_b4.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ワークフローのデプロイとオーケストレーション",
+  "level": "medium",
+  "question": "ある企業に複数の ML チームがあり、それぞれが独自の方法でトレーニングやデプロイの仕組みを構築しているため、品質と構成のばらつきが問題になっています。MLOps 責任者は、ソースリポジトリ、モデルビルドパイプライン、デプロイパイプラインを含む標準化された MLOps 環境の雛形を、各チームがセルフサービスで展開できるようにしたいと考えています。この要件に最も適した機能はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon SageMaker Projects の MLOps テンプレートを使用して、CI/CD パイプライン一式を含むプロジェクトを各チームに展開する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_087": {
+  "file": "MLA-C01_orig_b4.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ワークフローのデプロイとオーケストレーション",
+  "level": "medium",
+  "question": "ある製造企業が、品質検査用の画像分類モデルを工場内の計算リソースが限られたエッジデバイスで実行する計画です。工場のインターネット接続は不安定なため、推論はデバイス上でローカルに完結させる必要があります。また、デバイスのハードウェアで効率よく動作するようにモデルを最適化したいと考えています。この要件を満たすアクションはどれですか。",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon SageMaker Neo を使用して、ターゲットのエッジハードウェア向けにモデルをコンパイル・最適化する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "AWS IoT Greengrass を使用してモデルをエッジデバイスにデプロイし、デバイス上でローカルに推論を実行する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_088": {
+  "file": "MLA-C01_orig_b4.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ワークフローのデプロイとオーケストレーション",
+  "level": "medium",
+  "question": "ある企業のリアルタイム推論エンドポイントには、毎営業日の午前 9 時に社内の一括処理システムからの大量リクエストが集中することが分かっています。このパターンは毎日ほぼ一定です。負荷追従型のスケーリングだけでは、急増の開始直後にスケールアウトが間に合わずレイテンシーが悪化しています。この既知のパターンに対応する最も適切なスケーリング方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "スケジュールされたスケーリングを設定し、毎営業日の午前 9 時前にあらかじめインスタンス数を増やしておく。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_089": {
+  "file": "MLA-C01_orig_b4.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ワークフローのデプロイとオーケストレーション",
+  "level": "hard",
+  "question": "ある ML チームの Amazon SageMaker Pipelines には、時間のかかる前処理ステップとトレーニングステップが含まれています。ハイパーパラメータだけを変更してパイプラインを再実行することが多いのですが、入力データと前処理コードが前回とまったく同じ場合でも前処理ステップが毎回実行され、時間とコストを浪費しています。この無駄を減らすパイプラインの機能はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "ステップキャッシングを有効にし、入力や設定が前回の成功実行と一致するステップは結果を再利用してスキップさせる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_090": {
+  "file": "MLA-C01_orig_b4.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ワークフローのデプロイとオーケストレーション",
+  "level": "hard",
+  "question": "ある動画配信企業が、アップロードされた動画ファイルを ML モデルで解析するサービスを構築しています。1 リクエストあたりのペイロードは数百 MB と大きく、モデルの処理には最大 30 分かかります。リクエストは不定期で、処理完了時にはダウンストリームシステムへ通知が必要です。また、リクエストがない時間帯はインスタンス数をゼロまでスケールインしてコストを抑えたいと考えています。この要件に最も適した SageMaker AI の推論オプションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "非同期推論エンドポイントを使用し、リクエストをキューイングして処理し、完了・エラーを Amazon SNS で通知し、インスタンスをゼロまでオートスケールさせる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_091": {
+  "file": "MLA-C01_orig_b4.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ソリューションのモニタリング、保守、セキュリティ",
+  "level": "easy",
+  "question": "ある企業では、複数のチームとプロジェクトが同一の AWS アカウント内で Amazon SageMaker AI のリソースを使用しています。経理部門から、ML 関連のコストをチーム別・プロジェクト別に集計して報告するよう求められました。最も標準的な実現方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "SageMaker AI の各リソースにチーム名やプロジェクト名のタグを付け、コスト配分タグとして有効化して AWS Cost Explorer で集計する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_092": {
+  "file": "MLA-C01_orig_b4.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ソリューションのモニタリング、保守、セキュリティ",
+  "level": "medium",
+  "question": "ある企業のコスト見直しで、GPU インスタンス 2 台で稼働している Amazon SageMaker AI のリアルタイム推論エンドポイントが高額なコストを発生させていることが判明しました。Amazon CloudWatch のメトリクスを確認すると、GPU 使用率と CPU 使用率は常時 5% 未満であり、レイテンシーには十分な余裕がありました。性能要件を維持しながらコストを削減するために最初に取るべきアクションはどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "使用率メトリクスに基づいて、より小さいインスタンスタイプや GPU なしのインスタンスへの変更を検証し、エンドポイントをライトサイジングする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_093": {
+  "file": "MLA-C01_orig_b4.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ソリューションのモニタリング、保守、セキュリティ",
+  "level": "medium",
+  "question": "ある企業は、Amazon SageMaker Model Monitor でエンドポイントのデータドリフトを監視しており、違反レポートが生成されると担当者へ通知される仕組みは構築済みです。次のステップとして、ドリフト違反が検出された際に、人手を介さずに最新データでの再トレーニングパイプラインまで自動的に実行される仕組みにしたいと考えています。最も適切な構成はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Model Monitor の違反を示すイベントまたは CloudWatch アラームを Amazon EventBridge のルールと連携させ、SageMaker Pipelines の再トレーニングパイプラインの実行をトリガーする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_094": {
+  "file": "MLA-C01_orig_b4.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ソリューションのモニタリング、保守、セキュリティ",
+  "level": "medium",
+  "question": "ある金融機関が、規制対象の機密データを使用して Amazon SageMaker AI で複数インスタンスによる分散トレーニングを実行します。セキュリティ監査で、トレーニング中にインスタンス (コンテナ) 間でやり取りされるデータの通信も暗号化する必要があると指摘されました。この要件を満たすために行うべき設定はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "トレーニングジョブでコンテナ間トラフィックの暗号化 (EnableInterContainerTrafficEncryption) を有効にする。ノード間の通信を保護する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_095": {
+  "file": "MLA-C01_orig_b4.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ソリューションのモニタリング、保守、セキュリティ",
+  "level": "medium",
+  "question": "ある企業のリスク管理部門が、本番で使用されているすべての ML モデルについて、意図された用途、トレーニングの詳細、評価結果、リスクレーティングなどの情報を標準化された形式で文書化し、監査時に提出できるようにすることを求めています。Amazon SageMaker AI でこのモデルガバナンス文書を作成・管理する機能はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon SageMaker Model Cards を使用して、モデルごとに用途、トレーニング情報、評価結果、リスクレーティングを記録した文書を作成・管理する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_096": {
+  "file": "MLA-C01_orig_b4.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ソリューションのモニタリング、保守、セキュリティ",
+  "level": "hard",
+  "question": "ある企業のセキュリティチームは、組織のポリシーとして「Amazon SageMaker AI のトレーニングジョブは必ず VPC 設定付きで作成されること」および「トレーニングボリュームは必ず KMS キーで暗号化されること」を、利用者の善意に頼らず技術的に強制したいと考えています。IAM を使用してこれを実現するアクションはどれですか。",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "IAM ポリシーで sagemaker:VpcSubnets などの条件キーを使用し、VPC 設定が指定されていない CreateTrainingJob リクエストを拒否する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "IAM ポリシーで sagemaker:VolumeKmsKey 条件キーを使用し、ボリューム暗号化キーが指定されていない CreateTrainingJob リクエストを拒否する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_097": {
+  "file": "MLA-C01_orig_b4.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ソリューションのモニタリング、保守、セキュリティ",
+  "level": "hard",
+  "question": "ある ML エンジニアが Amazon SageMaker AI のトレーニングジョブを開始したところ、トレーニングデータのダウンロード段階で失敗しました。データは AWS KMS カスタマーマネージドキーによる SSE-KMS で暗号化された S3 バケットに保存されており、エラーはデータへのアクセス拒否を示しています。実行ロールには S3 バケットへの s3:GetObject 権限が既に付与されていることを確認済みです。この問題を解決するために確認・実施すべきアクションはどれですか。",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "実行ロールの IAM ポリシーを修正する。対象の KMS キーに対する kms:Decrypt などの必要な権限を追加する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "KMS キーのキーポリシーを確認する。実行ロールによるキーの使用が許可されているかを確認し、許可されていなければ追加する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_098": {
+  "file": "MLA-C01_orig_b4.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ソリューションのモニタリング、保守、セキュリティ",
+  "level": "hard",
+  "question": "ある企業が、与信スコアリングモデルを Amazon SageMaker AI のエンドポイントで運用しています。入力データの分布に大きな変化はないものの、本番の予測において各特徴量が予測へ寄与する度合いが、トレーニング時のベースラインから徐々に変化していないか、つまりモデルの判断根拠のドリフトを継続的に監視したいと考えています。この要件に最も適した監視の種類はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "SageMaker Model Monitor の特徴量属性ドリフトのモニタリングを設定する。SHAP に基づく特徴量の寄与度のベースラインからの乖離を検出する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_099": {
+  "file": "MLA-C01_orig_b4.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ソリューションのモニタリング、保守、セキュリティ",
+  "level": "hard",
+  "question": "ある企業は、モデル開発を行う中央の ML アカウントと、推論を稼働させる本番アカウントを分離したマルチアカウント構成を採用しています。中央アカウントの SageMaker Model Registry で承認されたモデルパッケージを、本番アカウントのデプロイパイプラインから直接参照してデプロイできるようにしたいと考えています。モデル管理の一元性を保ちながらこれを実現する方法はどれですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "中央アカウントのモデルパッケージグループにクロスアカウントアクセスを許可するリソースベースポリシーを設定し、本番アカウントのデプロイロールからモデルパッケージを参照させる。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_100": {
+  "file": "MLA-C01_orig_b4.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ソリューションのモニタリング、保守、セキュリティ",
+  "level": "hard",
+  "question": "ある政府系機関が、Amazon SageMaker Studio を利用した ML 開発環境を構築します。セキュリティ要件により、Studio からのトラフィックがインターネットへ直接出ることを禁止し、すべての通信を自組織の VPC 内のプライベートな経路に限定する必要があります。開発者は Studio から SageMaker API の操作と Amazon S3 のデータアクセスを行います。この要件を満たすアクションはどれですか。",
+  "n_correct": 2,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Studio のドメインを VPC のみ (VpcOnly) のネットワークモードで作成する。トラフィックを指定したプライベートサブネットとセキュリティグループ経由に限定する。"
+   },
+   {
+    "letter": "B",
+    "correct": true,
+    "text": "SageMaker API と SageMaker Runtime のインターフェイス VPC エンドポイントを作成する。S3 用のゲートウェイ VPC エンドポイントもあわせて作成する。"
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "E",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_301": {
+  "file": "MLA-C01_orig_gap1.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML モデルの開発",
+  "level": "medium",
+  "question": "ある企業のサポート部門は、受信した英語の問い合わせメールの本文を自動で分類したいと考えています。1 通のメールには「請求」「配送遅延」「返品」といった複数の話題が同時に含まれることがあり、該当するカテゴリをすべて付与する必要があります。カテゴリは全部で 20 種類です。手元には、人手でカテゴリを付与した本文が 5 万件あります。ML エンジニアは、モデルアーキテクチャを自分で設計したり、トレーニング用のインフラストラクチャを管理したりせずに、この分類器を最短の期間で用意する必要があります。どのアプローチを選択すべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon Comprehend のカスタム分類器をマルチラベルモードで作成し、1 列目にパイプ区切りのカテゴリ、2 列目に本文を記載した 2 列の CSV ファイルでトレーニングする。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_302": {
+  "file": "MLA-C01_orig_gap1.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "機械学習 (ML) のためのデータ準備",
+  "level": "medium",
+  "question": "ある保険会社が、コールセンターの英語の応対記録テキストを Amazon S3 に日次で数十万件蓄積しており、これを分析モデルのトレーニングデータとして使用する計画です。データガバナンス部門からは、氏名、住所、電話番号、クレジットカード番号といった個人を特定できる情報を、モデル開発チームがアクセスするバケットに置く前に本文から取り除くことを求められています。取り除いた箇所が、どの種類の情報であったかが分かる形で残ることは問題ありません。ML エンジニアは、正規表現による独自ルールの保守を避けつつ、この処理をバッチで自動化する必要があります。どのアプローチを選択すべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "Amazon Comprehend の PII エンティティ検出の非同期ジョブを、Mode に ONLY_REDACTION、RedactionConfig の MaskMode に REPLACE_WITH_PII_ENTITY_TYPE を指定して実行し、出力先の S3 バケットをモデル開発チームに公開する。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_303": {
+  "file": "MLA-C01_orig_gap1.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ワークフローのデプロイとオーケストレーション",
+  "level": "medium",
+  "question": "ある企業が、社内のヘルプデスク向けに、自然言語の質問へ根拠となる文書を示しながら回答する生成 AI アシスタントを構築しています。参照する社内文書は Amazon S3、Microsoft SharePoint、Confluence に分散しており、合計で数十万件あります。同社ではすでに Amazon Kendra の Enterprise Edition インデックスを運用しています。ML エンジニアは、埋め込みモデルの選定やベクトルデータベースの構築と運用を行わずに、質問に関連する文書の抜粋を取得して Amazon Bedrock の基盤モデルへ渡す仕組みを実装する必要があります。どのアプローチを選択すべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "各リポジトリに対応する Amazon Kendra のデータソースコネクタを設定して定期的に同期し、アプリケーションから Retrieve API で関連するパッセージを取得して、それをプロンプトのコンテキストに含めて Amazon Bedrock のモデルへ渡す。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_304": {
+  "file": "MLA-C01_orig_gap1.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "choice",
+  "domain": "ML ソリューションのモニタリング、保守、セキュリティ",
+  "level": "hard",
+  "question": "ある企業が、Amazon Kendra の Enterprise Edition インデックスを使った社内検索アプリケーションを運用しています。インデックスには人事、経理、開発の各部門の文書が混在しており、監査部門からは、利用者が自分の所属部門に許可された文書だけを検索結果として受け取れる状態にすることを求められています。利用者は Amazon Cognito ユーザープールで認証され、所属部門はグループとして ID トークンに含まれます。インデックスを部門ごとに分割すると、インデックスの費用と同期の運用がその分だけ増えるため避けたいと考えています。ML エンジニアはどのように実装すべきですか。",
+  "n_correct": 1,
+  "options": [
+   {
+    "letter": "A",
+    "correct": true,
+    "text": "文書のメタデータの AccessControlList フィールドに、アクセスを許可するグループを設定してインデックスに取り込む。インデックスでトークンベースのユーザーアクセス制御を有効にし、Query 要求の UserContext に利用者のトークンを渡してユーザーコンテキストフィルタリングを行う。"
+   },
+   {
+    "letter": "B",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "C",
+    "correct": false,
+    "text": null
+   },
+   {
+    "letter": "D",
+    "correct": false,
+    "text": null
+   }
+  ]
+ },
+ "MLA-C01_orig_211": {
+  "file": "mixed_orig_b1.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "ordering",
+  "domain": "ML ワークフローのデプロイとオーケストレーション",
+  "level": "medium",
+  "question": "ある ML エンジニアが、Amazon SageMaker Model Registry を使ってモデルのガバナンスを効かせたうえで、リアルタイム推論エンドポイントにデプロイします。以下のリストから、正しいステップを選択して正しい順に並べ替えてください。各ステップを 1 回だけ選択するか、まったく選択しないでください。",
+  "n_correct": null,
+  "options": []
+ },
+ "MLA-C01_orig_212": {
+  "file": "mixed_orig_b1.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "ordering",
+  "domain": "機械学習 (ML) のためのデータ準備",
+  "level": "medium",
+  "question": "ある ML エンジニアが、表形式のデータセットから教師あり学習のモデルを構築します。データリークを避けながら汎化性能を正しく見積もる必要があります。以下のリストから、正しいステップを選択して正しい順に並べ替えてください。各ステップを 1 回だけ選択するか、まったく選択しないでください。",
+  "n_correct": null,
+  "options": []
+ },
+ "MLA-C01_orig_213": {
+  "file": "mixed_orig_b1.json",
+  "exam": "MLA-C01",
+  "set": "orig",
+  "type": "ordering",
+  "domain": "ML ソリューションのモニタリング、保守、セキュリティ",
+  "level": "medium",
+  "question": "ある ML エンジニアが、本番の SageMaker リアルタイムエンドポイントでデータ品質のドリフトを検出する仕組みを構築します。以下のリストから、正しいステップを選択して正しい順に並べ替えてください。各ステップを 1 回だけ選択するか、まったく選択しないでください。",
+  "n_correct": null,
+  "options": []
+ }
+}
