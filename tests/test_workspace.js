@@ -8,12 +8,10 @@ const path = require('path');
   const ctx = await browser.newContext({ viewport: { width: 420, height: 900 } });
 
   let sentHeaders = null;
-  let firstCall = true;
+  // 実際のAPIと同じく「ワークスペースIDが無い限りエラー」にする
   await ctx.route('https://api.anthropic.com/**', async route => {
     sentHeaders = route.request().headers();
-    if (firstCall) {
-      // 1回目はワークスペース未指定として、実際のAPIと同じエラーを返す
-      firstCall = false;
+    if (!sentHeaders['anthropic-workspace-id']) {
       await route.fulfill({ status: 400, contentType: 'application/json', body: JSON.stringify({
         error: { message: 'anthropic-workspace-id is required when authenticating with an identity-linked API key; send the id of the workspace this request acts in.' },
       })});
@@ -53,6 +51,9 @@ const path = require('path');
   // ワークスペースIDを入れるとヘッダーに乗るか
   await page.mouse.click(10, 100);
   await page.locator('nav button[data-v="settings"]').click();
+  // ワークスペースID欄は必要になったときだけ出るので、まず「接続を確認」で出させる
+  await page.locator('button:has-text("接続を確認")').click();
+  await page.waitForSelector('#adv-row', { state: 'visible', timeout: 15000 });
   await page.fill('#set-workspace', 'wrkspc_01TESTWORKSPACE');
   await page.locator('#set-workspace').blur();
   await page.locator('nav button[data-v="exams"]').click();

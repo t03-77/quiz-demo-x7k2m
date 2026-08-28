@@ -315,9 +315,13 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
     </div>
     <button class="btn sub" style="margin-bottom:6px" onclick="fetchModels()">🔄 提供元から最新のモデル一覧を取得</button>
     <div class="note" id="model-note" style="margin-bottom:8px">候補は目安です。<b>APIキーを入れて上のボタンを押すと、提供元から実際に使えるモデルを取得</b>できます。<code>gpt-</code> で始まる名前ならOpenAI、それ以外はAnthropicのAPIに送ります。</div>
-    <div class="formrow"><label>ワークスペースID（Anthropicで必要な場合のみ）</label>
-      <input id="set-workspace" placeholder="wrkspc-..." style="width:100%" onchange="saveSettings()"></div>
-    <div class="note" style="margin-top:-4px;margin-bottom:8px"><b>空のままで動く場合は不要です。</b><br>「anthropic-workspace-id is required」というエラーが出たときだけ入れてください。そのAPIキーが利用者アカウントに紐づいていて、どのワークスペースで使うかを毎回指定する必要がある状態です。<br>IDは Anthropicコンソール → Settings → Workspaces で確認できます（<code>wrkspc_</code> で始まる文字列）。</div>
+    <button class="btn sub" style="margin-bottom:6px" onclick="checkConnection()">✔ 接続を確認する</button>
+    <div class="note" id="conn-msg" style="margin-bottom:8px">キーを入れたら押してください。使えるかどうかをその場で確かめます。</div>
+    <div id="adv-row" style="display:none;margin-bottom:8px">
+      <div class="formrow"><label>ワークスペースID</label>
+        <input id="set-workspace" placeholder="wrkspc_..." style="width:100%" onchange="saveSettings()"></div>
+      <div class="note">Anthropicコンソール → Settings → Workspaces で確認できる <code>wrkspc_</code> で始まる文字列です。</div>
+    </div>
     <div class="formrow"><label>月の予算上限(USD)</label><input type="number" id="set-budget" value="2" min="0" step="0.5" onchange="saveSettings()"></div>
     <div class="note">今月の使用額（概算）: $<span id="set-usage">0.00</span>。上限に達するとAI機能は自動停止します。<b>料金は変わるため、表示は目安であり請求額そのものではありません。</b><br><b>キーはこの端末のブラウザ内にだけ保存</b>され、送信先は選んだモデルの提供元（AnthropicまたはOpenAI）のAPIだけです。キーがなくてもAI以外の全機能を使えます。</div>
   </div>
@@ -1284,6 +1288,34 @@ async function unlockDemoKey(){
   }
 }
 function activeKey(){ return UNLOCKED_KEY || (SETTINGS.key||'').trim(); }
+/* キーを入れた直後に使えるか確かめる。
+   利用者に「ワークスペースIDとは何か」を考えさせないため、
+   必要になったときだけその欄を出し、それ以外は隠しておく。 */
+async function checkConnection(){
+  const msg=document.getElementById('conn-msg');
+  const key=activeKey();
+  if(!key){ msg.textContent='先にAPIキーを入れてください。'; return; }
+  msg.textContent='確認しています…';
+  try{
+    await aiCall([{role:'user', content:'ping'}], {maxTokens:16});
+    msg.innerHTML='<b>使えます。</b>AI機能が利用できます。';
+    document.getElementById('adv-row').style.display='none';
+  }catch(e){
+    const m=String(e.message||'');
+    if(/ワークスペース/.test(m)){
+      // 追加設定が要るときだけ欄を出して、そこへ誘導する
+      document.getElementById('adv-row').style.display='block';
+      msg.innerHTML='<b>あと1つ設定が要ります。</b>下の「ワークスペースID」を入れてから、もう一度確認してください。';
+      document.getElementById('set-workspace').focus();
+    }else if(/401|authentication|invalid.*key/i.test(m)){
+      msg.innerHTML='<b>キーが正しくないようです。</b>コピー漏れがないか確認してください。';
+    }else if(/model/i.test(m) && /not.*found|does not exist/i.test(m)){
+      msg.innerHTML='<b>そのモデルは使えないようです。</b>「最新のモデル一覧を取得」を押して、候補から選び直してください。';
+    }else{
+      msg.innerHTML='使えませんでした: '+esc(m);
+    }
+  }
+}
 function lockDemoKey(){
   UNLOCKED_KEY=null;
   try{ sessionStorage.removeItem(UNLOCK_KEY_STORE); }catch(e){}
@@ -1689,6 +1721,8 @@ document.getElementById('set-key').value=SETTINGS.key||'';
 document.getElementById('set-budget').value=SETTINGS.budget||2;
 document.getElementById('set-model').value=SETTINGS.model||'claude-sonnet-5';
 document.getElementById('set-workspace').value=SETTINGS.workspace||'';
+// 一度設定した人には出したままにする（消えると直せなくなるため）
+if(SETTINGS.workspace) document.getElementById('adv-row').style.display='block';
 renderModelList();
 document.getElementById('set-shuffle').checked = SETTINGS.shuffle!==false;
 document.getElementById('set-srs').checked = SETTINGS.srs!==false;
