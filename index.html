@@ -315,6 +315,9 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
     </div>
     <button class="btn sub" style="margin-bottom:6px" onclick="fetchModels()">🔄 提供元から最新のモデル一覧を取得</button>
     <div class="note" id="model-note" style="margin-bottom:8px">候補は目安です。<b>APIキーを入れて上のボタンを押すと、提供元から実際に使えるモデルを取得</b>できます。<code>gpt-</code> で始まる名前ならOpenAI、それ以外はAnthropicのAPIに送ります。</div>
+    <div class="formrow"><label>ワークスペースID（Anthropicで必要な場合のみ）</label>
+      <input id="set-workspace" placeholder="wrkspc-..." style="width:100%" onchange="saveSettings()"></div>
+    <div class="note" style="margin-top:-4px;margin-bottom:8px">ワークスペースに紐づいたAPIキーを使うときだけ必要です。「anthropic-workspace-id is required」というエラーが出たら、Anthropicコンソールの Settings → Workspaces で確認できるIDを入れてください。空のままで動く場合は不要です。</div>
     <div class="formrow"><label>月の予算上限(USD)</label><input type="number" id="set-budget" value="2" min="0" step="0.5" onchange="saveSettings()"></div>
     <div class="note">今月の使用額（概算）: $<span id="set-usage">0.00</span>。上限に達するとAI機能は自動停止します。<b>料金は変わるため、表示は目安であり請求額そのものではありません。</b><br><b>キーはこの端末のブラウザ内にだけ保存</b>され、送信先は選んだモデルの提供元（AnthropicまたはOpenAI）のAPIだけです。キーがなくてもAI以外の全機能を使えます。</div>
   </div>
@@ -652,11 +655,15 @@ function refreshHome(){
   const counts={all:all.length};
   for(const q of all) counts[q.set]=(counts[q.set]||0)+1;
   if(!counts[setFilter]) setFilter='all';
-  const chips=[['all','すべて']].concat(Object.keys(SET_LABELS).filter(k=>counts[k]).map(k=>[k,SET_LABELS[k]]));
+  const kinds=Object.keys(SET_LABELS).filter(k=>counts[k]);
+  const chips=[['all','すべて']].concat(kinds.map(k=>[k,SET_LABELS[k]]));
   document.getElementById('h-sets').innerHTML = chips.map(([k,l])=>
     `<button class="chip ${setFilter===k?'on':''}" onclick="setFilter='${k}';refreshHome()">${l} ${counts[k]||''}</button>`).join('');
   document.getElementById('h-setinfo').textContent =
     setFilter==='all'? 'すべての種類から出題します' : (SET_HINT[setFilter]||'');
+  // 種類が1つしかないときは「すべて」と同じ数になり、選ぶ意味がない。カードごと隠す
+  const setCard=document.getElementById('h-sets').closest('.card');
+  if(setCard) setCard.style.display = (kinds.length>=2)? '' : 'none';
   // 模擬試験の選択肢。本番と同じ問題数・時間を第一候補に、短縮版も用意する
   const e=EXAMS.find(x=>x.id===currentExam);
   const perQ=e.min/e.n;
@@ -1388,19 +1395,27 @@ async function callAnthropic(model, key, messages, opts){
   const body={model, max_tokens:opts.maxTokens||4096, messages};
   if(opts.system) body.system=opts.system;
   if(opts.schema) body.output_config={format:{type:'json_schema', schema:opts.schema}};
+  const head={
+    'content-type':'application/json',
+    'x-api-key':key,
+    'anthropic-version':'2023-06-01',
+    'anthropic-dangerous-direct-browser-access':'true',
+  };
+  // ワークスペースに紐づいたキーは、どのワークスペースでの利用かを添える必要がある
+  const ws=(SETTINGS.workspace||'').trim();
+  if(ws) head['anthropic-workspace-id']=ws;
   const res=await fetch('https://api.anthropic.com/v1/messages',{
-    method:'POST',
-    headers:{
-      'content-type':'application/json',
-      'x-api-key':key,
-      'anthropic-version':'2023-06-01',
-      'anthropic-dangerous-direct-browser-access':'true',
-    },
-    body:JSON.stringify(body),
+    method:'POST', headers:head, body:JSON.stringify(body),
   });
   if(!res.ok){
     const e=await res.json().catch(()=>({}));
-    throw new Error(`APIエラー(${res.status}): ${e.error?.message||'不明なエラー'}`);
+    const m=e.error?.message||'不明なエラー';
+    if(/workspace-id is required/i.test(m)){
+      throw new Error('このAPIキーはワークスペースに紐づいています。'
+        +'設定の「ワークスペースID」に、Anthropicコンソールで確認できる wrkspc_ から始まるIDを入れてください。'
+        +'（または、ワークスペースに属さないキーを作り直してください）');
+    }
+    throw new Error(`APIエラー(${res.status}): ${m}`);
   }
   const data=await res.json();
   recordAiCost(model, data.usage||{});
@@ -1567,6 +1582,7 @@ function saveSettings(){
   SETTINGS.budget=document.getElementById('set-budget').value;
   SETTINGS.model=(document.getElementById('set-model').value||'').trim()||'claude-haiku-4-5';
   SETTINGS.demo=document.getElementById('set-demo').checked;
+  SETTINGS.workspace=document.getElementById('set-workspace').value;
   SETTINGS.sessionLen=document.getElementById('set-seslen').value;
   lsSet(SETTINGS_KEY, SETTINGS);
   const hs=document.getElementById('home-seslen');
@@ -1672,6 +1688,7 @@ else if(matchMedia('(prefers-color-scheme: dark)').matches) document.documentEle
 document.getElementById('set-key').value=SETTINGS.key||'';
 document.getElementById('set-budget').value=SETTINGS.budget||2;
 document.getElementById('set-model').value=SETTINGS.model||'claude-sonnet-5';
+document.getElementById('set-workspace').value=SETTINGS.workspace||'';
 renderModelList();
 document.getElementById('set-shuffle').checked = SETTINGS.shuffle!==false;
 document.getElementById('set-srs').checked = SETTINGS.srs!==false;
