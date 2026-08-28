@@ -147,7 +147,45 @@ python tools/audit_criteria.py  チェックリスト58項目の充足状況
 ```
 
 **個別の指標だけ見て「直った」と判断しないこと。** 1つ直すと別の症状が出る。
-実際、「正解が最長」を直したら「最長は必ず誤答」という逆の癖が出かけた。
+
+### 「公式より低ければ良い」は間違い。**公式の値に合わせる**
+
+実際にこれで失敗した。DVA-C02 の「正解が最長」を 58% → 11% まで下げたところ、
+**最長の肢が正解である割合が 4.9% になり、公式 23.5% を大きく下回った**。
+「一番長い肢を捨てれば当たる」という逆の手がかりを作っていた。
+
+公式は正解が最長の問題を 2割強もつ。これは欠陥ではなく自然な分布であり、
+ゼロに近づけるほど良いわけではない。**上下どちらにずれても手がかりになる。**
+
+対処として、長さ調整で足していた末尾の句を16問から削り、20.6% に戻した。
+測るときは公式との差の**絶対値**を見ること:
+
+```
+python -X utf8 -c "
+import json
+js=open('data/orig.js',encoding='utf-8').read(); n=json.loads(js[js.index('['):js.rindex(']')+1])
+off=json.load(open('資料/変換済み/questions_all.json',encoding='utf-8'))['questions']
+def stat(qs,label):
+    hi=lo=same=0
+    for q in qs:
+        op=q.get('options') or []
+        cor=[len(o['text']) for o in op if o.get('correct')]; wr=[len(o['text']) for o in op if not o.get('correct')]
+        if not cor or not wr: continue
+        m=max(cor+wr); a=max(cor)==m; b=max(wr)==m
+        if a and not b: hi+=1
+        elif b and not a: lo+=1
+        else: same+=1
+    t=hi+lo+same
+    if t: print('%-16s 最長が正解 %5.1f%%  最長が誤答 %5.1f%%'%(label,hi/t*100,lo/t*100))
+for ex in ['DVA-C02','MLA-C01']:
+    stat([q for q in off if q.get('exam')==ex], ex+' 公式')
+    stat([q for q in n if q.get('exam')==ex and q.get('set')=='orig'], ex+' 自作')
+"
+```
+
+**修正の前に、その資格が本当に外れているかを測ること。** MLA-C01 は
+24問が「正解が最長」に該当していたが、分布で見ると 26.0% で既に公式 21.0% 並みだった。
+直していれば DVA-C02 と同じ逆の癖を作っていた。
 
 `audit_all.py` は**機械で測れない観点も「未検査」として必ず表示する**。
 検査が全部通っても品質は保証されない。
