@@ -162,23 +162,39 @@ def check_stale(mine):
     return hits
 
 
-def check_service_bias(mine):
-    """同じサービスばかり正解になっていないか(上位が突出していないか)"""
-    SVC = re.compile(r"(?:Amazon|AWS)\s+([A-Z][A-Za-z0-9]*(?:\s+[A-Z][A-Za-z0-9]*){0,2})")
+SVC_RE = re.compile(r"(?:Amazon|AWS)\s+([A-Z][A-Za-z0-9]*(?:\s+[A-Z][A-Za-z0-9]*){0,2})")
+
+
+def _bias_share(qs):
+    """正解肢に出てくるサービスのうち、上位3種が占める割合"""
+    c = Counter()
+    for q in qs:
+        for o in q.get("options", []):
+            if o.get("correct"):
+                for m in SVC_RE.finditer(o.get("text", "")):
+                    c[m.group(1).strip()] += 1
+    if not c:
+        return None, []
+    top = c.most_common(3)
+    return 100 * sum(n for _, n in top) // max(1, sum(c.values())), top
+
+
+def check_service_bias(mine, off):
+    """同じサービスばかり正解になっていないか。
+
+    **絶対値では判定しない。** 公式模試そのものに偏りがあり、その度合いは資格ごとに
+    大きく違う(SAP-C02 13% に対し AIP-C01 48%)。以前はここを share>=30 の
+    決め打ちで判定していたため、公式 36.5% に対して自作 33.8% の DEA-C01 を
+    「偏りが大きい」と誤検出していた。指摘された側が不要な作り直しに入る危険があった。
+    """
     rows = []
     for ex in sorted({q["exam"] for q in mine}):
-        c = Counter()
         qs = [q for q in mine if q["exam"] == ex]
-        for q in qs:
-            for o in q.get("options", []):
-                if o.get("correct"):
-                    for m in SVC.finditer(o.get("text", "")):
-                        c[m.group(1).strip()] += 1
-        if not c:
+        share, top = _bias_share(qs)
+        if share is None:
             continue
-        top = c.most_common(3)
-        share = 100 * sum(n for _, n in top) // max(1, sum(c.values()))
-        rows.append((ex, len(qs), top, share))
+        off_share, _ = _bias_share([q for q in off if q.get("exam") == ex])
+        rows.append((ex, len(qs), top, share, off_share))
     return rows
 
 
@@ -251,10 +267,19 @@ def main():
     print()
     print("=" * 74)
     print("4. 正解に出てくるサービスの偏り(上位3種が占める割合)")
-    for ex, n, top, share in check_service_bias(mine):
-        mark = "   ★偏りが大きい" if share >= 30 else ""
-        print("  %-9s %3d問  %-46s %2d%%%s" % (
-            ex, n, " / ".join("%s(%d)" % (s, c) for s, c in top), share, mark))
+    print("   公式模試にも偏りがあるため、絶対値ではなく公式との差で見る")
+    for ex, n, top, share, off_share in check_service_bias(mine, off):
+        if off_share is None:
+            mark = ""
+            cmp_ = "  公式 --  "
+        else:
+            gap = share - off_share
+            mark = "   ★公式より偏り大 %+dpt" % gap if gap >= 8 else ""
+            cmp_ = "  公式 %2d%%" % off_share
+            if mark:
+                ng += 1
+        print("  %-9s %3d問  %-44s 自作 %2d%%%s%s" % (
+            ex, n, " / ".join("%s(%d)" % (s, c) for s, c in top), share, cmp_, mark))
 
     return ng
 
