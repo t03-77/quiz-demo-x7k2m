@@ -221,13 +221,24 @@ def main():
     print()
     print("=" * 74)
     print("1b. 文面は違うが正解の構成が同じ問題")
+    # 公式模試にも同じ現象がある。EventBridge+SNS のような定番の組み合わせは
+    # 繰り返し正解になるのが自然で、絶対値で判定すると健全な状態を欠陥と誤検出する。
+    # 公式の 1.5 倍を超えたときだけ警告する。
     same = check_same_topic(mine)
-    if same:
+    same_off = check_same_topic(off)
+    rate = len(same) / max(1, len(mine)) * 1000
+    rate_off = len(same_off) / max(1, len(off)) * 1000
+    print("   1000問あたり  公式 %.1f組 / 自作 %.1f組" % (rate_off, rate))
+    if same and rate > rate_off * 1.5:
         ng += 1
-        reasons.append("正解の構成が同じ%d組" % len(same))
+        reasons.append("正解の構成が同じ%d組(公式の%.1f倍)" % (len(same), rate / max(0.1, rate_off)))
         for a, b, j, common in same[:15]:
             print("  %s ≒ %s (共通 %.0f%%: %s)" % (a, b, j * 100, " / ".join(common)))
-        print("  計 %d 組" % len(same))
+        print("  計 %d 組  ★公式より多い" % len(same))
+    elif same:
+        for a, b, j, common in same[:6]:
+            print("  %s ≒ %s (共通 %.0f%%: %s)" % (a, b, j * 100, " / ".join(common)))
+        print("  計 %d 組 (公式の範囲内)" % len(same))
     else:
         print("  なし")
 
