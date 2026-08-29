@@ -201,12 +201,17 @@ def check_service_bias(mine, off):
 def main():
     off, mine = load()
     ng = 0
+    # 何が引っかかったかを最後に1行で出す。audit_all.py は各スクリプトの
+    # 「最後の行」を要約として拾うため、ここが無いと無関係な行(以前はサービスの偏りの
+    # 最終行)が要確認の理由として表示され、誤った作業に入る危険がある。
+    reasons = []
 
     print("=" * 74)
     print("1. 内容が重複している問題")
     dup = check_duplicates(mine)
     if dup:
         ng += 1
+        reasons.append("重複%d組" % len(dup))
         for ex, a, b, r in dup[:20]:
             print("  %-9s %s ≒ %s (一致度 %.0f%%)" % (ex, a, b, r * 100))
         print("  計 %d 組" % len(dup))
@@ -219,6 +224,7 @@ def main():
     same = check_same_topic(mine)
     if same:
         ng += 1
+        reasons.append("正解の構成が同じ%d組" % len(same))
         for a, b, j, common in same[:15]:
             print("  %s ≒ %s (共通 %.0f%%: %s)" % (a, b, j * 100, " / ".join(common)))
         print("  計 %d 組" % len(same))
@@ -234,10 +240,12 @@ def main():
         print("  %d正解 / %d肢   公式 %4d問   自作 %4d問%s" % (nc, n, a, b, mark))
     if shape_ng:
         ng += 1
+        reasons.append("公式にない出題の形")
 
     print()
     print("=" * 74)
     print("2. 複数選択の比率(公式 → 自作)")
+    fmt_ng = []
     for ex, no, oc, nm, mc in check_format(off, mine):
         def pct(c, n, k):
             return 100 * c.get(k, 0) // max(1, n)
@@ -246,7 +254,13 @@ def main():
             pct(oc, no, 3), pct(mc, nm, 3))
         # 公式に3つ選択があるのに自作に無い、などのずれを目立たせる
         gap = max(abs(pct(oc, no, k) - pct(mc, nm, k)) for k in (1, 2, 3))
+        if gap >= 12:
+            fmt_ng.append(ex)
         print(line + ("   ★ずれ%dpt" % gap if gap >= 12 else ""))
+    if fmt_ng:
+        # 本番と出題の形が違うと、演習の感覚がずれる。件数だけでなく資格名を残す
+        ng += 1
+        reasons.append("複数選択の比率のずれ(%s)" % "、".join(fmt_ng))
 
     print()
     print("=" * 74)
@@ -254,6 +268,7 @@ def main():
     stale = check_stale(mine)
     if stale:
         ng += 1
+        reasons.append("提供終了サービスが正解%d問" % len(stale))
         seen = set()
         for ex, qid, name, why in stale:
             if (ex, name) in seen:
@@ -268,6 +283,7 @@ def main():
     print("=" * 74)
     print("4. 正解に出てくるサービスの偏り(上位3種が占める割合)")
     print("   公式模試にも偏りがあるため、絶対値ではなく公式との差で見る")
+    bias_ng = []
     for ex, n, top, share, off_share in check_service_bias(mine, off):
         if off_share is None:
             mark = ""
@@ -278,9 +294,16 @@ def main():
             cmp_ = "  公式 %2d%%" % off_share
             if mark:
                 ng += 1
+                bias_ng.append(ex)
         print("  %-9s %3d問  %-44s 自作 %2d%%%s%s" % (
             ex, n, " / ".join("%s(%d)" % (s, c) for s, c in top), share, cmp_, mark))
+    if bias_ng:
+        reasons.append("公式より偏りが大きい(%s)" % "、".join(bias_ng))
 
+    print()
+    print("=" * 74)
+    # audit_all.py はこの最終行を要約として拾う
+    print("要確認: " + " / ".join(reasons) if reasons else "要確認なし")
     return ng
 
 
