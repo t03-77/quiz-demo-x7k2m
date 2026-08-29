@@ -145,20 +145,39 @@ def option_count(off, mine):
 
 
 def question_length(off, mine):
-    """問題文の分量が公式模試の下位10%を下回っていないか"""
+    """問題文の分量が公式模試の水準か。
+
+    **「公式の下位10%を下回る問題が1問でもあれば要確認」という判定は誤りだった。**
+    公式模試そのものは、定義上ちょうど10%がその線を下回る。自作が0.6%(1211問中7問)
+    しかなくても要確認と報告され、しかもその7問は線を2〜10字下回るだけだった。
+    短い問題が多いのではなく、むしろ公式より少ない状態を欠陥として扱っていた。
+
+    見るべきは次の2つ:
+      - 下限割れの「割合」が公式の10%より多いか
+      - 中央値が公式から離れていないか(公式比 85〜115% を目安にする)
+    """
     import statistics
     bad = 0
+    total = 0
     detail = []
+    ng_ex = []
     for ex in sorted({q["exam"] for q in mine}):
         o = sorted(len(q.get("question", "")) for q in off if q.get("exam") == ex)
         m = [len(q["question"]) for q in mine if q["exam"] == ex]
         if not o or not m:
             continue
         lo = o[int(len(o) * .1)]
-        u = sum(1 for x in m if x < lo)
-        bad += u
-        detail.append("%s %d%%" % (ex, 100 * statistics.median(m) // statistics.median(o)))
-    return bad == 0, "下限割れ %d問 / 公式比 %s" % (bad, " ".join(detail))
+        bad += sum(1 for x in m if x < lo)
+        total += len(m)
+        ratio = 100 * statistics.median(m) // statistics.median(o)
+        if not (85 <= ratio <= 115):
+            ng_ex.append(ex)
+        detail.append("%s %d%%%s" % (ex, ratio, "★" if not (85 <= ratio <= 115) else ""))
+    share = 100 * bad / max(1, total)
+    ok = share <= 10 and not ng_ex
+    note = "下限割れ %d問(%.1f%% / 公式は定義上10%%) 中央値の公式比 %s" % (
+        bad, share, " ".join(detail))
+    return ok, note
 
 
 def volume(mine):
@@ -222,15 +241,20 @@ def main():
 
     results = []
     print("【機械で測れる観点】")
-    for label, fn in [
-        ("問題文の分量が公式模試の水準か", lambda: question_length(off, mine)),
-        ("正解の位置の偏り(出題時)", lambda: answer_position(off, mine)),
-        ("正解の位置の偏り(データ上)", lambda: raw_answer_position(mine)),
-        ("選択肢の数の分布", lambda: option_count(off, mine)),
-        ("問題数(本番の何回分か)", lambda: volume(mine)),
-        ("補助コンテンツのカバー率", lambda: coverage(mine)),
+    # info=True は「見ておく数字」であって欠陥ではない。要確認に数えると、
+    # 毎回2件が常時点灯して本当の問題が埋もれる。実際そうなっていた。
+    for label, fn, info in [
+        ("問題文の分量が公式模試の水準か", lambda: question_length(off, mine), False),
+        ("正解の位置の偏り(出題時)", lambda: answer_position(off, mine), False),
+        ("正解の位置の偏り(データ上)", lambda: raw_answer_position(mine), True),
+        ("選択肢の数の分布", lambda: option_count(off, mine), False),
+        ("問題数(本番の何回分か)", lambda: volume(mine), True),
+        ("補助コンテンツのカバー率", lambda: coverage(mine), False),
     ]:
         ok, note = fn()
+        if info:
+            print("  %s %-32s %s" % ("情報 ", label, note))
+            continue
         results.append(ok)
         print("  %s %-32s %s" % ("OK " if ok else "要確認", label, note))
 
