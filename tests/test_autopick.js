@@ -1,23 +1,7 @@
-// モデル未指定でも動くこと、自分のキーがデモ用キーより優先されることを確認する
+// モデル未指定でも、キーの種類に合わせて既定モデルが選ばれることを確認する
 const { chromium } = require('playwright-core');
 const path = require('path');
-const PASS = 'Test-Passphrase-For-E2E-2026-0827';
 const url = 'file:///' + path.resolve('C:/Users/na7sh/Works/95_work/aws/01_projects/cert_quiz_app/index.html').replace(/\\/g, '/');
-
-async function seedDemoKey(page) {
-  await page.evaluate(async (pass) => {
-    const enc = new TextEncoder();
-    const salt = crypto.getRandomValues(new Uint8Array(16));
-    const iv = crypto.getRandomValues(new Uint8Array(12));
-    const base = await crypto.subtle.importKey('raw', enc.encode(pass), 'PBKDF2', false, ['deriveBits']);
-    const bits = await crypto.subtle.deriveBits({ name: 'PBKDF2', salt, iterations: 1000, hash: 'SHA-256' }, base, 256);
-    const k = await crypto.subtle.importKey('raw', bits, 'AES-GCM', false, ['encrypt']);
-    const ct = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, k, enc.encode('sk-ant-DEMO-key'));
-    const b64 = b => btoa(String.fromCharCode(...new Uint8Array(b)));
-    window.DEMO_KEY = { v: 1, iter: 1000, salt: b64(salt), iv: b64(iv), data: b64(ct) };
-    if (window.syncDemoUI) syncDemoUI();
-  }, PASS);
-}
 
 (async () => {
   const browser = await chromium.launch({ channel: 'msedge', headless: true });
@@ -32,7 +16,6 @@ async function seedDemoKey(page) {
   page.on('dialog', async d => { await d.accept(); });
   await page.goto(url);
   await page.waitForSelector('.examcard');
-  await seedDemoKey(page);
 
   // 1. モデル未指定でも既定が選ばれること
   await page.locator('nav button[data-v="settings"]').click();
@@ -45,19 +28,7 @@ async function seedDemoKey(page) {
   console.log('自動で選ばれたモデル:', sent.body.model);
   if (!sent.body.model) throw new Error('モデルが決まっていない');
 
-  // 2. 自分のキーがデモ用キーより優先されること
-  await page.locator('#set-demo').check();
-  await seedDemoKey(page);
-  await page.fill('#demo-pass', PASS);
-  await page.locator('button:has-text("解錠")').click();
-  await page.waitForFunction(() => /解錠しました/.test(document.getElementById('demo-key-msg').textContent));
-  sent = null;
-  await page.locator('button:has-text("接続を確認")').click();
-  await page.waitForFunction(() => /使えます|使えません|設定/.test(document.getElementById('conn-msg').textContent));
-  console.log('解錠後に使われたキー:', sent.key);
-  if (sent.key !== 'sk-ant-MY-OWN-key') throw new Error('自分のキーが使われていない（デモ用キーが優先されている）');
-
-  // 3. OpenAIのキーならGPT系が選ばれること
+  // 2. OpenAIのキーならGPT系が選ばれること
   const ctx2 = await browser.newContext({ viewport: { width: 420, height: 900 } });
   let sent2 = null;
   await ctx2.route('https://api.openai.com/**', async route => {

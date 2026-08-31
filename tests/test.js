@@ -8,9 +8,9 @@ const { waitQuestion, answer } = require('./answer');
   const browser = await chromium.launch({ channel: 'msedge', headless: true });
   const page = await browser.newPage({ viewport: { width: 420, height: 900 } });
   page.on('pageerror', e => errors.push('pageerror: ' + e.message));
-  // 配布するときだけ置くファイル（音声トラック定義・デモ用キー）は、無くても正常。
+  // 配布するときだけ置くファイル（音声トラック定義）は、無くても正常。
   // 404は意図した動作なのでエラーとして数えない
-  const OPTIONAL = /audio_tracks|demo_key|\.mp3/;
+  const OPTIONAL = /audio_tracks|\.mp3/;
   page.on('console', m => {
     if (m.type() !== 'error') return;
     if (/ERR_FILE_NOT_FOUND|Failed to load resource/.test(m.text()) && OPTIONAL.test(m.location().url || '')) return;
