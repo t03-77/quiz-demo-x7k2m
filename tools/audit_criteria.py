@@ -83,18 +83,28 @@ def c3_7_no_price(off, mine):
 
 
 def c5_5_count_stated(off, mine):
-    """C5-5 複数選択のとき、選ぶ数が問題文に書かれているか"""
-    def bad(qs):
-        out = []
+    """C5-5 複数選択のとき、選ぶ数が問題文に書かれているか。
+
+    2026-09-01 修正: 以前は自作だけを絶対値で判定していた（鉄則4で禁じた形）。
+    公式模試も9割超が問題文に選択数を書かない(実測 160/175問が未記載)ため、
+    公式と未記載率を比較する。なおアプリのUIは n_correct から「Nつ選択」タグを
+    常時表示するので、利用者が選択数を知れないことはない。"""
+    def rate(qs):
+        tot = bad = 0
         for q in qs:
             nc = q.get("n_correct") or sum(1 for x in q["options"] if x.get("correct"))
             if nc < 2:
                 continue
+            tot += 1
             if not re.search(r"(2|3|二|三|２|３)\s*つ", q.get("question", "")):
-                out.append(q.get("id", "?"))
-        return out
-    b = bad(mine)
-    return not b, "選択数が未記載: 自作 %d問 %s" % (len(b), b[:3] if b else "")
+                bad += 1
+        return bad, tot
+    ob, ot = rate(off)
+    mb, mt = rate(mine)
+    orate = ob / ot * 100 if ot else 0
+    mrate = mb / mt * 100 if mt else 0
+    return mrate <= orate + 10, "選択数の未記載率: 公式 %.0f%%(%d/%d) / 自作 %.0f%%(%d/%d) ※UIが「Nつ選択」を常時表示" % (
+        orate, ob, ot, mrate, mb, mt)
 
 
 def c6_2_three_step(off, mine):
