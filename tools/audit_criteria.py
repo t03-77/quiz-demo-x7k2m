@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""チェックリスト37項目の充足状況を出す
+"""チェックリスト37項目(v1)＋v2 §10由来の4項目の充足状況を出す
 
 `資料/生成/_review_criteria.md` は公式問題61問を精読して導いた「良い問題」の条件。
 一方 `audit_all.py` が測っていたのはそのうち5項目だけだった。
@@ -143,6 +143,83 @@ def c1_6_length(off, mine):
 # ---- チェックリスト全項目 ---------------------------------------
 # (番号, 内容, 状態, 測定関数)
 #   "測定" … 実装済み / "要AI" … 機械では無理 / "未実装" … 機械化できるが未着手
+
+# ---- v2チェックリスト §10「品質差の正体」由来の追加項目 -------------
+# 2026-09-03 追加。_review_criteria_v2.md（58項目・確定版）で挙げられていながら
+# この検査が測っていなかった観点。いずれも公式との比較で判定する（鉄則4）。
+
+CODE_SNIPPET = re.compile(r'[{}]|"[A-Za-z]+"\s*:|Effect\s*[:=]|arn:aws|<[a-z]+>|\n\s{4,}\S')
+
+
+def v2_s9_config_snippet(off, mine):
+    """S-9 設定断片(JSON/ポリシー/ログ)を読ませる問題があるか。公式にあって自作に無い形式"""
+    def rate(qs):
+        hit = sum(1 for q in qs if CODE_SNIPPET.search(q.get("question", "")))
+        return hit, len(qs), hit / max(1, len(qs)) * 100
+    oh, ot, orate = rate(off)
+    mh, mt, mrate = rate(mine)
+    # 公式の半分あれば可とする(公式自体が1%前後と少ないため)
+    return mrate >= orate / 2, "設定断片を含む問題: 公式 %.1f%%(%d) / 自作 %.1f%%(%d)" % (orate, oh, mrate, mh)
+
+
+REASON_IN_OPT = re.compile(r"(ため|ので)[、。]")
+
+
+def v2_o6_reason_in_option(off, mine):
+    """O-6 選択肢の本文に理由が書き込まれていないか(公式は理由を解説側に置く)"""
+    def rate(qs):
+        tot = hit = 0
+        for q in qs:
+            for o in q["options"]:
+                tot += 1
+                if REASON_IN_OPT.search(o.get("text", "")):
+                    hit += 1
+        return hit, tot, hit / max(1, tot) * 100
+    oh, ot, orate = rate(off)
+    mh, mt, mrate = rate(mine)
+    return mrate <= orate * 3 + 0.5, "肢に理由が混入: 公式 %.1f%%(%d肢) / 自作 %.1f%%(%d肢)" % (orate, oh, mrate, mh)
+
+
+SELF_DEFEAT = re.compile(r"(必要がある|必要になる|増える|増大する|かかる|複雑になる|負荷が高い|時間がかかる|手間がかかる)。?$")
+
+
+def v2_o5_self_defeat(off, mine):
+    """O-5 誤答の末尾に「自ら負けを認める運用記述」を足す癖がないか(自作特有だった)"""
+    def rate(qs):
+        tot = hit = 0
+        for q in qs:
+            for o in q["options"]:
+                if o.get("correct"):
+                    continue
+                tot += 1
+                if SELF_DEFEAT.search(o.get("text", "")):
+                    hit += 1
+        return hit, tot, hit / max(1, tot) * 100
+    oh, ot, orate = rate(off)
+    mh, mt, mrate = rate(mine)
+    return mrate <= orate * 2 + 0.5, "負けを認める末尾: 公式 %.1f%% / 自作 %.1f%%(%d肢)" % (orate, mrate, mh)
+
+
+BANNED = re.compile(r"([ぁ-ん一-龥A-Za-z0-9 ]{4,16})(?:は避け|を避け|せずに|を使用しない|は使用できない|を再作成せずに|せずに)")
+
+
+def v2_s5_banned_leak(off, mine):
+    """S-5 問題文が禁じた方法が、そのまま誤答肢に出ていないか(読むだけで切れる)"""
+    def bad(qs):
+        out = []
+        for q in qs:
+            m = BANNED.search(q.get("question", ""))
+            if not m:
+                continue
+            key = m.group(1)[-6:]
+            if any(key in o.get("text", "") for o in q["options"] if not o.get("correct")):
+                out.append(q.get("id", "?"))
+        return out
+    ob = bad(off)
+    mb = bad(mine)
+    return len(mb) <= len(ob), "禁止語が誤答肢に: 公式 %d問 / 自作 %d問 %s" % (len(ob), len(mb), mb[:3] if mb else "")
+
+
 CRITERIA = [
     ("C0-1", "評価軸ありなら4肢とも技術的に要件を満たすか", "要AI", None),
     ("C0-2", "評価軸なしなら誤答3肢が要件違反か仕様上不可か", "要AI", None),
@@ -181,14 +258,18 @@ CRITERIA = [
     ("C6-3", "理由のない「不正解です」がないか", "測定", None),              # audit_consistency で測定
     ("C6-4", "テキストを変えたら解説を整合させたか", "測定", None),          # 作業時に verify で確認
     ("C6-5", "解説の仕様が実在し正しいか", "要AI", None),
+    # --- v2チェックリスト §10 由来（2026-09-03 追加） ---
+    ("S-9", "設定断片(JSON/ログ)を読ませる問題があるか", "測定", v2_s9_config_snippet),
+    ("O-6", "選択肢本文に理由が混入していないか", "測定", v2_o6_reason_in_option),
+    ("O-5", "誤答末尾に自ら負けを認める記述がないか", "測定", v2_o5_self_defeat),
+    ("S-5", "問題文が禁じた方法が誤答肢に出ていないか", "測定", v2_s5_banned_leak),
 ]
-
 
 def main():
     off, mine = load()
     print("=" * 78)
-    print(" チェックリスト37項目の充足状況")
-    print(" 出典: 資料/生成/_review_criteria.md（公式61問の精読から導出）")
+    print(" チェックリスト37項目(v1)＋v2追加4項目 の充足状況")
+    print(" 出典: _review_criteria.md(v1/61問) と _review_criteria_v2.md §10(公式100問)")
     print("=" * 78)
     print()
 
@@ -210,7 +291,7 @@ def main():
     print("  機械で測定: %d項目 / AIか人の判断が要る: %d項目 / 機械化できるが未実装: %d項目"
           % (counts["測定"], counts["要AI"], counts["未実装"]))
     print()
-    print("  **37項目のうち %d項目は機械では判定できない。**" % counts["要AI"])
+    print("  **41項目のうち %d項目は機械では判定できない。**" % counts["要AI"])
     print("  機械の検査が全部通っても、問題の質は保証されない。")
     print("  定期的に、公式問題と混ぜた出典を伏せた判定を行うこと（過去2回実施）。")
     return 1 if ng else 0
