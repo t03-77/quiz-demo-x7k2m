@@ -1284,8 +1284,8 @@
   "type": "choice",
   "domain": "トラブルシューティングと最適化",
   "level": "hard",
-  "question": "ある企業のモバイルアプリケーションが、Amazon API Gateway で公開された API を呼び出しています。ピーク時間帯にクライアントで HTTP 429 エラーが多発しています。バックエンドの Lambda 関数の同時実行数やエラー率には問題がありません。この状況を改善するには、どの組み合わせの手順を実行すべきですか。",
-  "n_correct": 2,
+  "question": "ある企業のモバイルアプリケーションが、Amazon API Gateway で公開された API を呼び出しています。ピーク時間帯にクライアントで HTTP 429 エラーが多発しています。バックエンドの Lambda 関数の同時実行数やエラー率には問題がありません。この状況を改善するには、どうすべきですか。",
+  "n_correct": 1,
   "options": [
    {
     "letter": "A",
@@ -1294,8 +1294,8 @@
    },
    {
     "letter": "B",
-    "correct": true,
-    "text": "API Gateway の設定を見直す。ステージや使用量プランのスロットリングのレートとバーストの上限を引き上げる。"
+    "correct": false,
+    "text": null
    },
    {
     "letter": "C",
@@ -1304,11 +1304,6 @@
    },
    {
     "letter": "D",
-    "correct": false,
-    "text": null
-   },
-   {
-    "letter": "E",
     "correct": false,
     "text": null
    }
@@ -2274,8 +2269,8 @@
   "type": "choice",
   "domain": "トラブルシューティングと最適化",
   "level": "hard",
-  "question": "ある企業のキャンペーンサイトでは、テレビ CM の放映直後に数分間だけ書き込みトラフィックが平常時の 30 倍に跳ね上がります。プロビジョニングモードの Amazon DynamoDB テーブルでは、この時間帯に ProvisionedThroughputExceededException が多発し、一部の書き込みが失敗しています。パーティションキーはユーザー ID で、キーの分散は良好です。開発者はどの組み合わせの手順を実行すべきですか。",
-  "n_correct": 2,
+  "question": "ある企業のキャンペーンサイトでは、テレビ CM の放映直後に数分間だけ書き込みトラフィックが平常時の 30 倍に跳ね上がります。プロビジョニングモードの Amazon DynamoDB テーブルでは、この時間帯に ProvisionedThroughputExceededException が多発し、一部の書き込みが失敗しています。パーティションキーはユーザー ID で、キーの分散は良好です。開発者はどうすべきですか。",
+  "n_correct": 1,
   "options": [
    {
     "letter": "A",
@@ -2284,8 +2279,8 @@
    },
    {
     "letter": "B",
-    "correct": true,
-    "text": "クライアント側を変更する。AWS SDK の再試行をエクスポネンシャルバックオフとジッターを伴う設定にする。"
+    "correct": false,
+    "text": null
    },
    {
     "letter": "C",
@@ -2294,11 +2289,6 @@
    },
    {
     "letter": "D",
-    "correct": false,
-    "text": null
-   },
-   {
-    "letter": "E",
     "correct": false,
     "text": null
    }
@@ -2572,8 +2562,8 @@
   "type": "choice",
   "domain": "AWS のサービスによる開発",
   "level": "hard",
-  "question": "ある企業のアプリケーションが、問い合わせチケットを Amazon DynamoDB テーブルに保存しています。チケットには長文の本文と添付ファイルのメタデータが含まれ、一部のアイテムが DynamoDB のアイテムサイズの上限を超えて書き込みに失敗しています。アプリケーションはチケットの一覧表示ではタイトルとステータスのみを使用し、本文は詳細画面でのみ必要です。開発者はどの組み合わせの手順を実行すべきですか。",
-  "n_correct": 2,
+  "question": "ある企業のアプリケーションが、問い合わせチケットを Amazon DynamoDB テーブルに保存しています。チケットには長文の本文と添付ファイルのメタデータが含まれ、一部のアイテムが DynamoDB のアイテムサイズの上限を超えて書き込みに失敗しています。アプリケーションはチケットの一覧表示ではタイトルとステータスのみを使用し、本文は詳細画面でのみ必要です。開発者はどうすべきですか。",
+  "n_correct": 1,
   "options": [
    {
     "letter": "A",
@@ -2582,8 +2572,8 @@
    },
    {
     "letter": "B",
-    "correct": true,
-    "text": "本文などの大きな属性を圧縮する。圧縮した結果をバイナリ属性としてアイテムに格納する。"
+    "correct": false,
+    "text": null
    },
    {
     "letter": "C",
@@ -2592,11 +2582,6 @@
    },
    {
     "letter": "D",
-    "correct": false,
-    "text": null
-   },
-   {
-    "letter": "E",
     "correct": false,
     "text": null
    }
