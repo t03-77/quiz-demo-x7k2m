@@ -220,6 +220,34 @@ def v2_s5_banned_leak(off, mine):
     return len(mb) <= len(ob), "禁止語が誤答肢に: 公式 %d問 / 自作 %d問 %s" % (len(ob), len(mb), mb[:3] if mb else "")
 
 
+
+STEP_SPLIT = __import__("re").compile(r"(?<=[。])")
+
+
+def c2_5_step_count(off, mine):
+    """C2-5 手順形式の肢があるとき、肢ごとの手順数(文数)が揃っているか。
+
+    公式は「操作A。操作B。」の複文肢を並べるとき、肢どうしで文数を揃える。
+    文数がばらつくと、多い肢が詳しく見えて手がかりになる。
+    2026-09-03 実装。判定は公式との比較（公式にも多少のばらつきがあるため）。
+    """
+    def rate(qs):
+        tot = bad = 0
+        for q in qs:
+            ns = [len([x for x in STEP_SPLIT.split(o.get("text", "")) if x.strip()])
+                  for o in q["options"] if o.get("text")]
+            if len(ns) < 2 or max(ns) < 2:
+                continue
+            tot += 1
+            if max(ns) - min(ns) >= 2:
+                bad += 1
+        return bad, tot, bad / max(1, tot) * 100
+    ob, ot, orate = rate(off)
+    mb, mt, mrate = rate(mine)
+    return mrate <= orate + 10, "手順数がばらつく問題: 公式 %.0f%%(%d/%d) / 自作 %.0f%%(%d/%d)" % (
+        orate, ob, ot, mrate, mb, mt)
+
+
 CRITERIA = [
     ("C0-1", "評価軸ありなら4肢とも技術的に要件を満たすか", "要AI", None),
     ("C0-2", "評価軸なしなら誤答3肢が要件違反か仕様上不可か", "要AI", None),
@@ -233,7 +261,7 @@ CRITERIA = [
     ("C2-2", "2軸型なら片方だけ誤りの肢が両方あるか", "要AI", None),
     ("C2-3", "正解と大部分同一で差分1点の誤答があるか", "測定", c2_3_near_miss),
     ("C2-4", "正解が突出して長くないか", "測定", None),                     # audit_difficulty で測定
-    ("C2-5", "手順形式なら全肢の手順数が揃っているか", "未実装", None),
+    ("C2-5", "手順形式なら全肢の手順数が揃っているか", "測定", c2_5_step_count),
     ("C2-6", "読んだ瞬間に切れる自己矛盾語の肢が2つ以上ないか", "測定", None),  # audit_difficulty で測定
     ("C2-7", "並び順から正解位置が推測できないか", "測定", None),            # audit_all で測定
     ("C2-8", "肢の数が1正解4肢/2正解5肢/3正解6肢か", "測定", None),          # audit_content で測定
@@ -246,7 +274,7 @@ CRITERIA = [
     ("C3-7", "選択肢本文に料金・上限値を書いていないか", "測定", c3_7_no_price),
     ("C4-1", "評価軸が問題文の事実と結びついているか", "要AI", None),
     ("C4-2", "軸を消したら正解が変わるか(軸が効いているか)", "要AI", None),
-    ("C4-3", "2軸を同時に課していないか", "未実装", None),
+    ("C4-3", "2軸を同時に課していないか → v2で削除(公式にも4軸の問題あり)", "廃止", None),
     ("C4-4", "絶対額でなく機構で判定できるか", "要AI", None),
     ("C5-1", "複数選択がM1/M2/M3のどれかの型か", "要AI", None),
     ("C5-2", "各サブ軸に誤答が1つ以上あるか", "要AI", None),
@@ -274,7 +302,7 @@ def main():
     print()
 
     ng = 0
-    counts = {"測定": 0, "要AI": 0, "未実装": 0}
+    counts = {"測定": 0, "要AI": 0, "未実装": 0, "廃止": 0}
     for num, text, kind, fn in CRITERIA:
         counts[kind] += 1
         if fn:
@@ -283,13 +311,13 @@ def main():
                 ng += 1
             print("  %-5s %-6s %-44s %s" % (num, "OK" if ok else "要確認", text, note))
         else:
-            mark = {"測定": "他で測定", "要AI": "要AI/人", "未実装": "未実装"}[kind]
+            mark = {"測定": "他で測定", "要AI": "要AI/人", "未実装": "未実装", "廃止": "廃止"}[kind]
             print("  %-5s %-6s %-44s" % (num, mark, text))
 
     print()
     print("-" * 78)
-    print("  機械で測定: %d項目 / AIか人の判断が要る: %d項目 / 機械化できるが未実装: %d項目"
-          % (counts["測定"], counts["要AI"], counts["未実装"]))
+    print("  機械で測定: %d項目 / AIか人の判断が要る: %d項目 / 未実装: %d項目 / v2で廃止: %d項目"
+          % (counts["測定"], counts["要AI"], counts["未実装"], counts["廃止"]))
     print()
     print("  **41項目のうち %d項目は機械では判定できない。**" % counts["要AI"])
     print("  機械の検査が全部通っても、問題の質は保証されない。")
