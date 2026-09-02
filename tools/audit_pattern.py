@@ -244,9 +244,10 @@ def main():
     if ng_exam:
         short = sum(1 for x in ng_exam if x[0] == "不足")
         over = len(ng_exam) - short
-        print("資格ごとに見て公式から離れているもの: %d件（不足 %d / 超過 %d）" % (len(ng_exam), short, over))
         if over:
             print("  ※超過は「公式より高すぎる」状態。下げる方向の調整が要る（鉄則4）")
+        # 件数は最後に出す（audit_all.py が最終行を要約に使うため）
+        print("資格ごとに見て公式から離れているもの: %d件（不足 %d / 超過 %d）" % (len(ng_exam), short, over))
     elif not gaps:
         print("この観点では、公式と目立った差はありません")
     return 1 if (gaps or ng_exam) else 0

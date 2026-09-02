@@ -36,6 +36,9 @@ EXTERNAL = [
     ("解説の分量が公式模試の水準か", [sys.executable, "-X", "utf8", "tools/audit_explanations.py"], 0),
     ("当てやすさ(正解が最長など)", [sys.executable, "-X", "utf8", "tools/audit_difficulty.py"], 0),
     ("内容面(重複・出題形式・古い情報・偏り)", [sys.executable, "-X", "utf8", "tools/audit_content.py"], 0),
+    # 2026-09-03 追加。肢どうしの語の重なりと複文率は「公式との品質差の本丸」なのに、
+    # 総合検査から漏れていて audit_pattern.py を個別に叩かないと気づけなかった。
+    ("肢の作り(語の重なり・複文率)", [sys.executable, "-X", "utf8", "tools/audit_pattern.py"], 0),
 ]
 
 # 機械では判定できない観点。人またはAIによる読み込みが要る。
