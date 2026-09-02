@@ -224,14 +224,29 @@ def main():
         print("  ▼ %s（資格ごと。全体平均では資格差が埋もれる）" % key)
         for ex, ov, mv in per_exam(off, mine, fn, key):
             ratio = (mv / ov) if ov else 1
-            mark = "" if ratio >= 0.9 else ("   ★不足 %.0f%%" % (100 * ratio))
-            if ratio < 0.9:
-                ng_exam.append((key, ex, ov, mv))
+            # 2026-09-03: 超過も検出するようにした。
+            # 公式より高すぎるのも「不自然な手がかり」で、公式との乖離であることに変わりはない
+            # （鉄則4「上下どちらにずれても手がかりになる」）。実際、語の重なりを上げる作業で
+            # AIF-C01 と CLF-C02 が公式を大きく超えていたのに、不足しか見ていなかったため
+            # 検出できていなかった。
+            gap = abs(mv - ov)
+            floor = 0.03 if "重なり" in key else 5      # 小さい値での比率の暴れを抑える
+            mark = ""
+            if ratio < 0.9 and gap >= floor:
+                mark = "   ★不足 %.0f%%" % (100 * ratio)
+                ng_exam.append(("不足", key, ex, ov, mv))
+            elif ratio > 1.25 and gap >= floor:
+                mark = "   ★超過 %.0f%%" % (100 * ratio)
+                ng_exam.append(("超過", key, ex, ov, mv))
             print("     %-9s 公式 %-8s 自作 %-8s%s" % (ex, round(ov, 3), round(mv, 3), mark))
 
     print()
     if ng_exam:
-        print("資格ごとに見て公式に届いていないもの: %d件" % len(ng_exam))
+        short = sum(1 for x in ng_exam if x[0] == "不足")
+        over = len(ng_exam) - short
+        print("資格ごとに見て公式から離れているもの: %d件（不足 %d / 超過 %d）" % (len(ng_exam), short, over))
+        if over:
+            print("  ※超過は「公式より高すぎる」状態。下げる方向の調整が要る（鉄則4）")
     elif not gaps:
         print("この観点では、公式と目立った差はありません")
     return 1 if (gaps or ng_exam) else 0
