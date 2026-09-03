@@ -37,12 +37,18 @@ STALE = {
     "CodeStar": ("提供終了", ["CodeStar Connections", "CodeConnections"]),
     "Cloud Directory": ("新規受付終了", []),
     "CodeCommit": ("新規顧客の受付を終了", []),
-    "Kendra": ("メンテナンスモード・新規受付終了", []),
     "Pinpoint": ("提供終了予定", []),
     "Forecast": ("新規受付終了", ["Forecast Horizon"]),
     "Snowcone": ("提供終了", []),
     "Snowball Edge Compute Optimized": ("提供終了", []),
 }
+# 2026-09-03: Kendra をこの表から外した。
+# 「新規受付終了」を根拠に自作問題を1問削除したが、公式模試を調べると
+# Kendra は**正解肢として2問出題されている**（AIP-C01_qset_008 / MLA-C01_exam_001。
+# 誤答肢としても8問）。利用者の目的は「試験に合格すること」なので、
+# 公式が現に出題している論点を消すのは逆効果だった。
+# **この表に足すときは、必ず公式側で正解肢に使われていないことを確認すること。**
+# 下の check_retired() はその確認を自動で行い、公式が正解に使っているサービスは警告しない。
 
 
 def load():
@@ -145,8 +151,22 @@ def check_format(off, mine):
     return rows
 
 
-def check_stale(mine):
-    """提供終了・受付終了のサービスが正解として問われていないか"""
+def check_stale(mine, off=None):
+    """提供終了・受付終了のサービスが正解として問われていないか。
+
+    2026-09-03: 公式模試が**正解肢として使っている**サービスは警告しない。
+    Kendra を「新規受付終了」だけを根拠に警告し、自作問題を1問削除したが、
+    公式は Kendra を正解に2問使っていた（AIP-C01_qset_008 / MLA-C01_exam_001）。
+    利用者の目的は試験に合格することなので、公式が出題する論点を消してはいけない。
+    """
+    live_in_official = set()
+    for q in (off or []):
+        for o in q.get("options", []):
+            if not o.get("correct"):
+                continue
+            for name in STALE:
+                if re.search(re.escape(name), o.get("text", "")):
+                    live_in_official.add(name)
     hits = []
     for q in mine:
         cor = " ".join(o.get("text", "") for o in q.get("options", []) if o.get("correct"))
@@ -157,7 +177,7 @@ def check_stale(mine):
             masked = cor
             for e in excludes:
                 masked = masked.replace(e, "")
-            if re.search(re.escape(name), masked):
+            if re.search(re.escape(name), masked) and name not in live_in_official:
                 hits.append((q["exam"], q["id"], name, why))
     return hits
 
@@ -276,7 +296,7 @@ def main():
     print()
     print("=" * 74)
     print("3. 提供終了・新規受付終了のサービスが正解になっている問題")
-    stale = check_stale(mine)
+    stale = check_stale(mine, off)
     if stale:
         ng += 1
         reasons.append("提供終了サービスが正解%d問" % len(stale))
