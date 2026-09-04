@@ -138,9 +138,17 @@ def main():
         print("  %-22s 新問 %.0f%% / 公式 %.0f%%%s" % (
             "最長が正解", ln, lo, "  ★差%.0fpt" % gap if gap > 15 else ""))
 
+        # 一般語は偶然どちらかに寄るだけで手がかりにならない。
+        # 2026-09-04: 「アクセス」「アプリケーション」「デプロイ」だけで3問が誤検出されたため除外。
+        GENERIC = {"アクセス", "アプリケーション", "デプロイ", "サービス", "データ", "ユーザー",
+                   "リクエスト", "モデル", "設定", "システム", "エンドポイント", "コンテンツ",
+                   "セキュリティ", "パフォーマンス", "コスト", "トレーニング", "プロンプト",
+                   "シーケンス", "インスタンス", "ワークフロー", "パラメータ", "ドキュメント",
+                   "レスポンス", "アカウント", "リソース", "クエリ", "ジョブ", "ポリシー"}
         leaks = []
         for q in new:
-            stem = {w.strip() for w in STEM_WORD.findall(q["question"]) if len(w.strip()) > 3}
+            stem = {w.strip() for w in STEM_WORD.findall(q["question"])
+                    if len(w.strip()) > 3 and w.strip() not in GENERIC}
             cor = [o for o in q["options"] if o.get("correct")]
             wr = [o for o in q["options"] if not o.get("correct")]
             for w in stem:
