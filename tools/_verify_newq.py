@@ -20,7 +20,11 @@ BASE = Path(__file__).resolve().parent.parent
 GEN = BASE / "資料" / "生成"
 OFFICIAL = BASE / "資料" / "変換済み" / "questions_all.json"
 WORD = re.compile(r"[A-Za-z][A-Za-z0-9]+|[ァ-ヶー]{3,}|[一-龥]{2,}")
-STEM_WORD = re.compile(r"[A-Za-z][A-Za-z0-9 ]+|[ァ-ヶー]{3,}")
+# 2026-09-09: 漢字語が1つも入っておらず、日本語の内容語(「見出し」「再利用」「監査証跡」)を
+# 1語も見ていなかった。上の WORD には [一-龥]{2,} があるのに、こちらだけ抜けていた。
+# 追加後の実測: 生成ファイル71件のうち OK→NG に反転するのは2件、新たに引っかかる問題は19問
+# (全体の約1.4%)。自作の該当率は公式より低いまま(公式AIP 37% / 自作 8〜20%)。
+STEM_WORD = re.compile(r"[A-Za-z][A-Za-z0-9 ]+|[ァ-ヶー]{3,}|[一-龥]{2,}")
 ID_FMT = re.compile(r"^[A-Z]{3}-C\d{2}_orig_\d+$")
 REQUIRED = ["id", "exam", "set", "type", "domain", "level", "question", "n_correct", "options"]
 
