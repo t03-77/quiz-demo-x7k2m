@@ -267,6 +267,42 @@ def c2_5_step_count(off, mine):
         orate, ob, ot, mrate, mb, mt)
 
 
+# 資格ごとの内訳を出す項目。全資格プールの平均だけでは資格差に埋もれる。
+PER_EXAM = {"C2-3", "C1-2", "C6-2"}
+
+
+def per_exam_note(off, mine, num, fn):
+    """資格ごとに fn を適用し、公式から離れているものだけを行として返す。
+
+    しきい値は audit_pattern.py と揃えて「比率で 0.75 未満または 1.25 超、
+    かつ実差が 5 ポイント以上」。絶対値ではなく資格ごとの公式値と比べる。
+    """
+    if num not in PER_EXAM:
+        return []
+    out = []
+    for ex in sorted({q.get("exam") for q in mine if q.get("exam")}):
+        o = [q for q in off if q.get("exam") == ex]
+        m = [q for q in mine if q.get("exam") == ex]
+        if len(o) < 20 or len(m) < 20:
+            continue
+        try:
+            _, note = fn(o, m)
+        except Exception:
+            continue
+        nums = re.findall(r"(\d+(?:\.\d+)?)%", note)
+        if len(nums) < 2:
+            continue
+        ov, mv = float(nums[0]), float(nums[1])
+        if ov <= 0:
+            continue
+        ratio, gap = mv / ov, abs(mv - ov)
+        if gap >= 5 and (ratio > 1.25 or ratio < 0.75):
+            side = "超過" if mv > ov else "不足"
+            out.append("          %-9s 公式 %5.1f%% / 自作 %5.1f%%   ★%s %+.0f pt"
+                       % (ex, ov, mv, side, mv - ov))
+    return out
+
+
 CRITERIA = [
     ("C0-1", "評価軸ありなら4肢とも技術的に要件を満たすか", "要AI", None),
     ("C0-2", "評価軸なしなら誤答3肢が要件違反か仕様上不可か", "要AI", None),
@@ -329,6 +365,13 @@ def main():
             if not ok:
                 ng += 1
             print("  %-5s %-6s %-44s %s" % (num, "OK" if ok else "要確認", text, note))
+            # 全資格をプールした平均は資格差に埋もれる。O-3 は公式値が
+            # CLF-C02 9.2% / SAP-C02 61.3% と6倍以上違うので、平均で判定すると
+            # 「基礎資格には過剰に厳しく、上位資格には緩い」目標になる（鉄則5）。
+            # 2026-09-09 まで C2-3 は全資格プールで判定しており、
+            # **O-3 が全11資格で超過していたのに気づけなかった一因**になっていた。
+            for line in per_exam_note(off, mine, num, fn):
+                print(line)
         else:
             mark = {"測定": "他で測定", "要AI": "要AI/人", "未実装": "未実装", "廃止": "廃止"}[kind]
             print("  %-5s %-6s %-44s" % (num, mark, text))
