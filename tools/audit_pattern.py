@@ -248,7 +248,13 @@ def main():
             print("  ※超過は「公式より高すぎる」状態。下げる方向の調整が要る（鉄則4）")
         # 件数は最後に出す（audit_all.py が最終行を要約に使うため）
         print("資格ごとに見て公式から離れているもの: %d件（不足 %d / 超過 %d）" % (len(ng_exam), short, over))
-    elif not gaps:
+    elif gaps:
+        # 資格別の★は無いが全資格まとめた★が残っている場合。ここで要約を出さないと
+        # audit_all.py が最終行（資格別の内訳の末尾）を拾い、無関係な資格が
+        # 要確認の理由として表示されてしまう
+        print("資格ごとの乖離は0件。全体で見た観点が %d件、公式と離れている: %s"
+              % (len(gaps), " / ".join(g[1] for g in gaps)))
+    else:
         print("この観点では、公式と目立った差はありません")
     return 1 if (gaps or ng_exam) else 0
 
