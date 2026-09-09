@@ -56,3 +56,24 @@ for exam in sorted(gen):
     print(f"{exam:<9}{r:>8}{g:>8}{pct:>7.0f}%   {mark}")
 done = sum(1 for p, *_ in rows if p >= 85)
 print(f"\n公式水準(85%以上)に到達: {done}/{len(rows)}資格")
+
+# ここが見ているのは 資料/生成/*_orig*.json の options[].explanation だけ。
+# AIP-C01 の一問一答221問は生成元が外部(06_lessons/genai_dev_pro/quiz/questions.json)で、
+# 肢ごとの解説を持たず全体解説だけを持つ形なので、上の集計には1問も入っていない。
+# 2026-09-09 に全体解説を中央51→130字へ充実させたとき、この表は1ポイントも動かず、
+# 「測れていない」ことに気づくまで成果が見えなかった。測っていない範囲は明示する。
+FLASH = BASE.parent.parent / "06_lessons" / "genai_dev_pro" / "quiz" / "questions.json"
+if FLASH.exists():
+    try:
+        _d = json.load(open(FLASH, encoding="utf-8"))
+        _qs = _d if isinstance(_d, list) else _d.get("questions", [])
+        _lens = sorted(len(clean(q.get("explanation", ""))) for q in _qs)
+        if _lens:
+            print("\n※上の表に含まれない: AIP-C01 の一問一答 %d問"
+                  "（全体解説のみ・中央 %d字 / 最短 %d字）。"
+                  "公式模試に一問一答形式が無いため達成率は出せない"
+                  % (len(_lens), _lens[len(_lens) // 2], _lens[0]))
+    except Exception as _e:
+        print("\n※一問一答の集計をスキップ: %s" % _e)
+else:
+    print("\n※AIP-C01 の一問一答は上の表に含まれない（生成元が見つからず字数も出せない）")
