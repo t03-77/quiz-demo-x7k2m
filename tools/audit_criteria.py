@@ -44,13 +44,32 @@ CONSTRAINT = re.compile(
     r"|[0-9]+\s*(分|時間|日|か月|年|TB|GB|MB|ミリ秒|%|件|台|アカウント|インスタンス))")
 
 
+def within(m, o, label, tol=10):
+    """公式と自作の差が tol ポイント以内か。**上下どちらも見る。**
+
+    2026-09-09 まで、この3つの判定はすべて `m >= o - 10` で
+    「不足しか見ない」作りだった。そのため O-3（正解と酷似した誤答）が
+    **全11資格で公式を超過していたのに、検査は緑のままだった**
+    （SAA-C03 は公式26.2%に対し62.7%）。原因は 2026-09-01〜03 の
+    「語の重なり」を上げる作業で「正解肢をコピーして1〜2トークン置換」した副作用。
+
+    CLAUDE.md 鉄則4「不足だけを見る検査は半分しか見ていない」の再発で、
+    同じ型を audit_pattern.py でも1度踏んでいる。**片側判定を書かないこと。**
+    """
+    d = m - o
+    if abs(d) <= tol:
+        return True, "%s: 公式 %d%% / 自作 %d%%" % (label, o, m)
+    side = "超過" if d > 0 else "不足"
+    return False, "%s: 公式 %d%% / 自作 %d%%（%s %+d pt）" % (label, o, m, side, d)
+
+
 def c1_2_constraints(off, mine):
     """C1-2 問題文に、絞り込みに使う制約が2つ以上あるか"""
     def n(q):
         return len(set(CONSTRAINT.findall(q.get("question", ""))))
     o = sum(1 for q in off if n(q) >= 2) * 100 // len(off)
     m = sum(1 for q in mine if n(q) >= 2) * 100 // len(mine)
-    return m >= o - 10, "制約2つ以上: 公式 %d%% / 自作 %d%%" % (o, m)
+    return within(m, o, "制約2つ以上")
 
 
 def c2_3_near_miss(off, mine):
@@ -69,7 +88,7 @@ def c2_3_near_miss(off, mine):
         return any(SequenceMatcher(None, c, w).ratio() >= 0.6 for c in cor for w in wrong)
     o = sum(1 for q in off if has(q)) * 100 // len(off)
     m = sum(1 for q in mine if has(q)) * 100 // len(mine)
-    return m >= o - 10, "正解と酷似した誤答あり: 公式 %d%% / 自作 %d%%" % (o, m)
+    return within(m, o, "正解と酷似した誤答あり")
 
 
 NUM_IN_OPT = re.compile(r"(\$[0-9]|[0-9]+\s*(ドル|円)|最大\s*[0-9]+\s*(個|件|TB|GB))")
@@ -125,7 +144,7 @@ def c6_2_three_step(off, mine):
                     ok += 1
         return 100 * ok // max(1, tot)
     o, m = ratio(off), ratio(mine)
-    return m >= o - 10, "誤答の解説が転換つき: 公式 %d%% / 自作 %d%%" % (o, m)
+    return within(m, o, "誤答の解説が転換つき")
 
 
 def c1_6_length(off, mine):
