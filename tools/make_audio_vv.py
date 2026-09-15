@@ -40,6 +40,10 @@ API = "http://127.0.0.1:50021"
 SPEAKER = 2          # 四国めたん(ノーマル)
 N_FILES = 8         # 既定。実際は PER_FILE から問題数に応じて決める(下の main を参照)
 PER_FILE = 12       # 1ファイルあたりの問数。約50分になる目安
+# 読み上げ構成のバージョン。変えるとキャッシュのキーが変わり全問作り直される。
+#   a = 問題+全選択肢 → 間 → 正解(記号) → 全解説   (〜2026-09-15)
+#   b = 問題         → 間 → 正解(記号+本文) → 全解説 (2026-09-15〜)
+FORMAT_VER = "b"
 SAMPLE_RATE = 24000
 PAUSE_SEC = 4.0
 
@@ -224,12 +228,16 @@ def content_key(q):
     **精読や誤答の書き換えで中身が変わっても古い音声が再利用され**、
     直したはずの誤りが音声に残り続ける状態だった(実際 9/7〜9/14 に
     AIP-C01 の解説を80箇所超・誤答を29肢直したが、音声は 8/27 のまま)。
-    読み上げる要素(問題文・選択肢のletterとtext)をキーに含めて、
-    中身が変われば作り直されるようにする。
+    読み上げる要素をすべてキーに含めて、中身が変われば作り直されるようにする。
+
+    2026-09-15 の初版では **explanation をキーに入れ忘れていた**。読み上げる
+    分量の半分以上は解説なのに、解説だけを直した場合に音声が更新されない状態
+    だった。FORMAT_VER も含めて、読み上げ構成を変えたときも作り直されるようにする。
     """
     import hashlib
-    src = q.get("question", "") + "|" + "|".join(
-        f"{o.get('letter','')}:{o.get('text','')}" for o in q.get("options", []))
+    src = FORMAT_VER + "|" + q.get("question", "") + "|" + "|".join(
+        f"{o.get('letter','')}:{o.get('text','')}:{o.get('explanation','')}"
+        for o in q.get("options", []))
     return hashlib.sha1(src.encode("utf-8")).hexdigest()[:8]
 
 
@@ -242,14 +250,23 @@ def question_audio(q, idx):
     nc = q.get("n_correct") or sum(1 for o in q.get("options", []) if o.get("correct"))
     kind = q.get("type") if USE_OFFICIAL else (f"{nc}つ選択" if nc else "選択")
     texts = [f"問題、{idx}。{kind}。"] + sentences(q["question"])
-    for o in q["options"]:
-        texts += sentences(f"{o['letter']}。{o['text']}")
+    # 誤答の本文は読まない(2026-09-15 に構成を変更)。
+    # 肢は中央110字あり、4肢を耳だけで比較して選ぶのは画面が無いと成立しない。
+    # 読み上げ全体の26%を占めていたが、誤答の解説は冒頭で肢の要点を言い直して
+    # いるものが多く(「不正解です。固定サイズチャンキングは、〜」)、
+    # 本文を飛ばしても文脈は保たれる。
+    # 正解肢だけは本文を読む。記号だけだと何が正解だったか耳に残らないため。
     frames = b""
     for t in texts:
         frames += synth_text(to_kana(t)) + SHORT_PAUSE
     frames += SILENCE  # 考える時間
     corrects = [o["letter"] for o in q["options"] if o.get("correct")]
     frames += synth_text(f"正解は、{'、と、'.join(corrects)}。" if corrects else "正解は、解説を参照してください。")
+    frames += SHORT_PAUSE
+    for o in q["options"]:
+        if o.get("correct"):
+            for t in sentences(o["text"]):
+                frames += synth_text(to_kana(t)) + SHORT_PAUSE
     frames += SHORT_PAUSE
     for o in q["options"]:
         for t in sentences(f"{o['letter']}。{o['explanation']}"):
