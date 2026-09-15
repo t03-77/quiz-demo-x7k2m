@@ -38,7 +38,8 @@ TRACKS_JS = BASE / "data" / ("audio_tracks.js" if USE_OFFICIAL else "audio_track
 ENGINE = Path(os.environ["LOCALAPPDATA"]) / "Programs" / "VOICEVOX" / "vv-engine" / "run.exe"
 API = "http://127.0.0.1:50021"
 SPEAKER = 2          # 四国めたん(ノーマル)
-N_FILES = 8
+N_FILES = 8         # 既定。実際は PER_FILE から問題数に応じて決める(下の main を参照)
+PER_FILE = 12       # 1ファイルあたりの問数。約50分になる目安
 SAMPLE_RATE = 24000
 PAUSE_SEC = 4.0
 
@@ -216,9 +217,25 @@ SILENCE = b"\x00\x00" * int(SAMPLE_RATE * PAUSE_SEC)
 SHORT_PAUSE = b"\x00\x00" * int(SAMPLE_RATE * 0.7)
 
 
+def content_key(q):
+    """問題の読み上げ内容から8桁のキーを作る。
+
+    2026-09-15 まではキャッシュのキーが問題IDだけだった。そのため
+    **精読や誤答の書き換えで中身が変わっても古い音声が再利用され**、
+    直したはずの誤りが音声に残り続ける状態だった(実際 9/7〜9/14 に
+    AIP-C01 の解説を80箇所超・誤答を29肢直したが、音声は 8/27 のまま)。
+    読み上げる要素(問題文・選択肢のletterとtext)をキーに含めて、
+    中身が変われば作り直されるようにする。
+    """
+    import hashlib
+    src = q.get("question", "") + "|" + "|".join(
+        f"{o.get('letter','')}:{o.get('text','')}" for o in q.get("options", []))
+    return hashlib.sha1(src.encode("utf-8")).hexdigest()[:8]
+
+
 def question_audio(q, idx):
     """1問ぶんのWAVフレームを合成(キャッシュあり)"""
-    cache = CACHE_DIR / f"{q['id']}.pcm"
+    cache = CACHE_DIR / f"{q['id']}_{content_key(q)}.pcm"
     if cache.exists() and cache.stat().st_size > 0:
         return cache.read_bytes()
     # 自作問題の type は choice/matching/ordering という内部値なので、そのまま読ませない
@@ -275,14 +292,18 @@ def main():
     CACHE_DIR.mkdir(exist_ok=True)
     ensure_engine()
 
-    per = (len(qs) + N_FILES - 1) // N_FILES
+    # 1本が長くなりすぎるとスマホで聞きにくい。問数に応じて本数を決める
+    # (100問を8本で作った当初から160問に増えており、8本のままだと1本100分になる)
+    n_files = max(1, (len(qs) + PER_FILE - 1) // PER_FILE)
+    per = (len(qs) + n_files - 1) // n_files
+    print(f"  {n_files}本に分割(1本あたり約{per}問)")
     tracks = []
     t0 = time.time()
-    for fi in range(N_FILES):
+    for fi in range(n_files):
         group = qs[fi * per:(fi + 1) * per]
         if not group:
             break
-        out = AUDIO_DIR / f"{PREFIX}_{fi+1}of{N_FILES}.mp3"
+        out = AUDIO_DIR / f"{PREFIX}_{fi+1}of{n_files}.mp3"
         chapters = []
         if out.exists() and out.stat().st_size > 0:
             print(f"skip(生成済み): {out.name}")
@@ -298,12 +319,12 @@ def main():
                 qa = question_audio(q, qs.index(q) + 1)
                 frames += qa
                 el = time.time() - t0
-                print(f"[{fi+1}/{N_FILES}] {q['id']} 完了 ({gi+1}/{len(group)}) 経過{el/60:.0f}分", flush=True)
+                print(f"[{fi+1}/{n_files}] {q['id']} 完了 ({gi+1}/{len(group)}) 経過{el/60:.0f}分", flush=True)
             write_mp3(frames, out)
             print(f"書き出し: {out.name} ({out.stat().st_size//1024//1024}MB)")
         tracks.append({
             "exam": "AIP-C01",
-            "title": f"AIP-C01 {'公式' if USE_OFFICIAL else 'オリジナル'}問題 読み上げ {fi+1}/{N_FILES} ({len(group)}問)",
+            "title": f"AIP-C01 {'公式' if USE_OFFICIAL else 'オリジナル'}問題 読み上げ {fi+1}/{n_files} ({len(group)}問)",
             "src": f"audio/{out.name}",
             "chapters": chapters,
         })
