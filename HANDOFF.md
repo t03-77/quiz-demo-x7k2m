@@ -430,7 +430,7 @@ AIP-C01 で誤りが80箇所近く出たので、他資格にも同型が眠っ�
 - 一問一答（orig_001〜221）の元データ `genai_dev_pro/quiz/questions.json` も同じ内容に直した（修正前は `questions.json.bak_20261008`）。
 - **読み上げ音声を作り直した**: 対象の選択式が 154問 → 210問になったため、`make_audio_vv.py` の分割規則どおり 13本 → 18本。
   内容が変わらない144問は既存の `_cache_orig` を再利用し、是正10問・新規56問だけ合成した。
-  旧 `aip-c01-orig_*of13.mp3`（13本）はどこからも参照されなくなったが、作業環境から削除できなかったため残っている。**手で削除して commit すること**。`data/audio_tracks_orig.js` は Service Worker にキャッシュされるため `sw.js` の VERSION を v26 に上げた。
+  旧 `aip-c01-orig_*of13.mp3`（13本）は削除した。`data/audio_tracks_orig.js` は Service Worker にキャッシュされるため `sw.js` の VERSION を v26 に上げた。
 
 **strong率を下げたのは何だったか**（2026-09-06 の実測。`_ブラインド_AIP_推移_20260906.md`）:
 「双子の肢」の是正は **-3pt** にしかならず、効いたのは**制約設計の是正で -14pt**。
