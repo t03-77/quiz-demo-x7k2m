@@ -2,7 +2,7 @@
    アプリ本体と問題データを最初の訪問でキャッシュし、以後はネットワークが無くても起動する。
    音声(audio/)は容量が大きいので自動キャッシュしない — 再生した分だけブラウザが保持する。 */
 
-const VERSION = 'v26';  // 上げると古いキャッシュを破棄する。index.html を直したら必ず上げること
+const VERSION = 'v29';  // 上げると古いキャッシュを破棄する。index.html を直したら必ず上げること
 const CACHE = `certquiz-${VERSION}`;
 
 // 起動に必要な最小構成。data/audio_tracks.js は無い環境もあるため別扱いにする
@@ -15,7 +15,7 @@ const CORE = [
   './data/glossary.js',
   './data/orig.js',
 ];
-const OPTIONAL = ['./data/demo_audio.js', './data/audio_tracks.js'];
+const OPTIONAL = [];  // 音声セクションを外したため、音声データの事前キャッシュはしない(2026-10-13)
 
 self.addEventListener('install', (e) => {
   e.waitUntil((async () => {
