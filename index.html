@@ -85,6 +85,10 @@ nav button.on{color:var(--accent); font-weight:700}
 details.expl summary::after{content:' ▾ 解説'; font-size:11px; color:var(--muted); font-weight:400}
 details.expl[open] summary::after{content:' ▴'}
 .term{color:var(--accent); border-bottom:1px dashed var(--accent); cursor:pointer}
+/* 用語が連続すると1つの語に見えるので、境目に隙間を入れて別々の用語だと分かるようにする */
+.term+.term{margin-left:3px}
+#sh-phrase{font-size:12px;color:var(--muted);margin:-2px 0 8px}
+#sh-phrase b{color:var(--ink)}
 .rowbtns{display:flex; gap:10px; margin-top:12px}
 .rowbtns .btn{margin:0}
 .ordpick{display:flex; flex-direction:column; gap:6px; min-height:34px; border:1.5px dashed var(--grid); border-radius:10px; padding:8px; margin-bottom:10px}
@@ -386,9 +390,12 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
       <h3 id="sh-term" style="flex:1"></h3>
       <button class="iconbtn" onclick="document.getElementById('sheet').classList.remove('on')">閉じる</button>
     </div>
+    <div id="sh-phrase"></div>
     <div id="sh-body" style="font-size:14px;color:var(--ink2)"></div>
     <div class="rel" id="sh-rel"></div>
-    <button class="btn sub" style="margin-top:12px" onclick="askAboutTerm()">🤖 この用語についてAIに聞く</button>
+    <button class="btn" style="margin-top:12px" id="sh-ask-phrase" onclick="askAboutTerm(true)"></button>
+    <button class="btn sub" style="margin-top:8px" id="sh-ask-term" onclick="askAboutTerm(false)">🤖 この用語についてAIに聞く</button>
+    <a class="note" id="sh-docs" target="_blank" rel="noopener" style="display:block;margin-top:10px;text-align:center"></a>
   </div>
 </div>
 
@@ -634,9 +641,41 @@ function linkify(text){
     }
     segs=next;
   }
-  return segs.map(s=>s.term?`<span class="term" onclick="showTerm('${s.t.replace(/'/g,"\\'")}')">${esc(s.t)}</span>`:esc(s.t)).join('');
+  // 用語は辞書の語単位で切り出すため、「SageMaker AI トレーニングジョブ」のような複合語が
+  // 「SageMaker AI」「トレーニング」に分かれてしまう。タップした語を含む、文中のひとまとまりの
+  // 表現（前後に続く英数字・カタカナ・隣接する用語）も控えておき、AIにはそちらで聞けるようにする
+  const WORDCH=/[A-Za-z0-9\u30A0-\u30FF\u3005・\-]/;
+  const full=segs.map(s=>s.t).join('');
+  const starts=[]; {let o=0; for(const s of segs){ starts.push(o); o+=s.t.length; }}
+  const ok=k=> k>=0 && k<full.length && (WORDCH.test(full[k]) || (full[k]===' ' && WORDCH.test(full[k-1]||'') && WORDCH.test(full[k+1]||'')));
+  const phraseAt=i=>{
+    let a=starts[i], b=a+segs[i].t.length;
+    while(ok(a-1)) a--;
+    while(ok(b)) b++;
+    const p=full.slice(a,b).trim();
+    return p.length<=40 ? p : segs[i].t;   // 英文が続く場合などは長くなりすぎるので用語のままにする
+  };
+  return segs.map((s,i)=>s.term?`<span class="term" data-t="${esc(s.t)}" data-p="${esc(phraseAt(i))}">${esc(s.t)}</span>`:esc(s.t)).join('');
 }
-function showTerm(t){ const g=GLOSSARY[t]; if(!g) return;
+// 用語のタップはまとめて受ける（インライン onclick に用語を埋め込むと記号で壊れるため）
+document.addEventListener('click',e=>{
+  const el=e.target.closest?.('.term'); if(!el) return;
+  const ctx=el.closest('.qtext,.body')?.innerText||'';
+  showTerm(el.dataset.t, el.dataset.p, ctx);
+});
+let TERM_CTX={term:'', phrase:'', text:''};
+function showTerm(t, phrase, ctxText){ const g=GLOSSARY[t]; if(!g) return;
+  phrase = (phrase||t).trim();
+  TERM_CTX={term:t, phrase, text:ctxText||''};
+  const differs = phrase!==t;
+  document.getElementById('sh-phrase').innerHTML = differs ? `文中の表現: <b>${esc(phrase)}</b>（下の説明は「${esc(t)}」の部分）` : '';
+  const bp=document.getElementById('sh-ask-phrase');
+  bp.style.display = differs ? '' : 'none';
+  bp.textContent = `🤖「${phrase}」についてAIに聞く`;
+  document.getElementById('sh-ask-term').textContent = differs ? `🤖「${t}」だけについて聞く` : '🤖 この用語についてAIに聞く';
+  const dl=document.getElementById('sh-docs');
+  dl.href='https://docs.aws.amazon.com/search/doc-search.html?searchPath=documentation&searchQuery='+encodeURIComponent(phrase);
+  dl.textContent=`🔎「${phrase}」を AWS ドキュメントで検索`;
   document.getElementById('sh-term').textContent=t;
   document.getElementById('sh-body').textContent=g.short;
   document.getElementById('sh-rel').textContent = g.related?.length? '関連: '+g.related.join('、') : '';
@@ -1505,11 +1544,19 @@ async function askAi(q){
   }
   aiChat.busy=false; renderAiChat();
 }
-function askAboutTerm(){
-  const t=document.getElementById('sh-term').textContent;
+function askAboutTerm(usePhrase){
+  const t=TERM_CTX.term || document.getElementById('sh-term').textContent;
   const g=GLOSSARY[t]||{};
+  const target = usePhrase ? TERM_CTX.phrase : t;
   document.getElementById('sheet').classList.remove('on');
-  openAiChat(`用語: ${t}\n既存の説明: ${g.short||'(なし)'}`, t+' について');
+  // 何について聞いているかを明示し、出題文も渡して、文脈に沿った説明にする
+  let ctx = `説明してほしい対象: ${target}\n`;
+  if(usePhrase && target!==t) ctx += `（「${target}」というひとまとまりの機能・概念として説明すること。「${t}」単体の一般的な意味の説明にしないこと）\n`;
+  ctx += `用語集の「${t}」の説明: ${g.short||'(なし)'}\n`;
+  if(TERM_CTX.text) ctx += `\nこの表現が出てきた文章:\n${TERM_CTX.text.slice(0,1500)}`;
+  openAiChat(ctx, target+' について');
+  // 開いたらすぐ「〜とは？」を聞く（チャットを開いてから質問を打つ手間を省く）
+  if(document.getElementById('aisheet').classList.contains('on')) askAi(`「${target}」とは？ 試験対策の観点で、要点を簡潔に教えて`);
 }
 
 /* ---------- AI変換(テキスト/画像 → 問題) ---------- */
