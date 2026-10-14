@@ -644,7 +644,8 @@ function linkify(text){
   // 用語は辞書の語単位で切り出すため、「SageMaker AI トレーニングジョブ」のような複合語が
   // 「SageMaker AI」「トレーニング」に分かれてしまう。タップした語を含む、文中のひとまとまりの
   // 表現（前後に続く英数字・カタカナ・隣接する用語）も控えておき、AIにはそちらで聞けるようにする
-  const WORDCH=/[A-Za-z0-9\u30A0-\u30FF\u3005・\-]/;
+  // 「・」は列挙の区切り（A・B）に使われるので語の一部に含めない
+  const WORDCH=/[A-Za-z0-9\u30A0-\u30FA\u30FC-\u30FF\u3005\-]/;
   const full=segs.map(s=>s.t).join('');
   const starts=[]; {let o=0; for(const s of segs){ starts.push(o); o+=s.t.length; }}
   const ok=k=> k>=0 && k<full.length && (WORDCH.test(full[k]) || (full[k]===' ' && WORDCH.test(full[k-1]||'') && WORDCH.test(full[k+1]||'')));
@@ -664,11 +665,34 @@ document.addEventListener('click',e=>{
   showTerm(el.dataset.t, el.dataset.p, ctx);
 });
 let TERM_CTX={term:'', phrase:'', text:''};
+// 本文では「Bedrock」「Lambda」のように Amazon / AWS を省くことが多い。AI やドキュメント検索には正式名で渡す
+const SVC_PREFIX = (()=>{
+  const amazon = ['Bedrock AgentCore','Bedrock','SageMaker AI','SageMaker','S3 Vectors','S3','OpenSearch Service','OpenSearch Serverless','OpenSearch',
+    'DynamoDB','Kendra','Comprehend Medical','Comprehend','Textract','Rekognition','Transcribe','Polly','Lex','Connect','Q Business','Q Developer','Q',
+    'CloudWatch','EventBridge','SNS','SQS','Kinesis Data Streams','Kinesis','Data Firehose','MSK','Aurora','RDS','Neptune Analytics','Neptune','MemoryDB',
+    'ElastiCache','API Gateway','Cognito','Macie','GuardDuty','Inspector','VPC','EC2','ECS','EKS','ECR','Athena','Redshift','QuickSight','Quick Sight',
+    'AppFlow','Augmented AI','Route 53','CloudFront','DocumentDB','Translate','Nova','Titan','Managed Grafana','Managed Service for Apache Flink'];
+  const aws = ['Lambda','Step Functions','Glue','KMS','IAM Identity Center','IAM','CloudTrail','Config','Organizations','Secrets Manager','Systems Manager',
+    'CloudFormation','CDK','CodePipeline','CodeBuild','CodeDeploy','CodeArtifact','X-Ray','WAF','Shield','PrivateLink','Direct Connect','DataSync',
+    'Transfer Family','Lake Formation','Well-Architected Tool','Well-Architected','Audit Manager','Security Hub','Service Catalog','Budgets','Cost Explorer',
+    'Control Tower','Outposts','Global Accelerator','AppConfig','Amplify','Fargate','Batch','Artifact','Certificate Manager','Trusted Advisor','Backup'];
+  return [...amazon.map(n=>[n,'Amazon']), ...aws.map(n=>[n,'AWS']), ['AgentCore','Amazon Bedrock']].sort((a,b)=>b[0].length-a[0].length);
+})();
+function fullServiceName(p){
+  if(/^(Amazon|AWS)\b/.test(p)) return p;
+  for(const [n,pre] of SVC_PREFIX){
+    if(p===n || (p.startsWith(n) && /^[\s゠-ヿ]/.test(p.slice(n.length)))) return pre+' '+p;
+  }
+  return p;
+}
 function showTerm(t, phrase, ctxText){ const g=GLOSSARY[t]; if(!g) return;
-  phrase = (phrase||t).trim();
+  const raw = (phrase||t).trim();
+  phrase = fullServiceName(raw);
   TERM_CTX={term:t, phrase, text:ctxText||''};
   const differs = phrase!==t;
-  document.getElementById('sh-phrase').innerHTML = differs ? `文中の表現: <b>${esc(phrase)}</b>（下の説明は「${esc(t)}」の部分）` : '';
+  document.getElementById('sh-phrase').innerHTML = !differs ? ''
+    : raw===t ? `正式名: <b>${esc(phrase)}</b>`
+    : `文中の表現: <b>${esc(raw)}</b>${raw!==phrase?`（正式名: <b>${esc(phrase)}</b>）`:''}<br>下の説明は「${esc(t)}」の部分`;
   const bp=document.getElementById('sh-ask-phrase');
   bp.style.display = differs ? '' : 'none';
   bp.textContent = `🤖「${phrase}」についてAIに聞く`;
