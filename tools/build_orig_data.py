@@ -48,7 +48,8 @@ def convert_aip_legacy():
                 "letter": letter,
                 "text": q["choices"][letter],
                 "correct": letter in answers,
-                "explanation": "",
+                # 2026-10-15: 選択肢ごとの解説（choice_explanations）があれば使う
+                "explanation": q.get("choice_explanations", {}).get(letter, ""),
             })
         out.append({
             "id": f"AIP-C01_orig_{i:03d}",
