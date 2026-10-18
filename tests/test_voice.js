@@ -7,8 +7,9 @@ const path = require('path');
 (async () => {
   const errors = [];
   const ch = process.env.PW_CHANNEL ?? (process.platform === 'win32' ? 'msedge' : undefined);
-  const browser = await chromium.launch(process.env.PW_EXE ? { executablePath: process.env.PW_EXE, headless: true }
-    : ch ? { channel: ch, headless: true } : { headless: true });
+  const args = ['--autoplay-policy=no-user-gesture-required'];
+  const browser = await chromium.launch(process.env.PW_EXE ? { executablePath: process.env.PW_EXE, headless: true, args }
+    : ch ? { channel: ch, headless: true, args } : { headless: true, args });
   const page = await browser.newPage({ viewport: { width: 420, height: 900 } });
   page.on('pageerror', e => errors.push(e.message));
   page.on('dialog', async d => { await d.accept(); });
@@ -53,7 +54,8 @@ const path = require('path');
   await page.waitForSelector('.examcard');
   await page.locator('.examcard', { hasText: 'Generative AI Developer' }).first().click();
   await page.waitForSelector('#v-home.on');
-  await page.evaluate(() => { SETTINGS.sessionLen = '5'; });
+  // 前半は端末の読み上げで流れを確かめる(事前音声の確認は最後にまとめて行う)
+  await page.evaluate(() => { SETTINGS.sessionLen = '5'; SETTINGS.voiceEngine = 'device'; });
 
   const results = [];
   const check = (name, ok, extra = '') => { results.push(ok); console.log((ok ? 'OK  ' : 'NG  ') + name + (extra ? ' — ' + extra : '')); };
@@ -172,6 +174,40 @@ const path = require('path');
   check('送り仮名つきの言い方', JSON.stringify(cmds) === JSON.stringify(['cont','expl','next','stop','stop','repeat','pass']), JSON.stringify(cmds));
   const lt = await page.evaluate(() => [vLetters(vNorm('AとC'), ['A','B','C','D','E']), vLetters(vNorm('ビーです'), ['A','B','C','D']), vLetters(vNorm('3番'), ['A','B','C','D']), vLetters(vNorm('えーとディー'), ['A','B','C','D'])]);
   check('記号の聞き取り', JSON.stringify(lt) === JSON.stringify([['A','C'],['B'],['C'],['D']]), JSON.stringify(lt));
+  const lt2 = await page.evaluate(() => ['え','美','市','デ','Dです','答えはC','2','いち','でー'].map(x => vLetters(vNorm(x), ['A','B','C','D'])));
+  // 2つ選択で「エーとディー」と答えたとき、「えーと」と取り違えずに A と D を取る
+  await page.evaluate(() => { VOICE.on = true; VOICE.phase = 'ask'; });
+  const two = await page.evaluate(() => { const q = ORIG.find(x => x.exam === 'AIP-C01' && x.type === 'choice' && x.n_correct === 2);
+    cur = q; sel = new Set(); VOICE.partial = []; let got = null; const g = grade; grade = () => { got = [...sel]; }; vHandle(['エーとディーです']); grade = g;
+    return { got, partial: VOICE.partial, opts: displayOpts(q).map(o => o.letter + o.orig) }; });
+  check('2つ選択の「エーとディー」', two.got && two.got.length === 2, JSON.stringify(two));
+  await page.evaluate(() => { VOICE.on = false; VOICE.phase = ''; });
+  check('短い言い方・数字の聞き取り', JSON.stringify(lt2) === JSON.stringify([['A'],['B'],['C'],['D'],['D'],['C'],['B'],['A'],['D']]), JSON.stringify(lt2));
+
+  // 事前に作った VOICEVOX 音声がある環境(VOICE_AUDIO_TEST=1)では、問題と結果を音声ファイルで鳴らす
+  if (process.env.VOICE_AUDIO_TEST) {
+    await page.evaluate(() => { SETTINGS.voiceEngine = 'vv'; window.__played = []; const P = HTMLMediaElement.prototype.play;
+      HTMLMediaElement.prototype.play = function () { window.__played.push(this.src); return P.call(this); }; });
+    await page.locator('nav button[data-v="home"]').click();
+    await page.waitForSelector('#v-home.on');
+    await page.locator('button:has-text("音声で解く")').click();
+    await waitPhase('ask');
+    { const t0 = Date.now(); while (Date.now() - t0 < 8000 && !(await page.evaluate(() => window.__played.some(u => /_q\.mp3$/.test(u))))) await wait(100); }
+    const qid = await page.evaluate(() => cur.id);
+    const played1 = await page.evaluate(() => window.__played.slice());
+    check('問題を事前音声で鳴らす', played1.some(u => u.endsWith(qid.split('_orig_')[1] + '_q.mp3')), played1.slice(-3).join(' '));
+    const n0 = await page.evaluate(() => window.__spoken.length);
+    const l = await page.evaluate(() => dispLetters(cur));
+    await page.evaluate(s => window.__say.push(s), sayAns(l));
+    await waitPhase('result');
+    { const t0 = Date.now(); while (Date.now() - t0 < 8000 && !(await page.evaluate(() => window.__played.some(u => /_a\.mp3$/.test(u))))) await wait(100); }
+    const played2 = await page.evaluate(() => window.__played.slice());
+    check('結果も事前音声（正解です＋解説）', played2.some(u => /common_ok\.mp3$/.test(u)) && played2.some(u => /_a\.mp3$/.test(u)), played2.slice(-4).join(' ') + ' ' + await page.evaluate(n => JSON.stringify({ph: VOICE.phase, sp: window.__spoken.slice(n), log: sessionLog.slice(-1), heard: VOICE.heard, say: window.__say}), n0));
+    check('事前音声のときは端末の読み上げを使わない', await page.evaluate(n => window.__spoken.length === n, n0));
+    check('クレジットを表示', /春日部つむぎ/.test(await page.locator('#vb-credit').innerText()));
+    await page.evaluate(() => voiceStop(false));
+  }
+
   check('ページのエラーなし', errors.length === 0, errors.join(' / '));
   const ng = results.filter(r => !r).length;
   console.log(ng ? `\n${ng}件NG` : '\n全項目OK');
