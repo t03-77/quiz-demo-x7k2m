@@ -55,7 +55,7 @@ nav button.on{color:var(--accent); font-weight:700}
 #voicebar .vh{font-size:12px; color:var(--muted); min-height:16px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis}
 #voicebar .vrow{display:flex; gap:8px; margin-top:6px; align-items:center}
 #voicebar .vrow .btn{margin:0; padding:10px 6px; font-size:14px}
-#voicebar select{width:auto; padding:6px; font-size:13px}
+#voicebar select{width:auto; padding:6px; font-size:16px}
 body.voiceon #v-quiz{padding-bottom:160px}
 .chiprow{display:flex; flex-wrap:wrap; gap:8px; margin:8px 0}
 .chip{border:1px solid var(--grid); background:var(--surface); color:var(--ink2); border-radius:99px; padding:5px 13px; font-size:13px; cursor:pointer}
@@ -101,7 +101,7 @@ details.expl[open] summary::after{content:' ▴'}
 .rowbtns .btn{margin:0}
 .ordpick{display:flex; flex-direction:column; gap:6px; min-height:34px; border:1.5px dashed var(--grid); border-radius:10px; padding:8px; margin-bottom:10px}
 .ordpick .pill{background:var(--accent); color:#fff; border-radius:8px; padding:4px 10px; font-weight:600; font-size:13px}
-select{font-size:14px; padding:6px 8px; border-radius:8px; border:1px solid var(--grid); background:var(--surface); color:var(--ink); max-width:100%}
+select{font-size:16px; padding:6px 8px; border-radius:8px; border:1px solid var(--grid); background:var(--surface); color:var(--ink); max-width:100%}
 .sheet{position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:50; display:none; align-items:flex-end}
 .sheet.on{display:flex}
 .sheet .panel{background:var(--surface); width:100%; max-width:640px; margin:0 auto; border-radius:16px 16px 0 0; padding:18px 18px calc(18px + env(safe-area-inset-bottom)); max-height:70vh; overflow:auto}
@@ -127,7 +127,8 @@ h2{font-size:15px; margin:4px 0 10px}
 .playerbar audio{width:100%; height:34px}
 .speedrow{display:flex; gap:6px; align-items:center; font-size:12px; color:var(--muted); margin-top:4px}
 .speedrow .chip{padding:2px 10px; font-size:12px}
-input[type=text],input[type=password],input[type=number]{width:100%; font-size:14px; padding:9px 10px; border-radius:9px; border:1px solid var(--grid); background:var(--page); color:var(--ink)}
+/* iPhone は 16px 未満の入力欄を触ると画面を拡大し、戻らずに左右が切れる。入力欄は 16px にする */
+input[type=text],input[type=password],input[type=number],textarea{width:100%; font-size:16px; padding:9px 10px; border-radius:9px; border:1px solid var(--grid); background:var(--page); color:var(--ink)}
 .formrow{margin-bottom:12px}
 .formrow label{display:block; font-size:12px; color:var(--ink2); margin-bottom:4px; font-weight:600}
 .note{font-size:12px; color:var(--muted)}
@@ -1583,7 +1584,7 @@ function renderAiChat(){
   const box=document.getElementById('ai-msgs');
   box.innerHTML = aiChat.history.map(h=>
     h.role==='user'
-      ? `<div style="text-align:right;margin:6px 0"><span style="display:inline-block;background:var(--accent-soft);border-radius:10px;padding:7px 11px;max-width:85%">${esc(h.content)}</span></div>`
+      ? `<div style="display:flex;justify-content:flex-end;margin:6px 0"><div style="background:var(--accent-soft);border-radius:10px;padding:7px 11px;max-width:85%;text-align:left;white-space:pre-wrap;overflow-wrap:anywhere">${esc(h.content)}</div></div>`
       : `<div style="margin:6px 0"><div class="md" style="background:var(--page);border:1px solid var(--grid);border-radius:10px;padding:9px 11px;max-width:92%">${mdToHtml(h.content)}</div></div>`
   ).join('') + (aiChat.busy?'<div class="note">考え中…</div>':'');
   box.scrollTop=box.scrollHeight;
