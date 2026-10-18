@@ -49,6 +49,14 @@ nav button.on{color:var(--accent); font-weight:700}
 .btn{display:block; width:100%; border:0; border-radius:12px; padding:14px; font-size:16px; font-weight:700; cursor:pointer; background:var(--accent); color:#fff; margin-bottom:10px}
 .btn.sub{background:var(--surface); color:var(--accent); border:1.5px solid var(--accent)}
 .btn:disabled{opacity:.45}
+/* 音声モードの操作バー。ナビの上に固定し、手が空いたときだけ押せるよう大きめにする */
+#voicebar{display:none; position:fixed; left:0; right:0; bottom:calc(56px + env(safe-area-inset-bottom)); z-index:25; background:var(--surface); border-top:2px solid var(--accent); padding:8px 12px 10px; box-shadow:0 -4px 12px rgba(0,0,0,.08)}
+#voicebar .vs{font-size:13px; font-weight:700; color:var(--accent)}
+#voicebar .vh{font-size:12px; color:var(--muted); min-height:16px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis}
+#voicebar .vrow{display:flex; gap:8px; margin-top:6px; align-items:center}
+#voicebar .vrow .btn{margin:0; padding:10px 6px; font-size:14px}
+#voicebar select{width:auto; padding:6px; font-size:13px}
+body.voiceon #v-quiz{padding-bottom:120px}
 .chiprow{display:flex; flex-wrap:wrap; gap:8px; margin:8px 0}
 .chip{border:1px solid var(--grid); background:var(--surface); color:var(--ink2); border-radius:99px; padding:5px 13px; font-size:13px; cursor:pointer}
 .chip.on{background:var(--accent); border-color:var(--accent); color:#fff; font-weight:600}
@@ -200,6 +208,8 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
     <div class="note" id="h-setinfo"></div>
   </div>
   <button class="btn" onclick="startQuiz('auto')">▶ 問題を解く(おまかせ)</button>
+  <button class="btn sub" onclick="voiceStart('auto')">🎙 音声で解く（ハンズフリー）</button>
+  <div class="note" style="margin:-4px 2px 12px">問題と選択肢を読み上げ、答えを声で受け付けます。「エー」「ビーとディー」のように記号で答えてください。ほかに「もう一回」「選択肢」「解説」「次」「わからない」「終了」が使えます。並び替え・マッチングは飛ばします。iPhone は Safari、PC・Android は Chrome で使えます（初回はマイクの許可が必要です）。</div>
   <div class="card">
     <h2>別の出し方で始める</h2>
     <div class="chiprow">
@@ -229,6 +239,19 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
 <div class="view" id="v-quiz">
   <div class="pbar"><i id="q-pbar" style="width:0%"></i></div>
   <div class="card" id="q-card"></div>
+  <div id="voicebar">
+    <div class="vs" id="vb-status">🎙 音声モード</div>
+    <div class="vh" id="vb-heard"></div>
+    <div class="vrow">
+      <button class="btn" onclick="voiceTapListen()">🎙 話す</button>
+      <button class="btn sub" onclick="voiceRepeat()">🔁 もう一度</button>
+      <select id="vb-rate" title="読み上げの速さ" onchange="voiceSetRate(this.value)">
+        <option value="0.9">0.9倍</option><option value="1.0">1.0倍</option><option value="1.1">1.1倍</option>
+        <option value="1.3">1.3倍</option><option value="1.5">1.5倍</option>
+      </select>
+      <button class="btn sub" style="flex:0 0 auto;width:auto;padding:10px 12px" onclick="voiceStop(true)">■ 終了</button>
+    </div>
+  </div>
 </div>
 
 <!-- ===== 統計 ===== -->
@@ -1758,6 +1781,308 @@ document.getElementById('cv-exam').innerHTML=EXAMS.filter(e=>!e.retired).map(e=>
 updateUsageUI();
 switchView('exams');
 initBank();
+
+/* ---------- 音声モード(ハンズフリー) ----------
+   手が空いていないときに使う。問題と選択肢を読み上げ、回答を声で受け取り、正誤と解説を読み上げる。
+   ブラウザの Web Speech API だけで動く(読み上げ: speechSynthesis / 聞き取り: SpeechRecognition)。
+   - 本番形式・一問一答の「選択式」だけが対象。並び替え・マッチングは声で答えにくいので飛ばす
+   - 模擬試験では使わない(途中で正誤を読み上げると模試にならない)
+   - 読み上げ中はマイクを止める(自分の読み上げ音声を回答として拾わないため) */
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+const VOICE = {on:false, skips:0, errN:0, phase:'', askedId:null, partial:[], rec:null, speaking:false, lock:null, prompted:false, heard:''};
+const LNAME = {A:'エー', B:'ビー', C:'シー', D:'ディー', E:'イー', F:'エフ'};
+
+function vStatus(s){
+  const el=document.getElementById('vb-status'); if(el) el.textContent=s;
+}
+function vHeard(s){
+  VOICE.heard=s; const el=document.getElementById('vb-heard'); if(el) el.textContent = s? `「${s}」` : '';
+}
+function vBar(on){
+  const b=document.getElementById('voicebar'); if(b) b.style.display = on? 'block':'none';
+  document.body.classList.toggle('voiceon', on);
+}
+/* 読み上げ用に整える。URL・記号を除き、英字の選択肢記号は日本語読みにする */
+function vClean(t){
+  return String(t||'')
+    .replace(/https?:\/\/\S+/g,'')
+    .replace(/^(正解です|不正解です)。?/,'')
+    .replace(/[「」『』【】]/g,'')
+    .replace(/\s*\/\s*/g,'、')
+    .replace(/→/g,'、')
+    .replace(/\n+/g,'。')
+    .trim();
+}
+function vVoice(){
+  const vs=speechSynthesis.getVoices().filter(v=>/^ja/i.test(v.lang));
+  return vs.find(v=>/Kyoko|O-ren|Google|Nanami|Haruka/i.test(v.name)) || vs[0] || null;
+}
+/* 長い文は端末によって途中で切れるため、句点ごとに分けて順に読む */
+function vSpeak(text){
+  return new Promise(res=>{
+    if(!('speechSynthesis' in window)){ res(); return; }
+    vStopListen();
+    const parts=String(text).split(/(?<=[。？！])/).map(s=>s.trim()).filter(Boolean);
+    if(!parts.length){ res(); return; }
+    VOICE.speaking=true; vStatus('🔊 読み上げ中…');
+    const rate=parseFloat(SETTINGS.voiceRate||'1.1');
+    const voice=vVoice();
+    let i=0;
+    const next=()=>{
+      if(!VOICE.on || i>=parts.length){ VOICE.speaking=false; res(); return; }
+      const u=new SpeechSynthesisUtterance(parts[i++]);
+      u.lang='ja-JP'; u.rate=rate; if(voice) u.voice=voice;
+      u.onend=next; u.onerror=next;
+      speechSynthesis.speak(u);
+    };
+    next();
+  });
+}
+function vStopSpeak(){ try{ speechSynthesis.cancel(); }catch(e){} VOICE.speaking=false; }
+
+/* ---- 聞き取り ---- */
+function vListen(){
+  if(!VOICE.on || VOICE.speaking) return;
+  if(!SR){ vStatus('このブラウザは音声入力に対応していません。画面をタップして回答してください'); return; }
+  vStopListen();
+  const r=new SR();
+  r.lang='ja-JP'; r.interimResults=false; r.maxAlternatives=5; r.continuous=false;
+  let got=false;
+  r.onresult=e=>{
+    got=true; VOICE.errN=0;
+    const alts=[...e.results[0]].map(a=>a.transcript);
+    vHandle(alts);
+  };
+  r.onerror=e=>{
+    if(e.error==='not-allowed' || e.error==='service-not-allowed'){
+      vStatus('マイクが許可されていません。ブラウザの設定でマイクを許可してください'); VOICE.rec=null; return;
+    }
+    if(e.error!=='no-speech' && e.error!=='aborted') VOICE.errN++;
+  };
+  r.onend=()=>{
+    if(VOICE.rec!==r) return;
+    VOICE.rec=null;
+    // 無音で終わったら聞き直す(手が離せない前提なので、ボタンを押させない)
+    if(!got && VOICE.on && !VOICE.speaking){
+      // 失敗が続くときは自動では聞き直さない(マイクの奪い合いで無限に再試行しないため)
+      if(VOICE.errN>=5){ vStatus('🎙 聞き取りを一時停止しました。「話す」を押すと再開します'); VOICE.errN=0; return; }
+      setTimeout(vListen, 250);
+    }
+  };
+  VOICE.rec=r;
+  try{ r.start(); vStatus('🎙 どうぞ（答え・「もう一回」・「終了」）'); }
+  catch(e){ VOICE.rec=null; vStatus('🎙 マイクを開始できませんでした。「話す」を押してください'); }
+}
+function vStopListen(){
+  const r=VOICE.rec; VOICE.rec=null;
+  if(r){ try{ r.abort(); }catch(e){} }
+}
+
+/* ---- 認識結果の解釈 ---- */
+function vNorm(s){
+  return String(s||'')
+    .replace(/[Ａ-Ｚａ-ｚ０-９]/g, c=>String.fromCharCode(c.charCodeAt(0)-0xFEE0))
+    .replace(/[ぁ-ゖ]/g, c=>String.fromCharCode(c.charCodeAt(0)+0x60))   // ひらがな→カタカナ
+    .toUpperCase()
+    .replace(/エー[ット]+|エート|エット|アノー?|ウーン|ンー/g,' ')         // 言いよどみを答えと取り違えない
+    .replace(/\s+/g,' ').trim();
+}
+// 判定はカタカナに揃えた後の文字列で行う(漢字の送り仮名もカタカナになっている点に注意)
+const VCMD = [
+  ['stop',    /終了|オワリ|終ワリ|ヤメ|止メ|ストップ|停止/],
+  ['repeat',  /モウ一[回度]|モウイッ?カイ|モウイチド|繰リ?返|クリカエ|リピート|ワンモア/],
+  ['options', /選択肢|センタクシ/],
+  ['expl',    /解説|カイセツ|詳シク|クワシク/],
+  ['next',    /次|ツギ|ネクスト|進[ムメ]|ススム|オッケー|OK/],
+  ['cont',    /続[ケク]|ツヅ[ケク]|モウ1セット|モウワンセット/],
+  ['pass',    /ワカラナイ|分カラナイ|パス|スキップ/],
+];
+function vCommand(s){ for(const [k,re] of VCMD) if(re.test(s)) return k; return null; }
+/* 「Bです」「エーとシー」「1番」などから記号を取り出す。出てきた順・重複なし */
+function vLetters(s, avail){
+  const map=[
+    [/(^|[^A-Z])A(?![A-Z])|エー|エイ|イチバン|1番|一番/g,'A'],
+    [/(^|[^A-Z])B(?![A-Z])|ビー|ビイ|ニバン|2番|二番/g,'B'],
+    [/(^|[^A-Z])C(?![A-Z])|シー|シイ|サンバン|3番|三番/g,'C'],
+    [/(^|[^A-Z])D(?![A-Z])|ディー|デー|ディ|ヨンバン|4番|四番/g,'D'],
+    [/(^|[^A-Z])E(?![A-Z])|イー|ゴバン|5番|五番/g,'E'],
+    [/(^|[^A-Z])F(?![A-Z])|エフ|ロクバン|6番|六番/g,'F'],
+  ];
+  const hits=[];
+  for(const [re,L] of map){ let m; re.lastIndex=0; while((m=re.exec(s))){ hits.push([m.index,L]); } }
+  // 「AC」「BD」のように記号が連なった言い方
+  for(const m of s.matchAll(/\b([A-F]{2,3})\b/g)) [...m[1]].forEach((L,k)=>hits.push([m.index+k,L]));
+  hits.sort((a,b)=>a[0]-b[0]);
+  const out=[]; for(const [,L] of hits) if(avail.includes(L) && !out.includes(L)) out.push(L);
+  return out;
+}
+function vHandle(alts){
+  const norm=alts.map(vNorm);
+  vHeard(alts[0]||'');
+  const cmd=norm.map(vCommand).find(Boolean);
+  if(cmd==='stop'){ voiceStop(true); return; }
+  if(VOICE.phase==='ask'){
+    if(cmd==='repeat'){ vAsk(true); return; }
+    if(cmd==='options'){ vReadOptions().then(vListen); return; }
+    const q=cur, opts=displayOpts(q), avail=opts.map(o=>o.letter), need=q.n_correct||1;
+    let letters=[];
+    for(const n of norm){ letters=vLetters(n, avail); if(letters.length) break; }
+    if(cmd==='pass' && !letters.length){ vPass(); return; }
+    if(!letters.length){
+      vSpeak(`聞き取れませんでした。${avail.map(l=>LNAME[l]).join('、')}のどれかで答えてください。`).then(vListen); return;
+    }
+    VOICE.partial=[...new Set(VOICE.partial.concat(letters))].slice(0, need);
+    if(VOICE.partial.length<need){
+      vSpeak(`${VOICE.partial.map(l=>LNAME[l]).join('と')}ですね。あと${need-VOICE.partial.length}つ答えてください。`).then(vListen); return;
+    }
+    sel=new Set(VOICE.partial.map(L=>opts.find(o=>o.letter===L).orig));
+    VOICE.partial=[];
+    renderQ();       // 選んだ肢を画面にも反映する
+    grade();         // → renderResult の後で vResult が呼ばれる
+    return;
+  }
+  if(VOICE.phase==='result'){
+    if(cmd==='expl'){ vReadAllExpl().then(vListen); return; }
+    if(cmd==='repeat'){ vResultSpeak(true); return; }
+    if(cmd==='next' || cmd==='cont'){ vNext(); return; }
+    vSpeak('「次」で進みます。「解説」で全部の選択肢の解説を読みます。').then(vListen); return;
+  }
+  if(VOICE.phase==='finish'){
+    if(cmd==='cont' || cmd==='next'){ startQuiz(mode, domFilter); return; }
+    vSpeak('続ける場合は「続ける」、やめる場合は「終了」と言ってください。').then(vListen); return;
+  }
+}
+
+/* ---- 出題・結果の読み上げ ---- */
+function vOptionsText(q){
+  return displayOpts(q).map(o=>`${LNAME[o.letter]}。${vClean(o.text)}`).join('。')+'。';
+}
+function vReadOptions(){ return vSpeak('選択肢。'+vOptionsText(cur)); }
+function vAsk(again){
+  const q=cur; if(!q) return;
+  VOICE.phase='ask'; VOICE.askedId=q.id; VOICE.partial=[];
+  const need=q.n_correct||1;
+  const denom=(mode==='queue')? sessionN+REVIEW_QUEUE.length : sessionLen();
+  let t = again? '' : `${sessionN}問目。`;
+  t += vClean(q.question)+'。';
+  t += '選択肢。'+vOptionsText(q);
+  t += need>1? `${need}つ答えてください。` : (VOICE.prompted? '' : '答えを記号で言ってください。');
+  VOICE.prompted=true;
+  vSpeak(t).then(vListen);
+}
+function vCorrectExpl(q){
+  const c=q.options.filter(o=>o.correct);
+  const e=c.map(o=>vClean(o.explanation)).filter(Boolean).join('。');
+  return e || vClean(q.explanation);
+}
+function vResultSpeak(again){
+  const q=cur, ok=VOICE.lastOk;
+  const letters=dispLetters(q).map(l=>LNAME[l]).join('と');
+  let t = ok? '正解です。' : `不正解。正解は${letters}です。`;
+  t += vCorrectExpl(q)+'。';
+  const last = mode!=='queue' && sessionN>=sessionLen();
+  t += last? '「次」でこのセットの結果に進みます。' : '「次」で進みます。';
+  vSpeak(t).then(vListen);
+}
+function vResult(ok){ VOICE.phase='result'; VOICE.lastOk=ok; vResultSpeak(false); }
+function vReadAllExpl(){
+  const q=cur;
+  const t=displayOpts(q).map(o=>`${LNAME[o.letter]}は${o.correct?'正解':'不正解'}。${vClean(o.explanation)}`).join('。');
+  return vSpeak(t || vClean(q.explanation));
+}
+/* 分からないときは不正解として記録し、正解を聞いて先へ進む(習得状態をごまかさない) */
+function vPass(){
+  const q=cur, opts=displayOpts(q), need=q.n_correct||1;
+  const wrong=opts.filter(o=>!o.correct).slice(0,need).map(o=>o.orig);
+  sel=new Set(wrong); grade();
+}
+function vNext(){
+  // 結果画面のボタンと同じ動きにする(セット最後なら結果へ)
+  if(mode==='queue') nextQ();
+  else if(sessionN>=sessionLen()) finishSession();
+  else nextQ();
+}
+function vFinish(){
+  VOICE.phase='finish';
+  const ok=sessionLog.filter(r=>r.ok).length, n=sessionLog.length;
+  vSpeak(`このセットは終了です。${n}問中${ok}問正解でした。続ける場合は「続ける」、やめる場合は「終了」と言ってください。`).then(vListen);
+}
+
+/* ---- 開始・終了 ---- */
+async function voiceStart(m){
+  if(!('speechSynthesis' in window)){ alert('このブラウザは読み上げに対応していません'); return; }
+  VOICE.on=true; VOICE.askedId=null; VOICE.prompted=false; vHeard('');
+  vBar(true);
+  // iPhone では最初の読み上げをタップの直後に始めないと鳴らないため、ここで短く鳴らしておく
+  try{ const u=new SpeechSynthesisUtterance('音声モードを開始します。'); u.lang='ja-JP'; speechSynthesis.speak(u); }catch(e){}
+  try{ if('wakeLock' in navigator) VOICE.lock=await navigator.wakeLock.request('screen'); }catch(e){}
+  if(!SR) vStatus('音声入力に未対応のブラウザです。読み上げのみ行います');
+  startQuiz(m||'auto');
+}
+function voiceStop(say){
+  if(!VOICE.on) return;
+  vStopListen();
+  if(say){ vStopSpeak(); try{ const u=new SpeechSynthesisUtterance('音声モードを終了します。'); u.lang='ja-JP'; speechSynthesis.speak(u); }catch(e){} }
+  else vStopSpeak();
+  VOICE.on=false; VOICE.phase=''; VOICE.askedId=null;
+  try{ VOICE.lock?.release(); }catch(e){} VOICE.lock=null;
+  vBar(false);
+}
+function voiceTapListen(){ vStopSpeak(); vListen(); }
+function voiceRepeat(){
+  vStopSpeak();
+  if(VOICE.phase==='ask') vAsk(true);
+  else if(VOICE.phase==='result') vResultSpeak(true);
+  else if(VOICE.phase==='finish') vFinish();
+}
+function voiceSetRate(v){ SETTINGS.voiceRate=v; lsSet(SETTINGS_KEY, SETTINGS); }
+
+/* ---- 既存の画面処理につなぐ(元の関数は変えずに後ろで呼ぶ) ---- */
+{
+  const _renderQ=renderQ;
+  renderQ=function(){
+    _renderQ();
+    if(!VOICE.on || mode==='mock' || !cur) return;
+    if(cur.id===VOICE.askedId) return;        // 選択肢をタップしただけの再描画では読み直さない
+    if(cur.type!=='choice'){
+      // 並び替え・マッチングは声では答えにくいので、記録せずに次へ回す
+      VOICE.askedId=cur.id; sessionN--;
+      if(++VOICE.skips>15){ vSpeak('音声で答えられる問題が見つかりません。音声モードを終了します。').then(()=>voiceStop(false)); return; }
+      vSpeak('この問題は並び替えかマッチングのため、音声モードでは飛ばします。').then(()=>{ if(VOICE.on) nextQ(); });
+      return;
+    }
+    VOICE.skips=0;
+    vAsk(false);
+  };
+  const _renderResult=renderResult;
+  renderResult=function(ok, chosen, correctAns, review){
+    _renderResult(ok, chosen, correctAns, review);
+    if(VOICE.on && !review && mode!=='mock') vResult(ok);
+  };
+  const _finishSession=finishSession;
+  finishSession=function(){ _finishSession(); if(VOICE.on) vFinish(); };
+  const _nextQ=nextQ;
+  nextQ=function(){
+    _nextQ();
+    // 出題できる問題が無いときは、黙ったまま待たせない
+    if(VOICE.on && !document.querySelector('#q-card .qtext') && !document.querySelector('#q-card .resultbanner')){
+      vSpeak('このモードで出せる問題はいまありません。音声モードを終了します。').then(()=>voiceStop(false));
+    }
+  };
+  const _switchView=switchView;
+  switchView=function(v){ if(v!=='quiz') voiceStop(false); _switchView(v); };
+  const _startMock=startMock;
+  startMock=function(n, m){ voiceStop(false); _startMock(n, m); };
+  // 画面を切り替えると読み上げ・聞き取りが止まる端末があるため、戻ってきたら聞き取りを再開する
+  document.addEventListener('visibilitychange', ()=>{
+    if(document.visibilityState==='visible' && VOICE.on){
+      (async()=>{ try{ if('wakeLock' in navigator && !VOICE.lock) VOICE.lock=await navigator.wakeLock.request('screen'); }catch(e){} })();
+      if(!VOICE.speaking && !VOICE.rec) vListen();
+    }
+  });
+  if('speechSynthesis' in window) speechSynthesis.onvoiceschanged=()=>{};
+  const rs=document.getElementById('vb-rate'); if(rs) rs.value=SETTINGS.voiceRate||'1.1';
+}
 
 /* ---------- オフライン対応(PWA) ---------- */
 // file:// で開いた場合はService Workerが使えないため、その時は何もしない
