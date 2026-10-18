@@ -23,21 +23,26 @@ const path = require('path');
     };
     Object.defineProperty(window, 'speechSynthesis', { value: synth, configurable: true });
     window.SpeechSynthesisUtterance = function (t) { this.text = t; };
+    // 連続認識(continuous)の偽物。開いている間、__say に積まれた発話を1つずつ結果として返す
     class FakeRec {
       start() {
-        window.__recStarts++;
-        setTimeout(() => {
+        window.__recStarts++; this.results = []; this.alive = true;
+        setTimeout(() => this.onstart && this.onstart(), 5);
+        this.timer = setInterval(() => {
+          if (!this.alive) return;
+          if (window.__killMic) { window.__killMic = false; this.stop(); return; }
+          // 人は読み上げを聞き終わってから答えるので、読み上げ中は話さない(__force のときだけ割り込む)
+          if (!window.__force && typeof VOICE !== 'undefined' && (VOICE.speaking || Date.now() < VOICE.muteUntil)) return;
+          window.__force = false;
           const t = window.__say.shift();
-          if (t !== undefined) {
-            const alt = [{ transcript: t }];
-            this.onresult && this.onresult({ results: [alt] });
-          } else {
-            this.onerror && this.onerror({ error: 'no-speech' });
-          }
-          this.onend && this.onend();
-        }, 30);
+          if (t === undefined) return;
+          const r = [{ transcript: t }]; r.isFinal = true;
+          this.results.push(r);
+          this.onresult && this.onresult({ resultIndex: this.results.length - 1, results: this.results });
+        }, 40);
       }
-      abort() {}
+      stop() { this.alive = false; clearInterval(this.timer); setTimeout(() => this.onend && this.onend(), 5); }
+      abort() { this.stop(); }
     }
     window.SpeechRecognition = FakeRec;
   });
@@ -53,7 +58,7 @@ const path = require('path');
   const results = [];
   const check = (name, ok, extra = '') => { results.push(ok); console.log((ok ? 'OK  ' : 'NG  ') + name + (extra ? ' — ' + extra : '')); };
   const wait = ms => page.waitForTimeout(ms);
-  const waitPhase = async (p, ms = 4000) => {
+  const waitPhase = async (p, ms = 8000) => {
     const t0 = Date.now();
     while (Date.now() - t0 < ms) { if (await page.evaluate(x => VOICE.phase === x, p)) return true; await wait(50); }
     return false;
@@ -120,10 +125,10 @@ const path = require('path');
   check('「わからない」は不正解として記録', last3 && last3.id === q3 && last3.ok === false);
 
   // 残りを片付けてセット終了 → 「続ける」
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < 12; i++) {
     const ph = await page.evaluate(() => VOICE.phase);
     if (ph === 'finish') break;
-    if (ph === 'result') { await page.evaluate(() => window.__say.push('次')); await wait(500); continue; }
+    if (ph === 'result') { await page.evaluate(() => window.__say.push('次')); const t0 = Date.now(); while (Date.now() - t0 < 8000 && await page.evaluate(() => VOICE.phase === 'result')) await wait(50); continue; }
     if (ph === 'ask') {
       const l = await page.evaluate(() => dispLetters(cur));
       await page.evaluate(s => window.__say.push(s), sayAns(l));
@@ -133,22 +138,32 @@ const path = require('path');
   check('セット終了をまとめて読む', await waitPhase('finish') && await page.evaluate(() => window.__spoken.some(t => /このセットは終了/.test(t))));
   await page.evaluate(() => window.__say.push('続ける'));
   const okc = await waitPhase('ask');
-  check('「続ける」で次のセット', okc, okc ? '' : await page.evaluate(() => JSON.stringify({ph: VOICE.phase, n: sessionN, id: cur && cur.id, asked: VOICE.askedId, say: window.__say, last: window.__spoken.slice(-3)})));
+  check('「続ける」で次のセット', okc, okc ? '' : await page.evaluate(() => JSON.stringify({ph: VOICE.phase, n: sessionN, id: cur && cur.id, asked: VOICE.askedId, say: window.__say, heard: VOICE.heard, acc: VOICE.accept, rec: !!VOICE.rec, mic: VOICE.mic, last: window.__spoken.slice(-3)})));
 
-  // 無音が続いても聞き直し続ける(ボタンを押させない)
+  // マイクが閉じても自動で開き直す(ボタンを押させない)
   const s0 = await page.evaluate(() => window.__recStarts);
-  await wait(1200);
-  check('無音のあと自動で聞き直す', await page.evaluate(n => window.__recStarts > n + 2, s0));
+  await page.evaluate(() => { window.__killMic = true; });
+  await wait(800);
+  check('マイクが閉じても自動で開き直す', await page.evaluate(n => window.__recStarts > n, s0));
+  // 読み上げ中に聞こえた音(自分の読み上げ)は回答にしない
+  await page.evaluate(() => window.__say.push('次'));
+  await waitPhase('ask');
+  const qid = await page.evaluate(() => cur.id);
+  const echoed = await page.evaluate(() => { VOICE.speaking = true; window.__force = true; window.__say.push('エー'); return true; });
+  await wait(300);
+  const stillAsk = await page.evaluate(id => VOICE.phase === 'ask' && cur.id === id && sessionLog.every(r => r.id !== id), qid);
+  await page.evaluate(() => { VOICE.speaking = false; });
+  check('読み上げ中の音は回答にしない', echoed && stillAsk);
 
   // 「終了」で止まる
   await page.evaluate(() => window.__say.push('終了'));
-  await wait(400);
+  { const t0 = Date.now(); while (Date.now() - t0 < 8000 && await page.evaluate(() => VOICE.on)) await wait(50); }
   check('「終了」で音声モードを止める', await page.evaluate(() => !VOICE.on) && !(await page.locator('#voicebar').isVisible()));
 
   // 模擬試験では使わない / タップでの操作は今までどおり
   await page.locator('nav button[data-v="home"]').click();
   await page.waitForSelector('#v-home.on');
-  await page.locator('button:has-text("問題を解く(おまかせ)")').click();
+  await page.locator('button:has-text("▶ 問題を解く")').click();
   await page.waitForSelector('#q-card .opt');
   check('通常モードでは読み上げない', await page.evaluate(() => !VOICE.on));
 

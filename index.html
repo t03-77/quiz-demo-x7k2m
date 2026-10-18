@@ -56,7 +56,7 @@ nav button.on{color:var(--accent); font-weight:700}
 #voicebar .vrow{display:flex; gap:8px; margin-top:6px; align-items:center}
 #voicebar .vrow .btn{margin:0; padding:10px 6px; font-size:14px}
 #voicebar select{width:auto; padding:6px; font-size:13px}
-body.voiceon #v-quiz{padding-bottom:120px}
+body.voiceon #v-quiz{padding-bottom:160px}
 .chiprow{display:flex; flex-wrap:wrap; gap:8px; margin:8px 0}
 .chip{border:1px solid var(--grid); background:var(--surface); color:var(--ink2); border-radius:99px; padding:5px 13px; font-size:13px; cursor:pointer}
 .chip.on{background:var(--accent); border-color:var(--accent); color:#fff; font-weight:600}
@@ -202,23 +202,17 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
     <div class="tile"><div class="v" id="h-master">0</div><div class="l">習得済み</div></div>
   </div>
   <div class="note" id="h-duenote" style="margin:-4px 2px 10px"></div>
+  <!-- 出題の設定を先に決めてから始める。開始ボタンは設定の下にまとめる(2026-10-18) -->
   <div class="card" style="padding:12px 16px">
-    <h2 style="margin-bottom:6px">出題する問題の種類</h2>
-    <div class="chiprow" id="h-sets" style="margin:0 0 4px"></div>
-    <div class="note" id="h-setinfo"></div>
-  </div>
-  <button class="btn" onclick="startQuiz('auto')">▶ 問題を解く(おまかせ)</button>
-  <button class="btn sub" onclick="voiceStart('auto')">🎙 音声で解く（ハンズフリー）</button>
-  <div class="note" style="margin:-4px 2px 12px">問題と選択肢を読み上げ、答えを声で受け付けます。「エー」「ビーとディー」のように記号で答えてください。ほかに「もう一回」「選択肢」「解説」「次」「わからない」「終了」が使えます。並び替え・マッチングは飛ばします。iPhone は Safari、PC・Android は Chrome で使えます（初回はマイクの許可が必要です）。</div>
-  <div class="card">
-    <h2>別の出し方で始める</h2>
-    <div class="chiprow">
-      <button class="chip act" onclick="startQuiz('review')">▶ まちがえた問題だけ</button>
-      <button class="chip act" onclick="startQuiz('new')">▶ まだ解いていない問題</button>
-      <button class="chip act" onclick="startQuiz('random')">▶ ランダム</button>
-      <button class="chip act" onclick="startQuiz('seq')">▶ 順番どおり</button>
+    <div class="setblock">
+      <h2 style="margin-bottom:6px">出題する問題の種類</h2>
+      <div class="chiprow" id="h-sets" style="margin:0 0 4px"></div>
+      <div class="note" id="h-setinfo" style="margin-bottom:12px"></div>
     </div>
-    <div class="formrow" style="margin-bottom:6px"><label>1セットの問題数</label>
+    <h2 style="margin-bottom:6px">出し方</h2>
+    <div class="chiprow" id="h-modes" style="margin:0 0 4px"></div>
+    <div class="note" id="h-modeinfo" style="margin-bottom:12px"></div>
+    <div class="formrow" style="margin-bottom:0"><label>1セットの問題数</label>
       <select id="home-seslen" style="width:100%" onchange="SETTINGS.sessionLen=this.value;lsSet(SETTINGS_KEY,SETTINGS);refreshHome();document.getElementById('set-seslen').value=this.value">
         <option value="5">5問 — すきま時間に</option>
         <option value="10">10問 — 標準</option>
@@ -226,8 +220,10 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
         <option value="30">30問 — 長めに</option>
       </select>
     </div>
-    <div class="note">「おまかせ」は <b>前回まちがえた問題 → そろそろ復習の問題 → はじめての問題</b> の順に出します。同じ問題に2回続けて正解すると習得済みになり、その後も忘却対策で間隔をあけて再登場します。<br><b>途中でやめても、解いた分の記録は残ります。</b>次に開いたときは続きから出題されます。<br>PCでは A〜F キーで選択、Enter で回答・次の問題へ進めます。</div>
   </div>
+  <button class="btn" onclick="startQuiz(startMode())">▶ 問題を解く</button>
+  <button class="btn sub" onclick="voiceStart(startMode())">🎙 音声で解く（ハンズフリー）</button>
+  <div class="note" style="margin:-4px 2px 12px">音声で解く: 問題と選択肢を読み上げ、答えを声で受け付けます。「エー」「ビーとディー」のように記号で答えてください。ほかに「もう一回」「選択肢」「解説」「次」「わからない」「終了」が使えます。並び替え・マッチングは飛ばします。iPhone は Safari、PC・Android は Chrome で使えます（初回はマイクの許可が必要です）。<br><b>途中でやめても、解いた分の記録は残ります。</b>PCでは A〜F キーで選択、Enter で回答・次の問題へ進めます。</div>
   <div class="card">
     <h2>模擬試験モード</h2>
     <div class="note" style="margin-bottom:8px"><b>本番と同じ制限時間で計ります。</b>画面上部に残り時間が出て、時間切れになるとそこまでの回答で自動採点します。途中で正解は表示せず、最後にまとめて採点・合否判定します（本番の合格スコアで判定）。<br>いちばん上の選択肢が<b>本番と同じ問題数・同じ時間</b>です。短いものは時間配分の練習に使えます。</div>
@@ -241,7 +237,7 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
   <div class="card" id="q-card"></div>
   <div id="voicebar">
     <div class="vs" id="vb-status">🎙 音声モード</div>
-    <div class="vh" id="vb-heard"></div>
+    <div class="vh"><span id="vb-mic"></span> <span id="vb-heard"></span></div>
     <div class="vrow">
       <button class="btn" onclick="voiceTapListen()">🎙 話す</button>
       <button class="btn sub" onclick="voiceRepeat()">🔁 もう一度</button>
@@ -251,6 +247,7 @@ input[type=text],input[type=password],input[type=number]{width:100%; font-size:1
       </select>
       <button class="btn sub" style="flex:0 0 auto;width:auto;padding:10px 12px" onclick="voiceStop(true)">■ 終了</button>
     </div>
+    <div class="vrow"><span class="note" style="flex:0 0 auto">声</span><select id="vb-voice" style="flex:1;min-width:0" onchange="voiceSetVoice(this.value)"></select></div>
   </div>
 </div>
 
@@ -793,8 +790,14 @@ function refreshHome(){
   document.getElementById('h-setinfo').textContent =
     setFilter==='all'? 'すべての種類から出題します' : (SET_HINT[setFilter]||'');
   // 種類が1つしかないときは「すべて」と同じ数になり、選ぶ意味がない。カードごと隠す
-  const setCard=document.getElementById('h-sets').closest('.card');
+  const setCard=document.getElementById('h-sets').closest('.setblock');
   if(setCard) setCard.style.display = (kinds.length>=2)? '' : 'none';
+  // 出し方の選択。開始ボタン(通常・音声)の両方がこれを使う
+  const sm=startMode();
+  document.getElementById('h-modes').innerHTML = START_MODES.map(([k,l])=>
+    `<button class="chip ${sm===k?'on':''}" onclick="SETTINGS.startMode='${k}';lsSet(SETTINGS_KEY,SETTINGS);refreshHome()">${l}</button>`).join('');
+  document.getElementById('h-modeinfo').innerHTML = START_MODE_HINT[sm]||'';
+  const hs=document.getElementById('home-seslen'); if(hs) hs.value=String(sessionLen());
   // 模擬試験の選択肢。本番と同じ問題数・時間を第一候補に、短縮版も用意する
   const e=EXAMS.find(x=>x.id===currentExam);
   const perQ=e.min/e.n;
@@ -804,6 +807,16 @@ function refreshHome(){
     short.map(([n,label])=>`<button class="chip" onclick="startMock(${n},${Math.round(n*perQ)})">${label} ${n}問 / ${Math.round(n*perQ)}分</button>`).join('');
 }
 
+/* 出し方(学習トップで選ぶ)。「おまかせ」が既定 */
+const START_MODES=[['auto','おまかせ'],['review','まちがえた問題だけ'],['new','まだ解いていない問題'],['random','ランダム'],['seq','順番どおり']];
+const START_MODE_HINT={
+  auto:'<b>前回まちがえた問題 → そろそろ復習の問題 → はじめての問題</b> の順に出します。同じ問題に2回続けて正解すると習得済みになり、その後も忘却対策で間隔をあけて再登場します。',
+  review:'まちがえたままの問題だけを出します。',
+  new:'まだ一度も解いていない問題だけを出します。',
+  random:'記録に関係なく、ランダムに出します。',
+  seq:'問題の並び順どおりに出します。',
+};
+function startMode(){ const m=SETTINGS.startMode; return START_MODES.some(([k])=>k===m)? m : 'auto'; }
 /* ---------- 演習 ---------- */
 let cur=null, mode='auto', sel=new Set(), ordSel=[], sessionN=0;
 // 練習1セットの問題数。区切りを作り達成感と復習の機会を与える。
@@ -1789,7 +1802,7 @@ initBank();
    - 模擬試験では使わない(途中で正誤を読み上げると模試にならない)
    - 読み上げ中はマイクを止める(自分の読み上げ音声を回答として拾わないため) */
 const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-const VOICE = {on:false, skips:0, errN:0, phase:'', askedId:null, partial:[], rec:null, speaking:false, lock:null, prompted:false, heard:''};
+const VOICE = {on:false, skips:0, errN:0, accept:false, muteUntil:0, cut:false, blocked:false, mic:'', lastErr:'', phase:'', askedId:null, partial:[], rec:null, speaking:false, lock:null, prompted:false, heard:''};
 const LNAME = {A:'エー', B:'ビー', C:'シー', D:'ディー', E:'イー', F:'エフ'};
 
 function vStatus(s){
@@ -1813,23 +1826,38 @@ function vClean(t){
     .replace(/\n+/g,'。')
     .trim();
 }
-function vVoice(){
-  const vs=speechSynthesis.getVoices().filter(v=>/^ja/i.test(v.lang));
-  return vs.find(v=>/Kyoko|O-ren|Google|Nanami|Haruka/i.test(v.name)) || vs[0] || null;
+/* 読み上げの声。端末に入っている日本語の声から選べるようにする。
+   iPhone は「設定 > アクセシビリティ > 読み上げコンテンツ > 声 > 日本語」で高音質の声(拡張/プレミアム)を追加できる */
+function vVoices(){
+  try{ return speechSynthesis.getVoices().filter(v=>/^ja/i.test(v.lang)); }catch(e){ return []; }
 }
-/* 長い文は端末によって途中で切れるため、句点ごとに分けて順に読む */
+function vVoice(){
+  const vs=vVoices();
+  if(SETTINGS.voiceName){ const v=vs.find(x=>x.name===SETTINGS.voiceName); if(v) return v; }
+  return vs.find(v=>/拡張|Enhanced|プレミアム|Premium|Neural|Natural/i.test(v.name))
+      || vs.find(v=>/Kyoko|O-ren|Nanami|Google/i.test(v.name)) || vs[0] || null;
+}
+function vFillVoices(){
+  const sel=document.getElementById('vb-voice'); if(!sel) return;
+  const vs=vVoices(), curV=vVoice();
+  sel.innerHTML = vs.length? vs.map(v=>`<option value="${esc(v.name)}"${curV&&v.name===curV.name?' selected':''}>${esc(v.name.replace(/\s*\(.*?Japanese.*?\)|日本語\s*\(日本\)/g,''))}</option>`).join('')
+                           : '<option value="">標準の声</option>';
+}
+/* 長い文は端末によって途中で切れるため、句点ごとに分けて順に読む。
+   読み上げ中と直後は、マイクが拾った自分の読み上げ音声を回答として扱わない */
 function vSpeak(text){
   return new Promise(res=>{
     if(!('speechSynthesis' in window)){ res(); return; }
-    vStopListen();
+    VOICE.accept=false;
     const parts=String(text).split(/(?<=[。？！])/).map(s=>s.trim()).filter(Boolean);
     if(!parts.length){ res(); return; }
-    VOICE.speaking=true; vStatus('🔊 読み上げ中…');
+    VOICE.speaking=true; vStatus('🔊 読み上げ中…（「話す」で割り込めます）');
     const rate=parseFloat(SETTINGS.voiceRate||'1.1');
     const voice=vVoice();
     let i=0;
+    const done=()=>{ VOICE.speaking=false; VOICE.muteUntil=Date.now()+700; res(); };
     const next=()=>{
-      if(!VOICE.on || i>=parts.length){ VOICE.speaking=false; res(); return; }
+      if(!VOICE.on || VOICE.cut || i>=parts.length){ VOICE.cut=false; done(); return; }
       const u=new SpeechSynthesisUtterance(parts[i++]);
       u.lang='ja-JP'; u.rate=rate; if(voice) u.voice=voice;
       u.onend=next; u.onerror=next;
@@ -1838,40 +1866,60 @@ function vSpeak(text){
     next();
   });
 }
-function vStopSpeak(){ try{ speechSynthesis.cancel(); }catch(e){} VOICE.speaking=false; }
+function vStopSpeak(){ VOICE.cut=VOICE.speaking; try{ speechSynthesis.cancel(); }catch(e){} VOICE.speaking=false; }
 
-/* ---- 聞き取り ---- */
+/* ---- 聞き取り ----
+   マイクは音声モードの開始時(タップの直後)に1回だけ開き、終了まで開いたままにする。
+   iPhone の Safari は、タップ以外のきっかけでマイクを開き直すと失敗することがあるため。
+   回答を受け付けるかどうかは VOICE.accept で切り替える */
+function vMic(s){ VOICE.mic=s; const el=document.getElementById('vb-mic'); if(el) el.textContent=s; }
 function vListen(){
-  if(!VOICE.on || VOICE.speaking) return;
+  if(!VOICE.on) return;
+  VOICE.accept=true;
   if(!SR){ vStatus('このブラウザは音声入力に対応していません。画面をタップして回答してください'); return; }
-  vStopListen();
+  if(!VOICE.rec) vMicStart(false);
+  vStatus(VOICE.rec? '🎙 どうぞ（答え・「もう一回」・「終了」）' : '🎙 マイクが止まっています。「話す」を押してください');
+}
+function vMicStart(fromTap){
+  if(!SR || !VOICE.on) return;
   const r=new SR();
-  r.lang='ja-JP'; r.interimResults=false; r.maxAlternatives=5; r.continuous=false;
-  let got=false;
+  r.lang='ja-JP'; r.interimResults=false; r.maxAlternatives=5; r.continuous=true;
+  r.onstart=()=>{ vMic('マイク: 聞き取り中'); };
   r.onresult=e=>{
-    got=true; VOICE.errN=0;
-    const alts=[...e.results[0]].map(a=>a.transcript);
-    vHandle(alts);
+    VOICE.errN=0;
+    for(let i=e.resultIndex; i<e.results.length; i++){
+      const res=e.results[i]; if(res.isFinal===false) continue;
+      const alts=[...res].map(a=>a.transcript.trim()).filter(Boolean);
+      if(!alts.length) continue;
+      // 読み上げ中・直後に聞こえたものは自分の読み上げなので捨てる。答えは短いので、長い文も捨てる
+      if(VOICE.speaking || Date.now()<VOICE.muteUntil){ vHeard('（読み上げ中のため無視）'+alts[0]); continue; }
+      if(alts[0].length>40){ vHeard('（長いため無視）'+alts[0].slice(0,20)+'…'); continue; }
+      if(!VOICE.accept){ vHeard(alts[0]); continue; }
+      vHandle(alts);
+    }
   };
   r.onerror=e=>{
+    VOICE.lastErr=e.error;
     if(e.error==='not-allowed' || e.error==='service-not-allowed'){
-      vStatus('マイクが許可されていません。ブラウザの設定でマイクを許可してください'); VOICE.rec=null; return;
+      VOICE.blocked=true;
+      vMic('マイク: 使えません（'+e.error+'）');
+      vStatus('マイクか音声入力が許可されていません。iPhone は「設定 > 一般 > キーボード > 音声入力」をオンにし、Safari のマイクを許可してください');
+      return;
     }
     if(e.error!=='no-speech' && e.error!=='aborted') VOICE.errN++;
   };
   r.onend=()=>{
     if(VOICE.rec!==r) return;
-    VOICE.rec=null;
-    // 無音で終わったら聞き直す(手が離せない前提なので、ボタンを押させない)
-    if(!got && VOICE.on && !VOICE.speaking){
-      // 失敗が続くときは自動では聞き直さない(マイクの奪い合いで無限に再試行しないため)
-      if(VOICE.errN>=5){ vStatus('🎙 聞き取りを一時停止しました。「話す」を押すと再開します'); VOICE.errN=0; return; }
-      setTimeout(vListen, 250);
+    VOICE.rec=null; vMic('マイク: 停止'+(VOICE.lastErr? '（'+VOICE.lastErr+'）':''));
+    // 無音が続くとブラウザが閉じるので開き直す。失敗が続くときはタップを待つ(無限に再試行しない)
+    if(VOICE.on && !VOICE.blocked){
+      if(VOICE.errN>=5){ vStatus('🎙 聞き取りを一時停止しました。「話す」か画面をタップすると再開します'); VOICE.errN=0; return; }
+      setTimeout(()=>{ if(VOICE.on && !VOICE.rec) vMicStart(false); }, 250);
     }
   };
-  VOICE.rec=r;
-  try{ r.start(); vStatus('🎙 どうぞ（答え・「もう一回」・「終了」）'); }
-  catch(e){ VOICE.rec=null; vStatus('🎙 マイクを開始できませんでした。「話す」を押してください'); }
+  VOICE.rec=r; VOICE.lastErr='';
+  try{ r.start(); }
+  catch(e){ VOICE.rec=null; vMic('マイク: 開始できません'); vStatus('🎙 マイクを開始できませんでした。「話す」か画面をタップしてください'); }
 }
 function vStopListen(){
   const r=VOICE.rec; VOICE.rec=null;
@@ -1917,6 +1965,7 @@ function vLetters(s, avail){
   return out;
 }
 function vHandle(alts){
+  VOICE.accept=false;   // 同じ発話の重複した結果で二重に回答しない
   const norm=alts.map(vNorm);
   vHeard(alts[0]||'');
   const cmd=norm.map(vCommand).find(Boolean);
@@ -2011,24 +2060,30 @@ function vFinish(){
 /* ---- 開始・終了 ---- */
 async function voiceStart(m){
   if(!('speechSynthesis' in window)){ alert('このブラウザは読み上げに対応していません'); return; }
-  VOICE.on=true; VOICE.askedId=null; VOICE.prompted=false; vHeard('');
-  vBar(true);
-  // iPhone では最初の読み上げをタップの直後に始めないと鳴らないため、ここで短く鳴らしておく
-  try{ const u=new SpeechSynthesisUtterance('音声モードを開始します。'); u.lang='ja-JP'; speechSynthesis.speak(u); }catch(e){}
+  VOICE.on=true; VOICE.askedId=null; VOICE.prompted=false; VOICE.blocked=false; VOICE.errN=0; VOICE.accept=false; vHeard('');
+  vBar(true); vFillVoices();
+  // iPhone は「タップの直後」でないと読み上げもマイクも始められないため、ここで両方を開始しておく
+  try{ const u=new SpeechSynthesisUtterance('音声モードを開始します。'); u.lang='ja-JP'; const v=vVoice(); if(v) u.voice=v; speechSynthesis.speak(u); }catch(e){}
+  if(SR) vMicStart(true); else vStatus('音声入力に未対応のブラウザです。読み上げのみ行います');
   try{ if('wakeLock' in navigator) VOICE.lock=await navigator.wakeLock.request('screen'); }catch(e){}
-  if(!SR) vStatus('音声入力に未対応のブラウザです。読み上げのみ行います');
   startQuiz(m||'auto');
 }
 function voiceStop(say){
   if(!VOICE.on) return;
   vStopListen();
-  if(say){ vStopSpeak(); try{ const u=new SpeechSynthesisUtterance('音声モードを終了します。'); u.lang='ja-JP'; speechSynthesis.speak(u); }catch(e){} }
-  else vStopSpeak();
-  VOICE.on=false; VOICE.phase=''; VOICE.askedId=null;
+  vStopSpeak();
+  if(say){ try{ const u=new SpeechSynthesisUtterance('音声モードを終了します。'); u.lang='ja-JP'; speechSynthesis.speak(u); }catch(e){} }
+  VOICE.on=false; VOICE.phase=''; VOICE.askedId=null; VOICE.accept=false;
   try{ VOICE.lock?.release(); }catch(e){} VOICE.lock=null;
   vBar(false);
 }
-function voiceTapListen(){ vStopSpeak(); vListen(); }
+/* 「話す」: 読み上げを止めてすぐ答えられるようにする。マイクが止まっていればここ(タップ)で開き直す */
+function voiceTapListen(){
+  vStopSpeak(); VOICE.muteUntil=Date.now()+300; VOICE.blocked=false;
+  if(!VOICE.rec) vMicStart(true);
+  vListen();
+}
+function voiceSetVoice(name){ SETTINGS.voiceName=name; lsSet(SETTINGS_KEY, SETTINGS); }
 function voiceRepeat(){
   vStopSpeak();
   if(VOICE.phase==='ask') vAsk(true);
@@ -2063,6 +2118,7 @@ function voiceSetRate(v){ SETTINGS.voiceRate=v; lsSet(SETTINGS_KEY, SETTINGS); }
   finishSession=function(){ _finishSession(); if(VOICE.on) vFinish(); };
   const _nextQ=nextQ;
   nextQ=function(){
+    VOICE.askedId=null;   // 新しく引いた問題は、直前と同じ問題でも読み上げる
     _nextQ();
     // 出題できる問題が無いときは、黙ったまま待たせない
     if(VOICE.on && !document.querySelector('#q-card .qtext') && !document.querySelector('#q-card .resultbanner')){
@@ -2077,10 +2133,14 @@ function voiceSetRate(v){ SETTINGS.voiceRate=v; lsSet(SETTINGS_KEY, SETTINGS); }
   document.addEventListener('visibilitychange', ()=>{
     if(document.visibilityState==='visible' && VOICE.on){
       (async()=>{ try{ if('wakeLock' in navigator && !VOICE.lock) VOICE.lock=await navigator.wakeLock.request('screen'); }catch(e){} })();
-      if(!VOICE.speaking && !VOICE.rec) vListen();
+      if(!VOICE.rec) vMicStart(false);
     }
   });
-  if('speechSynthesis' in window) speechSynthesis.onvoiceschanged=()=>{};
+  // マイクが止まったときは、画面のどこをタップしても開き直せるようにする(iPhone はタップが必要なことがある)
+  document.addEventListener('click', e=>{
+    if(VOICE.on && SR && !VOICE.rec && !e.target.closest('#voicebar')){ VOICE.blocked=false; vMicStart(true); }
+  }, true);
+  if('speechSynthesis' in window) speechSynthesis.onvoiceschanged=()=>vFillVoices();
   const rs=document.getElementById('vb-rate'); if(rs) rs.value=SETTINGS.voiceRate||'1.1';
 }
 
