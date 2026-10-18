@@ -1564,10 +1564,17 @@ let aiChat={ctx:'', history:[], busy:false};
 const AI_PRESETS=['もっと簡単に説明して','例え話で説明して','なぜ他の選択肢は不正解？','実務ではどう使う？'];
 function buildQuestionCtx(q){
   let t=`【問題】\n${q.question}\n`;
-  if(q.options) t+='\n【選択肢】\n'+q.options.map(o=>`${o.letter}. ${o.text}${o.correct?' (正解)':''}`).join('\n');
+  // 選択肢は画面と同じ並び・同じ記号で渡す(元の記号のままだと、画面の「A」とAIの「A」が別の選択肢になる)
+  const opts=displayOpts(q);
+  if(opts.length) t+='\n【選択肢】(記号は学習者の画面の表示どおり)\n'+opts.map(o=>`${o.letter}. ${o.text}${o.correct?' (正解)':''}`).join('\n');
   if(q.type==='matching') t+='\n【正しい組み合わせ】\n'+q.statements.map((s,i)=>`${i+1}. ${s.statement} → ${s.answer}`).join('\n');
   if(q.type==='ordering') t+='\n【正しい順序】\n'+q.order_answer.map((s,i)=>`${i+1}. ${s}`).join('\n');
-  if(q.options?.some(o=>o.explanation)) t+='\n\n【解説】\n'+q.options.map(o=>`${o.letter}. ${stripRef(o.explanation)}`).join('\n');
+  if(opts.some(o=>o.explanation)) t+='\n\n【選択肢ごとの解説】\n'+opts.map(o=>`${o.letter}. ${stripRef(o.explanation)}`).join('\n');
+  const last=(qs_(q.id).attempts||[]).slice(-1)[0];
+  if(opts.length && last?.chosen?.length){
+    const toDisp=Object.fromEntries(opts.map(o=>[o.orig,o.letter]));
+    t+=`\n\n【学習者の回答】${last.chosen.map(l=>toDisp[l]||l).sort().join(', ')}（${last.correct?'正解':'不正解'}）`;
+  }
   if(q.explanation) t+='\n\n【解説】\n'+stripRef(q.explanation);
   return t;
 }
