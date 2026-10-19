@@ -196,10 +196,15 @@ const path = require('path');
     const qid = await page.evaluate(() => cur.id);
     const played1 = await page.evaluate(() => window.__played.slice());
     check('問題を事前音声で鳴らす', played1.some(u => u.endsWith(qid.split('_orig_')[1] + '_q.mp3')), played1.slice(-3).join(' '));
+    // 本物の音声は1問1分ほどある。読み上げ中は回答を受け付けない作りなので、再生を終わったことにしてから答える(テスト用サーバーは途中へのシークに対応しないため ended を送る)
+    const ffwd = async () => { const t0 = Date.now(); while (Date.now() - t0 < 15000 && await page.evaluate(() => VOICE.speaking)) {
+      await page.evaluate(() => { vAudioEl().dispatchEvent(new Event('ended')); }); await wait(200); } };
+    await ffwd();
     const n0 = await page.evaluate(() => window.__spoken.length);
     const l = await page.evaluate(() => dispLetters(cur));
     await page.evaluate(s => window.__say.push(s), sayAns(l));
     await waitPhase('result');
+    await ffwd();
     { const t0 = Date.now(); while (Date.now() - t0 < 8000 && !(await page.evaluate(() => window.__played.some(u => /_a\.mp3$/.test(u))))) await wait(100); }
     const played2 = await page.evaluate(() => window.__played.slice());
     check('結果も事前音声（正解です＋解説）', played2.some(u => /common_ok\.mp3$/.test(u)) && played2.some(u => /_a\.mp3$/.test(u)), played2.slice(-4).join(' ') + ' ' + await page.evaluate(n => JSON.stringify({ph: VOICE.phase, sp: window.__spoken.slice(n), log: sessionLog.slice(-1), heard: VOICE.heard, say: window.__say}), n0));

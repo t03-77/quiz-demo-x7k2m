@@ -1886,13 +1886,16 @@ function vPlay(urls, fallback){
     VOICE.accept=false; VOICE.speaking=true; vStatus('🔊 読み上げ中…（「話す」で割り込めます）');
     const a=vAudioEl(); let i=0, failed=false;
     const done=()=>{ a.onended=a.onerror=null; VOICE.speaking=false; VOICE.muteUntil=Date.now()+400; res(); };
-    const fail=()=>{ if(failed) return; failed=true; a.onended=a.onerror=null; VOICE.speaking=false; Promise.resolve(fallback&&fallback()).then(res); };
+    const fail=e=>{ if(failed) return; failed=true;
+      // 「話す」で止めたとき(pause による AbortError を含む)は、端末の読み上げで最初から読み直さない
+      if(!VOICE.on || VOICE.cut || (e&&e.name==='AbortError')){ VOICE.cut=false; done(); return; }
+      a.onended=a.onerror=null; VOICE.speaking=false; Promise.resolve(fallback&&fallback()).then(res); };
     const next=()=>{
       if(!VOICE.on || VOICE.cut){ VOICE.cut=false; done(); return; }
       if(i>=urls.length){ done(); return; }
       a.src=urls[i++];
       a.playbackRate=parseFloat(SETTINGS.voiceRate||'1.1');
-      a.onended=next; a.onerror=fail;
+      a.onended=next; a.onerror=()=>fail();
       const p=a.play(); if(p && p.catch) p.catch(fail);
     };
     next();
