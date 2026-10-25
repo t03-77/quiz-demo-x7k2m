@@ -30,7 +30,7 @@
   --accent:#3987e5; --accent-soft:#16283d;
 }
 *{box-sizing:border-box; -webkit-tap-highlight-color:transparent}
-body{margin:0; font-family:system-ui,-apple-system,"Segoe UI",sans-serif; background:var(--page); color:var(--ink); font-size:15px; line-height:1.65; padding-bottom:70px}
+body{margin:0; font-family:system-ui,-apple-system,"Segoe UI",sans-serif; background:var(--page); color:var(--ink); font-size:15px; line-height:1.65; padding-bottom:calc(76px + env(safe-area-inset-bottom))}
 header{position:sticky; top:0; z-index:20; background:var(--surface); border-bottom:1px solid var(--grid); display:flex; align-items:center; gap:8px; padding:10px 14px}
 header h1{font-size:16px; margin:0; font-weight:700}
 .examchip{font-size:12px; background:var(--accent-soft); color:var(--accent); border-radius:99px; padding:2px 10px; font-weight:600; cursor:pointer; border:0}
@@ -128,7 +128,7 @@ h2{font-size:15px; margin:4px 0 10px}
 .speedrow{display:flex; gap:6px; align-items:center; font-size:12px; color:var(--muted); margin-top:4px}
 .speedrow .chip{padding:2px 10px; font-size:12px}
 /* iPhone は 16px 未満の入力欄を触ると画面を拡大し、戻らずに左右が切れる。入力欄は 16px にする */
-input[type=text],input[type=password],input[type=number],textarea{width:100%; font-size:16px; padding:9px 10px; border-radius:9px; border:1px solid var(--grid); background:var(--page); color:var(--ink)}
+input[type=text],input[type=password],input[type=number],input[type=date],textarea{width:100%; font-size:16px; padding:9px 10px; border-radius:9px; border:1px solid var(--grid); background:var(--page); color:var(--ink)}
 .formrow{margin-bottom:12px}
 .formrow label{display:block; font-size:12px; color:var(--ink2); margin-bottom:4px; font-weight:600}
 .note{font-size:12px; color:var(--muted)}
@@ -140,6 +140,11 @@ input[type=text],input[type=password],input[type=number],textarea{width:100%; fo
 .lvlhead{font-size:12px; color:var(--muted); font-weight:700; margin:14px 2px 6px}
 .examcard{display:flex; align-items:center; gap:12px; background:var(--surface); border:1px solid var(--grid); border-radius:14px; padding:12px 14px; margin-bottom:8px; cursor:pointer}
 .examcard:active{background:var(--accent-soft)}
+.examcard.cur{border-color:var(--accent); box-shadow:0 0 0 1px var(--accent) inset}
+.weakitem .wq{flex:1; min-width:0}
+.weakitem .wd{display:block; font-size:11px; color:var(--muted)}
+.weakitem .wt{display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden}
+.resume{display:flex; align-items:center; gap:10px; width:100%; text-align:left; background:var(--accent-soft); color:var(--ink); border:1px solid var(--accent); border-radius:14px; padding:10px 14px; margin-bottom:12px; font-size:14px; cursor:pointer}
 .examcard .code{font-weight:800; font-size:14px; color:var(--accent); min-width:50px}
 .examcard .nm{flex:1; min-width:0}
 .examcard .nm .t{font-size:14px; font-weight:600; line-height:1.35}
@@ -197,6 +202,8 @@ input[type=text],input[type=password],input[type=number],textarea{width:100%; fo
 
 <!-- ===== 試験ホーム ===== -->
 <div class="view" id="v-home">
+  <div id="h-resume"></div>
+  <div class="note" id="h-countdown" style="margin:0 2px 10px"></div>
   <div class="tiles">
     <div class="tile"><div class="v" id="h-rate">–</div><div class="l">正答率</div></div>
     <div class="tile"><div class="v" id="h-count">0</div><div class="l">延べ回答</div></div>
@@ -255,6 +262,11 @@ input[type=text],input[type=password],input[type=number],textarea{width:100%; fo
 
 <!-- ===== 統計 ===== -->
 <div class="view" id="v-stats">
+  <div class="card" style="padding:12px 16px">
+    <div class="formrow" style="margin:0"><label for="s-examdate">試験日</label>
+      <input type="date" id="s-examdate" onchange="setExamDate(this.value)"></div>
+    <div class="note" id="s-countdown" style="margin-top:6px">試験日を入れると、残りの日数と1日に解く問題数の目安が出ます。</div>
+  </div>
   <div class="tiles">
     <div class="tile"><div class="v" id="s-rate">–</div><div class="l">正答率</div></div>
     <div class="tile"><div class="v" id="s-count">0</div><div class="l">延べ回答</div></div>
@@ -283,7 +295,7 @@ input[type=text],input[type=password],input[type=number],textarea{width:100%; fo
   </div>
   <div class="card">
     <h2>まちがえた回数が多い問題</h2>
-    <div class="note" style="margin:-4px 0 6px">タップするとその問題をもう一度解けます。</div>
+    <div class="note" style="margin:-4px 0 6px">まだ習得していない問題だけを出します。タップするとその問題をもう一度解けます。</div>
     <div id="weaklist"><div class="emptyhint">まちがえた問題がここに並びます。まず10問解いてみましょう。</div></div>
   </div>
 </div>
@@ -750,7 +762,7 @@ function refreshExamList(){
       const sub = empty
         ? '<span style="color:var(--crit)">問題がまだありません</span>'
         : `${e.id} ・ オリジナル${orig}問${off?` + 公式${off}問`:''}`;
-      h+=`<div class="examcard" ${empty?'style="opacity:.55;cursor:default" title="この試験には問題がありません"':`onclick="selectExam('${e.id}')"`}>
+      h+=`<div class="examcard${e.id===currentExam?' cur':''}" ${empty?'style="opacity:.55;cursor:default" title="この試験には問題がありません"':`onclick="selectExam('${e.id}')"`}>
         <span class="code">${e.short}</span>
         <span class="nm"><span class="t">${esc(e.name)} ${badge}</span><span class="s">${sub}</span></span>
         <span class="prog">${empty?'<div class="q">—</div>':`<div class="p">${Math.round(mastered/total*100)}%</div><div class="q">習得 ${mastered}/${total}</div>`}</span>
@@ -765,14 +777,41 @@ function refreshExamList(){
   document.getElementById('bank-remove').style.display = OFFICIAL.length? 'block':'none';
 }
 function selectExam(ex){
-  currentExam=ex; setFilter='all'; cur=null; loadProgress(ex);
+  // 選択中の試験をもう一度選んだときは、途中の問題や絞り込みを消さずに学習トップへ戻る
+  if(ex===currentExam){ switchView('home'); return; }
+  currentExam=ex; setFilter='all'; cur=null; quizOpen=false; loadProgress(ex);
   document.getElementById('head-exam').textContent = 'AWS '+EXAMS.find(e=>e.id===ex).short+' ▾';
   switchView('home');
+}
+
+/* ---------- 試験日(試験ごとに保存) ---------- */
+function examDate(){ return (SETTINGS.examDates||{})[currentExam] || ''; }
+function setExamDate(v){
+  const d={...(SETTINGS.examDates||{})}; if(v) d[currentExam]=v; else delete d[currentExam];
+  SETTINGS.examDates=d; lsSet(SETTINGS_KEY, SETTINGS); refreshStats();
+}
+function countdownHTML(){
+  const d=examDate(); if(!d) return '';
+  const t=new Date(d+'T00:00:00'), now=new Date(); now.setHours(0,0,0,0);
+  const n=Math.round((t-now)/864e5);
+  const md=`${t.getMonth()+1}/${t.getDate()}`;
+  if(n<0) return `📅 試験日（${md}）を過ぎています。次の試験日を入れ直してください。`;
+  if(n===0) return `📅 <b>今日が試験日</b>です。落ち着いていきましょう。`;
+  // まだ習得していない問題を、試験の前日までに一巡するペース
+  let rest=0; for(const q of examQuestions(currentExam)){ const s=statusOf(qs_(q.id)); if(s!=='習得済み' && s!=='復習期') rest++; }
+  const per=Math.ceil(rest/n);
+  return `📅 試験（${md}）まであと <b>${n}日</b>。未習得 ${rest}問 → 1日 <b>${per}問</b>で一巡します`;
 }
 
 /* ---------- 試験ホーム ---------- */
 function refreshHome(){
   if(!currentExam){ switchView('exams'); return; }
+  // ほかのタブを見に行っても、解いている途中の問題に戻れるようにする
+  document.getElementById('h-resume').innerHTML = (quizOpen && cur && cur.exam===currentExam && mode!=='mock')
+    ? `<button class="resume" onclick="switchView('quiz')"><span style="font-size:18px">↩</span><span style="flex:1">解いている途中の問題に戻る</span><span class="note">${sessionN? (sessionLog.length+1)+'問目' : ''}</span></button>` : '';
+  const cd=countdownHTML();
+  document.getElementById('h-countdown').innerHTML = cd || '';
+  document.getElementById('h-countdown').style.display = cd? '' : 'none';
   const H=liveHistory();
   const n=H.length, ok=H.filter(h=>h.correct).length;
   document.getElementById('h-rate').textContent = n? Math.round(ok/n*100)+'%':'–';
@@ -822,6 +861,7 @@ const START_MODE_HINT={
 function startMode(){ const m=SETTINGS.startMode; return START_MODES.some(([k])=>k===m)? m : 'auto'; }
 /* ---------- 演習 ---------- */
 let cur=null, mode='auto', sel=new Set(), ordSel=[], sessionN=0;
+let quizOpen=false;   // 解いている途中の問題があるか(セット完了で false)
 // 練習1セットの問題数。区切りを作り達成感と復習の機会を与える。
 // 一度に解ける量は人によって違うので、設定で変えられるようにしている
 // (回答は1問ごとに保存されるので、途中でやめても記録は残る)
@@ -860,6 +900,7 @@ function nextQ(){
 }
 /* 1セット終了時のまとめ。次にやることを示して学習を切らさない */
 function finishSession(){
+  quizOpen=false;
   const ok=sessionLog.filter(r=>r.ok).length, n=sessionLog.length;
   const wrong=sessionLog.filter(r=>!r.ok).map(r=>r.id);
   document.getElementById('q-pbar').style.width='100%';
@@ -892,6 +933,7 @@ function displayOpts(q){
 }
 const dispLetters = q => displayOpts(q).filter(o=>o.correct).map(o=>o.letter).sort();
 function renderQ(){
+  quizOpen=true;
   const q=cur, st=qs_(q.id), s=statusOf(st);
   let head;
   if(mode==='mock'){
@@ -1248,6 +1290,8 @@ function zoomDiagram(svg){
 /* ---------- 統計 ---------- */
 function refreshStats(){
   if(!currentExam){ switchView('exams'); return; }
+  document.getElementById('s-examdate').value = examDate();
+  document.getElementById('s-countdown').innerHTML = countdownHTML() || '試験日を入れると、残りの日数と1日に解く問題数の目安が出ます。';
   const all=examQuestions(currentExam);
   const H=liveHistory();
   const n=H.length, ok=H.filter(h=>h.correct).length;
@@ -1292,11 +1336,15 @@ function refreshStats(){
   const recBox=document.getElementById('recent20');
   recBox.innerHTML = rec.length? rec.map(h=>`<span title="${h.id}" style="width:18px;height:18px;border-radius:5px;background:var(${h.correct?'--s1':'--s8'});display:inline-block"></span>`).join(''): '<span class="emptyhint">まだ解いた問題がありません。</span>';
   recBox.nextElementSibling.style.display = rec.length? '' : 'none';   // データが無いのに凡例だけ出さない
-  const wrongs={}; for(const h of H) if(!h.correct) wrongs[h.id]=(wrongs[h.id]||0)+1;
-  const top=Object.entries(wrongs).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  // 2回連続で正解して習得済みになった問題は、まちがえた回数が多くても今は苦手ではないので外す。
+  // 同じ回数なら最近まちがえた問題を上にする
+  const wrongs={}, lastWrong={};
+  H.forEach((h,i)=>{ if(!h.correct){ wrongs[h.id]=(wrongs[h.id]||0)+1; lastWrong[h.id]=i; } });
+  const top=Object.entries(wrongs).filter(([id])=>{ const s=statusOf(qs_(id)); return s!=='習得済み' && s!=='復習期'; })
+    .sort((a,b)=>b[1]-a[1] || lastWrong[b[0]]-lastWrong[a[0]]).slice(0,5);
   document.getElementById('weaklist').innerHTML = top.length? top.map(([id,n2])=>{
     const q=byId(id); if(!q) return '';
-    return `<div class="weakitem" onclick="startSingleReview('${id}')"><span>${esc(q.question.slice(0,38))}…</span><span class="n">${n2}回まちがえた</span></div>`;
+    return `<div class="weakitem" onclick="startSingleReview('${id}')"><span class="wq">${q.domain?`<span class="wd">${esc(q.domain)}</span>`:''}<span class="wt">${esc(q.question)}</span></span><span class="n" style="white-space:nowrap">${n2}回ミス</span></div>`;
   }).join(''): '<div class="emptyhint">まちがえた問題がここに並びます。まず10問解いてみましょう。</div>';
 }
 
@@ -1733,7 +1781,10 @@ function resetProgress(){
 }
 
 /* ---------- ナビ・テーマ ---------- */
-function switchView(v){
+let curView='exams';
+function switchView(v, fromHistory){
+  if(!fromHistory && v!==curView){ try{ history.pushState({v}, '', '#'+v); }catch(e){} }
+  curView=v;
   document.querySelectorAll('.view').forEach(x=>x.classList.toggle('on', x.id==='v-'+v));
   // 演習中も「学習」タブを点灯させ、現在地が分かるようにする
   const navFor = (v==='quiz')? 'home' : v;
@@ -1744,6 +1795,14 @@ function switchView(v){
   if(v==='audio' && document.getElementById('tracklist')) renderTracks();
   window.scrollTo(0,0);
 }
+try{ history.replaceState({v:'exams'}, '', location.pathname+location.search); }catch(e){}
+window.addEventListener('popstate', e=>{
+  let v=(e.state&&e.state.v)||'exams';
+  if(!leaveGuard()){ try{ history.pushState({v:curView}, '', '#'+curView); }catch(_){} return; }
+  if(v==='quiz' && !cur) v='home';
+  if(v!=='exams' && v!=='settings' && !currentExam) v='exams';
+  switchView(v, true);
+});
 /* 模擬試験中に画面を離れると解答が失われるため、必ず確認する */
 function leaveGuard(){
   if(!MOCK || MOCK.rows) return true;                 // 採点済みなら離れてよい
@@ -1755,12 +1814,11 @@ document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
   const v=b.dataset.v;
   if(!leaveGuard()) return;
   if((v==='home'||v==='stats') && !currentExam){ alert('先に試験を選んでください'); switchView('exams'); return; }
-  if(v==='exams' && currentExam){ currentExam=null; cur=null; document.getElementById('head-exam').textContent='試験を選ぶ'; }
   switchView(v);
 });
 document.getElementById('head-exam').onclick=()=>{
   if(!leaveGuard()) return;
-  currentExam=null; cur=null; document.getElementById('head-exam').textContent='試験を選ぶ'; switchView('exams');
+  switchView('exams');
 };
 /* ---------- キーボード操作(PC) ---------- */
 document.addEventListener('keydown', e=>{
@@ -2223,7 +2281,7 @@ function voiceSetRate(v){ SETTINGS.voiceRate=v; lsSet(SETTINGS_KEY, SETTINGS); }
     }
   };
   const _switchView=switchView;
-  switchView=function(v){ if(v!=='quiz') voiceStop(false); _switchView(v); };
+  switchView=function(v, h){ if(v!=='quiz') voiceStop(false); _switchView(v, h); };
   const _startMock=startMock;
   startMock=function(n, m){ voiceStop(false); _startMock(n, m); };
   // 画面を切り替えると読み上げ・聞き取りが止まる端末があるため、戻ってきたら聞き取りを再開する
