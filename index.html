@@ -492,13 +492,14 @@ input[type=text],input[type=password],input[type=number],input[type=date],textar
 <script src="data/voice_audio.js"></script><!-- 音声モード用の事前生成音声の一覧(無ければ端末の読み上げ) -->
 <script>
 const EXAMS = window.EXAMS||[], GLOSSARY = window.GLOSSARY||{}, ORIG = window.ORIG_QUESTIONS||[], TRACKS = window.TRACKS||[];
-const SET_LABELS = {orig:'本番形式', flash:'一問一答', qset:'問題集', exam:'模擬試験', pretest:'Pretest', user:'追加'};
+const SET_LABELS = {orig:'本番形式', flash:'一問一答', qset:'問題集', exam:'模擬試験', pretest:'Pretest', gap:'プリテスト範囲外', user:'追加'};
 const SET_HINT = {
   orig:'本番と同じシナリオ形式の問題です',
   flash:'用語や機能を短く確認する暗記用の問題です',
   qset:'AWS公式の問題集(各20問)',
   exam:'AWS公式の模擬試験',
   pretest:'AWS公式のPretest(模擬試験の新しい版)',
+  gap:'公式Pretestで1問も出ていない出題範囲を練習する自作問題です',
   user:'あなたが追加した問題',
 };
 
@@ -1926,7 +1927,10 @@ function vAudioOk(q){
   if(SETTINGS.voiceEngine==='device' || SETTINGS.shuffle===false || !q || !VAUD.items) return false;
   const k=VAUD.items[q.id]; return !!k && k===vAudioKey(q);
 }
-function vQClip(q, part){ const [ex,num]=q.id.split('_orig_'); return `audio/${ex.toLowerCase()}-orig_${num}_${part}.mp3`; }
+function vQClip(q, part){   // tools/make_voice_audio.py の fname と同じ規則(gap は 9xx 番)
+  const m=q.id.match(/^(.+?)_(orig|gap)_(\d+)$/); if(!m) return '';
+  const num = m[2]==='gap'? '9'+m[3].padStart(2,'0').slice(-2) : m[3];
+  return `audio/${m[1].toLowerCase()}-orig_${num}_${part}.mp3`; }
 function vClip(name){ return `audio/${(VAUD.exams?.[0]||'AIP-C01').toLowerCase()}-orig_common_${name}.mp3`; }
 /* 共通の短い言い回しは、事前音声があればそれを、なければ端末の読み上げを使う */
 function vSay(name, fallbackText){

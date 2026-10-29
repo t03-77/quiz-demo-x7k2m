@@ -98,7 +98,7 @@ def load_generated():
             else:
                 print(f"ERROR: {f.name} {q['id']}: 未知のtype {t}")
                 ok = False
-            if not re.match(r"^[A-Z]{3}-C\d{2}_orig_\d+$", q["id"]):
+            if not re.match(r"^[A-Z]{3}-C\d{2}_(orig|gap)_\d+$", q["id"]):
                 print(f"WARN: {f.name} {q['id']}: ID形式が非標準")
         if ok:
             out.extend(qs)

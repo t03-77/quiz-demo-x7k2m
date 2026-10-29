@@ -225,7 +225,10 @@ def load_orig():
 
 def fname(qid, part):
     # .gitignore で公開を許しているのは audio/*-orig_*.mp3 だけなので、その形にそろえる
-    exam, num = qid.split("_orig_")
+    # 自作の別セット(例: AIP-C01_gap_001)も同じ形にそろえる。gap は番号を 9xx にして本番形式の番号と重ならないようにする
+    exam, kind, num = re.match(r"^(.+?)_(orig|gap)_(\d+)$", qid).groups()
+    if kind == "gap":
+        num = "9" + num.zfill(2)[-2:]
     return f"{exam.lower()}-orig_{num}_{part}.mp3"
 
 
