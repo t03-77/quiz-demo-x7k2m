@@ -129,6 +129,9 @@ h2{font-size:15px; margin:4px 0 10px}
 .speedrow .chip{padding:2px 10px; font-size:12px}
 /* iPhone は 16px 未満の入力欄を触ると画面を拡大し、戻らずに左右が切れる。入力欄は 16px にする */
 input[type=text],input[type=password],input[type=number],input[type=date],textarea{width:100%; font-size:16px; padding:9px 10px; border-radius:9px; border:1px solid var(--grid); background:var(--page); color:var(--ink)}
+/* iPhone の日付欄は padding の分だけ枠から横にはみ出すので、幅に padding と枠線を含める */
+input[type=date]{box-sizing:border-box; max-width:100%; min-width:0; display:block; -webkit-appearance:none; appearance:none; min-height:42px; text-align:left}
+input[type=date]::-webkit-date-and-time-value{text-align:left}
 .formrow{margin-bottom:12px}
 .formrow label{display:block; font-size:12px; color:var(--ink2); margin-bottom:4px; font-weight:600}
 .note{font-size:12px; color:var(--muted)}
@@ -206,7 +209,7 @@ input[type=text],input[type=password],input[type=number],input[type=date],textar
   <div class="note" id="h-countdown" style="margin:0 2px 10px"></div>
   <div class="tiles">
     <div class="tile"><div class="v" id="h-rate">–</div><div class="l">正答率</div></div>
-    <div class="tile"><div class="v" id="h-count">0</div><div class="l">延べ回答</div></div>
+    <div class="tile"><div class="v" id="h-count">0</div><div class="l" id="h-countl">解いた問題</div></div>
     <div class="tile"><div class="v" id="h-master">0</div><div class="l">習得済み</div></div>
   </div>
   <div class="note" id="h-duenote" style="margin:-4px 2px 10px"></div>
@@ -269,7 +272,7 @@ input[type=text],input[type=password],input[type=number],input[type=date],textar
   </div>
   <div class="tiles">
     <div class="tile"><div class="v" id="s-rate">–</div><div class="l">正答率</div></div>
-    <div class="tile"><div class="v" id="s-count">0</div><div class="l">延べ回答</div></div>
+    <div class="tile"><div class="v" id="s-count">0</div><div class="l" id="s-countl">解いた問題</div></div>
     <div class="tile"><div class="v" id="s-streakdays">0</div><div class="l">今日の回答</div></div>
   </div>
   <div class="card">
@@ -785,6 +788,14 @@ function selectExam(ex){
   switchView('home');
 }
 
+/* 「解いた問題」は同じ問題を何度解いても1問と数える(延べの回数は下に小さく出す)。
+   延べ回数だけだと、75問のセットを解き直しただけで78のように数が問題数を超えて分かりにくかった */
+function solvedTile(pre, H){
+  const uniq=new Set(H.map(h=>h.id)).size;
+  document.getElementById(pre+'-count').textContent = uniq;
+  document.getElementById(pre+'-countl').innerHTML = '解いた問題' + (H.length>uniq? `<br><span style="font-size:10px">延べ ${H.length}回</span>` : '');
+}
+
 /* ---------- 試験日(試験ごとに保存) ---------- */
 function examDate(){ return (SETTINGS.examDates||{})[currentExam] || ''; }
 function setExamDate(v){
@@ -816,7 +827,7 @@ function refreshHome(){
   const H=liveHistory();
   const n=H.length, ok=H.filter(h=>h.correct).length;
   document.getElementById('h-rate').textContent = n? Math.round(ok/n*100)+'%':'–';
-  document.getElementById('h-count').textContent = n;
+  solvedTile('h', H);
   const all=examQuestions(currentExam);
   // 復習期は「一度習得した」問題なので習得数に含める(内訳は統計のドーナツで確認できる)
   let mastered=0, due=0;
@@ -1297,7 +1308,7 @@ function refreshStats(){
   const H=liveHistory();
   const n=H.length, ok=H.filter(h=>h.correct).length;
   document.getElementById('s-rate').textContent = n? Math.round(ok/n*100)+'%':'–';
-  document.getElementById('s-count').textContent = n;
+  solvedTile('s', H);
   const today=new Date().toISOString().slice(0,10);
   document.getElementById('s-streakdays').textContent = H.filter(h=>h.date===today).length;
   const c={'未出題':0,'要復習':0,'再確認待ち':0,'習得済み':0,'復習期':0};
