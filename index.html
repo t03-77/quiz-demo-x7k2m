@@ -479,7 +479,7 @@ input[type=date]::-webkit-date-and-time-value{text-align:left}
     <div id="ai-msgs" style="font-size:14px;max-height:40vh;overflow:auto;margin:8px 0"></div>
     <div class="chiprow" id="ai-presets"></div>
     <div style="display:flex;gap:8px;margin-top:6px">
-      <input type="text" id="ai-input" placeholder="質問を入力..." style="flex:1" onkeydown="if(event.key==='Enter')sendAiInput()">
+      <input type="text" id="ai-input" placeholder="質問を入力..." style="flex:1" onkeydown="if(event.key==='Enter' && !event.isComposing && event.keyCode!==229)sendAiInput()">
       <button class="iconbtn" style="padding:8px 14px" onclick="sendAiInput()">送信</button>
     </div>
     <div class="note" style="margin-top:6px">今月の使用額: $<span class="ai-usage-inline">0.00</span></div>
@@ -1163,7 +1163,7 @@ function renderResult(ok, chosen, correctAns, review){
   const gx = stripRef(q.explanation);
   if(gx) h += `<div class="expl"><div class="h">解説</div><div class="body">${linkify(gx)}</div></div>`;
   if(findDiagram(q)) h += `<div class="expl" id="diagram-box"><div class="h">図</div><div class="body" id="diagram-body">読み込み中…</div></div>`;
-  h += `<button class="btn sub" style="margin-top:8px" onclick="openAiChat(buildQuestionCtx(cur), 'この問題について')">🤖 この問題についてAIに質問</button>`;
+  h += `<button class="btn sub" style="margin-top:8px" onclick="openAiChat(buildQuestionCtx(cur), 'この問題について', 'q:'+cur.id)">🤖 この問題についてAIに質問</button>`;
   h += `<button class="btn sub" style="margin-top:6px" onclick="openReport()">🚩 この問題を報告する</button>`;
   if(review==='session') h += `<div class="rowbtns"><button class="btn" onclick="finishSession()">結果一覧へ戻る</button></div>`;
   else if(review) h += `<div class="rowbtns"><button class="btn" onclick="document.getElementById('q-card').innerHTML=MOCK.resultHtml;window.scrollTo(0,0)">結果一覧へ戻る</button></div>`;
@@ -1597,6 +1597,60 @@ async function callAnthropic(model, key, messages, opts){
   if(data.stop_reason==='refusal') throw new Error('AIが回答を差し控えました');
   return (data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('');
 }
+/* チャット用のストリーミング呼び出し。届いた分から onDelta(全文) で画面に出す。
+   応答を待つ間ずっと無通信になると、iPhone の Safari が接続を切って "Load failed" になりやすいため。 */
+async function aiStream(messages, opts, onDelta){
+  const model=chosenModel(), key=activeKey();
+  const openai=isOpenAI(model);
+  let url, head, body;
+  if(openai){
+    const msgs=[]; if(opts.system) msgs.push({role:'system', content:opts.system});
+    messages.forEach(m=>msgs.push({role:m.role, content:m.content}));
+    url='https://api.openai.com/v1/chat/completions';
+    head={'content-type':'application/json', 'authorization':'Bearer '+key};
+    body={model, messages:msgs, max_completion_tokens:opts.maxTokens||4096, stream:true, stream_options:{include_usage:true}};
+  }else{
+    url='https://api.anthropic.com/v1/messages';
+    head={'content-type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'};
+    const ws=(SETTINGS.workspace||'').trim(); if(ws) head['anthropic-workspace-id']=ws;
+    body={model, max_tokens:opts.maxTokens||4096, messages, stream:true};
+    if(opts.system) body.system=opts.system;
+  }
+  const res=await fetch(url,{method:'POST', headers:head, body:JSON.stringify(body)});
+  if(!res.ok){
+    const e=await res.json().catch(()=>({}));
+    const err=new Error(`APIエラー(${res.status}): ${e.error?.message||'不明なエラー'}`);
+    err.status=res.status; throw err;
+  }
+  const rd=res.body.getReader(), dec=new TextDecoder();
+  let buf='', text='', usage={input_tokens:0, output_tokens:0}, refused=false;
+  try{
+    for(;;){
+      const {done, value}=await rd.read(); if(done) break;
+      buf+=dec.decode(value, {stream:true});
+      let i;
+      while((i=buf.indexOf('\n'))>=0){
+        const line=buf.slice(0,i).trim(); buf=buf.slice(i+1);
+        if(!line.startsWith('data:')) continue;
+        const d=line.slice(5).trim(); if(!d || d==='[DONE]') continue;
+        let ev; try{ ev=JSON.parse(d); }catch(_){ continue; }
+        if(openai){
+          const c=ev.choices?.[0];
+          if(c?.delta?.content){ text+=c.delta.content; onDelta(text); }
+          if(c?.finish_reason==='content_filter') refused=true;
+          if(ev.usage){ usage={input_tokens:ev.usage.prompt_tokens, output_tokens:ev.usage.completion_tokens}; }
+        }else{
+          if(ev.type==='content_block_delta' && ev.delta?.type==='text_delta'){ text+=ev.delta.text; onDelta(text); }
+          else if(ev.type==='message_start'){ usage.input_tokens=ev.message?.usage?.input_tokens||0; }
+          else if(ev.type==='message_delta'){ usage.output_tokens=ev.usage?.output_tokens||usage.output_tokens; if(ev.delta?.stop_reason==='refusal') refused=true; }
+          else if(ev.type==='error'){ throw new Error('APIエラー: '+(ev.error?.message||'不明なエラー')); }
+        }
+      }
+    }
+  }finally{ recordAiCost(model, usage); }
+  if(refused && !text) throw new Error('AIが回答を差し控えました');
+  return text;
+}
 /* OpenAI も使えるようにしている。リクエストの形が違うだけで、やることは同じ。
    画像は image_url 形式、構造化出力は response_format で指定する。 */
 async function callOpenAI(model, key, messages, opts){
@@ -1627,7 +1681,22 @@ async function callOpenAI(model, key, messages, opts){
 }
 
 /* ---------- AI質問チャット ---------- */
-let aiChat={ctx:'', history:[], busy:false};
+/* チャットは「何について聞いたか」(問題ごと・用語ごと)に保存する。
+   シートを閉じても、同じ問題で開き直せば続きから見られる。別の問題なら新しいチャットになる。
+   回答の生成中に閉じても裏で続き、開き直すと途中から表示される。 */
+let aiChat={key:'', ctx:'', history:[], busy:false, queue:[]};
+const AI_CHATS={};             // key → チャット
+const AI_CHATS_LS='certquiz.v3.aichats';
+try{ Object.assign(AI_CHATS, JSON.parse(localStorage.getItem(AI_CHATS_LS)||'{}')); }catch(e){}
+for(const k in AI_CHATS){ AI_CHATS[k].busy=false; AI_CHATS[k].queue=[]; AI_CHATS[k].history=(AI_CHATS[k].history||[]).filter(h=>!h.pending); }
+function saveAiChats(){
+  try{
+    // 新しい順に20件だけ残す(端末の保存容量を使いすぎないため)
+    const ks=Object.keys(AI_CHATS).sort((a,b)=>(AI_CHATS[b].t||0)-(AI_CHATS[a].t||0)).slice(0,20);
+    const o={}; for(const k of ks){ const c=AI_CHATS[k]; o[k]={key:k, ctx:c.ctx, title:c.title, t:c.t, history:c.history.filter(h=>!h.pending)}; }
+    localStorage.setItem(AI_CHATS_LS, JSON.stringify(o));
+  }catch(e){}
+}
 const AI_PRESETS=['もっと簡単に説明して','例え話で説明して','なぜ他の選択肢は不正解？','実務ではどう使う？'];
 function buildQuestionCtx(q){
   let t=`【問題】\n${q.question}\n`;
@@ -1645,9 +1714,13 @@ function buildQuestionCtx(q){
   if(q.explanation) t+='\n\n【解説】\n'+stripRef(q.explanation);
   return t;
 }
-function openAiChat(ctx, title){
+function openAiChat(ctx, title, key){
   if(!aiReady()) return;
-  aiChat={ctx, history:[], busy:false};
+  key = key || ('ctx:'+title);
+  const old=AI_CHATS[key];
+  // 同じ問題なら続きから(解き直して自分の回答が変わっていれば、渡す内容だけ新しくする)
+  if(old){ old.ctx=ctx; old.title=title; aiChat=old; }
+  else{ aiChat=AI_CHATS[key]={key, ctx, title, history:[], busy:false, queue:[], t:Date.now()}; }
   document.getElementById('ai-title').textContent='🤖 '+title;
   document.getElementById('ai-presets').innerHTML=AI_PRESETS.map(p=>
     `<button class="chip" onclick="askAi('${p}')">${p}</button>`).join('');
@@ -1659,27 +1732,61 @@ function renderAiChat(){
   box.innerHTML = aiChat.history.map(h=>
     h.role==='user'
       ? `<div style="display:flex;justify-content:flex-end;margin:6px 0"><div style="background:var(--accent-soft);border-radius:10px;padding:7px 11px;max-width:85%;text-align:left;white-space:pre-wrap;overflow-wrap:anywhere">${esc(h.content)}</div></div>`
-      : `<div style="margin:6px 0"><div class="md" style="background:var(--page);border:1px solid var(--grid);border-radius:10px;padding:9px 11px;max-width:92%">${mdToHtml(h.content)}</div></div>`
-  ).join('') + (aiChat.busy?'<div class="note">考え中…</div>':'');
-  box.scrollTop=box.scrollHeight;
+      : h.error
+        ? `<div style="margin:6px 0"><div style="border:1px solid var(--crit);border-radius:10px;padding:9px 11px;max-width:92%">⚠ ${esc(h.content)}${h.retry?`<div style="margin-top:6px"><button class="chip" onclick="retryAi()">もう一度送る</button></div>`:''}</div></div>`
+        : `<div style="margin:6px 0"><div class="md" style="background:var(--page);border:1px solid var(--grid);border-radius:10px;padding:9px 11px;max-width:92%">${h.content? mdToHtml(h.content) : '<span class="note">考え中…</span>'}${h.cut?'<div class="note">（通信が途切れたため、ここまでの回答です）</div>':''}</div></div>`
+  ).join('') + aiChat.queue.map(q=>`<div style="display:flex;justify-content:flex-end;margin:6px 0"><div style="background:var(--accent-soft);opacity:.6;border-radius:10px;padding:7px 11px;max-width:85%;text-align:left;white-space:pre-wrap;overflow-wrap:anywhere">${esc(q)}<div class="note">前の回答のあとに送ります</div></div></div>`).join('');
+  const near = box.scrollHeight - box.scrollTop - box.clientHeight < 80;
+  if(near || !aiChat.busy) box.scrollTop=box.scrollHeight;
 }
+function aiSheetShowing(c){ return document.getElementById('aisheet').classList.contains('on') && aiChat===c; }
 function sendAiInput(){
   const inp=document.getElementById('ai-input');
   const q=inp.value.trim(); if(!q) return;
   inp.value=''; askAi(q);
 }
+/* 回答を待っている間も次の質問を入力・送信できる(順番待ちに入り、前の回答が終わったら自動で送る) */
 async function askAi(q){
-  if(aiChat.busy || !aiReady()) return;
-  aiChat.history.push({role:'user', content:q});
-  aiChat.busy=true; renderAiChat();
-  try{
-    const sys='あなたはAWS認定資格の学習コーチです。以下のコンテキストにもとづき、学習者の質問に日本語で簡潔かつ正確に答えてください。試験対策として重要なポイントを優先してください。\n\n'+aiChat.ctx;
-    const text=await aiCall(aiChat.history.map(h=>({role:h.role, content:h.content})), {system:sys, maxTokens:2048});
-    aiChat.history.push({role:'assistant', content:text});
-  }catch(e){
-    aiChat.history.push({role:'assistant', content:'⚠ '+e.message});
+  if(!aiReady()) return;
+  const c=aiChat;
+  if(c.busy){ c.queue.push(q); renderAiChat(); return; }
+  c.history.push({role:'user', content:q});
+  await runAiTurn(c);
+}
+function retryAi(){
+  const c=aiChat; if(c.busy) return;
+  // 失敗した回答の表示を消して、同じ質問をもう一度送る
+  while(c.history.length && c.history[c.history.length-1].role==='assistant') c.history.pop();
+  runAiTurn(c);
+}
+async function runAiTurn(c){
+  c.busy=true; c.t=Date.now();
+  const sys='あなたはAWS認定資格の学習コーチです。以下のコンテキストにもとづき、学習者の質問に日本語で簡潔かつ正確に答えてください。試験対策として重要なポイントを優先してください。\n\n'+c.ctx;
+  // API に渡す会話(エラー表示や途中で切れた回答は除く)
+  const msgs=c.history.filter(h=>!h.error).map(h=>({role:h.role, content:h.content}));
+  const slot={role:'assistant', content:'', pending:true}; c.history.push(slot);
+  if(aiSheetShowing(c)) renderAiChat();
+  let tries=0;
+  for(;;){
+    try{
+      const text=await aiStream(msgs, {system:sys, maxTokens:2048}, t=>{ slot.content=t; if(aiSheetShowing(c)) renderAiChat(); });
+      slot.content=text; delete slot.pending; break;
+    }catch(e){
+      const network = e instanceof TypeError || /load failed|network|fetch/i.test(e.message||'');
+      // 何も届かないうちの通信エラーは、少し待って自動でやり直す(2回まで)
+      if(network && !slot.content && tries<2){ tries++; await new Promise(r=>setTimeout(r, 1500*tries)); continue; }
+      delete slot.pending;
+      if(slot.content){ slot.cut=true; }            // 途中まで届いていれば、それは残す
+      else{
+        slot.error=true; slot.retry=true;
+        slot.content = network ? '通信が途切れました（電波の弱い場所や、アプリを裏に回したときに起きます）。' : e.message;
+      }
+      break;
+    }
   }
-  aiChat.busy=false; renderAiChat();
+  c.busy=false; saveAiChats();
+  if(c.queue.length){ c.history.push({role:'user', content:c.queue.shift()}); return runAiTurn(c); }
+  if(aiSheetShowing(c)) renderAiChat();
 }
 function askAboutTerm(usePhrase){
   const t=TERM_CTX.term || document.getElementById('sh-term').textContent;
@@ -1691,9 +1798,9 @@ function askAboutTerm(usePhrase){
   if(usePhrase && target!==t) ctx += `（「${target}」というひとまとまりの機能・概念として説明すること。「${t}」単体の一般的な意味の説明にしないこと）\n`;
   ctx += `用語集の「${t}」の説明: ${g.short||'(なし)'}\n`;
   if(TERM_CTX.text) ctx += `\nこの表現が出てきた文章:\n${TERM_CTX.text.slice(0,1500)}`;
-  openAiChat(ctx, target+' について');
+  openAiChat(ctx, target+' について', 'term:'+target+'|'+(TERM_CTX.text||'').slice(0,80));
   // 開いたらすぐ「〜とは？」を聞く（チャットを開いてから質問を打つ手間を省く）
-  if(document.getElementById('aisheet').classList.contains('on')) askAi(`「${target}」とは？ 試験対策の観点で、要点を簡潔に教えて`);
+  if(document.getElementById('aisheet').classList.contains('on') && !aiChat.history.length) askAi(`「${target}」とは？ 試験対策の観点で、要点を簡潔に教えて`);
 }
 
 /* ---------- AI変換(テキスト/画像 → 問題) ---------- */
