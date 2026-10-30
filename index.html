@@ -391,6 +391,12 @@ input[type=date]::-webkit-date-and-time-value{text-align:left}
     <div class="note" style="margin-top:4px">区切りとして結果をまとめる単位です。<b>「問題を解く」では回答が1問ごとに保存される</b>ので、セットの途中でやめても記録は残り、次回は続きから出題されます。<br>ただし<b>模擬試験モードは最後まで解くか時間切れになるまで記録されません</b>（本番と同じ扱いにするためです。中断すると採点もされません）。</div>
   </div>
   <div class="card">
+    <h2>アプリの版</h2>
+    <div class="note" style="margin-bottom:8px">いまの版: <b id="app-ver">–</b><br>新しい版は、アプリを開いたときや戻ってきたときに自動で取り込みます。反映されないときは下のボタンを押してください（学習の記録は消えません）。</div>
+    <button class="btn sub" onclick="forceUpdate()">🔄 最新版に更新</button>
+    <div class="note" id="upd-note"></div>
+  </div>
+  <div class="card">
     <h2>学習データ</h2>
     <div class="note" style="margin-bottom:8px">正答率・習得状態・復習の予定は、<b>この端末のブラウザ内にだけ</b>保存されます。<br>そのため<b>別の端末では引き継がれず、ブラウザのデータを消すと失われます</b>。下のボタンでファイルに書き出しておけば、別の端末や新しいブラウザで読み込んで続きから学習できます。</div>
     <button class="btn sub" onclick="exportProgress()">📥 進捗をファイルに保存</button>
@@ -1805,6 +1811,7 @@ function switchView(v, fromHistory){
   if(v==='exams') refreshExamList();
   if(v==='home') refreshHome();
   if(v==='stats') refreshStats();
+  if(v==='settings') showAppVersion();
   if(v==='audio' && document.getElementById('tracklist')) renderTracks();
   window.scrollTo(0,0);
 }
@@ -2317,10 +2324,47 @@ function voiceSetRate(v){ SETTINGS.voiceRate=v; lsSet(SETTINGS_KEY, SETTINGS); }
 
 /* ---------- オフライン対応(PWA) ---------- */
 // file:// で開いた場合はService Workerが使えないため、その時は何もしない
+/* ホーム画面に追加したアプリ(iPhone)は、開き直しても裏から復帰するだけで新しい版を取りに行かないことがある。
+   - 起動時と、アプリに戻ってきたとき(visibilitychange)に毎回 sw.js を確認する
+   - sw.js 自体を HTTP キャッシュから読まない(updateViaCache:'none')
+   - 新しい版に切り替わったら、問題を解いている途中でなければ自動で読み直す。途中なら上に帯を出す */
+let swReg=null, swReloading=false;
+function swCheck(){ if(swReg) swReg.update().catch(()=>{}); }
+function swBusy(){ return !!MOCK || (curView==='quiz' && quizOpen); }
+function swShowBanner(){
+  if(document.getElementById('updbar')) return;
+  const el=document.createElement('div'); el.id='updbar';
+  el.style.cssText='position:fixed;left:12px;right:12px;bottom:calc(70px + env(safe-area-inset-bottom));z-index:60;background:var(--accent);color:#fff;border-radius:12px;padding:10px 14px;font-size:14px;display:flex;align-items:center;gap:10px;box-shadow:0 4px 14px rgba(0,0,0,.3)';
+  el.innerHTML='<span style="flex:1">新しい版があります</span><button style="background:#fff;color:var(--accent);border:0;border-radius:8px;padding:6px 12px;font-weight:700" onclick="location.reload()">更新する</button>';
+  document.body.appendChild(el);
+}
 if('serviceWorker' in navigator && location.protocol.startsWith('http')){
   window.addEventListener('load', ()=>{
-    navigator.serviceWorker.register('sw.js').catch(()=>{});
+    navigator.serviceWorker.register('sw.js', {updateViaCache:'none'}).then(r=>{ swReg=r; swCheck(); }).catch(()=>{});
   });
+  document.addEventListener('visibilitychange', ()=>{ if(document.visibilityState==='visible') swCheck(); });
+  // 新しい Service Worker が制御を引き継いだ = 新しい版のファイルがキャッシュに入った
+  const hadController = !!navigator.serviceWorker.controller;
+  navigator.serviceWorker.addEventListener('controllerchange', ()=>{
+    if(!hadController || swReloading) return;      // 初回インストールでは読み直さない
+    if(swBusy()){ swShowBanner(); return; }
+    swReloading=true; location.reload();
+  });
+}
+// いまの版(= Service Worker のキャッシュ名の末尾)を設定画面に出す
+function showAppVersion(){
+  const el=document.getElementById('app-ver'); if(!el || !window.caches) return;
+  caches.keys().then(ks=>{ const k=ks.filter(x=>x.startsWith('certquiz-')).sort().pop(); el.textContent=k? k.replace('certquiz-','') : '–'; }).catch(()=>{});
+}
+window.addEventListener('load', ()=>setTimeout(showAppVersion, 1500));
+/* 設定の「最新版に更新」: 確認しても変わらないときは、キャッシュを消して読み直す */
+async function forceUpdate(){
+  const el=document.getElementById('upd-note'); if(el) el.textContent='確認しています…';
+  try{
+    if(swReg) await swReg.update();
+    const keys=await caches.keys(); await Promise.all(keys.map(k=>caches.delete(k)));
+  }catch(e){}
+  location.reload();
 }
 // 通信できない状態を画面に出す(問題演習は続けられることを添える)
 function showOffline(on){
