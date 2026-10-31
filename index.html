@@ -473,7 +473,7 @@ input[type=date]::-webkit-date-and-time-value{text-align:left}
 </div>
 
 <!-- AIチャットシート -->
-<div class="sheet" id="aisheet" onclick="if(event.target===this)this.classList.remove('on')">
+<div class="sheet" id="aisheet" onclick="if(event.target===this){this.classList.remove('on');aiStopSpeak();}">
   <div class="panel" style="max-height:80vh">
     <h3 id="ai-title" style="font-size:15px">🤖 AIに質問</h3>
     <div id="ai-msgs" style="font-size:14px;max-height:40vh;overflow:auto;margin:8px 0"></div>
@@ -1731,17 +1731,53 @@ function openAiChat(ctx, title, key){
 }
 function renderAiChat(){
   const box=document.getElementById('ai-msgs');
-  box.innerHTML = aiChat.history.map(h=>
+  box.innerHTML = aiChat.history.map((h,i)=>
     h.role==='user'
       ? `<div style="display:flex;justify-content:flex-end;margin:6px 0"><div style="background:var(--accent-soft);border-radius:10px;padding:7px 11px;max-width:85%;text-align:left;white-space:pre-wrap;overflow-wrap:anywhere">${esc(h.content)}</div></div>`
       : h.error
         ? `<div style="margin:6px 0"><div style="border:1px solid var(--crit);border-radius:10px;padding:9px 11px;max-width:92%">⚠ ${esc(h.content)}${h.retry?`<div style="margin-top:6px"><button class="chip" onclick="retryAi()">もう一度送る</button></div>`:''}</div></div>`
-        : `<div style="margin:6px 0"><div class="md" style="background:var(--page);border:1px solid var(--grid);border-radius:10px;padding:9px 11px;max-width:92%">${h.content? mdToHtml(h.content) : '<span class="note">考え中…</span>'}${h.cut?'<div class="note">（通信が途切れたため、ここまでの回答です）</div>':''}</div></div>`
+        : `<div style="margin:6px 0"><div class="md" style="background:var(--page);border:1px solid var(--grid);border-radius:10px;padding:9px 11px;max-width:92%">${h.content? mdToHtml(h.content) : '<span class="note">考え中…</span>'}${h.cut?'<div class="note">（通信が途切れたため、ここまでの回答です）</div>':''}${(h.content && !h.pending)? `<div style="margin-top:6px"><button class="chip" style="font-size:12px;padding:3px 10px" onclick="aiSpeak(${i})">${(AI_TTS.c===aiChat && AI_TTS.i===i)? '⏹ 止める' : '🔊 読み上げ'}</button></div>` : ''}</div></div>`
   ).join('') + aiChat.queue.map(q=>`<div style="display:flex;justify-content:flex-end;margin:6px 0"><div style="background:var(--accent-soft);opacity:.6;border-radius:10px;padding:7px 11px;max-width:85%;text-align:left;white-space:pre-wrap;overflow-wrap:anywhere">${esc(q)}<div class="note">前の回答のあとに送ります</div></div></div>`).join('');
   const near = box.scrollHeight - box.scrollTop - box.clientHeight < 80;
   if(near || !aiChat.busy) box.scrollTop=box.scrollHeight;
 }
 function aiSheetShowing(c){ return document.getElementById('aisheet').classList.contains('on') && aiChat===c; }
+/* AI の回答を端末の声で読み上げる(声と速さは音声モードの設定を使う)。もう一度押すと止まる。
+   表・コード・記号は読みにくいので、読む前に普通の文章に直す */
+let AI_TTS={c:null, i:-1};
+function aiSpeakText(md){
+  return String(md||'')
+    .replace(/```[\s\S]*?```/g, '。コードは画面で確認してください。')
+    .replace(/^\s*\|?[\s:|-]+\|\s*$/gm, '')                 // 表の区切り行
+    .replace(/^\s*\|(.*)\|\s*$/gm, (m,r)=>r.split('|').map(c=>c.trim()).filter(Boolean).join('、')+'。')
+    .replace(/<br\s*\/?>/gi, '、')
+    .replace(/^#{1,6}\s*/gm, '').replace(/^\s*[-*+]\s+/gm, '').replace(/^\s*\d+[.)]\s+/gm, '')
+    .replace(/\*\*|__|`/g, '')
+    .replace(/https?:\/\/\S+/g, '')
+    .replace(/[「」『』【】]/g, '').replace(/→/g, '、')
+    .replace(/\n+/g, '。').replace(/。{2,}/g, '。');
+}
+function aiStopSpeak(){ try{ speechSynthesis.cancel(); }catch(e){} const was=AI_TTS.c; AI_TTS={c:null, i:-1}; if(was && aiSheetShowing(was)) renderAiChat(); }
+function aiSpeak(i){
+  if(!('speechSynthesis' in window)){ alert('この端末のブラウザは読み上げに対応していません'); return; }
+  if(AI_TTS.c===aiChat && AI_TTS.i===i){ aiStopSpeak(); return; }
+  try{ speechSynthesis.cancel(); }catch(e){}
+  const h=aiChat.history[i]; if(!h || !h.content) return;
+  const parts=aiSpeakText(h.content).split(/(?<=[。？！?!])/).map(x=>x.trim()).filter(x=>x && x!=='。');
+  if(!parts.length) return;
+  const me={c:aiChat, i}; AI_TTS=me; renderAiChat();
+  const rate=parseFloat(SETTINGS.voiceRate||'1.1'), voice=vVoice();
+  let k=0;
+  const next=()=>{
+    if(AI_TTS!==me) return;                               // 止めた・別の回答を読み始めた
+    if(k>=parts.length){ AI_TTS={c:null, i:-1}; if(aiSheetShowing(me.c)) renderAiChat(); return; }
+    const u=new SpeechSynthesisUtterance(parts[k++]);
+    u.lang='ja-JP'; u.rate=rate; if(voice) u.voice=voice;
+    u.onend=next; u.onerror=next;
+    speechSynthesis.speak(u);
+  };
+  next();
+}
 function sendAiInput(){
   const inp=document.getElementById('ai-input');
   const q=inp.value.trim(); if(!q) return;
