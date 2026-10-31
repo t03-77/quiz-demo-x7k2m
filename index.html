@@ -1625,7 +1625,7 @@ async function aiStream(messages, opts, onDelta){
     err.status=res.status; throw err;
   }
   const rd=res.body.getReader(), dec=new TextDecoder();
-  let buf='', text='', usage={input_tokens:0, output_tokens:0}, refused=false;
+  let buf='', text='', usage={input_tokens:0, output_tokens:0}, refused=false, stopReason='';
   try{
     for(;;){
       const {done, value}=await rd.read(); if(done) break;
@@ -1640,17 +1640,19 @@ async function aiStream(messages, opts, onDelta){
           const c=ev.choices?.[0];
           if(c?.delta?.content){ text+=c.delta.content; onDelta(text); }
           if(c?.finish_reason==='content_filter') refused=true;
+          if(c?.finish_reason) stopReason=c.finish_reason==='length'? 'max_tokens' : c.finish_reason;
           if(ev.usage){ usage={input_tokens:ev.usage.prompt_tokens, output_tokens:ev.usage.completion_tokens}; }
         }else{
           if(ev.type==='content_block_delta' && ev.delta?.type==='text_delta'){ text+=ev.delta.text; onDelta(text); }
           else if(ev.type==='message_start'){ usage.input_tokens=ev.message?.usage?.input_tokens||0; }
-          else if(ev.type==='message_delta'){ usage.output_tokens=ev.usage?.output_tokens||usage.output_tokens; if(ev.delta?.stop_reason==='refusal') refused=true; }
+          else if(ev.type==='message_delta'){ usage.output_tokens=ev.usage?.output_tokens||usage.output_tokens; if(ev.delta?.stop_reason){ stopReason=ev.delta.stop_reason; if(stopReason==='refusal') refused=true; } }
           else if(ev.type==='error'){ throw new Error('APIエラー: '+(ev.error?.message||'不明なエラー')); }
         }
       }
     }
   }finally{ recordAiCost(model, usage); }
   if(refused && !text) throw new Error('AIが回答を差し控えました');
+  aiStream.lastStop=stopReason;     // 'max_tokens' なら長さの上限で途中で切れている
   return text;
 }
 /* OpenAI も使えるようにしている。リクエストの形が違うだけで、やることは同じ。
@@ -1736,7 +1738,7 @@ function renderAiChat(){
       ? `<div style="display:flex;justify-content:flex-end;margin:6px 0"><div style="background:var(--accent-soft);border-radius:10px;padding:7px 11px;max-width:85%;text-align:left;white-space:pre-wrap;overflow-wrap:anywhere">${esc(h.content)}</div></div>`
       : h.error
         ? `<div style="margin:6px 0"><div style="border:1px solid var(--crit);border-radius:10px;padding:9px 11px;max-width:92%">⚠ ${esc(h.content)}${h.retry?`<div style="margin-top:6px"><button class="chip" onclick="retryAi()">もう一度送る</button></div>`:''}</div></div>`
-        : `<div style="margin:6px 0"><div class="md" style="background:var(--page);border:1px solid var(--grid);border-radius:10px;padding:9px 11px;max-width:92%">${h.content? mdToHtml(h.content) : '<span class="note">考え中…</span>'}${h.cut?'<div class="note">（通信が途切れたため、ここまでの回答です）</div>':''}${(h.content && !h.pending)? `<div style="margin-top:6px"><button class="chip" style="font-size:12px;padding:3px 10px" onclick="aiSpeak(${i})">${(AI_TTS.c===aiChat && AI_TTS.i===i)? '⏹ 止める' : '🔊 読み上げ'}</button></div>` : ''}</div></div>`
+        : `<div style="margin:6px 0"><div class="md" style="background:var(--page);border:1px solid var(--grid);border-radius:10px;padding:9px 11px;max-width:92%">${h.content? mdToHtml(h.content) : '<span class="note">考え中…</span>'}${h.cut?'<div class="note">（通信が途切れたため、ここまでの回答です）</div>':''}${(h.long && i===aiChat.history.length-1 && !aiChat.busy)?`<div class="note" style="margin-top:4px">（長くなったため途中で切れました）</div><button class="chip" style="font-size:12px;padding:3px 10px;margin-top:4px" onclick="askAi('続きをお願いします（前の回答の途中から）')">続きを表示</button>`:''}${(h.content && !h.pending)? `<div style="margin-top:6px"><button class="chip" style="font-size:12px;padding:3px 10px" onclick="aiSpeak(${i})">${(AI_TTS.c===aiChat && AI_TTS.i===i)? '⏹ 止める' : '🔊 読み上げ'}</button></div>` : ''}</div></div>`
   ).join('') + aiChat.queue.map(q=>`<div style="display:flex;justify-content:flex-end;margin:6px 0"><div style="background:var(--accent-soft);opacity:.6;border-radius:10px;padding:7px 11px;max-width:85%;text-align:left;white-space:pre-wrap;overflow-wrap:anywhere">${esc(q)}<div class="note">前の回答のあとに送ります</div></div></div>`).join('');
   const near = box.scrollHeight - box.scrollTop - box.clientHeight < 80;
   if(near || !aiChat.busy) box.scrollTop=box.scrollHeight;
@@ -1799,7 +1801,7 @@ function retryAi(){
 }
 async function runAiTurn(c){
   c.busy=true; c.t=Date.now();
-  const sys='あなたはAWS認定資格の学習コーチです。以下のコンテキストにもとづき、学習者の質問に日本語で簡潔かつ正確に答えてください。試験対策として重要なポイントを優先してください。\n\n'+c.ctx;
+  const sys='あなたはAWS認定資格の学習コーチです。以下のコンテキストにもとづき、学習者の質問に日本語で簡潔かつ正確に答えてください。試験対策として重要なポイントを優先し、長くなりすぎないよう要点に絞ってください（目安は画面1〜2スクロール分）。\n\n'+c.ctx;
   // API に渡す会話(エラー表示や途中で切れた回答は除く)
   const msgs=c.history.filter(h=>!h.error).map(h=>({role:h.role, content:h.content}));
   const slot={role:'assistant', content:'', pending:true}; c.history.push(slot);
@@ -1807,8 +1809,10 @@ async function runAiTurn(c){
   let tries=0;
   for(;;){
     try{
-      const text=await aiStream(msgs, {system:sys, maxTokens:2048}, t=>{ slot.content=t; if(aiSheetShowing(c)) renderAiChat(); });
-      slot.content=text; delete slot.pending; break;
+      const text=await aiStream(msgs, {system:sys, maxTokens:4096}, t=>{ slot.content=t; if(aiSheetShowing(c)) renderAiChat(); });
+      slot.content=text; delete slot.pending;
+      if(aiStream.lastStop==='max_tokens') slot.long=true;   // 長すぎて上限で切れた
+      break;
     }catch(e){
       const network = e instanceof TypeError || /load failed|network|fetch/i.test(e.message||'');
       // 何も届かないうちの通信エラーは、少し待って自動でやり直す(2回まで)
