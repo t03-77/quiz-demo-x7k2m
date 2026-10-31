@@ -174,7 +174,7 @@ input[type=date]::-webkit-date-and-time-value{text-align:left}
 .md pre code{background:none; border:0; padding:0}
 .md hr{border:0; border-top:1px solid var(--grid); margin:9px 0}
 .md table{border-collapse:collapse; margin:7px 0; font-size:.92em; display:block; overflow-x:auto}
-.md th,.md td{border:1px solid var(--grid); padding:4px 7px; text-align:left}
+.md th,.md td{border:1px solid var(--grid); padding:4px 7px; text-align:left; min-width:4.5em; vertical-align:top}
 .md th{background:var(--page); font-weight:700}
 </style>
 </head>
@@ -630,6 +630,8 @@ function mdToHtml(src){
   const lines = String(src==null?'':src).replace(/\r\n?/g,'\n').split('\n');
   const out=[]; let para=[], list=null, code=null;
   const inline = s => esc(s)
+    // AI は表のセル内の改行に <br> を書くことがある。エスケープ後の文字列だけを改行に戻す(他のタグは通さない)
+    .replace(/&lt;br\s*\/?&gt;/gi, '<br>')
     .replace(/`([^`]+)`/g, (m,c)=>'<code>'+c+'</code>')
     .replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>')
     .replace(/__([^_]+)__/g, '<b>$1</b>');
