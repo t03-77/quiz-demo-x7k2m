@@ -303,8 +303,15 @@ input[type=date]::-webkit-date-and-time-value{text-align:left}
   </div>
 </div>
 
-<!-- 音声セクションは 2026-10-13 に外した（読み上げ音声が問題の書き直しで合わなくなったため）。
-     プレイヤー要素と再生用のJSは残してあるので、戻すときはこのビュー・下のナビ・script読み込みを復元すればよい -->
+<!-- ===== 聞く（聞き流し用の音声） =====
+     2026-10-13 に一度外し、2026-11-01 に回答記録から作り直した音声（tools/make_listen_audio.py）で戻した -->
+<div class="view" id="v-audio">
+  <div class="card">
+    <h2>聞き流し</h2>
+    <div class="note" id="audio-note" style="margin:-4px 0 8px"></div>
+    <div id="tracklist"></div>
+  </div>
+</div>
 
 <!-- ===== 設定 ===== -->
 <div class="view" id="v-settings">
@@ -489,6 +496,7 @@ input[type=date]::-webkit-date-and-time-value{text-align:left}
 <nav>
   <button data-v="exams" class="on"><span class="ic">📚</span>試験を選ぶ</button>
   <button data-v="home"><span class="ic">✏️</span>学習</button>
+  <button data-v="audio"><span class="ic">🎧</span>聞く</button>
   <button data-v="stats"><span class="ic">📊</span>統計</button>
   <button data-v="settings"><span class="ic">⚙️</span>設定</button>
 </nav>
@@ -498,7 +506,8 @@ input[type=date]::-webkit-date-and-time-value{text-align:left}
 <script src="data/diagrams.js"></script>
 <script src="data/report.js"></script><!-- 不具合報告の送信先(未設定ならコピーのみ) -->
 <script src="data/orig.js"></script>
-<script src="data/voice_audio.js"></script><!-- 音声モード用の事前生成音声の一覧(無ければ端末の読み上げ) -->
+<script src="data/voice_audio.js"></script>
+<script src="data/audio_tracks_listen.js"></script><!-- 聞き流し用の音声の一覧(無ければ「聞く」は空) --><!-- 音声モード用の事前生成音声の一覧(無ければ端末の読み上げ) -->
 <script>
 const EXAMS = window.EXAMS||[], GLOSSARY = window.GLOSSARY||{}, ORIG = window.ORIG_QUESTIONS||[], TRACKS = window.TRACKS||[];
 const SET_LABELS = {orig:'本番形式', flash:'一問一答', qset:'問題集', exam:'模擬試験', pretest:'Pretest', gap:'プリテスト範囲外', weak:'苦手対策', user:'追加'};
@@ -1408,7 +1417,7 @@ function renderTracks(){
   const mine = visibleTracks();
   const examName = currentExam? 'AWS '+(EXAMS.find(e=>e.id===currentExam)||{}).short : '';
   document.getElementById('audio-note').textContent = mine.length
-    ? '通勤中などに聞き流せる読み上げ音声です。再生速度は下のプレイヤーで変えられ、チャプターで問題ごとに頭出しできます。'
+    ? '回答記録をもとに、苦手な分野・間違えた論点から並べた音声です。「聞き流し」は1つの論点を40秒〜1分で説明します（問題文と選択肢は読みません）。「覚える用の要点」は1論点1〜3文の要点だけを続けて読みます。途中で止めても、次に押したとき続きから再生します。'
     : currentExam
       ? `${examName} の読み上げ音声はまだありません。現在はAIP-C01のみ対応しています。`
       : '試験を選ぶと、その試験の読み上げ音声が表示されます。';
@@ -1421,10 +1430,17 @@ function renderTracks(){
     return h;
   }).join('') : '<div class="note">音声データがありません</div>';
 }
+/* 聞いた位置を音声ごとに覚えておき、次に押したとき続きから流す(端末内だけ・失敗しても再生には影響しない) */
+const POS_KEY='certquiz.v3.audiopos';
+function audioPos(){ try{ return JSON.parse(localStorage.getItem(POS_KEY)||'{}'); }catch(e){ return {}; } }
+function saveAudioPos(src, t){ try{ const m=audioPos(); if(t>0) m[src]=Math.floor(t); else delete m[src]; localStorage.setItem(POS_KEY, JSON.stringify(m)); }catch(e){} }
 function playTrack(i){
   const t=visibleTracks()[i]; if(!t) return;
   trackIdx=i; const a=document.getElementById('player');
-  a.src=t.src; a.playbackRate=curSpeed; a.play();
+  a.src=t.src; a.playbackRate=curSpeed;
+  const resume=audioPos()[t.src]||0;
+  if(resume>5) a.addEventListener('loadedmetadata', ()=>{ if(resume < a.duration-10) a.currentTime=resume; }, {once:true});
+  a.play();
   document.getElementById('np').textContent='♪ '+t.title;
   document.getElementById('playerbar').classList.add('on');
   renderTracks();
@@ -1439,7 +1455,10 @@ document.querySelectorAll('[data-sp]').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('[data-sp]').forEach(x=>x.classList.toggle('on',x===b));
   document.getElementById('player').playbackRate=curSpeed;
 });
-document.getElementById('player').addEventListener('ended',()=>{ if(trackIdx<visibleTracks().length-1) playTrack(trackIdx+1); });
+document.getElementById('player').addEventListener('ended',()=>{ const t=visibleTracks()[trackIdx]; if(t) saveAudioPos(t.src,0); if(trackIdx<visibleTracks().length-1) playTrack(trackIdx+1); });
+{ let lastSave=0; document.getElementById('player').addEventListener('timeupdate',e=>{
+    const a=e.target, t=visibleTracks()[trackIdx]; if(!t || Date.now()-lastSave<5000) return;
+    lastSave=Date.now(); saveAudioPos(t.src, a.currentTime); }); }
 
 /* ---------- AI連携 ---------- */
 /* 使用額の概算に使う単価 ($/MTok, [入力,出力])。
