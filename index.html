@@ -1417,7 +1417,7 @@ function renderTracks(){
   const mine = visibleTracks();
   const examName = currentExam? 'AWS '+(EXAMS.find(e=>e.id===currentExam)||{}).short : '';
   document.getElementById('audio-note').textContent = mine.length
-    ? '回答記録をもとに、苦手な分野・間違えた論点から並べた音声です。「聞き流し」は1つの論点を40秒〜1分で説明します（問題文と選択肢は読みません）。「覚える用の要点」は1論点1〜3文の要点だけを続けて読みます。途中で止めても、次に押したとき続きから再生します。'
+    ? '回答記録をもとに、苦手な分野・間違えた論点から並べた音声です。「聞き流し」は 問いかけ → 少し間（答えを思い浮かべる） → 答えとひっかけ → キーワードの繰り返し の順です（問題文と選択肢は読みません）。「覚える用の要点」はキーワードと1〜3文の要点を続けて読みます。途中で止めても、次に押したとき続きから再生します。音声: VOICEVOX:No.7 / VOICEVOX:青山龍星'
     : currentExam
       ? `${examName} の読み上げ音声はまだありません。現在はAIP-C01のみ対応しています。`
       : '試験を選ぶと、その試験の読み上げ音声が表示されます。';
