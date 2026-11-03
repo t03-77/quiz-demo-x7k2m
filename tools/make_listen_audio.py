@@ -21,7 +21,8 @@
 
 途中で止めても、作り終えた論点は audio/_cache_listen/ に残り、次回はそこから続ける。
 文面を直した論点だけが作り直される。
-声は利用者が選んだ No.7(説明)と 青山龍星(問いかけ・キーワード)。英語の読みは tools/voice_yomi.json。
+声はすべて落ち着いた女性の声 No.7(利用者の希望・2026-11-04)。説明はノーマル、問いかけ・キーワードはアナウンスで読み分ける。
+英語の読みは tools/voice_yomi.json。mp3 は 64kbps(32kbps では音質が悪いと指摘があった)。
 """
 import hashlib
 import io
@@ -41,9 +42,10 @@ OUT_DIR = BASE / "audio"
 CACHE = OUT_DIR / "_cache_listen"
 TRACKS_JS = BASE / "data" / "audio_tracks_listen.js"
 LOG = OUT_DIR / "_listen_progress.txt"
-FORMAT_VER = "3"
+FORMAT_VER = "4"
 VOICE_A = ("No.7", "ノーマル")       # 説明
-VOICE_B = ("青山龍星", "ノーマル")   # 問いかけ・キーワード
+VOICE_B = ("No.7", "アナウンス")     # 問いかけ・キーワード(同じ声で調子だけ変える)
+BITRATE = "64k"
 THINK_SEC = 3.0
 N_POINT_FILES = 2
 SHORT_DOM = {
@@ -168,7 +170,11 @@ def write_mp3(sp, frames, out, ff):
     with wave.open(buf, "wb") as w:
         w.setparams(sp.params)
         w.writeframes(frames)
-    mv.to_mp3(buf.getvalue(), out, ff)
+    tmp = out.with_suffix(".tmp.wav")
+    tmp.write_bytes(buf.getvalue())
+    import subprocess
+    subprocess.check_call([ff, "-y", "-loglevel", "error", "-i", str(tmp), "-ac", "1", "-b:a", BITRATE, str(out)])
+    tmp.unlink()
 
 
 def main():
@@ -225,7 +231,7 @@ def main():
                        "src": f"audio/{out.name}", "chapters": chapters})
         log(f"要点 {fi+1}/{N_POINT_FILES} 書き出し ({out.stat().st_size//1024}KB) 経過{(time.time()-t0)/60:.0f}分")
 
-    js = ("// 聞き流し用の音声(VOICEVOX:No.7 / VOICEVOX:青山龍星)。tools/make_listen_audio.py で生成\n"
+    js = ("// 聞き流し用の音声(VOICEVOX:No.7)。tools/make_listen_audio.py で生成\n"
           "// 回答記録をもとに、苦手な分野・間違えた問題の論点から並べている(tools/listen_plan.json)\n"
           "window.AUDIO_TRACKS = (window.AUDIO_TRACKS||[]).concat(" + json.dumps(listen + points, ensure_ascii=False) + ");\n")
     TRACKS_JS.write_text(js, encoding="utf-8")
