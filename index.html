@@ -123,6 +123,7 @@ h2{font-size:15px; margin:4px 0 10px}
 .audiotrack .d{font-size:12px; color:var(--muted)}
 .playerbar{position:fixed; bottom:calc(52px + env(safe-area-inset-bottom)); left:0; right:0; z-index:19; background:var(--surface); border-top:1px solid var(--grid); padding:8px 14px; display:none}
 .playerbar.on{display:block}
+body.withplayer{padding-bottom:calc(190px + env(safe-area-inset-bottom))}   /* バーの下に問題が隠れないように */
 .playerbar .inner{max-width:640px; margin:0 auto}
 .playerbar audio{width:100%; height:34px}
 .speedrow{display:flex; gap:6px; align-items:center; font-size:12px; color:var(--muted); margin-top:4px}
@@ -421,7 +422,7 @@ input[type=date]::-webkit-date-and-time-value{text-align:left}
 <!-- プレイヤー -->
 <div class="playerbar" id="playerbar">
   <div class="inner">
-    <div style="font-size:12px;color:var(--ink2)" id="np">–</div>
+    <div style="display:flex;align-items:center;gap:8px"><div style="font-size:12px;color:var(--ink2);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" id="np">–</div><button class="chip" style="font-size:12px;padding:2px 10px" onclick="closePlayer()">✕ 閉じる</button></div>
     <audio id="player" controls></audio>
     <div class="speedrow">速度
       <button class="chip" data-sp="1">1.0×</button>
@@ -1442,8 +1443,22 @@ function playTrack(i){
   if(resume>5) a.addEventListener('loadedmetadata', ()=>{ if(resume < a.duration-10) a.currentTime=resume; }, {once:true});
   a.play();
   document.getElementById('np').textContent='♪ '+t.title;
-  document.getElementById('playerbar').classList.add('on');
+  updatePlayerBar();
   renderTracks();
+}
+/* プレイヤーのバーは「聞く」タブでは常に、ほかのタブでは再生中だけ出す。
+   止めたまま問題を解いていると、バーが画面の下を塞いだまま消えなかったため（利用者の指摘） */
+function updatePlayerBar(){
+  const a=document.getElementById('player');
+  const show = trackIdx>=0 && (curView==='audio' || !a.paused);
+  document.getElementById('playerbar').classList.toggle('on', show);
+  document.body.classList.toggle('withplayer', show);
+}
+function closePlayer(){
+  const a=document.getElementById('player'), t=visibleTracks()[trackIdx];
+  if(t) saveAudioPos(t.src, a.currentTime);
+  a.pause(); trackIdx=-1;
+  updatePlayerBar(); if(document.getElementById('tracklist')) renderTracks();
 }
 function seekChapter(s){
   const a=document.getElementById('player');
@@ -1456,6 +1471,7 @@ document.querySelectorAll('[data-sp]').forEach(b=>b.onclick=()=>{
   document.getElementById('player').playbackRate=curSpeed;
 });
 document.getElementById('player').addEventListener('ended',()=>{ const t=visibleTracks()[trackIdx]; if(t) saveAudioPos(t.src,0); if(trackIdx<visibleTracks().length-1) playTrack(trackIdx+1); });
+['play','pause','ended'].forEach(ev=>document.getElementById('player').addEventListener(ev, ()=>updatePlayerBar()));
 { let lastSave=0; document.getElementById('player').addEventListener('timeupdate',e=>{
     const a=e.target, t=visibleTracks()[trackIdx]; if(!t || Date.now()-lastSave<5000) return;
     lastSave=Date.now(); saveAudioPos(t.src, a.currentTime); }); }
@@ -1996,6 +2012,7 @@ function switchView(v, fromHistory){
   if(v==='stats') refreshStats();
   if(v==='settings') showAppVersion();
   if(v==='audio' && document.getElementById('tracklist')) renderTracks();
+  if(typeof updatePlayerBar==='function') updatePlayerBar();
   window.scrollTo(0,0);
 }
 try{ history.replaceState({v:'exams'}, '', location.pathname+location.search); }catch(e){}
