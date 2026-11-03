@@ -1747,20 +1747,27 @@ function openAiChat(ctx, title, key){
   document.getElementById('ai-title').textContent='🤖 '+title;
   document.getElementById('ai-presets').innerHTML=AI_PRESETS.map(p=>
     `<button class="chip" onclick="askAi('${p}')">${p}</button>`).join('');
-  renderAiChat(); updateUsageUI();
   document.getElementById('aisheet').classList.add('on');
+  // 開いたときは最後の質問の位置から（その下に回答が続く）
+  for(let i=aiChat.history.length-1;i>=0;i--) if(aiChat.history[i].role==='user'){ aiChat.jumpTo=i; break; }
+  renderAiChat(); updateUsageUI();
 }
 function renderAiChat(){
   const box=document.getElementById('ai-msgs');
+  const prev=box.scrollTop;   // 読んでいる位置。描き直しても動かさない
   box.innerHTML = aiChat.history.map((h,i)=>
     h.role==='user'
-      ? `<div style="display:flex;justify-content:flex-end;margin:6px 0"><div style="background:var(--accent-soft);border-radius:10px;padding:7px 11px;max-width:85%;text-align:left;white-space:pre-wrap;overflow-wrap:anywhere">${esc(h.content)}</div></div>`
+      ? `<div data-i="${i}" style="display:flex;justify-content:flex-end;margin:6px 0"><div style="background:var(--accent-soft);border-radius:10px;padding:7px 11px;max-width:85%;text-align:left;white-space:pre-wrap;overflow-wrap:anywhere">${esc(h.content)}</div></div>`
       : h.error
         ? `<div style="margin:6px 0"><div style="border:1px solid var(--crit);border-radius:10px;padding:9px 11px;max-width:92%">⚠ ${esc(h.content)}${h.retry?`<div style="margin-top:6px"><button class="chip" onclick="retryAi()">もう一度送る</button></div>`:''}</div></div>`
         : `<div style="margin:6px 0"><div class="md" style="background:var(--page);border:1px solid var(--grid);border-radius:10px;padding:9px 11px;max-width:92%">${h.content? mdToHtml(h.content) : '<span class="note">考え中…</span>'}${h.cut?'<div class="note">（通信が途切れたため、ここまでの回答です）</div>':''}${(h.long && i===aiChat.history.length-1 && !aiChat.busy)?`<div class="note" style="margin-top:4px">（長くなったため途中で切れました）</div><button class="chip" style="font-size:12px;padding:3px 10px;margin-top:4px" onclick="askAi('続きをお願いします（前の回答の途中から）')">続きを表示</button>`:''}${(h.content && !h.pending)? `<div style="margin-top:6px"><button class="chip" style="font-size:12px;padding:3px 10px" onclick="aiSpeak(${i})">${(AI_TTS.c===aiChat && AI_TTS.i===i)? '⏹ 止める' : '🔊 読み上げ'}</button></div>` : ''}</div></div>`
   ).join('') + aiChat.queue.map(q=>`<div style="display:flex;justify-content:flex-end;margin:6px 0"><div style="background:var(--accent-soft);opacity:.6;border-radius:10px;padding:7px 11px;max-width:85%;text-align:left;white-space:pre-wrap;overflow-wrap:anywhere">${esc(q)}<div class="note">前の回答のあとに送ります</div></div></div>`).join('');
-  const near = box.scrollHeight - box.scrollTop - box.clientHeight < 80;
-  if(near || !aiChat.busy) box.scrollTop=box.scrollHeight;
+  /* 回答が届くたびに一番下へ飛ばすと、前の回答を読んでいる途中で引き戻されてしまう（利用者の指摘）。
+     位置は基本そのまま。動かすのは「質問を送った瞬間」と「開いたとき」だけで、
+     そのときも一番下ではなく、その質問の吹き出しを上端に出す（回答を頭から読める） */
+  const el = aiChat.jumpTo!=null && box.querySelector(`[data-i="${aiChat.jumpTo}"]`);
+  delete aiChat.jumpTo;
+  box.scrollTop = el ? el.getBoundingClientRect().top - box.getBoundingClientRect().top + box.scrollTop - 4 : prev;
 }
 function aiSheetShowing(c){ return document.getElementById('aisheet').classList.contains('on') && aiChat===c; }
 /* AI の回答を端末の声で読み上げる(声と速さは音声モードの設定を使う)。もう一度押すと止まる。
@@ -1768,7 +1775,14 @@ function aiSheetShowing(c){ return document.getElementById('aisheet').classList.
 let AI_TTS={c:null, i:-1};
 function aiSpeakText(md){
   return String(md||'')
-    .replace(/```[\s\S]*?```/g, '。コードは画面で確認してください。')
+    // コード枠: AIは箇条書きや手順もコード枠で書くことがある。日本語の文が中心なら中身を読み、
+    // 記号だらけの本物のコード（JSON・プログラム）だけ読み飛ばす
+    .replace(/```[^\n]*\n?([\s\S]*?)```/g, (m,body)=>{
+      const t=body.trim(); if(!t) return '。';
+      const jp=(t.match(/[\u3040-\u30ff\u4e00-\u9fff]/g)||[]).length;
+      const sym=(t.match(/[{}\[\];=<>$\\]/g)||[]).length;
+      return (jp>=4 && sym<=jp/4) ? '。'+t.split('\n').map(x=>x.trim()).filter(Boolean).join('。')+'。' : '。コードは画面で確認してください。';
+    })
     .replace(/^\s*\|?[\s:|-]+\|\s*$/gm, '')                 // 表の区切り行
     .replace(/^\s*\|(.*)\|\s*$/gm, (m,r)=>r.split('|').map(c=>c.trim()).filter(Boolean).join('、')+'。')
     .replace(/<br\s*\/?>/gi, '、')
@@ -1808,8 +1822,9 @@ function sendAiInput(){
 async function askAi(q){
   if(!aiReady()) return;
   const c=aiChat;
-  if(c.busy){ c.queue.push(q); renderAiChat(); return; }
+  if(c.busy){ c.queue.push(q); renderAiChat(); return; }   // 回答待ちの間は位置を動かさない
   c.history.push({role:'user', content:q});
+  c.jumpTo=c.history.length-1;      // 送った質問を上端に出し、回答がその下に流れてくるようにする
   await runAiTurn(c);
 }
 function retryAi(){
