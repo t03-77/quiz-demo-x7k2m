@@ -38,7 +38,7 @@ STALE = {
     "Cloud Directory": ("新規受付終了", []),
     "CodeCommit": ("新規顧客の受付を終了", []),
     "Pinpoint": ("提供終了予定", []),
-    "Forecast": ("新規受付終了", ["Forecast Horizon"]),
+    "Forecast": ("新規受付終了", ["Forecast Horizon", "ForecastOnly", "ForecastAndScale", "Forecast only", "Forecast and scale"]),  # 後ろ4つは Auto Scaling の予測スケーリングのモード名
     "Snowcone": ("提供終了", []),
     "Snowball Edge Compute Optimized": ("提供終了", []),
 }

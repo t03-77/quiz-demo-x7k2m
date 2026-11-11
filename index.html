@@ -539,6 +539,9 @@ const mem = {};
 function lsGet(k){ try{ return LS_OK? JSON.parse(localStorage.getItem(k)||'null') : (mem[k]||null); }catch(e){ return null; } }
 function lsSet(k,v){ mem[k]=v; if(LS_OK) try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
 function lsDel(k){ delete mem[k]; if(LS_OK) localStorage.removeItem(k); }
+/* 日付は端末の時刻(日本なら日本時間)で数える。toISOString() は UTC なので、朝9時までの回答が前日の分として数えられていた */
+function localDate(d){ d=d||new Date(); const p=n=>String(n).padStart(2,'0'); return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}`; }
+function localStamp(){ const d=new Date(), p=n=>String(n).padStart(2,'0'); return `${localDate(d)}T${p(d.getHours())}:${p(d.getMinutes())}`; }
 const progKey = ex => 'certquiz.v3.'+ex;
 const SETTINGS_KEY = 'certquiz.v3.settings';
 let SETTINGS = lsGet(SETTINGS_KEY) || {};
@@ -607,7 +610,9 @@ function pickNext(mode){
   const ids = pool().map(q=>q.id);
   if(!ids.length) return null;
   if(mode==='random'){ const c=ids.filter(i=>i!==last); return c[Math.floor(Math.random()*c.length)] ?? ids[0]; }
-  if(mode==='seq'){ const done=new Set(P.history.map(h=>h.id)); return ids.find(i=>!done.has(i)) || ids[0]; }
+  if(mode==='seq'){ const done=new Set(P.history.map(h=>h.id)); const nx=ids.find(i=>!done.has(i)); if(nx) return nx;
+    // 一巡したあとは、直前に解いた問題の次へ進む(以前は先頭の1問だけが出続けていた)
+    return ids[(ids.indexOf(last)+1)%ids.length]; }
   const buckets = {'要復習':[], '復習期':[], '未出題':[], '再確認待ち':[]};
   for(const id of ids){ const st=qs_(id), s=statusOf(st);
     if(!(s in buckets)) continue;
@@ -784,7 +789,7 @@ function refreshExamList(){
       const empty = total===0;
       const sub = empty
         ? '<span style="color:var(--crit)">問題がまだありません</span>'
-        : `${e.id} ・ オリジナル${orig}問${off?` + 公式${off}問`:''}`;
+        : `${e.ver||e.id}${e.verNote?`（${e.verNote}）`:''} ・ オリジナル${orig}問${off?` + 公式${off}問`:''}`;
       h+=`<div class="examcard${e.id===currentExam?' cur':''}" ${empty?'style="opacity:.55;cursor:default" title="この試験には問題がありません"':`onclick="selectExam('${e.id}')"`}>
         <span class="code">${e.short}</span>
         <span class="nm"><span class="t">${esc(e.name)} ${badge}</span><span class="s">${sub}</span></span>
@@ -1035,10 +1040,10 @@ function grade(){
   const correctAns = correctOf(q);
   const ok = JSON.stringify(chosen)===JSON.stringify(correctAns);
   const st=qs_(q.id);
-  st.attempts.push({date:new Date().toISOString().slice(0,16), chosen, correct:ok});
+  st.attempts.push({date:localStamp(), chosen, correct:ok});
   st.streak = ok? st.streak+1 : 0; st.lastIndex = P.history.length;
   applySrs(st, ok);
-  P.questions[q.id]=st; P.history.push({id:q.id, date:new Date().toISOString().slice(0,10), correct:ok}); saveP();
+  P.questions[q.id]=st; P.history.push({id:q.id, date:localDate(), correct:ok}); saveP();
   sessionLog.push({id:q.id, ok, chosen});
   renderResult(ok, chosen, correctAns);
 }
@@ -1092,10 +1097,10 @@ function finishMock(timeup){
     const ok = answered && JSON.stringify(a)===JSON.stringify(correctOf(q));
     if(answered){
       const st=qs_(q.id);
-      st.attempts.push({date:new Date().toISOString().slice(0,16), chosen:a, correct:ok});
+      st.attempts.push({date:localStamp(), chosen:a, correct:ok});
       st.streak = ok? st.streak+1 : 0; st.lastIndex = P.history.length;
       applySrs(st, ok);
-      P.questions[q.id]=st; P.history.push({id:q.id, date:new Date().toISOString().slice(0,10), correct:ok});
+      P.questions[q.id]=st; P.history.push({id:q.id, date:localDate(), correct:ok});
     }
     rows.push({id, ok, answered});
   }
@@ -1107,7 +1112,7 @@ function finishMock(timeup){
   const pass=rate>=need;
   let h = `<div class="resultbanner ${pass?'ok':'ng'}">${pass?'🎉 合格ライン到達':'📚 もう少し!'}<span style="font-weight:400;font-size:13px;margin-left:auto">${okN}/${total}問正解 (${rate}%)${timeup?' ・時間切れ':''}</span></div>`;
   const short=Math.max(0, Math.ceil(total*need/100)-okN);
-  h += `<div class="note" style="margin-bottom:10px">${e.id}の合格ラインはスコア${e.pass}/1000。本番は問題ごとの重み付けがあるため単純比較はできませんが、正答率${need}%前後が目安です。${short? `この結果ではあと${short}問足りません。` : ''}</div>`;
+  h += `<div class="note" style="margin-bottom:10px">${e.ver||e.id}の合格ラインはスコア${e.pass}/1000。本番は問題ごとの重み付けがあるため単純比較はできませんが、正答率${need}%前後が目安です。${short? `この結果ではあと${short}問足りません。` : ''}</div>`;
   // 分野別の内訳。どこを勉強し直すべきかが一目で分かる
   const dom={};
   for(const r of rows){ const q=byId(r.id); if(!q?.domain) continue;
@@ -1328,7 +1333,7 @@ function refreshStats(){
   const n=H.length, ok=H.filter(h=>h.correct).length;
   document.getElementById('s-rate').textContent = n? Math.round(ok/n*100)+'%':'–';
   solvedTile('s', H);
-  const today=new Date().toISOString().slice(0,10);
+  const today=localDate();
   document.getElementById('s-streakdays').textContent = H.filter(h=>h.date===today).length;
   const c={'未出題':0,'要復習':0,'再確認待ち':0,'習得済み':0,'復習期':0};
   for(const q of all) c[statusOf(qs_(q.id))]++;
@@ -1482,7 +1487,7 @@ document.getElementById('player').addEventListener('ended',()=>{ const t=visible
    予算上限を超えないための目安であり、請求額そのものではない。 */
 const AI_PRICES = {'claude-haiku-4-5':[1,5], 'claude-sonnet-5':[3,15], 'claude-opus-5':[5,25]};
 const AI_PRICE_DEFAULT = [5,25];
-const monthKey = ()=>new Date().toISOString().slice(0,7);
+const monthKey = ()=>localDate().slice(0,7);
 function aiUsage(){ return (SETTINGS.aiUsage||{})[monthKey()]||0; }
 function recordAiCost(model, usage){
   const [ri,ro]=AI_PRICES[model]||AI_PRICE_DEFAULT;
@@ -1520,7 +1525,7 @@ async function checkConnection(){
     }else if(/401|authentication|invalid.*key/i.test(m)){
       msg.innerHTML='<b>キーが正しくないようです。</b>コピー漏れがないか確認してください。';
     }else if(/model/i.test(m) && /not.*found|does not exist/i.test(m)){
-      msg.innerHTML='<b>そのモデルは使えないようです。</b>「最新のモデル一覧を取得」を押して、候補から選び直してください。';
+      msg.innerHTML='<b>そのモデルは使えないようです。</b>「使えるモデルの一覧を取得」を押して、候補から選び直してください。';
     }else{
       msg.innerHTML='使えませんでした: '+esc(m);
     }
@@ -1932,7 +1937,7 @@ async function convertQuestions(){
       cvPending.map((q,i)=>`<div class="setrow"><span>${i+1}. ${esc(q.question.slice(0,40))}…</span><span class="note">${q.options.length}択</span></div>`).join('')+
       `<div class="rowbtns"><button class="btn sub" onclick="cvPending=null;document.getElementById('cv-preview').innerHTML=''">破棄</button><button class="btn" onclick="saveConverted()">保存する</button></div>`;
   }catch(e){ alert('変換に失敗しました: '+e.message); }
-  btn.disabled=false; btn.textContent='🤖 AIで問題形式に変換(要APIキー)';
+  btn.disabled=false; btn.textContent='🤖 AIで問題に変換する';
 }
 async function saveConverted(){
   if(!cvPending) return;
@@ -1977,18 +1982,21 @@ function saveSettings(){
   if(hs) hs.value=String(sessionLen());
 }
 function exportProgress(){
-  const dump={exams:{}};
+  const dump={exams:{}, examDates:SETTINGS.examDates||{}, saved:localStamp()};
   for(const e of EXAMS){ const p=lsGet(progKey(e.id)); if(p) dump.exams[e.id]=p; }
   const b=new Blob([JSON.stringify(dump,null,1)],{type:'application/json'});
-  const a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download='学習進捗.json'; a.click();
+  const a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download=`学習進捗_${localDate()}.json`; a.click();
 }
 function importProgress(inp){ const f=inp.files[0]; if(!f) return; inp.value='';
   f.text().then(t=>{ try{
     const d=JSON.parse(t);
-    if(d.exams){ for(const ex in d.exams) lsSet(progKey(ex), d.exams[ex]); }
-    else throw new Error('形式が違います');
+    if(!d.exams) throw new Error('形式が違います');
+    const n=Object.keys(d.exams).length;
+    if(!confirm(`${n}試験ぶんの記録を読み込みます${d.saved? '（'+d.saved.replace('T',' ')+' に保存）':''}。\nこの端末のいまの記録は上書きされます。よろしいですか?`)) return;
+    for(const ex in d.exams) lsSet(progKey(ex), d.exams[ex]);
+    if(d.examDates){ SETTINGS.examDates={...(SETTINGS.examDates||{}), ...d.examDates}; lsSet(SETTINGS_KEY, SETTINGS); }
     if(currentExam) loadProgress(currentExam);
-    alert('インポートしました'); refreshExamList(); if(currentExam) refreshHome();
+    alert('復元しました'); refreshExamList(); if(currentExam) refreshHome();
   }catch(e){alert('読み込みに失敗しました')} });
 }
 function resetProgress(){
@@ -2047,13 +2055,14 @@ document.addEventListener('keydown', e=>{
   if(document.querySelector('.sheet.on')) return;                 // シート表示中は無効
   if(!document.getElementById('v-quiz').classList.contains('on')) return;
   const card=document.getElementById('q-card');
-  if(/^[a-fA-F]$/.test(e.key)){
+  if(e.ctrlKey||e.metaKey||e.altKey) return;                      // ブラウザのショートカット(Ctrl+C など)を邪魔しない
+  if(/^[a-fA-F1-6]$/.test(e.key)){
     const opts=card.querySelectorAll('.opt');
-    const i='abcdef'.indexOf(e.key.toLowerCase());
+    const i=/[1-6]/.test(e.key)? Number(e.key)-1 : 'abcdef'.indexOf(e.key.toLowerCase());
     if(opts[i]){ e.preventDefault(); opts[i].click(); }
   } else if(e.key==='Enter'){
     const btn=[...card.querySelectorAll('button')].find(b=>
-      !b.disabled && /回答する|次の問題/.test(b.textContent));
+      !b.disabled && /回答する|次の問題|結果を見る|結果一覧へ戻る|もう1セット/.test(b.textContent));
     if(btn){ e.preventDefault(); btn.click(); }
   }
 });
@@ -2078,7 +2087,7 @@ document.getElementById('set-seslen').value = String(sessionLen());
 document.getElementById('cnt-bundled').textContent = (ORIG.length||0).toLocaleString();
 // デモモードは廃止した(2026-08-31)。ONのまま残った旧設定が読み込み時の挙動に影響しないよう消す
 if('demo' in SETTINGS){ delete SETTINGS.demo; lsSet(SETTINGS_KEY, SETTINGS); }
-document.getElementById('cv-exam').innerHTML=EXAMS.filter(e=>!e.retired).map(e=>`<option value="${e.id}">AWS ${e.short} (${e.id})</option>`).join('');
+document.getElementById('cv-exam').innerHTML=EXAMS.filter(e=>!e.retired).map(e=>`<option value="${e.id}">AWS ${e.short} (${e.ver||e.id})</option>`).join('');
 updateUsageUI();
 switchView('exams');
 initBank();

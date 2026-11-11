@@ -149,14 +149,18 @@ def c6_2_three_step(off, mine):
 
 def c1_6_length(off, mine):
     """C1-6 問題文の長さが資格の型に合っているか"""
-    bad = 0
+    bad = tot = 0
     for ex in sorted({q["exam"] for q in mine}):
         o = sorted(len(q.get("question", "")) for q in off if q.get("exam") == ex)
         m = [len(q["question"]) for q in mine if q["exam"] == ex]
         if not o or not m:
             continue
         bad += sum(1 for x in m if x < o[int(len(o) * .1)])
-    return bad == 0, "公式の下位10%%を下回る問題: %d問" % bad
+        tot += len(m)
+    # 2026-11-11: 以前は「1問でも下回れば要確認」だったが、公式自身が定義上10%は下回る。
+    # 0問を目標にした結果、自作が公式より長くなっていた（中央値が公式の上位25%相当）。
+    # 公式と同じ割合(10%)を大きく超えたときだけ要確認にする。
+    return bad * 100 <= tot * 15, "公式の下位10%%を下回る問題: %d問 (%.1f%% / 公式は定義上10%%)" % (bad, bad * 100 / max(1, tot))
 
 
 # ---- チェックリスト全項目 ---------------------------------------

@@ -12,7 +12,7 @@
 |---|---|
 | `index.html` | アプリ本体 |
 | `data/exams.js` | 試験マスタ(ここに追記すれば試験が増える) |
-| `data/orig.js` | 同梱オリジナル問題(自作321問)。`tools/build_orig_data.py` で生成 |
+| `data/orig.js` | 同梱オリジナル問題(自作2,078問・2026-11-11時点)。`tools/build_orig_data.py` で生成 |
 | `data/glossary.js` | 用語辞書 |
 | `data/demo_audio.js` | デモ音声(base64) |
 | `docs/仕様書.md` | 機能仕様 |
