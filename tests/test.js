@@ -20,10 +20,14 @@ const { waitQuestion, answer } = require('./answer');
   const url = 'file:///' + path.resolve('C:/Users/na7sh/Works/95_work/aws/01_projects/cert_quiz_app/index.html').replace(/\\/g, '/');
   await page.goto(url);
 
-  // 1. 試験選択画面: 12資格
+  // 1. 試験選択画面: 廃止済み・廃止予定で問題の無い試験を除いた全資格
   await page.waitForSelector('.examcard');
   const nCards = await page.locator('.examcard').count();
-  console.log('試験カード数:', nCards, nCards === 12 ? 'OK' : 'NG');
+  const nExpect = await page.evaluate(() => EXAMS.filter(e => {
+    const total = ORIG.filter(q => q.exam === e.id).length + OFFICIAL.filter(q => q.exam === e.id && !q.needs_review).length;
+    return !(e.retired && (new Date(e.retired) <= new Date() || total === 0));
+  }).length);
+  console.log('試験カード数:', nCards, nCards === nExpect ? 'OK' : 'NG（期待 ' + nExpect + '）');
   console.log('バンク状態:', (await page.locator('#bank-status').innerText()).trim());
 
   // 2. SAAを選ぶ → ホーム

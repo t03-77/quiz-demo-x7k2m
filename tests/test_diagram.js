@@ -13,15 +13,16 @@ async function openWithDiagram(page) {
   await page.waitForSelector('#q-card .opt, #q-card select');
   // 図が引き当たる問題を探して開く
   const info = await page.evaluate(() => {
-    const q = examQuestions(currentExam).find(x => findDiagram(x));
+    const q = examQuestions(currentExam).find(x => (x.type || 'choice') === 'choice' && findDiagram(x));
     if (!q) return null;
     startSingleReview(q.id);
     return { id: q.id, title: findDiagram(q).title };
   });
   if (!info) throw new Error('図が引き当たる問題が1問もない');
   await page.waitForSelector('#q-card .opt');
-  const i = await page.evaluate(() => displayOpts(cur).findIndex(o => o.correct));
-  await page.locator('#q-card .opt').nth(Math.max(0, i)).click();
+  // 複数選択の問題でも回答できるよう、正解の肢をすべて選ぶ
+  const idx = await page.evaluate(() => displayOpts(cur).map((o, k) => (o.correct ? k : -1)).filter(k => k >= 0));
+  for (const k of (idx.length ? idx : [0])) await page.locator('#q-card .opt').nth(k).click();
   await page.locator('#q-card button:has-text("回答する")').click();
   await page.waitForSelector('.resultbanner');
   return info;

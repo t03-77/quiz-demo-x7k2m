@@ -14,10 +14,10 @@ const { waitQuestion, answer } = require('./answer');
   await page.goto(url);
   await page.waitForSelector('.examcard');
 
-  // #10 0問の試験(ANS)は無効化されているか
-  const ans = page.locator('.examcard', { hasText: 'Advanced Networking' });
-  console.log('ANSカードに onclick:', await ans.getAttribute('onclick') === null ? 'なし(無効化OK)' : '← まだ押せる');
-  console.log('ANS表示:', (await ans.innerText()).replace(/\n/g, ' ').slice(0, 60));
+  // #10 廃止が決まっていて問題も無い試験(ANS)は一覧に出ないか（公式問題を読み込んでいる環境では問題があるので出る）
+  const ansCount = await page.locator('.examcard', { hasText: 'Advanced Networking' }).count();
+  const ansTotal = await page.evaluate(() => ORIG.filter(q => q.exam === 'ANS-C01').length + OFFICIAL.filter(q => q.exam === 'ANS-C01' && !q.needs_review).length);
+  console.log('ANSカード:', ansTotal === 0 ? (ansCount === 0 ? '非表示(OK)' : '← 問題が無いのに表示されている') : (ansCount === 1 ? '表示(問題あり・OK)' : '← 問題があるのに出ていない'));
 
   await page.locator('.examcard', { hasText: 'Solutions Architect – Associate' }).first().click();
   await page.waitForSelector('#v-home.on');

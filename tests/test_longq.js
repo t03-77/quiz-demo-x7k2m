@@ -38,8 +38,9 @@ const path = require('path');
   await page.screenshot({ path: 'long_q.png', fullPage: true });
 
   // 回答して解説まで表示されるか
-  const i = await page.evaluate(() => displayOpts(cur).findIndex(o => o.correct));
-  await page.locator('#q-card .opt').nth(i).click();
+  // 複数選択の問題でも回答できるよう、正解の肢をすべて選ぶ
+  const idx = await page.evaluate(() => displayOpts(cur).map((o, k) => (o.correct ? k : -1)).filter(k => k >= 0));
+  for (const k of (idx.length ? idx : [0])) await page.locator('#q-card .opt').nth(k).click();
   await page.locator('#q-card button:has-text("回答する")').click();
   await page.waitForSelector('.resultbanner');
   const expl = await page.locator('.expl').first().innerText();

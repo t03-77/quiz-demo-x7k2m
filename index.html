@@ -777,6 +777,7 @@ function refreshExamList(){
   let h='';
   for(const lvl of ['基礎','アソシエイト','プロフェッショナル','専門']){
     if(!groups[lvl]) continue;
+    const headAt=h.length; let shown=0;
     h+=`<div class="lvlhead">${lvl}</div>`;
     for(const e of groups[lvl]){
       const orig = ORIG.filter(q=>q.exam===e.id).length;
@@ -785,8 +786,11 @@ function refreshExamList(){
       let mastered=0; const total=orig+off;
       if(prog) for(const id in prog.questions){ const st=prog.questions[id]; if(st.attempts?.length && st.streak>=2) mastered++; }
       const retired = e.retired && new Date(e.retired) <= new Date();
-      const badge = e.retired? `<span class="badge retired">${retired?'廃止済み':'まもなく廃止'}</span>` : '';
       const empty = total===0;
+      // 廃止された試験と、廃止が決まっていて問題も無い試験は一覧に出さない（選択中のものだけは残す）
+      if(e.retired && (retired || empty) && e.id!==currentExam) continue;
+      shown++;
+      const badge = e.retired? `<span class="badge retired">${retired?'廃止済み':'まもなく廃止'}</span>` : '';
       const sub = empty
         ? '<span style="color:var(--crit)">問題がまだありません</span>'
         : `${e.ver||e.id}${e.verNote?`（${e.verNote}）`:''} ・ オリジナル${orig}問${off?` + 公式${off}問`:''}`;
@@ -796,6 +800,7 @@ function refreshExamList(){
         <span class="prog">${empty?'<div class="q">—</div>':`<div class="p">${Math.round(mastered/total*100)}%</div><div class="q">習得 ${mastered}/${total}</div>`}</span>
       </div>`;
     }
+    if(!shown) h=h.slice(0,headAt);
   }
   box.innerHTML=h;
   const st = OFFICIAL.length? `公式問題: <b>読み込み済み(${OFFICIAL.length}問)</b>` : '公式問題を追加(任意)';
@@ -1661,8 +1666,27 @@ async function aiStream(messages, opts, onDelta){
   const res=await fetch(url,{method:'POST', headers:head, body:JSON.stringify(body)});
   if(!res.ok){
     const e=await res.json().catch(()=>({}));
-    const err=new Error(`APIエラー(${res.status}): ${e.error?.message||'不明なエラー'}`);
+    const m=e.error?.message||'不明なエラー';
+    // callAnthropic と同じ案内を出す(ストリーミングにしたとき、こちらだけ英語のままになっていた)
+    const err=new Error(/workspace-id is required/i.test(m)
+      ? 'このAPIキーは、どのワークスペースで使うかを指定する必要があります。'
+        +'設定の「ワークスペースID」に、Anthropicコンソール → Settings → Workspaces で確認できる'
+        +' wrkspc_ から始まるIDを入れてください。'
+      : `APIエラー(${res.status}): ${m}`);
     err.status=res.status; throw err;
+  }
+  // ストリーミングにならず JSON がまとめて返った場合(中継サーバーや一部のモデル)も読めるようにする
+  if((res.headers.get('content-type')||'').includes('application/json')){
+    const data=await res.json();
+    const u=data.usage||{};
+    recordAiCost(model, openai? {input_tokens:u.prompt_tokens||0, output_tokens:u.completion_tokens||0} : u);
+    const c0=data.choices?.[0];
+    const t=openai? (c0?.message?.content||'') : (data.content||[]).filter(x=>x.type==='text').map(x=>x.text).join('');
+    const stop=openai? (c0?.finish_reason==='length'? 'max_tokens' : (c0?.finish_reason||'')) : (data.stop_reason||'');
+    if((stop==='refusal' || stop==='content_filter') && !t) throw new Error('AIが回答を差し控えました');
+    if(t) onDelta(t);
+    aiStream.lastStop=stop;
+    return t;
   }
   const rd=res.body.getReader(), dec=new TextDecoder();
   let buf='', text='', usage={input_tokens:0, output_tokens:0}, refused=false, stopReason='';
